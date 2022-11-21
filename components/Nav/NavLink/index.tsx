@@ -17,10 +17,13 @@ const NavLink = ({ title, href, ...props }: NavLinkType) => {
         }
       `}
       variant='ghost'
+      colorScheme='blackAlpha'
       {...props}
     >
       <Link href={href}>
-        <Text fontWeight='semibold'>{title}</Text>
+        <Text fontWeight='semibold' color='white'>
+          {title}
+        </Text>
       </Link>
     </Button>
   );

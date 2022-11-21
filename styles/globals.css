@@ -12,6 +12,15 @@ svg {
   box-sizing: border-box;
 }
 
+.swiper-button-prev,
+.swiper-button-next {
+  color: white !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: white !important;
+}
+
 /*Custom scrollbar*/
 /*Chrome*/
 /* width */
