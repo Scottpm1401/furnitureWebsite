@@ -1,4 +1,4 @@
-import { Button, ButtonProps, Text } from '@chakra-ui/react';
+import { Button, ButtonProps, ColorProps, Text } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import React from 'react';
@@ -6,9 +6,10 @@ import React from 'react';
 type NavLinkType = {
   title: string;
   href: string;
+  textColor?: ColorProps['color'];
 } & ButtonProps;
 
-const NavLink = ({ title, href, ...props }: NavLinkType) => {
+const NavLink = ({ title, href, textColor, ...props }: NavLinkType) => {
   return (
     <Button
       css={css`
@@ -21,7 +22,7 @@ const NavLink = ({ title, href, ...props }: NavLinkType) => {
       {...props}
     >
       <Link href={href}>
-        <Text fontWeight='semibold' color='white'>
+        <Text fontWeight='semibold' color={textColor ?? 'white'}>
           {title}
         </Text>
       </Link>
