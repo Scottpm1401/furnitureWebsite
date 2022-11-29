@@ -25,7 +25,7 @@ type Props = {};
 const Nav = (props: Props) => {
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
   const { t } = useTranslation();
-  const [isTop, setIsTop] = useState(false);
+  const [isTop, setIsTop] = useState(true);
   const router = useRouter();
 
   const handleChangeLanguage = async (lang: string) => {
