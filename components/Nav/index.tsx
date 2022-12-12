@@ -13,6 +13,8 @@ import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { API } from '../../api';
+import axiosClient from '../../interceptor';
 import AccountIcon from '../../public/svg/account.svg';
 import LanguageIcon from '../../public/svg/language.svg';
 import Logo from '../../public/svg/logo.svg';
@@ -45,6 +47,14 @@ const Nav = (props: Props) => {
     }
   }, []);
 
+  const handleClick = async () => {
+    const res = await axiosClient.post(API.USER.LOGIN, {
+      email: 'scott@example.com',
+      password: 'scott123',
+    });
+    console.log('test', res.data);
+  };
+
   useEffect(() => {
     if (router.pathname === '/') {
       if (document) {
@@ -69,6 +79,7 @@ const Nav = (props: Props) => {
       bg={isTop ? 'transparent' : 'white'}
     >
       <Container>
+        <Button onClick={() => handleClick()}>Test</Button>
         <Grid
           templateColumns='1fr auto 1fr'
           h='full'
