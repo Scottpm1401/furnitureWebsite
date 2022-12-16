@@ -126,7 +126,12 @@ const Nav = (props: Props) => {
                   p='4px'
                   onClick={() => setIsOpenLanguage(true)}
                 >
-                  <LanguageIcon style={{ fill: isTop ? 'white' : 'black' }} />
+                  <LanguageIcon
+                    style={{
+                      stroke: isTop ? 'white' : 'black',
+                      strokeWidth: 1.75,
+                    }}
+                  />
                 </Button>
               </PopoverTrigger>
               <PopoverContent w='120px'>
@@ -153,13 +158,19 @@ const Nav = (props: Props) => {
               ml='16px'
               position='relative'
             >
-              <ShoppingBagIcon style={{ fill: isTop ? 'white' : 'black' }} />
+              <ShoppingBagIcon
+                style={{
+                  stroke: isTop ? 'white' : 'black',
+                  strokeWidth: 1.75,
+                }}
+              />
               <Text
                 position='absolute'
                 top='0px'
                 right='-5px'
                 fontSize='smaller'
                 color={isTop ? 'white' : 'black'}
+                fontWeight='normal'
               >
                 0
               </Text>
@@ -172,7 +183,12 @@ const Nav = (props: Props) => {
               p='4px'
               ml='16px'
             >
-              <AccountIcon style={{ fill: isTop ? 'white' : 'black' }} />
+              <AccountIcon
+                style={{
+                  stroke: isTop ? 'white' : 'black',
+                  strokeWidth: 1.75,
+                }}
+              />
             </Button>
           </Flex>
         </Grid>

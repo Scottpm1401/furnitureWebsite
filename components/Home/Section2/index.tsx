@@ -1,8 +1,15 @@
-import { Flex, Grid, Text, useBreakpointValue } from '@chakra-ui/react';
+import { Button, Flex, Grid, Text, useBreakpointValue } from '@chakra-ui/react';
+import { css } from '@emotion/react';
+import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import { ProductType } from '../../../models/product';
+import AshleyIcon from '../../../public/svg/ashley.svg';
+import HabitatIcon from '../../../public/svg/habitat.svg';
+import IkeaIcon from '../../../public/svg/ikea.svg';
+import MaisonsDuMondeIcon from '../../../public/svg/maisons-du-monde.svg';
+import WilliamsIcon from '../../../public/svg/williams-sonoma.svg';
 import Container from '../../Container';
 import ProductCard from '../../ProductCard';
 
@@ -36,7 +43,7 @@ const Section2 = ({ products }: Props) => {
           templateColumns={responsive ? '1fr' : '1fr 1fr 1fr'}
           justifyContent='center'
           alignItems='center'
-          mt='2rem'
+          mt='2.5rem'
           gap='2rem'
         >
           {products.map((item, index) => (
@@ -48,6 +55,74 @@ const Section2 = ({ products }: Props) => {
             />
           ))}
         </Grid>
+        <Flex mt='5rem' justifyContent='center'>
+          <Link href='/products'>
+            <Button
+              variant='outline'
+              _hover={{
+                background: 'rgba(0,0,0,0.05)',
+              }}
+              colorScheme='black'
+            >
+              <Text>{t('view_more')}</Text>
+            </Button>
+          </Link>
+        </Flex>
+
+        <Flex
+          mt='5rem'
+          alignItems='center'
+          justifyContent='center'
+          css={css`
+            svg {
+              width: 300px;
+              height: 150px;
+              transition: all 200ms ease-in-out;
+            }
+
+            svg:hover {
+              transform: scale(1.05);
+            }
+          `}
+        >
+          <Link href='https://www.ashleyfurniture.com/' target='_blank'>
+            <AshleyIcon />
+          </Link>
+
+          <Link href='https://www.ikea.com/' target='_blank'>
+            <IkeaIcon />
+          </Link>
+          <Link href='https://www.maisonsdumonde.com/' target='_blank'>
+            <MaisonsDuMondeIcon
+              style={{
+                paddingBottom: 28,
+                paddingTop: 43,
+                paddingLeft: 36,
+                paddingRight: 36,
+              }}
+            />
+          </Link>
+          <Link href='https://www.habitat.co.uk' target='_blank'>
+            <HabitatIcon
+              style={{
+                paddingBottom: 43,
+                paddingTop: 43,
+                paddingLeft: 36,
+                paddingRight: 36,
+              }}
+            />
+          </Link>
+          <Link href='https://www.williams-sonoma.com/' target='_blank'>
+            <WilliamsIcon
+              style={{
+                paddingBottom: 24,
+                paddingTop: 43,
+                paddingLeft: 36,
+                paddingRight: 36,
+              }}
+            />
+          </Link>
+        </Flex>
       </Container>
     </Flex>
   );

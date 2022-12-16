@@ -78,17 +78,17 @@ const ProductCard = ({
           gap='1rem'
         >
           <PopupButton href='#'>
-            <ShoppingBagIcon style={{ fill: 'white' }} />
+            <ShoppingBagIcon style={{ fill: 'none', stroke: 'white' }} />
           </PopupButton>
           <PopupButton href='#'>
-            <SearchIcon style={{ fill: 'white' }} />
+            <SearchIcon style={{ fill: 'none', stroke: 'white' }} />
           </PopupButton>
         </Flex>
       </Flex>
       <Flex
         direction={isHorizontal ? 'column' : 'row'}
         justifyContent='space-between'
-        mt='0.5rem'
+        mt='0.75rem'
       >
         <Text fontWeight='semibold'>{title}</Text>
         <Text fontWeight='semibold'>${price}</Text>
