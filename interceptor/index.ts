@@ -7,29 +7,27 @@ import { AuthState } from '../redux/reducers/authReducer';
 import { store } from '../redux/store';
 
 const axiosClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BE_URL,
-  timeout: 45000,
+  baseURL: process.env.NEXT_PUBLIC_BE_URL || '',
+  timeout: 10000,
   headers: { Accept: '*/*', 'Content-Type': 'application/json' },
 });
 
 // Add a request interceptor
 axiosClient.interceptors.request.use(
   async (config) => {
-    if (typeof window !== 'undefined') {
-      const { accessToken, expiredDate }: AuthState = store.getState().auth;
-      if (expiredDate === null) {
-        return config;
-      }
-
-      // Date.now() is in milliseconds expires is in seconds
-      // tslint:disable-next-line:radix
-      if (moment().isBefore(expiredDate)) {
-        config.headers = {
-          ...config.headers,
-          Authorization: `Bearer ${accessToken}`,
-        };
-      }
+    const { accessToken, expiredDate }: AuthState = store.getState().auth;
+    if (expiredDate === null) {
+      return config;
     }
+
+    // Date.now() is in milliseconds expires is in seconds
+    if (moment().isBefore(expiredDate)) {
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${accessToken}`,
+      };
+    }
+
     // Do something before request is sent
     return config;
   },
