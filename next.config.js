@@ -10,9 +10,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'dl.airtable.com',
-        port: '',
-        pathname: '/.attachments/**',
+        hostname: 'res.cloudinary.com',
+        pathname: '/scottcloud/image/upload/**',
       },
     ],
   },

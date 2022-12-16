@@ -29,7 +29,8 @@ const ProductCard = ({
     {
       md: 200,
       lg: 280,
-      xl: 320,
+      xl: 360,
+      '2xl': 440,
       base: 280,
     },
     {
@@ -49,6 +50,8 @@ const ProductCard = ({
         w='full'
         h='full'
         position='relative'
+        borderRadius='1rem'
+        overflow='hidden'
         css={css`
           &:hover .popup {
             visibility: visible;

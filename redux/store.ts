@@ -1,27 +1,23 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
-import { Context, createWrapper, MakeStore } from 'next-redux-wrapper';
 import logger from 'redux-logger';
+import { persistStore } from 'redux-persist';
 
-import { globalSlice } from './reducer';
+import { reducer } from './reducer';
 
-const makeStore = (context: Context) =>
-  configureStore({
-    reducer: {
-      [globalSlice.name]: globalSlice.reducer,
-    },
-    middleware: [logger],
-    devTools: true,
-  });
-export type AppStore = ReturnType<typeof makeStore>;
-
-export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });
+export const store = configureStore({
+  reducer,
+  middleware: [logger],
+  devTools: true,
+});
+export const persistor = persistStore(store);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type AppState = ReturnType<AppStore['getState']>;
-
+export type RootState = ReturnType<typeof store.getState>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch;
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
-  AppState,
+  RootState,
   unknown,
   Action
 >;
