@@ -14,12 +14,8 @@ const theme = extendTheme({
   config,
   styles: {
     global: {
-      '@font-face': {
-        fontFamily: 'Roboto',
-        src: "url('/fonts/Roboto/Roboto-Regular.ttf')",
-      },
       'html, body': {
-        fontFamily: `'Roboto', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        fontFamily: `'Montserrat', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif`,
         padding: 0,
         margin: 0,

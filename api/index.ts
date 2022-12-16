@@ -11,6 +11,7 @@ export const API = {
     UPDATEUSER: (id: string) => `/user/update/${id}`,
   },
   PRODUCT: {
+    GETFEATURED: '/product/featured',
     GETALL: '/product/all',
     GETPRODUCT: (id: string) => `/product/get/${id}`,
     CREATEPRODUCT: '/product/create',

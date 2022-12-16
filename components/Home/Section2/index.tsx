@@ -2,12 +2,15 @@ import { Flex, Grid, Text, useBreakpointValue } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import { ProductType } from '../../../models/product';
 import Container from '../../Container';
 import ProductCard from '../../ProductCard';
 
-type Props = {};
+type Props = {
+  products: ProductType[];
+};
 
-const Section2 = (props: Props) => {
+const Section2 = ({ products }: Props) => {
   const { t } = useTranslation();
   const responsive = useBreakpointValue(
     {
@@ -20,14 +23,14 @@ const Section2 = (props: Props) => {
   );
 
   return (
-    <Flex bg='#f1f5f8' minHeight={600} paddingY='2.5rem'>
+    <Flex bg='#f1f5f8' minHeight={600} paddingY='7rem'>
       <Container
         flexDirection='column'
         justifyContent='center'
         textAlign='center'
       >
-        <Text color='black' fontSize='4xl' fontWeight='bold'>
-          {t('featured_products').toUpperCase()}
+        <Text color='black' fontSize='4xl' fontWeight={600}>
+          {t('featured_products')}
         </Text>
         <Grid
           templateColumns={responsive ? '1fr' : '1fr 1fr 1fr'}
@@ -36,21 +39,14 @@ const Section2 = (props: Props) => {
           mt='2rem'
           gap='2rem'
         >
-          <ProductCard
-            title='Mordern Poster'
-            price={30.99}
-            image='https://dl.airtable.com/.attachments/e2eef862d9b7a2fb0aa74fa24fbf97bb/25c4bc17/0-pexels-pixabay-462235.jpg'
-          />
-          <ProductCard
-            title='Mordern Poster 2'
-            price={99.99}
-            image='https://dl.airtable.com/.attachments/e2eef862d9b7a2fb0aa74fa24fbf97bb/25c4bc17/0-pexels-pixabay-462235.jpg'
-          />
-          <ProductCard
-            title='Mordern Poster 3'
-            price={199.99}
-            image='https://dl.airtable.com/.attachments/e2eef862d9b7a2fb0aa74fa24fbf97bb/25c4bc17/0-pexels-pixabay-462235.jpg'
-          />
+          {products.map((item, index) => (
+            <ProductCard
+              key={item._id}
+              title={item.title}
+              price={item.price}
+              image={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
+            />
+          ))}
         </Grid>
       </Container>
     </Flex>

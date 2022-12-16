@@ -19,16 +19,20 @@ import AccountIcon from '../../public/svg/account.svg';
 import LanguageIcon from '../../public/svg/language.svg';
 import Logo from '../../public/svg/logo.svg';
 import ShoppingBagIcon from '../../public/svg/shopping_bag.svg';
+import { useAppDispatch } from '../../redux/hooks';
+import { actions } from '../../redux/reducer';
 import Container from '../Container';
 import NavLink from './NavLink';
 
 type Props = {};
+const OFFSET = 160;
 
 const Nav = (props: Props) => {
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
   const { t } = useTranslation();
   const [isTop, setIsTop] = useState(true);
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleChangeLanguage = async (lang: string) => {
     await setLanguage(lang);
@@ -36,10 +40,10 @@ const Nav = (props: Props) => {
   };
 
   const scrollEvent = useCallback(() => {
-    const section1 = document.getElementById('section1');
-    if (section1) {
-      const rect = section1.getBoundingClientRect();
-      if (rect.top <= -160) {
+    const body = document.body;
+    if (body) {
+      const rect = body.getBoundingClientRect();
+      if (rect.top <= -OFFSET) {
         setIsTop(false);
       } else {
         setIsTop(true);
@@ -52,6 +56,7 @@ const Nav = (props: Props) => {
       email: 'scott@example.com',
       password: 'scott123',
     });
+    dispatch(actions.auth.setAuth(res.data));
     console.log('test', res.data);
   };
 
@@ -69,9 +74,8 @@ const Nav = (props: Props) => {
 
   return (
     <Flex
-      paddingY='4px'
+      paddingY='0.75rem'
       position='fixed'
-      h='60px'
       w='full'
       top={0}
       left={0}
@@ -79,7 +83,6 @@ const Nav = (props: Props) => {
       bg={isTop ? 'transparent' : 'white'}
     >
       <Container>
-        <Button onClick={() => handleClick()}>Test</Button>
         <Grid
           templateColumns='1fr auto 1fr'
           h='full'

@@ -7,7 +7,18 @@ type PopupButtonType = {
 
 const PopupButton = ({ href, children, ...props }: PopupButtonType) => {
   return (
-    <Flex w='26px' h='26px' p='4px' border='1px solid white' {...props}>
+    <Flex
+      w='60px'
+      h='60px'
+      p='16px'
+      borderRadius='full'
+      alignItems='center'
+      justifyContent='center'
+      _hover={{
+        background: 'rgba(0,0,0,0.25)',
+      }}
+      {...props}
+    >
       <Link
         style={{
           width: '100%',
