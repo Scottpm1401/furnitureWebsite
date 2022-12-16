@@ -32,7 +32,7 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
         <Text maxWidth='60%' color='white' fontSize='md'>
           {description}
         </Text>
-        <Flex mt='16px'>
+        <Flex mt='1.5rem'>
           <Button
             variant='unstyled'
             css={css`
