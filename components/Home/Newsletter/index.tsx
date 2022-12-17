@@ -1,11 +1,84 @@
-import { Flex, FlexProps } from '@chakra-ui/react';
+import { Button, Flex, FlexProps, Input, Text } from '@chakra-ui/react';
+import { css } from '@emotion/react';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import ArrowRight from '../../../public/svg/arrow_right.svg';
+import Refund from '../../../public/svg/refund.svg';
+import Shipping from '../../../public/svg/shipping.svg';
 import Container from '../../Container';
 type Props = {} & FlexProps;
 
 const Newsletter = ({ ...props }: Props) => {
-  return <Container {...props}>Newsletter</Container>;
+  const { t } = useTranslation();
+
+  return (
+    <Container
+      display='grid'
+      gridTemplateColumns='30% 30% 40%'
+      alignItems='center'
+      justifyContent='center'
+      border='1px solid rgb(65, 64, 66)'
+      p='5rem 8rem'
+      borderRadius='1rem'
+      {...props}
+    >
+      <Flex mr='2rem' alignItems='center'>
+        <Flex w='3rem' h='3rem' justifyContent='center' alignItems='center'>
+          <Refund />
+        </Flex>
+        <Flex ml='1rem' direction='column'>
+          <Text fontWeight='semibold' fontSize='18px'>
+            {t('20_days')}
+          </Text>
+          <Text mt='0.5rem'>{t('20_days_des')}</Text>
+        </Flex>
+      </Flex>
+      <Flex mr='2rem' alignItems='center'>
+        <Flex w='3rem' h='3rem' justifyContent='center' alignItems='center'>
+          <Shipping />
+        </Flex>
+        <Flex ml='1rem' direction='column'>
+          <Text fontWeight='semibold' fontSize='18px'>
+            {t('free_shipping')}
+          </Text>
+          <Text mt='0.5rem'>{t('free_shipping_des')}</Text>
+        </Flex>
+      </Flex>
+      <Flex direction='column'>
+        <Text fontWeight='semibold' fontSize='1.5rem'>
+          {t('signup_newsletter')}
+        </Text>
+        <Flex alignItems='flex-end'>
+          <Input
+            variant='flushed'
+            type='email'
+            mt='1rem'
+            placeholder={t('your_email')}
+          />
+          <Button
+            css={css`
+              svg {
+                transition: all 200ms ease-in-out;
+              }
+              &:hover svg {
+                transform: translateX(10px);
+              }
+            `}
+            variant='unstyled'
+            w='24px'
+            h='24px'
+          >
+            <ArrowRight
+              style={{
+                strokeWidth: 1.5,
+              }}
+            />
+          </Button>
+        </Flex>
+      </Flex>
+    </Container>
+  );
 };
 
 export default Newsletter;

@@ -98,17 +98,17 @@ const Nav = (props: Props) => {
             <NavLink
               title={t('home')}
               href='/'
-              textColor={isTop ? 'white' : 'black'}
+              textProps={{ color: isTop ? 'white' : 'black' }}
             />
             <NavLink
               title={t('about')}
               href='/about'
-              textColor={isTop ? 'white' : 'black'}
+              textProps={{ color: isTop ? 'white' : 'black' }}
             />
             <NavLink
               title={t('products')}
               href='/products'
-              textColor={isTop ? 'white' : 'black'}
+              textProps={{ color: isTop ? 'white' : 'black' }}
             />
           </Flex>
           <Flex justifyContent='flex-end' alignItems='center'>

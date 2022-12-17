@@ -7,6 +7,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import { persistor, store } from '../redux/store';
 import theme from '../theme';
@@ -23,6 +24,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           <Nav />
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Component {...pageProps} />
+          <Footer />
         </ChakraProvider>
       </PersistGate>
     </Provider>

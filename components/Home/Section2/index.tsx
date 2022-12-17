@@ -73,6 +73,7 @@ const Section2 = ({ products }: Props) => {
           mt='5rem'
           alignItems='center'
           justifyContent='center'
+          wrap='wrap'
           css={css`
             svg {
               width: 300px;
