@@ -10,7 +10,7 @@ const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BE_URL,
   // timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 // Add a request interceptor
