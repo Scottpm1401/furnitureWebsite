@@ -8,11 +8,12 @@ import { store } from '../redux/store';
 
 const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BE_URL,
-  timeout: 10000,
-  headers: { 'Content-Type': 'application/json' },
+  // timeout: 10000,
+  // headers: { 'Content-Type': 'application/json' },
+  // withCredentials:true
 });
 
-// Add a request interceptor
+// // Add a request interceptor
 // axiosClient.interceptors.request.use(
 //   async (config) => {
 //     const { accessToken, expiredDate }: AuthState = store.getState().auth;
