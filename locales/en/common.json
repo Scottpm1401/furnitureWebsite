@@ -52,9 +52,9 @@
   "maisons_du_monde": "Maisons Du Monde",
   "habitat": "Habitat",
   "williams_sonoma": "Williams Sonoma",
-  "price_asc": "Price (Lowest)",
-  "price_des": "Price (Highest)",
-  "name_asc": "Name (A-Z)",
-  "name_des": "Name (Z-A)",
+  "PRICE_ASC": "Price (Lowest)",
+  "PRICE_DES": "Price (Highest)",
+  "NAME_ASC": "Name (A-Z)",
+  "NAME_DES": "Name (Z-A)",
   "sort_by": "Sort by"
 }

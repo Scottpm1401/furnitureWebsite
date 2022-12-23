@@ -55,23 +55,20 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
               {t('categories')}
             </Text>
             {Object.values(ProductCategory).map((value, index) => (
-              <Flex
-                cursor='pointer'
-                mt='0.5rem'
-                key={value}
-                onClick={() =>
-                  value === filter.category
-                    ? handleUpdateFilter({ ...filter, category: undefined })
-                    : handleUpdateFilter({ ...filter, category: value })
-                }
-              >
+              <Flex mt='0.5rem' key={value}>
                 <Flex
                   css={css`
                     &:hover .underline {
                       width: 100%;
                     }
                   `}
+                  cursor='pointer'
                   direction='column'
+                  onClick={() =>
+                    value === filter.category
+                      ? handleUpdateFilter({ ...filter, category: undefined })
+                      : handleUpdateFilter({ ...filter, category: value })
+                  }
                 >
                   <Text>{t(value)}</Text>
                   <Flex
@@ -90,22 +87,19 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
               {t('brand')}
             </Text>
             {Object.values(ProductBrand).map((value, index) => (
-              <Flex
-                cursor='pointer'
-                mt='0.5rem'
-                key={value}
-                onClick={() =>
-                  value === filter.brand
-                    ? handleUpdateFilter({ ...filter, brand: undefined })
-                    : handleUpdateFilter({ ...filter, brand: value })
-                }
-              >
+              <Flex mt='0.5rem' key={value}>
                 <Flex
                   css={css`
                     &:hover .underline {
                       width: 100%;
                     }
                   `}
+                  cursor='pointer'
+                  onClick={() =>
+                    value === filter.brand
+                      ? handleUpdateFilter({ ...filter, brand: undefined })
+                      : handleUpdateFilter({ ...filter, brand: value })
+                  }
                   direction='column'
                 >
                   <Text>{t(value)}</Text>

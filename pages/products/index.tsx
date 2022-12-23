@@ -20,6 +20,7 @@ const LIMITED = 9;
 const initFilter: Filter = {
   offset: 0,
   limit: LIMITED,
+  sort: ProductSort.price_asc,
 };
 
 enum Layout {
@@ -122,8 +123,15 @@ const Products = ({
                   cursor='pointer'
                   ml='1rem'
                   icon={<DropDownIcon style={{ width: 24, height: 24 }} />}
+                  value={filter.sort}
+                  onChange={(e) =>
+                    handleUpdateFilter({
+                      ...filter,
+                      sort: e.target.value as ProductSort,
+                    })
+                  }
                 >
-                  {Object.keys(ProductSort).map((value) => (
+                  {Object.values(ProductSort).map((value) => (
                     <option value={value} key={value}>
                       {t(value)}
                     </option>
@@ -133,8 +141,9 @@ const Products = ({
             </Grid>
             <Grid
               mt='1.5rem'
-              height='200vh'
-              gridTemplateColumns='1fr 1fr 1fr'
+              gridTemplateColumns={
+                layout === Layout.grid ? '1fr 1fr 1fr' : '1fr'
+              }
               gap='2rem'
             >
               {products.map((item) => (
@@ -144,6 +153,7 @@ const Products = ({
                   image={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
                   price={item.price}
                   isLoaded={!isLoading}
+                  isHorizontal={layout === Layout.list}
                 />
               ))}
             </Grid>

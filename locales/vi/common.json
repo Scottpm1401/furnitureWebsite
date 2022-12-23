@@ -52,9 +52,9 @@
   "maisons_du_monde": "Maisons Du Monde",
   "habitat": "Habitat",
   "williams_sonoma": "Williams Sonoma",
-  "price_asc": "Giá (Tăng dần)",
-  "price_des": "Giá (Giảm dần)",
-  "name_asc": "Tên (A-Z)",
-  "name_des": "Tên (Z-A)",
+  "PRICE_ASC": "Giá (Tăng dần)",
+  "PRICE_DES": "Giá (Giảm dần)",
+  "NAME_ASC": "Tên (A-Z)",
+  "NAME_DES": "Tên (Z-A)",
   "sort_by": "Sắp xếp"
 }

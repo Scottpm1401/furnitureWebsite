@@ -66,4 +66,5 @@ export type Filter = {
   brand?: string;
   color?: string;
   price?: number;
+  sort?: ProductSort;
 };
