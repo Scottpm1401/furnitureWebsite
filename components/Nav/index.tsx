@@ -26,6 +26,7 @@ import NavLink from './NavLink';
 
 type Props = {};
 const OFFSET = 160;
+export const NAV_HEIGHT = '84px';
 
 const Nav = (props: Props) => {
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
@@ -51,20 +52,13 @@ const Nav = (props: Props) => {
     }
   }, []);
 
-  const handleClick = async () => {
-    const res = await axiosClient.post(API.USER.LOGIN, {
-      email: 'scott@example.com',
-      password: 'scott123',
-    });
-    dispatch(actions.auth.setAuth(res.data));
-    console.log('test', res.data);
-  };
-
   useEffect(() => {
     if (router.pathname === '/') {
       if (document) {
         document.addEventListener('scroll', scrollEvent);
       }
+    } else {
+      setIsTop(false);
     }
 
     return () => {

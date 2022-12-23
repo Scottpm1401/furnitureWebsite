@@ -52,6 +52,7 @@ const Section2 = ({ products }: Props) => {
               title={item.title}
               price={item.price}
               image={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
+              isLoaded={true}
             />
           ))}
         </Grid>
