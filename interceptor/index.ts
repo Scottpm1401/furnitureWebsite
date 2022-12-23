@@ -9,7 +9,10 @@ import { store } from '../redux/store';
 const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BE_URL,
   timeout: 10000,
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    'Accept-Encoding': 'gzip,deflate,compress,',
+    'Content-Type': 'application/json',
+  },
 });
 
 // Add a request interceptor
