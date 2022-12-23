@@ -1,4 +1,11 @@
-import { Flex, FlexProps, Text, useBreakpointValue } from '@chakra-ui/react';
+import {
+  Flex,
+  FlexProps,
+  Skeleton,
+  SkeletonText,
+  Text,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import React from 'react';
@@ -14,6 +21,7 @@ type ProductCardType = {
   price: number;
   isHorizontal?: boolean;
   href?: string;
+  isLoaded?: boolean;
 } & FlexProps;
 
 const ProductCard = ({
@@ -23,6 +31,7 @@ const ProductCard = ({
   price,
   href,
   isHorizontal = false,
+  isLoaded = false,
   ...props
 }: ProductCardType) => {
   const responsive = useBreakpointValue(
@@ -46,52 +55,63 @@ const ProductCard = ({
       direction={isHorizontal ? 'row' : 'column'}
       {...props}
     >
-      <Flex
+      <Skeleton
         w='full'
         h='full'
-        position='relative'
         borderRadius='1rem'
         overflow='hidden'
-        css={css`
-          &:hover .popup {
-            visibility: visible;
-            opacity: 1;
-            z-index: 1;
-          }
-        `}
+        isLoaded={isLoaded}
       >
-        <Image src={image} fill alt={title} />
         <Flex
-          className='popup'
-          position='absolute'
-          top='0px'
-          left='0px'
           w='full'
           h='full'
-          visibility='hidden'
-          zIndex={0}
-          opacity={0}
-          transition='all 300ms ease-in-out'
-          background='blackAlpha.600'
-          justifyContent='center'
-          alignItems='center'
-          gap='1rem'
+          position='relative'
+          css={css`
+            &:hover .popup {
+              visibility: visible;
+              opacity: 1;
+              z-index: 1;
+            }
+          `}
         >
-          <PopupButton href='#'>
-            <ShoppingBagIcon style={{ fill: 'none', stroke: 'white' }} />
-          </PopupButton>
-          <PopupButton href='#'>
-            <SearchIcon style={{ fill: 'none', stroke: 'white' }} />
-          </PopupButton>
+          <Image src={image} fill alt={title} />
+          <Flex
+            className='popup'
+            position='absolute'
+            top='0px'
+            left='0px'
+            w='full'
+            h='full'
+            visibility='hidden'
+            zIndex={0}
+            opacity={0}
+            transition='all 300ms ease-in-out'
+            background='blackAlpha.600'
+            justifyContent='center'
+            alignItems='center'
+            gap='1rem'
+          >
+            <PopupButton href='#'>
+              <ShoppingBagIcon style={{ fill: 'none', stroke: 'white' }} />
+            </PopupButton>
+            <PopupButton href='#'>
+              <SearchIcon style={{ fill: 'none', stroke: 'white' }} />
+            </PopupButton>
+          </Flex>
         </Flex>
-      </Flex>
+      </Skeleton>
+
       <Flex
         direction={isHorizontal ? 'column' : 'row'}
         justifyContent='space-between'
         mt='0.75rem'
       >
-        <Text fontWeight='semibold'>{title}</Text>
-        <Text fontWeight='semibold'>${price}</Text>
+        <Skeleton isLoaded={isLoaded}>
+          <Text fontWeight='semibold'>{title}</Text>
+        </Skeleton>
+        <Skeleton isLoaded={isLoaded}>
+          <Text fontWeight='semibold'>${price}</Text>
+        </Skeleton>
       </Flex>
     </Flex>
   );

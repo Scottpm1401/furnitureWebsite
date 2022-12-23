@@ -27,7 +27,7 @@ svg {
 /*Chrome*/
 /* width */
 ::-webkit-scrollbar {
-  width: auto;
+  width: 8px;
   height: auto;
 }
 
@@ -38,13 +38,13 @@ svg {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #77777d !important;
+  background: #77777d4d !important;
   border-radius: 40px !important;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555 !important;
+  background: rgba(85, 85, 85, 0.541) !important;
 }
 
 /*FireFox*/

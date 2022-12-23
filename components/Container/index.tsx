@@ -1,19 +1,15 @@
-import { Flex, FlexProps, useBreakpointValue } from '@chakra-ui/react';
+import { Flex, FlexProps } from '@chakra-ui/react';
 import React from 'react';
 
+import { useResponsive } from '../../hooks/useResponsive';
+
 const Container = ({ children, ...props }: FlexProps) => {
-  const maxWidth = useBreakpointValue(
-    {
-      md: '90vw',
-      xl: '95vw',
-      base: '90vw',
-    },
-    {
-      fallback: 'md',
-    }
-  );
+  const { isBigScreen } = useResponsive();
   return (
-    <Flex style={{ width: maxWidth, margin: '0 auto' }} {...props}>
+    <Flex
+      style={{ width: isBigScreen ? '95vw' : '90vw', margin: '0 auto' }}
+      {...props}
+    >
       {children}
     </Flex>
   );
