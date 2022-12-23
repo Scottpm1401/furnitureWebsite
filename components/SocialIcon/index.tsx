@@ -38,7 +38,9 @@ const SocialIcon = ({
       borderRadius='full'
       {...props}
     >
-      <Link href={href || '#'}>{icon}</Link>
+      <Link href={href || '#'} target='_blank'>
+        {icon}
+      </Link>
     </Button>
   );
 };

@@ -39,9 +39,14 @@ const Footer = (props: Props) => {
             {t('footer_welcome')}
           </Text>
           <Flex mt={'0.5rem'}>
-            <SocialIcon icon={<Facebook />} hoverColor='rgb(56, 88, 152)' />
+            <SocialIcon
+              href='https://www.facebook.com'
+              icon={<Facebook />}
+              hoverColor='rgb(56, 88, 152)'
+            />
 
             <SocialIcon
+              href='https://www.instagram.com'
               icon={
                 <>
                   <svg
@@ -64,6 +69,7 @@ const Footer = (props: Props) => {
               ml='14px'
             />
             <SocialIcon
+              href='https://twitter.com'
               icon={<Twitter />}
               hoverColor='rgb(29, 161, 242)'
               ml='14px'
