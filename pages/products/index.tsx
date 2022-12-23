@@ -154,6 +154,7 @@ const Products = ({
                   price={item.price}
                   isLoaded={!isLoading}
                   isHorizontal={layout === Layout.list}
+                  description={item.description}
                 />
               ))}
             </Grid>

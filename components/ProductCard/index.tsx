@@ -1,8 +1,8 @@
 import {
   Flex,
-  FlexProps,
+  Grid,
+  GridProps,
   Skeleton,
-  SkeletonText,
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
@@ -22,7 +22,7 @@ type ProductCardType = {
   isHorizontal?: boolean;
   href?: string;
   isLoaded?: boolean;
-} & FlexProps;
+} & GridProps;
 
 const ProductCard = ({
   title,
@@ -47,15 +47,16 @@ const ProductCard = ({
     }
   );
   return (
-    <Flex
+    <Grid
       position='relative'
-      cursor='pointer'
       w='full'
       h={responsive}
-      direction={isHorizontal ? 'row' : 'column'}
+      templateColumns={isHorizontal ? '360px 1fr' : 'auto'}
+      templateRows={isHorizontal ? 'auto' : '1fr auto'}
       {...props}
     >
       <Skeleton
+        cursor='pointer'
         w='full'
         h='full'
         borderRadius='1rem'
@@ -103,17 +104,30 @@ const ProductCard = ({
 
       <Flex
         direction={isHorizontal ? 'column' : 'row'}
-        justifyContent='space-between'
-        mt='0.75rem'
+        justifyContent={isHorizontal ? 'center' : 'space-between'}
+        mt={isHorizontal ? '0' : '0.75rem'}
+        w='full'
+        h='full'
+        ml={isHorizontal ? '2rem' : '0'}
       >
         <Skeleton isLoaded={isLoaded}>
-          <Text fontWeight='semibold'>{title}</Text>
+          <Text fontWeight='semibold' fontSize={isHorizontal ? '2xl' : 'md'}>
+            {title}
+          </Text>
         </Skeleton>
         <Skeleton isLoaded={isLoaded}>
           <Text fontWeight='semibold'>${price}</Text>
         </Skeleton>
+        {isHorizontal && (
+          <Skeleton w='full' mt='0.5rem' isLoaded={isLoaded}>
+            <Text>
+              {description?.slice(0, 150)}
+              {description && description.length > 150 && '...'}
+            </Text>
+          </Skeleton>
+        )}
       </Flex>
-    </Flex>
+    </Grid>
   );
 };
 
