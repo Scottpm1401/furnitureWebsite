@@ -30,6 +30,7 @@
     "react-dom": "18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-redux": "^8.0.5",
+    "react-simple-star-rating": "^5.1.7",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "sharp": "^0.31.2",

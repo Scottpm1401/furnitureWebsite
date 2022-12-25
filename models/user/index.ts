@@ -1,5 +1,8 @@
 /*********************TYPE & INTERFACE*****************************/
 
+import { ProductCartType } from '../cart';
+import { PurchaseType } from '../purchase';
+
 export enum Gender {
   male = 'MALE',
   female = 'FEMALE',
@@ -31,4 +34,7 @@ export type UserType = {
   role: 'ADMIN' | 'USER';
   birthday: string;
   info?: UserInfoType;
+  cart_total: number;
+  cart: ProductCartType[];
+  purchase: PurchaseType[];
 };

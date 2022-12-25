@@ -122,7 +122,7 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
               {Object.values(ProductColor).map((color) => (
                 <ColorButton
                   key={color}
-                  color={color}
+                  product_color={color}
                   mr='0.5rem'
                   active={filter.color === color}
                   onClick={() =>

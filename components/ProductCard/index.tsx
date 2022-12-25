@@ -15,6 +15,7 @@ import ShoppingBagIcon from '../../public/svg/shopping_bag.svg';
 import PopupButton from './PopupButton';
 
 type ProductCardType = {
+  _id: string;
   title: string;
   description?: string;
   image: string;
@@ -25,6 +26,7 @@ type ProductCardType = {
 } & GridProps;
 
 const ProductCard = ({
+  _id,
   title,
   description,
   image,
@@ -95,7 +97,7 @@ const ProductCard = ({
             <PopupButton href='#'>
               <ShoppingBagIcon style={{ fill: 'none', stroke: 'white' }} />
             </PopupButton>
-            <PopupButton href='#'>
+            <PopupButton href={`/products/${_id}`}>
               <SearchIcon style={{ fill: 'none', stroke: 'white' }} />
             </PopupButton>
           </Flex>
