@@ -5,11 +5,11 @@ import { ProductColor } from '../../models/product';
 import CheckIcon from '../../public/svg/check.svg';
 
 type Props = {
-  color: ProductColor;
+  product_color: ProductColor;
   active: boolean;
 } & ButtonProps;
 
-const ColorButton = ({ color, active, ...props }: Props) => {
+const ColorButton = ({ product_color, active, ...props }: Props) => {
   return (
     <Button
       opacity={active ? 1 : 0.6}
@@ -19,7 +19,7 @@ const ColorButton = ({ color, active, ...props }: Props) => {
       minW='auto'
       p='0.25rem'
       borderRadius='full'
-      background={color}
+      background={product_color}
       {...props}
     >
       <CheckIcon

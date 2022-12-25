@@ -56,5 +56,12 @@
   "PRICE_DES": "Price (Highest)",
   "NAME_ASC": "Name (A-Z)",
   "NAME_DES": "Name (Z-A)",
-  "sort_by": "Sort by"
+  "sort_by": "Sort by",
+  "back_to_products": "Back to products",
+  "customer_review": "Customers review",
+  "available": "Available",
+  "in_stock": "In stock",
+  "out_of_stock": "Out of stock",
+  "sku": "sku",
+  "add_to_cart": "Add to cart"
 }

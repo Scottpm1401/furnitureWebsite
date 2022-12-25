@@ -19,11 +19,11 @@ export type ProductType = {
   category: string;
   brand: string;
   rating?: RatingType;
-  review?: ReviewType;
+  review?: ReviewType[];
   price: number;
   sku: string;
   storage_quantity: number;
-  colors: string[];
+  colors: ProductColor[];
 };
 
 export enum ProductCategory {

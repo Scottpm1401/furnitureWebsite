@@ -155,6 +155,7 @@ const Products = ({
                   isLoaded={!isLoading}
                   isHorizontal={layout === Layout.list}
                   description={item.description}
+                  _id={item._id}
                 />
               ))}
             </Grid>

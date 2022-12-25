@@ -56,5 +56,12 @@
   "PRICE_DES": "Giá (Giảm dần)",
   "NAME_ASC": "Tên (A-Z)",
   "NAME_DES": "Tên (Z-A)",
-  "sort_by": "Sắp xếp"
+  "sort_by": "Sắp xếp",
+  "back_to_products": "Trở về",
+  "customer_review": "Người đánh giá",
+  "available": "Tình trạng",
+  "in_stock": "Còn hàng",
+  "out_of_stock": "Hết hàng",
+  "sku": "sku",
+  "add_to_cart": "Thêm vào giỏ hàng"
 }
