@@ -15,6 +15,7 @@ type NavLinkType = {
   href: string;
   textProps?: TextProps;
   direction?: 'left' | 'center';
+  isSpacing?: boolean;
 } & ButtonProps;
 
 const NavLink = ({
@@ -22,13 +23,14 @@ const NavLink = ({
   href,
   textProps,
   direction = 'center',
+  isSpacing = true,
   ...props
 }: NavLinkType) => {
   return (
     <Button
       css={css`
         &:not(last-child) {
-          margin-right: 2rem;
+          margin-right: ${isSpacing ? '2rem' : '0'};
         }
         &:hover .underline {
           width: 100%;

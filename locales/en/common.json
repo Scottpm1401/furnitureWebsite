@@ -63,5 +63,13 @@
   "in_stock": "In stock",
   "out_of_stock": "Out of stock",
   "sku": "sku",
-  "add_to_cart": "Add to cart"
+  "add_to_cart": "Add to cart",
+  "sign_in": "Sign in",
+  "sign_up": "Sign up",
+  "sign_in_to_comfysloth": "Sign in to Comfysloth",
+  "username_or_email": "Username or email address",
+  "password": "Password",
+  "forgot_password": "Forgot password?",
+  "new_to_comfysloth": "New to Comfysloth?",
+  "create_an_account": "Create an account"
 }
