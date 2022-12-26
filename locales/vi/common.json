@@ -63,5 +63,13 @@
   "in_stock": "Còn hàng",
   "out_of_stock": "Hết hàng",
   "sku": "sku",
-  "add_to_cart": "Thêm vào giỏ hàng"
+  "add_to_cart": "Thêm vào giỏ hàng",
+  "sign_in": "Đăng nhập",
+  "sign_up": "Đăng ký",
+  "sign_in_to_comfysloth": "Đăng nhập vào Comfysloth",
+  "username_or_email": "Tên đăng nhập hoặc email",
+  "password": "Mật khẩu",
+  "forgot_password": "Quên mật khẩu?",
+  "new_to_comfysloth": "Thành viên mới?",
+  "create_an_account": "Tạo tài khoản"
 }

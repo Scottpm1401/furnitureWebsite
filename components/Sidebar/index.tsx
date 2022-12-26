@@ -30,6 +30,14 @@ type SidebarType = {
 const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
   const [sliderValue, setSliderValue] = useState(1000);
   const { t } = useTranslation();
+  const filterByTitle = debounce(
+    (value: string) => handleUpdateFilter({ ...filter, title: value }),
+    300
+  );
+  const filterByPrice = debounce(
+    (value: number) => handleUpdateFilter({ ...filter, price: value }),
+    1000
+  );
   return (
     <Box position='relative' h='full'>
       <Flex
@@ -42,12 +50,7 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
       >
         <Input
           placeholder={t('search_place_holder')}
-          onChange={(e) =>
-            debounce(
-              () => handleUpdateFilter({ ...filter, title: e.target.value }),
-              300
-            )()
-          }
+          onChange={(e) => filterByTitle(e.target.value)}
         />
         <Flex mt='1rem' direction='column' w='full' overflow='auto'>
           <Flex direction='column' w='full'>
@@ -144,12 +147,7 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
             <Slider
               value={sliderValue}
               onChange={(value) => setSliderValue(value)}
-              onChangeEnd={(value) =>
-                debounce(
-                  () => handleUpdateFilter({ ...filter, price: value }),
-                  1000
-                )()
-              }
+              onChangeEnd={(value) => filterByPrice(value)}
               min={25}
               max={1000}
               w='80%'

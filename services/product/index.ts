@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { API } from '../api';
-import axiosClient from '../interceptor';
-import { Filter, ProductType } from '../models/product';
+import { API } from '../../api';
+import axiosClient from '../../interceptor';
+import { Filter, ProductType } from '../../models/product';
 
 export const getFeaturedProduct = async () => {
   const res = await axiosClient.get(API.PRODUCT.GETFEATURED);
