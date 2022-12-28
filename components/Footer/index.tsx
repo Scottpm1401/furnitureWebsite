@@ -24,9 +24,11 @@ const Footer = (props: Props) => {
       <Flex w='full' justifyContent='space-between'>
         <Flex direction='column' mr='2rem' maxW='260px'>
           <Flex>
-            <Button variant='unstyled' h='40px'>
-              <Logo />
-            </Button>
+            <Link href='/'>
+              <Button variant='unstyled' h='40px'>
+                <Logo />
+              </Button>
+            </Link>
           </Flex>
 
           <Text

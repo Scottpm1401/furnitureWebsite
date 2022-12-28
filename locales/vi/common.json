@@ -71,5 +71,16 @@
   "password": "Mật khẩu",
   "forgot_password": "Quên mật khẩu?",
   "new_to_comfysloth": "Thành viên mới?",
-  "create_an_account": "Tạo tài khoản"
+  "create_an_account": "Tạo tài khoản",
+  "create_a_new_account": "Tạo tài khoản mới",
+  "name": "Tên của bạn",
+  "username": "Tên đăng nhập",
+  "email": "Email",
+  "birthday": "Ngày sinh",
+  "create_account": "Tạo tài khoản",
+  "already_have_an_account": "Đã có tài khoản?",
+  "page_not_found": "Trang không tồn tại",
+  "back_to_home": "Trở về trang chủ",
+  "signing_in": "Đang đăng nhập",
+  "creating_account": "Đang tạo tài khoản"
 }

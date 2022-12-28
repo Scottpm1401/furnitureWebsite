@@ -19,6 +19,7 @@ const CustomDatePicker = ({
     <Flex
       css={css`
         input {
+          background: transparent;
           width: 100%;
           border: 1px solid var(--chakra-colors-gray-200);
           padding: 0 1rem;

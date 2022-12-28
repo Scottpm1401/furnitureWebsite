@@ -25,7 +25,13 @@ const Login = (props: Props) => {
         ]}
         current={t('sign_up')}
       />
-      <Flex mt='5rem' direction='column' minW='340px'>
+      <Flex
+        mt='5rem'
+        direction='column'
+        minW='400px'
+        minHeight='60vh'
+        justifyContent='center'
+      >
         <Flex mb='1rem' justifyContent='center'>
           <Text fontSize='3xl' fontWeight='semibold'>
             {t('create_a_new_account')}
@@ -38,10 +44,10 @@ const Login = (props: Props) => {
           borderRadius='0.5rem'
           justifyContent='center'
           alignItems='center'
-          background='white'
+          bg='orange.50'
         >
           <NavLink
-            title={t('create_an_account')}
+            title={t('already_have_an_account')}
             href='/login'
             textProps={{ color: 'blue' }}
             isSpacing={false}

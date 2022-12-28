@@ -25,7 +25,13 @@ const Login = (props: Props) => {
         ]}
         current={t('sign_in')}
       />
-      <Flex mt='5rem' direction='column' minW='340px'>
+      <Flex
+        mt='5rem'
+        direction='column'
+        minW='340px'
+        minHeight='60vh'
+        justifyContent='center'
+      >
         <Flex mb='1rem' justifyContent='center'>
           <Text fontSize='3xl' fontWeight='semibold'>
             {t('sign_in_to_comfysloth')}
@@ -38,7 +44,7 @@ const Login = (props: Props) => {
           borderRadius='0.5rem'
           justifyContent='center'
           alignItems='center'
-          background='white'
+          bg='orange.50'
         >
           <Text mr='0.25rem'>{t('new_to_comfysloth')}</Text>
           <NavLink

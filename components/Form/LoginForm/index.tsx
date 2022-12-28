@@ -1,8 +1,9 @@
 import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
 import { Formik } from 'formik';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import { LoginRequest } from '../../../models/api/user';
@@ -29,7 +30,12 @@ const LoginForm = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
+
   const handleLogin = async (values: LoginFormType) => {
+    setIsLoading(true);
+    setErrorMessage(undefined);
     const { userinput, password } = values;
     const loginReq: LoginRequest = validateEmail(values.userinput)
       ? {
@@ -40,18 +46,24 @@ const LoginForm = () => {
           username: userinput,
           password,
         };
-    const data = await login(loginReq);
-    dispatch(actions.auth.setAuth(data));
-    const userProfile = await getProfile();
-    dispatch(actions.user.setUser(userProfile));
-    router.push('/');
+    try {
+      const data = await login(loginReq);
+      dispatch(actions.auth.setAuth(data));
+      const userProfile = await getProfile();
+      dispatch(actions.user.setUser(userProfile));
+      setIsLoading(false);
+      router.push('/');
+    } catch (err) {
+      if (isAxiosError(err)) setErrorMessage(err.response?.data.message);
+      setIsLoading(false);
+    }
   };
 
   return (
     <Flex
       w='full'
       borderRadius='0.5rem'
-      background='white'
+      bg='orange.50'
       p='1.5rem 1rem'
       alignItems='center'
       justifyContent='center'
@@ -102,9 +114,21 @@ const LoginForm = () => {
               colorScheme='orange'
               mt='1rem'
               onClick={() => handleSubmit()}
+              isLoading={isLoading}
+              loadingText={t('signing_in')}
             >
               {t('sign_in')}
             </Button>
+            {errorMessage && (
+              <Text
+                mt='0.5rem'
+                fontSize='smaller'
+                color='red'
+                textAlign='center'
+              >
+                {errorMessage}
+              </Text>
+            )}
           </Flex>
         )}
       </Formik>

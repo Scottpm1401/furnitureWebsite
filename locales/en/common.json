@@ -71,5 +71,16 @@
   "password": "Password",
   "forgot_password": "Forgot password?",
   "new_to_comfysloth": "New to Comfysloth?",
-  "create_an_account": "Create an account"
+  "create_an_account": "Create an account",
+  "create_a_new_account": "Create a new account",
+  "name": "Name",
+  "username": "Username",
+  "email": "Email",
+  "birthday": "Birthday",
+  "create_account": "Create account",
+  "already_have_an_account": "Already have an account?",
+  "page_not_found": "Page not found",
+  "back_to_home": "Back to home",
+  "signing_in": "Signing in",
+  "creating_account": "Creating account"
 }
