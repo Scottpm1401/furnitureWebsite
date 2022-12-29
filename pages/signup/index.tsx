@@ -44,12 +44,13 @@ const Login = (props: Props) => {
           borderRadius='0.5rem'
           justifyContent='center'
           alignItems='center'
-          bg='orange.50'
+          bg='transparent'
+          boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px'
         >
           <NavLink
             title={t('already_have_an_account')}
             href='/login'
-            textProps={{ color: 'blue' }}
+            textProps={{ color: 'orange.400' }}
             isSpacing={false}
           />
         </Flex>

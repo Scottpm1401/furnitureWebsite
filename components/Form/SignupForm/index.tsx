@@ -1,4 +1,11 @@
-import { Button, Flex, Input, Link, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Text,
+} from '@chakra-ui/react';
 import { isAxiosError } from 'axios';
 import { Formik } from 'formik';
 import moment from 'moment';
@@ -8,6 +15,8 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import CustomDatePicker from '../../../components/CustomeDatePicker';
+import Eye from '../../../public/svg/eye.svg';
+import EyeOff from '../../../public/svg/eye_off.svg';
 import { useAppDispatch } from '../../../redux/hooks';
 import { actions } from '../../../redux/reducer';
 import { signup } from '../../../services/auth';
@@ -43,6 +52,7 @@ const SignupForm = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const handleSignup = async (values: SignupFormType) => {
     setIsLoading(true);
@@ -67,7 +77,8 @@ const SignupForm = () => {
     <Flex
       w='full'
       borderRadius='0.5rem'
-      bg='orange.50'
+      bg='transparent'
+      boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px'
       p='1.5rem 1rem'
       alignItems='center'
       justifyContent='center'
@@ -145,12 +156,30 @@ const SignupForm = () => {
 
             <Flex mt='0.5rem' direction='column'>
               <Text>{t('password')}</Text>
-              <Input
-                mt='0.5rem'
-                type='password'
-                value={values.password}
-                onChange={handleChange('password')}
-              />
+              <InputGroup mt='0.5rem'>
+                <Input
+                  value={values.password}
+                  onChange={handleChange('password')}
+                  pr='32px'
+                  type={isShowPassword ? 'text' : 'password'}
+                />
+                <InputRightElement width='32px' pr='8px'>
+                  <Button
+                    variant='unstyled'
+                    size='sm'
+                    minW='auto'
+                    h='auto'
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                    sx={{
+                      svg: {
+                        stroke: 'var(--chakra-colors-gray-400)',
+                      },
+                    }}
+                  >
+                    {isShowPassword ? <EyeOff /> : <Eye />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
               {errors.password && touched.password && (
                 <Text fontSize='smaller' color='red'>
                   {errors.password}

@@ -10,6 +10,11 @@ svg {
   height: 100%;
 }
 
+input:focus-visible {
+  border-color: var(--chakra-colors-orange-400) !important;
+  box-shadow: 0 0 0 1px var(--chakra-colors-orange-400) !important;
+}
+
 * {
   box-sizing: border-box;
 }

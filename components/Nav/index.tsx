@@ -95,6 +95,7 @@ const Nav = (props: Props) => {
       left={0}
       zIndex={99}
       bg={isTop ? 'transparent' : 'white'}
+      transition='all 200ms ease-in-out'
     >
       <Container>
         <Grid
