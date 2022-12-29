@@ -202,7 +202,7 @@ const Nav = (props: Props) => {
                       <Avatar
                         ml='1rem'
                         name={user?.displayName}
-                        src={user?.info?.avatar}
+                        src={`${process.env.NEXT_PUBLIC_CDN}/${user?.info?.avatar}`}
                         size='sm'
                       />
                     </Button>

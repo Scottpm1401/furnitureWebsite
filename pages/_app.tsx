@@ -9,6 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
+import AuthProvider from '../layout/AuthProvider';
 import { persistor, store } from '../redux/store';
 import theme from '../theme';
 
@@ -17,14 +18,16 @@ const App = ({ Component, pageProps }: AppProps) => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
-          <Head>
-            <title>Comfysloth</title>
-            <link rel='icon' href='/favicon.svg' />
-          </Head>
-          <Nav />
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-          <Component {...pageProps} />
-          <Footer />
+          <AuthProvider>
+            <Head>
+              <title>Comfysloth</title>
+              <link rel='icon' href='/favicon.svg' />
+            </Head>
+            <Nav />
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+            <Component {...pageProps} />
+            <Footer />
+          </AuthProvider>
         </ChakraProvider>
       </PersistGate>
     </Provider>

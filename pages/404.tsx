@@ -3,19 +3,19 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { NAV_HEIGHT } from '../components/Nav';
+import Page from '../layout/Page';
 
 type Props = {};
 
 const NotFound = (props: Props) => {
   const { t } = useTranslation();
   return (
-    <Flex
-      mt={NAV_HEIGHT}
+    <Page
       alignItems='center'
       justifyContent='center'
       direction='column'
       minH='60vh'
+      title='Not Found'
     >
       <Text fontWeight='bold' fontSize='4xl'>
         404 {t('page_not_found')}
@@ -25,7 +25,7 @@ const NotFound = (props: Props) => {
           <Button colorScheme='orange'>{t('back_to_home')}</Button>
         </Link>
       </Flex>
-    </Flex>
+    </Page>
   );
 };
 

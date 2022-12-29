@@ -17,7 +17,7 @@ import { Rating } from 'react-simple-star-rating';
 import Breadcrumb from '../../../components/Breadcrumb';
 import ColorButton from '../../../components/ColorButton';
 import Container from '../../../components/Container';
-import { NAV_HEIGHT } from '../../../components/Nav';
+import Page from '../../../layout/Page';
 import { ProductCartType } from '../../../models/cart';
 import { ProductType } from '../../../models/product';
 import MinusIcon from '../../../public/svg/minus.svg';
@@ -81,7 +81,7 @@ const Product = ({ ...props }: Props) => {
   }, [handleGetProduct]);
 
   return (
-    <Flex w='full' direction='column' mt={NAV_HEIGHT}>
+    <Page w='full' direction='column' title={product?.title || 'Product'}>
       <Breadcrumb
         links={[
           { title: t('home'), href: '/' },
@@ -342,7 +342,7 @@ const Product = ({ ...props }: Props) => {
           </Grid>
         )}
       </Container>
-    </Flex>
+    </Page>
   );
 };
 

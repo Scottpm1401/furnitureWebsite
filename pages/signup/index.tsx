@@ -4,19 +4,18 @@ import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import SignupForm from '../../components/Form/SignupForm';
-import { NAV_HEIGHT } from '../../components/Nav';
 import NavLink from '../../components/Nav/NavLink';
-
+import Page from '../../layout/Page';
 type Props = {};
 
 const Login = (props: Props) => {
   const { t } = useTranslation();
   return (
-    <Flex
-      mt={NAV_HEIGHT}
+    <Page
       alignItems='center'
       justifyContent='center'
       direction='column'
+      title='Sign up'
     >
       <Breadcrumb
         links={[
@@ -55,7 +54,7 @@ const Login = (props: Props) => {
           />
         </Flex>
       </Flex>
-    </Flex>
+    </Page>
   );
 };
 
