@@ -5,10 +5,10 @@ import React, { useState } from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import Container from '../../components/Container';
-import { NAV_HEIGHT } from '../../components/Nav';
 import ProductCard from '../../components/ProductCard';
 import Sidebar from '../../components/Sidebar';
 import { useResponsive } from '../../hooks/useResponsive';
+import Page from '../../layout/Page';
 import { Filter, ProductSort, ProductType } from '../../models/product';
 import DropDownIcon from '../../public/svg/drop-down.svg';
 import GridIcon from '../../public/svg/grid.svg';
@@ -58,7 +58,7 @@ const Products = ({
   };
 
   return (
-    <Flex w='full' direction='column' mt={NAV_HEIGHT}>
+    <Page w='full' direction='column' title='Products'>
       <Breadcrumb
         links={[
           { title: t('home'), href: '/' },
@@ -162,7 +162,7 @@ const Products = ({
           </Flex>
         </Grid>
       </Container>
-    </Flex>
+    </Page>
   );
 };
 

@@ -7,7 +7,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { isAxiosError } from 'axios';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
@@ -85,81 +85,83 @@ const LoginForm = () => {
         onSubmit={handleLogin}
       >
         {({ handleSubmit, handleChange, values, errors, touched }) => (
-          <Flex direction='column' w='full'>
-            <Text>{t('username_or_email')}</Text>
-            <Input
-              mt='0.5rem'
-              value={values.userinput}
-              onChange={handleChange('userinput')}
-            />
-            {errors.userinput && touched.userinput && (
-              <Text fontSize='smaller' color='red'>
-                {errors.userinput}
-              </Text>
-            )}
-            <Flex
-              mt='0.5rem'
-              justifyContent='space-between'
-              alignItems='center'
-            >
-              <Text>{t('password')}</Text>
-              <NavLink
-                title={t('forgot_password')}
-                href='#'
-                textProps={{ color: 'orange.400', fontSize: 'smaller' }}
-                isSpacing={false}
-              />
-            </Flex>
-            <InputGroup mt='0.5rem'>
+          <Form style={{ width: '100%' }} onSubmit={handleSubmit}>
+            <Flex direction='column' w='full'>
+              <Text>{t('username_or_email')}</Text>
               <Input
-                value={values.password}
-                onChange={handleChange('password')}
-                pr='32px'
-                type={isShowPassword ? 'text' : 'password'}
-              />
-              <InputRightElement width='32px' pr='8px'>
-                <Button
-                  variant='unstyled'
-                  size='sm'
-                  minW='auto'
-                  h='auto'
-                  onClick={() => setIsShowPassword(!isShowPassword)}
-                  sx={{
-                    svg: {
-                      stroke: 'var(--chakra-colors-gray-400)',
-                    },
-                  }}
-                >
-                  {isShowPassword ? <EyeOff /> : <Eye />}
-                </Button>
-              </InputRightElement>
-            </InputGroup>
-
-            {errors.password && touched.password && (
-              <Text fontSize='smaller' color='red'>
-                {errors.password}
-              </Text>
-            )}
-            <Button
-              colorScheme='orange'
-              mt='1rem'
-              onClick={() => handleSubmit()}
-              isLoading={isLoading}
-              loadingText={t('signing_in')}
-            >
-              {t('sign_in')}
-            </Button>
-            {errorMessage && (
-              <Text
                 mt='0.5rem'
-                fontSize='smaller'
-                color='red'
-                textAlign='center'
+                value={values.userinput}
+                onChange={handleChange('userinput')}
+              />
+              {errors.userinput && touched.userinput && (
+                <Text fontSize='smaller' color='red'>
+                  {errors.userinput}
+                </Text>
+              )}
+              <Flex
+                mt='0.5rem'
+                justifyContent='space-between'
+                alignItems='center'
               >
-                {errorMessage}
-              </Text>
-            )}
-          </Flex>
+                <Text>{t('password')}</Text>
+                <NavLink
+                  title={t('forgot_password')}
+                  href='#'
+                  textProps={{ color: 'orange.400', fontSize: 'smaller' }}
+                  isSpacing={false}
+                />
+              </Flex>
+              <InputGroup mt='0.5rem'>
+                <Input
+                  value={values.password}
+                  onChange={handleChange('password')}
+                  pr='32px'
+                  type={isShowPassword ? 'text' : 'password'}
+                />
+                <InputRightElement width='32px' pr='8px'>
+                  <Button
+                    variant='unstyled'
+                    size='sm'
+                    minW='auto'
+                    h='auto'
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                    sx={{
+                      svg: {
+                        stroke: 'var(--chakra-colors-gray-400)',
+                      },
+                    }}
+                  >
+                    {isShowPassword ? <EyeOff /> : <Eye />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+
+              {errors.password && touched.password && (
+                <Text fontSize='smaller' color='red'>
+                  {errors.password}
+                </Text>
+              )}
+              <Button
+                colorScheme='orange'
+                mt='1rem'
+                type='submit'
+                isLoading={isLoading}
+                loadingText={t('signing_in')}
+              >
+                {t('sign_in')}
+              </Button>
+              {errorMessage && (
+                <Text
+                  mt='0.5rem'
+                  fontSize='smaller'
+                  color='red'
+                  textAlign='center'
+                >
+                  {errorMessage}
+                </Text>
+              )}
+            </Flex>
+          </Form>
         )}
       </Formik>
     </Flex>

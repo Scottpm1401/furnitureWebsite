@@ -7,6 +7,7 @@ import Newsletter from '../components/Home/Newsletter';
 import Section1 from '../components/Home/Section1';
 import Section2 from '../components/Home/Section2';
 import Section3 from '../components/Home/Section3';
+import Page from '../layout/Page';
 import { getFeaturedProduct } from '../services/product';
 
 type Props = {};
@@ -26,12 +27,12 @@ const Home = ({
   const { t } = useTranslation();
 
   return (
-    <Flex direction='column'>
+    <Page direction='column'>
       <Section1 />
       <Section2 products={featuredProducts} />
       <Section3 />
       <Newsletter />
-    </Flex>
+    </Page>
   );
 };
 
