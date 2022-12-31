@@ -109,5 +109,7 @@
   "update_profile_success": "Cập nhật thông tin thành công",
   "update_password_success": "Cập nhật mật khẩu thành công",
   "form_required": "Không thể bỏ trống ô này",
-  "incorrect_password": "Sai mật khẩu"
+  "incorrect_password": "Sai mật khẩu",
+  "invalid_email_username": "Sai tên đăng nhập hoặc email",
+  "user_already_existed": "Tên đăng nhập đã tồn tại"
 }

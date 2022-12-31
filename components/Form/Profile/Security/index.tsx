@@ -32,6 +32,11 @@ const SecurityProfile = () => {
   const [isShowPassword1, setIsShowPassword1] = useState(false);
   const [isShowPassword2, setIsShowPassword2] = useState(false);
 
+  const authenticationSchema = Yup.object().shape({
+    currentPassword: Yup.string().required(t('form_required')),
+    newPassword: Yup.string().required(t('form_required')),
+  });
+
   const handleUpdateProfile = async (values: SecurityType) => {
     setIsLoading(true);
     try {
@@ -81,6 +86,7 @@ const SecurityProfile = () => {
             newPassword: '',
           } as SecurityType
         }
+        validationSchema={authenticationSchema}
         onSubmit={handleUpdateProfile}
         enableReinitialize
       >

@@ -30,11 +30,6 @@ type LoginFormType = {
 
 const initValue: LoginFormType = { userinput: '', password: '' };
 
-const LoginSchema = Yup.object().shape({
-  userinput: Yup.string().required('Please enter username or email'),
-  password: Yup.string().required('Please enter password'),
-});
-
 const LoginForm = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -42,6 +37,11 @@ const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const LoginSchema = Yup.object().shape({
+    userinput: Yup.string().required(t('form_required')),
+    password: Yup.string().required(t('form_required')),
+  });
 
   const handleLogin = async (values: LoginFormType) => {
     setIsLoading(true);
@@ -63,7 +63,7 @@ const LoginForm = () => {
       dispatch(actions.user.setUser(userProfile));
       await router.push('/');
     } catch (err) {
-      if (isAxiosError(err)) setErrorMessage(err.response?.data.message);
+      if (isAxiosError(err)) setErrorMessage(t(err.response?.data.message));
     }
     setIsLoading(false);
   };

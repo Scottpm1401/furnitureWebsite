@@ -38,14 +38,6 @@ const initValue: SignupFormType = {
   birthday: null,
 };
 
-const SignupSchema = Yup.object().shape({
-  displayName: Yup.string().required('Please enter your name'),
-  username: Yup.string().required('Please enter username'),
-  email: Yup.string().email().required('Please enter email'),
-  password: Yup.string().required('Please enter password'),
-  birthday: Yup.string().nullable().required('Please choose your birthday'),
-});
-
 const SignupForm = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -53,6 +45,14 @@ const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const SignupSchema = Yup.object().shape({
+    displayName: Yup.string().required(t('form_required')),
+    username: Yup.string().required(t('form_required')),
+    email: Yup.string().email().required(t('form_required')),
+    password: Yup.string().required(t('form_required')),
+    birthday: Yup.string().nullable().required(t('form_required')),
+  });
 
   const handleSignup = async (values: SignupFormType) => {
     setIsLoading(true);
@@ -67,7 +67,7 @@ const SignupForm = () => {
       dispatch(actions.user.setUser(userProfile));
       await router.push('/');
     } catch (err) {
-      if (isAxiosError(err)) setErrorMessage(err.response?.data.message);
+      if (isAxiosError(err)) setErrorMessage(t(err.response?.data.message));
     }
     setIsLoading(false);
   };
