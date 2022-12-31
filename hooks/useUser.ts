@@ -11,6 +11,7 @@ export const useUser = () => {
   const [user, setUser] = useState<UserState>();
 
   const getUser = useCallback(async () => {
+    setIsLoading(true);
     try {
       const currentUser = await getProfile();
       setUser(currentUser);
@@ -19,7 +20,7 @@ export const useUser = () => {
     } catch (err) {
       return undefined;
     } finally {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   }, [dispatch]);
 
