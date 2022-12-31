@@ -6,12 +6,11 @@ import { UserState } from '../redux/reducers/userReducer';
 import { getProfile } from '../services/user';
 
 export const useUser = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
   const [user, setUser] = useState<UserState>();
 
   const getUser = useCallback(async () => {
-    setIsLoading(true);
     try {
       const currentUser = await getProfile();
       setUser(currentUser);
