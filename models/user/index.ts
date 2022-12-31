@@ -10,12 +10,12 @@ export enum Gender {
 }
 
 export type UserInfoType = {
-  first_name: string;
-  last_name: string;
-  phone: string;
-  sex: Gender;
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
+  sex?: Gender;
   avatar?: string;
-  address: AddressType;
+  address?: AddressType;
 };
 
 export type AddressType = {

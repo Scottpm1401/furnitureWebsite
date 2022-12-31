@@ -23,5 +23,8 @@ export const API = {
     CHECKOUT: '/payment/checkout',
     CONFIRM: '/payment/confirm',
   },
+  UPLOAD:{
+    SIGNATURE:'/upload/signature'
+  },
   REFRESHTOKEN: '/user/refreshToken',
 };

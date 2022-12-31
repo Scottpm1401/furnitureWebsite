@@ -82,5 +82,12 @@
   "page_not_found": "Page not found",
   "back_to_home": "Back to home",
   "signing_in": "Signing in",
-  "creating_account": "Creating account"
+  "creating_account": "Creating account",
+  "public_profile": "Public Profile",
+  "additional_info": "Additional Info",
+  "password_and_authentication": "Password & Authentication",
+  "update_profile": "Update Profile",
+  "profile_picture": "Profile Picture",
+  "profile": "Profile",
+  "updating": "Updating"
 }

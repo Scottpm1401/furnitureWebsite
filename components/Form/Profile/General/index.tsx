@@ -13,8 +13,10 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import Camera from '../../../../public/svg/camera.svg';
-import { useAppSelector } from '../../../../redux/hooks';
-import { selectors } from '../../../../redux/reducer';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { actions, selectors } from '../../../../redux/reducer';
+import { getSignature, GetSignatureType } from '../../../../services/upload';
+import { updateUser, uploadUserAva } from '../../../../services/user';
 import { convertToBase64 } from '../../../../utils/common';
 
 type GeneralProfileType = {
@@ -27,9 +29,52 @@ const GeneralProfile = () => {
   const { t } = useTranslation();
   const user = useAppSelector(selectors.user.selectUser);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
 
-  const handleUpdateProfile = (values: GeneralProfileType) => {
+  const handleUpdateProfile = async (values: GeneralProfileType) => {
+    setIsLoading(true);
     if (values.avatar) {
+      const formData = new FormData();
+      let signatureParam: GetSignatureType = {};
+      if (user.info?.avatar) {
+        signatureParam.public_id = user.info.avatar;
+        formData.append('public_id', user.info.avatar);
+      } else {
+        const folder = 'furniture/users';
+        signatureParam.folder = folder;
+        formData.append('folder', folder);
+      }
+      const { signature, timestamp } = await getSignature(signatureParam);
+      formData.append('file', values.avatar);
+      formData.append(
+        'api_key',
+        process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || ''
+      );
+      formData.append('timestamp', timestamp.toString());
+      formData.append('signature', signature);
+      formData.append(
+        'upload_preset',
+        process.env.NEXT_PUBLIC_CLOUDINARY_PRESET || ''
+      );
+
+      const { public_id, version } = await uploadUserAva(formData);
+      const updatedUser = await updateUser({
+        username: values.username,
+        displayName: values.displayName,
+        info: {
+          ...user.info,
+          avatar: version ? `v${version}/${public_id}` : public_id,
+        },
+      });
+      dispatch(actions.user.setUser(updatedUser));
+      setIsLoading(false);
+    } else {
+      const updatedUser = await updateUser({
+        username: values.username,
+        displayName: values.displayName,
+      });
+      dispatch(actions.user.setUser(updatedUser));
+      setIsLoading(false);
     }
   };
 
@@ -37,12 +82,16 @@ const GeneralProfile = () => {
     <Flex
       w='full'
       borderRadius='0.5rem'
-      bg='white'
-      p='1.5rem 1rem'
       alignItems='center'
       justifyContent='center'
-      boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px'
+      direction='column'
     >
+      <Flex direction='column' w='full'>
+        <Text fontSize='xl' fontWeight='bold'>
+          {t('public_profile')}
+        </Text>
+        <Flex mt='1rem' w='full' h='1px' bg='blackAlpha.400' />
+      </Flex>
       <Formik
         initialValues={
           {
@@ -64,42 +113,95 @@ const GeneralProfile = () => {
           errors,
           touched,
         }) => (
-          <Form style={{ width: '100%' }} onSubmit={handleSubmit}>
-            <Flex w='full' direction='column'>
-              <Flex position='relative' w='64px' h='64px'>
-                <Avatar w='full' h='full' src={values.avatar} />
-                <Flex
-                  position='absolute'
-                  bottom='-5px'
-                  right='-4px'
-                  w='28px'
-                  h='28px'
-                  borderRadius='full'
-                  p='6px'
-                  bg='white'
-                  justifyContent='center'
-                  alignItems='center'
-                  boxShadow='2px 1px 7px'
-                  cursor='pointer'
-                >
-                  <label htmlFor='avatar'>
-                    <Camera style={{ stroke: 'black' }} />
-                  </label>
+          <Form
+            style={{ width: '100%', marginTop: '1rem' }}
+            onSubmit={handleSubmit}
+          >
+            <Flex w='full'>
+              <Flex w='full' direction='column'>
+                <Flex direction='column' w='full'>
+                  <Text fontWeight='semibold'>{t('email')}</Text>
+                  <Input mt='0.5rem' value={user.email} disabled />
                 </Flex>
+                <Flex mt='1.5rem' direction='column' w='full'>
+                  <Text fontWeight='semibold'>{t('name')}</Text>
+                  <Input
+                    mt='0.5rem'
+                    value={values.displayName}
+                    onChange={handleChange('displayName')}
+                  />
+                  {errors.displayName && touched.displayName && (
+                    <Text fontSize='smaller' color='red'>
+                      {errors.displayName}
+                    </Text>
+                  )}
+                </Flex>
+                <Flex mt='1.5rem' direction='column' w='full'>
+                  <Text fontWeight='semibold'>{t('username')}</Text>
+                  <Input
+                    mt='0.5rem'
+                    value={values.username}
+                    onChange={handleChange('username')}
+                  />
+                  {errors.username && touched.username && (
+                    <Text fontSize='smaller' color='red'>
+                      {errors.username}
+                    </Text>
+                  )}
+                </Flex>
+                <Flex mt='2rem'>
+                  <Button
+                    isLoading={isLoading}
+                    loadingText={t('updating')}
+                    type='submit'
+                    colorScheme='orange'
+                  >
+                    {t('update_profile')}
+                  </Button>
+                </Flex>
+              </Flex>
+              <Flex ml='4rem' direction='column'>
+                <Text fontWeight='semibold'>{t('profile_picture')}</Text>
+                <Flex mt='0.5rem' position='relative' w='160px' h='160px'>
+                  <Avatar
+                    w='full'
+                    h='full'
+                    name={values?.displayName}
+                    src={values.avatar}
+                  />
+                  <label htmlFor='avatar'>
+                    <Flex
+                      position='absolute'
+                      bottom='0'
+                      right='4px'
+                      w='40px'
+                      h='40px'
+                      borderRadius='full'
+                      p='8px'
+                      bg='white'
+                      justifyContent='center'
+                      alignItems='center'
+                      boxShadow='2px 1px 7px'
+                      _hover={{ opacity: 0.9 }}
+                      cursor='pointer'
+                    >
+                      <Camera style={{ stroke: 'black', cursor: 'pointer' }} />
+                    </Flex>
+                  </label>
 
-                <Input
-                  id='avatar'
-                  display='none'
-                  type='file'
-                  accept='image/png, image/gif, image/jpeg'
-                  onChange={async (e) => {
-                    const { result } = await convertToBase64(
-                      e.target.files?.[0] as File
-                    );
-
-                    setFieldValue('avatar', result);
-                  }}
-                />
+                  <Input
+                    id='avatar'
+                    display='none'
+                    type='file'
+                    accept='image/png, image/gif, image/jpeg'
+                    onChange={async (e) => {
+                      const { result } = await convertToBase64(
+                        e.target.files?.[0] as File
+                      );
+                      setFieldValue('avatar', result);
+                    }}
+                  />
+                </Flex>
               </Flex>
             </Flex>
           </Form>

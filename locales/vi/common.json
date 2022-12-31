@@ -82,5 +82,12 @@
   "page_not_found": "Trang không tồn tại",
   "back_to_home": "Trở về trang chủ",
   "signing_in": "Đang đăng nhập",
-  "creating_account": "Đang tạo tài khoản"
+  "creating_account": "Đang tạo tài khoản",
+  "public_profile": "Thông tin chung",
+  "additional_info": "Thông tin chi tiết",
+  "password_and_authentication": "Mật khẩu và bảo mật",
+  "update_profile": "Cập nhật thông tin",
+  "profile_picture": "Ảnh đại diện",
+  "profile": "Trang cá nhân",
+  "updating": "Đang cập nhật"
 }
