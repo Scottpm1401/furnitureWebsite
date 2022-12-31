@@ -55,3 +55,8 @@ export type LogoutResquest = {
 export type LogoutResponse = {
   success: boolean;
 };
+
+export type ChangePasswordRequest = {
+  password: string;
+  newPassword: string;
+};

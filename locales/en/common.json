@@ -102,5 +102,12 @@
   "current_password": "Current password",
   "new_password": "New password",
   "update_password": "Change your password",
-  "your_personal_account": "Your personal account"
+  "your_personal_account": "Your personal account",
+  "MALE": "Male",
+  "FEMALE": "Female",
+  "OTHER": "Other",
+  "update_profile_success": "Successfully update your profile",
+  "update_password_success": "Successfully update your password",
+  "form_required": "This field cannot be empty",
+  "incorrect_password": "Incorrect password"
 }

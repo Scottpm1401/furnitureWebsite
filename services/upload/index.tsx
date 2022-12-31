@@ -1,4 +1,4 @@
-import { API } from '../../api';
+import { API } from '../../constant/api';
 import axiosClient from '../../interceptor';
 import { SignedUpload } from '../../models/upload';
 

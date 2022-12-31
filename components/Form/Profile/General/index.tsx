@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  Button,
-  Flex,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Text,
-} from '@chakra-ui/react';
+import { Avatar, Button, Flex, Input, Text, useToast } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
@@ -30,6 +22,7 @@ const GeneralProfile = () => {
   const user = useAppSelector(selectors.user.selectUser);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   const handleUpdateProfile = async (values: GeneralProfileType) => {
     setIsLoading(true);
@@ -74,6 +67,12 @@ const GeneralProfile = () => {
       });
       dispatch(actions.user.setUser(updatedUser));
     }
+    toast({
+      title: t('update_profile_success'),
+      status: 'success',
+      duration: 5000,
+      position: 'top-right',
+    });
     setIsLoading(false);
   };
 

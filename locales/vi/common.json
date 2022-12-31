@@ -102,5 +102,12 @@
   "current_password": "Mật khẩu hiện tại",
   "new_password": "Mật khẩu mới",
   "update_password": "Thay đổi mật khẩu",
-  "your_personal_account": "Tài khoản của bạn"
+  "your_personal_account": "Tài khoản của bạn",
+  "MALE": "Nam",
+  "FEMALE": "Nữ",
+  "OTHER": "Khác",
+  "update_profile_success": "Cập nhật thông tin thành công",
+  "update_password_success": "Cập nhật mật khẩu thành công",
+  "form_required": "Không thể bỏ trống ô này",
+  "incorrect_password": "Sai mật khẩu"
 }

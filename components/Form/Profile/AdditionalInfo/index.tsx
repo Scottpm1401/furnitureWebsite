@@ -1,24 +1,16 @@
-import {
-  Avatar,
-  Button,
-  Flex,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Flex, Input, Select, Text, useToast } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
+import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
-import { UserInfoType } from '../../../../models/user';
-import Camera from '../../../../public/svg/camera.svg';
+import { countries } from '../../../../constant/country';
+import { Gender, UserInfoType } from '../../../../models/user';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';
-import { getSignature, GetSignatureType } from '../../../../services/upload';
-import { updateUser, uploadUserAva } from '../../../../services/user';
-import { convertToBase64 } from '../../../../utils/common';
+import { updateUser } from '../../../../services/user';
+import CustomDatePicker from '../../../CustomeDatePicker';
 
 type AdditionalInfoType = {
   birthday: string;
@@ -30,8 +22,20 @@ const AdditionalInfoProfile = () => {
   const user = useAppSelector(selectors.user.selectUser);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
-  const handleUpdateProfile = async (values: AdditionalInfoType) => {};
+  const handleUpdateProfile = async (values: AdditionalInfoType) => {
+    setIsLoading(true);
+    const updatedUser = await updateUser({ ...values });
+    dispatch(actions.user.setUser(updatedUser));
+    toast({
+      title: t('update_profile_success'),
+      status: 'success',
+      duration: 5000,
+      position: 'top-right',
+    });
+    setIsLoading(false);
+  };
 
   return (
     <Flex
@@ -90,12 +94,53 @@ const AdditionalInfoProfile = () => {
                 </Flex>
 
                 <Flex mt='1.5rem' direction='column' w='full'>
+                  <Text fontWeight='semibold'>{t('birthday')}</Text>
+                  <CustomDatePicker
+                    mt='0.5rem'
+                    currentDate={moment(values.birthday).toDate()}
+                    callback={(date) =>
+                      setFieldValue('birthday', date?.toString())
+                    }
+                  />
+                </Flex>
+
+                <Flex mt='1.5rem' direction='column' w='full'>
                   <Text fontWeight='semibold'>{t('phone')}</Text>
                   <Input
                     mt='0.5rem'
                     value={values.info?.phone}
                     onChange={handleChange('info.phone')}
                   />
+                </Flex>
+
+                <Flex mt='1.5rem' direction='column' w='full'>
+                  <Text fontWeight='semibold'>{t('gender')}</Text>
+                  <Select
+                    mt='0.5rem'
+                    value={values.info?.phone}
+                    onChange={handleChange('info.gender')}
+                  >
+                    {Object.values(Gender).map((gen) => (
+                      <option value={gen} key={gen}>
+                        {gen}
+                      </option>
+                    ))}
+                  </Select>
+                </Flex>
+
+                <Flex mt='1.5rem' direction='column' w='full'>
+                  <Text fontWeight='semibold'>{t('country')}</Text>
+                  <Select
+                    mt='0.5rem'
+                    value={values.info?.address?.country || 'VN'}
+                    onChange={handleChange('info.country')}
+                  >
+                    {countries.map((country) => (
+                      <option value={country.code} key={country.code}>
+                        {country.name}
+                      </option>
+                    ))}
+                  </Select>
                 </Flex>
 
                 <Flex mt='1.5rem' direction='column' w='full'>

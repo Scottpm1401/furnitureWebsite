@@ -1,24 +1,23 @@
 import {
-  Avatar,
   Button,
   Flex,
   Input,
   InputGroup,
   InputRightElement,
   Text,
+  useToast,
 } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
-import Camera from '../../../../public/svg/camera.svg';
+import Eye from '../../../../public/svg/eye.svg';
+import EyeOff from '../../../../public/svg/eye_off.svg';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';
-import { getSignature, GetSignatureType } from '../../../../services/upload';
-import { updateUser, uploadUserAva } from '../../../../services/user';
-import { convertToBase64 } from '../../../../utils/common';
-
+import { changePassword } from '../../../../services/user';
 type SecurityType = {
   currentPassword: string;
   newPassword: string;
@@ -29,8 +28,37 @@ const SecurityProfile = () => {
   const user = useAppSelector(selectors.user.selectUser);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const toast = useToast();
+  const [isShowPassword1, setIsShowPassword1] = useState(false);
+  const [isShowPassword2, setIsShowPassword2] = useState(false);
 
-  const handleUpdateProfile = async (values: SecurityType) => {};
+  const handleUpdateProfile = async (values: SecurityType) => {
+    setIsLoading(true);
+    try {
+      const data = await changePassword({
+        password: values.currentPassword,
+        newPassword: values.newPassword,
+      });
+      dispatch(actions.auth.setAuth(data));
+      toast({
+        title: t('update_password_success'),
+        status: 'success',
+        duration: 5000,
+        position: 'top-right',
+      });
+    } catch (err) {
+      if (isAxiosError(err)) {
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+      }
+    }
+
+    setIsLoading(false);
+  };
 
   return (
     <Flex
@@ -72,11 +100,30 @@ const SecurityProfile = () => {
               <Flex w='full' direction='column'>
                 <Flex mt='1.5rem' direction='column' w='full'>
                   <Text fontWeight='semibold'>{t('current_password')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.currentPassword}
-                    onChange={handleChange('currentPassword')}
-                  />
+                  <InputGroup mt='0.5rem'>
+                    <Input
+                      value={values.currentPassword}
+                      onChange={handleChange('currentPassword')}
+                      pr='32px'
+                      type={isShowPassword1 ? 'text' : 'password'}
+                    />
+                    <InputRightElement width='32px' pr='8px'>
+                      <Button
+                        variant='unstyled'
+                        size='sm'
+                        minW='auto'
+                        h='auto'
+                        onClick={() => setIsShowPassword1(!isShowPassword1)}
+                        sx={{
+                          svg: {
+                            stroke: 'var(--chakra-colors-gray-400)',
+                          },
+                        }}
+                      >
+                        {isShowPassword1 ? <EyeOff /> : <Eye />}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
                   {errors.currentPassword && touched.currentPassword && (
                     <Text fontSize='smaller' color='red'>
                       {errors.currentPassword}
@@ -86,11 +133,30 @@ const SecurityProfile = () => {
 
                 <Flex mt='1.5rem' direction='column' w='full'>
                   <Text fontWeight='semibold'>{t('new_password')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.newPassword}
-                    onChange={handleChange('newPassword')}
-                  />
+                  <InputGroup mt='0.5rem'>
+                    <Input
+                      value={values.newPassword}
+                      onChange={handleChange('newPassword')}
+                      pr='32px'
+                      type={isShowPassword2 ? 'text' : 'password'}
+                    />
+                    <InputRightElement width='32px' pr='8px'>
+                      <Button
+                        variant='unstyled'
+                        size='sm'
+                        minW='auto'
+                        h='auto'
+                        onClick={() => setIsShowPassword2(!isShowPassword2)}
+                        sx={{
+                          svg: {
+                            stroke: 'var(--chakra-colors-gray-400)',
+                          },
+                        }}
+                      >
+                        {isShowPassword2 ? <EyeOff /> : <Eye />}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
                   {errors.newPassword && touched.newPassword && (
                     <Text fontSize='smaller' color='red'>
                       {errors.newPassword}

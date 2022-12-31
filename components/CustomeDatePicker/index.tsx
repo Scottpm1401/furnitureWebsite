@@ -26,6 +26,7 @@ const CustomDatePicker = ({
           height: var(--chakra-sizes-10);
           border-radius: var(--chakra-radii-md);
           transition: all 200ms ease-in-out;
+          outline: none;
         }
       `}
       {...props}

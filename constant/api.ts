@@ -9,6 +9,7 @@ export const API = {
     UPDATESELF: '/user/update_self',
     DELETEUSER: (id: string) => `/user/delete/${id}`,
     UPDATEUSER: (id: string) => `/user/update/${id}`,
+    CHANGEPASSWORD: '/user/change_password',
   },
   PRODUCT: {
     GETFEATURED: '/product/featured',
@@ -23,8 +24,8 @@ export const API = {
     CHECKOUT: '/payment/checkout',
     CONFIRM: '/payment/confirm',
   },
-  UPLOAD:{
-    SIGNATURE:'/upload/signature'
+  UPLOAD: {
+    SIGNATURE: '/upload/signature',
   },
   REFRESHTOKEN: '/user/refreshToken',
 };

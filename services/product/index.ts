@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { API } from '../../api';
+import { API } from '../../constant/api';
 import axiosClient from '../../interceptor';
 import { Filter, ProductType } from '../../models/product';
 
