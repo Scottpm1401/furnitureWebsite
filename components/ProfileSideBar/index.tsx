@@ -1,4 +1,4 @@
-import { Flex, FlexProps, Text } from '@chakra-ui/react';
+import { Avatar, Flex, FlexProps, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';

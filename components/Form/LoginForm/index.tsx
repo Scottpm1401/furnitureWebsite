@@ -61,12 +61,11 @@ const LoginForm = () => {
       dispatch(actions.auth.setAuth(data));
       const userProfile = await getProfile();
       dispatch(actions.user.setUser(userProfile));
-      setIsLoading(false);
-      router.push('/');
+      await router.push('/');
     } catch (err) {
       if (isAxiosError(err)) setErrorMessage(err.response?.data.message);
-      setIsLoading(false);
     }
+    setIsLoading(false);
   };
 
   return (

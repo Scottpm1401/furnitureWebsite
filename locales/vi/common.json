@@ -89,5 +89,18 @@
   "update_profile": "Cập nhật thông tin",
   "profile_picture": "Ảnh đại diện",
   "profile": "Trang cá nhân",
-  "updating": "Đang cập nhật"
+  "updating": "Đang cập nhật",
+  "first_name": "Họ",
+  "last_name": "Tên",
+  "phone": "Số điện thoại",
+  "country": "Quốc gia",
+  "city": "Thành phố",
+  "state": "Quận",
+  "line1": "Địa chỉ 1",
+  "line2": "Địa chỉ 2",
+  "gender": "Giới tính",
+  "current_password": "Mật khẩu hiện tại",
+  "new_password": "Mật khẩu mới",
+  "update_password": "Thay đổi mật khẩu",
+  "your_personal_account": "Tài khoản của bạn"
 }

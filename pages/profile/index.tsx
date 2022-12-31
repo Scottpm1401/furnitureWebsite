@@ -12,7 +12,12 @@ type Props = {};
 const Profile = (props: Props) => {
   const { t } = useTranslation();
   return (
-    <Page alignItems='center' justifyContent='center' direction='column'>
+    <Page
+      alignItems='center'
+      justifyContent='center'
+      direction='column'
+      title='Profile'
+    >
       <Breadcrumb
         links={[
           { title: t('home'), href: '/' },

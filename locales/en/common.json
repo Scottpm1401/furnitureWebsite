@@ -89,5 +89,18 @@
   "update_profile": "Update Profile",
   "profile_picture": "Profile Picture",
   "profile": "Profile",
-  "updating": "Updating"
+  "updating": "Updating",
+  "first_name": "First name",
+  "last_name": "Last name",
+  "phone": "Phone number",
+  "country": "Country",
+  "city": "City",
+  "state": "State",
+  "line1": "Line 1",
+  "line2": "Line 2",
+  "gender": "Gender",
+  "current_password": "Current password",
+  "new_password": "New password",
+  "update_password": "Change your password",
+  "your_personal_account": "Your personal account"
 }

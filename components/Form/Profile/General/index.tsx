@@ -67,15 +67,14 @@ const GeneralProfile = () => {
         },
       });
       dispatch(actions.user.setUser(updatedUser));
-      setIsLoading(false);
     } else {
       const updatedUser = await updateUser({
         username: values.username,
         displayName: values.displayName,
       });
       dispatch(actions.user.setUser(updatedUser));
-      setIsLoading(false);
     }
+    setIsLoading(false);
   };
 
   return (

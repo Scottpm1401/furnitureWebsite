@@ -32,7 +32,7 @@ const Breadcrumb = ({
       direction='column'
       w='full'
       h='20vh'
-      bg='#e7e1d8'
+      bg='orange.200'
       justifyContent='center'
       fontSize='3xl'
       fontWeight='semibold'
@@ -43,7 +43,7 @@ const Breadcrumb = ({
           {links.map((item, index) => (
             <BreadcrumbItem key={`${item.title}_${index}`}>
               {item.title === current ? (
-                <Text color='#464646'>{item.title}</Text>
+                <Text color='blackAlpha.600'>{item.title}</Text>
               ) : (
                 <Link href={item.href}>
                   <Text>{item.title}</Text>
