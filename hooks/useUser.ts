@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { useAppDispatch } from '../redux/hooks';
-import { actions } from '../redux/reducer';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { actions, selectors } from '../redux/reducer';
 import { UserState } from '../redux/reducers/userReducer';
 import { getProfile } from '../services/user';
 
 export const useUser = () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
+  const storedUser = useAppSelector(selectors.user.selectUser);
   const [user, setUser] = useState<UserState>();
 
   const getUser = useCallback(async () => {
@@ -24,20 +25,13 @@ export const useUser = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    getUser();
-  }, [getUser]);
-
-  // const user = useMemo(async () => {
-  //   try {
-  //     const currentUser = await getProfile();
-  //     dispatch(actions.user.setUser(currentUser));
-  //     return currentUser;
-  //   } catch (err) {
-  //     return undefined;
-  //   } finally {
-  //     setIsLoading(true);
-  //   }
-  // }, [dispatch]);
+    if (!storedUser._id) {
+      getUser();
+    } else {
+      setUser(storedUser);
+      setIsLoading(false);
+    }
+  }, [getUser, storedUser]);
 
   return { isLoading, user };
 };
