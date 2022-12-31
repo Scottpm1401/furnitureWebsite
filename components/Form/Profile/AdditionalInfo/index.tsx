@@ -55,7 +55,13 @@ const AdditionalInfoProfile = () => {
         initialValues={
           {
             birthday: user.birthday,
-            info: user.info,
+            info: {
+              ...user.info,
+              address: {
+                ...user.info?.address,
+                country: user.info?.address?.country || 'VN',
+              },
+            },
           } as AdditionalInfoType
         }
         onSubmit={handleUpdateProfile}
@@ -132,7 +138,7 @@ const AdditionalInfoProfile = () => {
                   <Text fontWeight='semibold'>{t('country')}</Text>
                   <Select
                     mt='0.5rem'
-                    value={values.info?.address?.country || 'VN'}
+                    value={values.info?.address?.country}
                     onChange={handleChange('info.country')}
                   >
                     {countries.map((country) => (
