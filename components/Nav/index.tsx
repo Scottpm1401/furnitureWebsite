@@ -63,6 +63,7 @@ const Nav = (props: Props) => {
     if (refreshToken) {
       const data = await logout({ refreshToken });
       if (data.success) {
+        await router.push('/');
         dispatch(actions.auth.reset());
         dispatch(actions.user.reset());
       }
