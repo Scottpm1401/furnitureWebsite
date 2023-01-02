@@ -21,6 +21,7 @@ const ProfileContainer = ({ children, ...props }: Props) => {
               w='full'
               h='full'
               src={`${process.env.NEXT_PUBLIC_CDN}/${user.info?.avatar}`}
+              name={user?.displayName}
             />
           </Flex>
           <Flex direction='column'>
