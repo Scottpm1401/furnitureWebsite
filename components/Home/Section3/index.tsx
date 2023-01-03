@@ -14,7 +14,7 @@ const Section3 = (props: Props) => {
       <Flex
         justifyContent='center'
         alignItems='center'
-        bg='rgb(231, 225, 216)'
+        bg='orange.100'
         w='full'
         h='400px'
         direction='column'
