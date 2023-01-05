@@ -16,7 +16,7 @@ const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     if (isLoading) return;
     if (!user) {
-      router.push('/');
+      router.push('/login');
       return;
     }
     setVerified(true);

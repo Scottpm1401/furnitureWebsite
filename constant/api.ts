@@ -10,6 +10,10 @@ export const API = {
     DELETEUSER: (id: string) => `/user/delete/${id}`,
     UPDATEUSER: (id: string) => `/user/update/${id}`,
     CHANGEPASSWORD: '/user/change_password',
+    ADDTOCART: '/user/cart/add',
+    REMOVEFROMCART: '/user/cart/remove',
+    UPDATECARTQUANTITY: '/user/cart/update_quantity',
+    CLEARCART: '/user/cart/clear',
   },
   PRODUCT: {
     GETFEATURED: '/product/featured',

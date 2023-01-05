@@ -1,23 +1,17 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { UserInfoType } from '../../models/user';
+import { ProductCartType } from '../../models/cart';
+import { UserType } from '../../models/user';
 
-export type UserState = {
-  _id: string;
-  displayName?: string;
-  email: string;
-  username: string;
-  role: 'ADMIN' | 'USER';
-  birthday: string;
-  info?: UserInfoType;
-};
-// Initial state
-const initialState: UserState = {
+const initialState: UserType = {
   _id: '',
   email: '',
   username: '',
   role: 'USER',
   birthday: '',
+  cart_total: 0,
+  cart: [],
+  purchase: [],
 };
 
 // Actual Slice
@@ -26,7 +20,7 @@ export const { actions, reducer } = createSlice({
   initialState,
   reducers: {
     // Action to set the authentication status
-    setUser(state, action: PayloadAction<UserState>) {
+    setUser(state, action: PayloadAction<UserType>) {
       state._id = action.payload._id;
       state.birthday = action.payload.birthday;
       state.displayName = action.payload.displayName;
@@ -34,6 +28,13 @@ export const { actions, reducer } = createSlice({
       state.info = action.payload.info;
       state.role = action.payload.role;
       state.username = action.payload.username;
+      state.cart = action.payload.cart;
+      state.cart_total = action.payload.cart_total;
+      state.purchase = action.payload.purchase;
+    },
+
+    setUserCart(state, action: PayloadAction<ProductCartType[]>) {
+      state.cart = action.payload;
     },
 
     reset: () => initialState,
@@ -42,16 +43,20 @@ export const { actions, reducer } = createSlice({
   },
 });
 
-const selectors = (<S extends { user: UserState }>() => {
+const selectors = (<S extends { user: UserType }>() => {
   const getState = (state: S) => state.user;
   const selectUser = createSelector(getState, (state) => state);
   const selectUserId = createSelector(getState, (state) => state._id);
+  const selectUserCart = createSelector(getState, (state) => state.cart);
+  const selectCartTotal = createSelector(getState, (state) => state.cart_total);
   const isAdmin = createSelector(getState, (state) => state.role === 'ADMIN');
 
   return {
     selectUser,
     selectUserId,
     isAdmin,
+    selectUserCart,
+    selectCartTotal,
   };
 })();
 

@@ -1,8 +1,10 @@
+import { ProductColor } from '../product';
+
 export type ProductCartType = {
   product_id: string;
   img: string;
   title: string;
   price: number;
-  color: string;
+  color: ProductColor;
   quantity: number;
 };

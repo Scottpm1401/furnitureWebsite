@@ -20,10 +20,13 @@ import Container from '../../../components/Container';
 import NotAuthProvider from '../../../layout/NotAuthProvider';
 import Page from '../../../layout/Page';
 import { ProductCartType } from '../../../models/cart';
-import { ProductType } from '../../../models/product';
+import { ProductColor, ProductType } from '../../../models/product';
 import MinusIcon from '../../../public/svg/minus.svg';
 import PlusIcon from '../../../public/svg/plus.svg';
 import StarIcon from '../../../public/svg/star.svg';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { actions, selectors } from '../../../redux/reducer';
+import { addProductCart, updateCartQuantity } from '../../../services/cart';
 import { getProductById } from '../../../services/product';
 
 type Props = {} & FlexProps;
@@ -34,7 +37,7 @@ const initProductCart: ProductCartType = {
   title: '',
   price: 0,
   quantity: 1,
-  color: '',
+  color: ProductColor.BLACK,
 };
 
 const Product = ({ ...props }: Props) => {
@@ -46,6 +49,9 @@ const Product = ({ ...props }: Props) => {
   const [addedProduct, setAddedProduct] =
     useState<ProductCartType>(initProductCart);
   const [currentSlide, setCurrentSlide] = useState<string>();
+  const dispatch = useAppDispatch();
+  const userCart = useAppSelector(selectors.user.selectUserCart);
+
   const isAvailable = useMemo(
     () => (product ? product?.storage_quantity > 0 : false),
     [product]
@@ -75,6 +81,34 @@ const Product = ({ ...props }: Props) => {
       if (addedProduct.quantity === product?.storage_quantity) return;
       setAddedProduct({ ...addedProduct, quantity: addedProduct.quantity + 1 });
     }
+  };
+
+  const handleAddProduct = async () => {
+    try {
+      const isExistInCart =
+        userCart.findIndex(
+          (item) =>
+            item.product_id === addedProduct.product_id &&
+            item.color === addedProduct.color
+        ) > -1;
+      if (isExistInCart) {
+        const newCart = await updateCartQuantity({
+          product_id: addedProduct.product_id,
+          quantity: addedProduct.quantity,
+          color: addedProduct.color,
+        });
+        dispatch(actions.user.setUserCart(newCart));
+      } else {
+        const newCart = await addProductCart({
+          product_id: addedProduct.product_id,
+          quantity: addedProduct.quantity,
+          color: addedProduct.color,
+        });
+        dispatch(actions.user.setUserCart(newCart));
+      }
+
+      router.push('/cart');
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -258,7 +292,12 @@ const Product = ({ ...props }: Props) => {
                 </Flex>
                 {isAvailable && (
                   <Flex mt='2rem'>
-                    <Button colorScheme='orange'>{t('add_to_cart')}</Button>
+                    <Button
+                      colorScheme='orange'
+                      onClick={() => handleAddProduct()}
+                    >
+                      {t('add_to_cart')}
+                    </Button>
                   </Flex>
                 )}
               </Flex>

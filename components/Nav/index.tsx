@@ -167,32 +167,35 @@ const Nav = (props: Props) => {
             </Popover>
             {user._id ? (
               <>
-                <Button
-                  w='27px'
-                  h='30px'
-                  variant='unstyled'
-                  minWidth={0}
-                  p='4px'
-                  ml='16px'
-                  position='relative'
-                >
-                  <ShoppingBagIcon
-                    style={{
-                      stroke: isTop ? 'white' : 'black',
-                      strokeWidth: 1.75,
-                    }}
-                  />
-                  <Text
-                    position='absolute'
-                    top='0px'
-                    right='-5px'
-                    fontSize='smaller'
-                    color={isTop ? 'white' : 'black'}
-                    fontWeight='normal'
+                <Link href='/cart'>
+                  <Button
+                    w='27px'
+                    h='30px'
+                    variant='unstyled'
+                    minWidth={0}
+                    p='4px'
+                    ml='16px'
+                    position='relative'
                   >
-                    0
-                  </Text>
-                </Button>
+                    <ShoppingBagIcon
+                      style={{
+                        stroke: isTop ? 'white' : 'black',
+                        strokeWidth: 1.75,
+                      }}
+                    />
+                    <Text
+                      position='absolute'
+                      top='0px'
+                      right='-5px'
+                      fontSize='smaller'
+                      color={isTop ? 'white' : 'black'}
+                      fontWeight='normal'
+                    >
+                      0
+                    </Text>
+                  </Button>
+                </Link>
+
                 <Popover isOpen={isPopoverOpen} onClose={onPopoverClose}>
                   <PopoverTrigger>
                     <Button
