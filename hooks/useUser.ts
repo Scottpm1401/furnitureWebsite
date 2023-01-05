@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { UserType } from '../models/user';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { actions, selectors } from '../redux/reducer';
-import { UserState } from '../redux/reducers/userReducer';
 import { getProfile } from '../services/user';
 
 export const useUser = () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
   const storedUser = useAppSelector(selectors.user.selectUser);
-  const [user, setUser] = useState<UserState>();
+  const [user, setUser] = useState<UserType>();
 
   const getUser = useCallback(async () => {
     try {
