@@ -25,7 +25,7 @@ const Section3 = (props: Props) => {
           {t('our-creative-force')}
         </Text>
 
-        <Text fontSize='4xl' fontWeight='bold'>
+        <Text textAlign='center' fontSize='4xl' fontWeight='bold'>
           {t('meet-our-team')}
         </Text>
         <Flex mt='0.5rem' h='1px' w='120px' background='black' />
