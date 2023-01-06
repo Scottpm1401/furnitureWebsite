@@ -27,7 +27,7 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
         h='full'
         justifyContent='center'
         zIndex={2}
-        overflow='hidden'
+        overflow={isMobile ? 'hidden' : 'initial'}
       >
         <Text
           color='white'
@@ -71,7 +71,7 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
           top: 0,
           left: 0,
           zIndex: 1,
-          objectFit: isMobile ? 'cover' : 'contain',
+          objectFit: 'cover',
         }}
         src={banner}
         fill

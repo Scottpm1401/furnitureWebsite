@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Flex,
   Input,
   Slider,
@@ -13,6 +14,7 @@ import { debounce } from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 
+import { useResponsive } from '../../hooks/useResponsive';
 import {
   Filter,
   ProductBrand,
@@ -30,6 +32,8 @@ type SidebarType = {
 const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
   const [sliderValue, setSliderValue] = useState(1000);
   const { t } = useTranslation();
+  const { isMobile } = useResponsive();
+  const [isShowFilter, setIsShowFilter] = useState(false);
   const filterByTitle = debounce(
     (value: string) => handleUpdateFilter({ ...filter, title: value }),
     300
@@ -52,13 +56,52 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
           placeholder={t('search_place_holder')}
           onChange={(e) => filterByTitle(e.target.value)}
         />
-        <Flex mt='1rem' direction='column' w='full' overflow='auto'>
+        {isMobile &&
+          (!isShowFilter ? (
+            <Button
+              mt='1rem'
+              colorScheme='orange'
+              onClick={() => setIsShowFilter(!isShowFilter)}
+            >
+              <Text>{t('more_filter')}</Text>
+            </Button>
+          ) : (
+            <Flex justifyContent='space-between'>
+              <Button
+                mt='0.5rem'
+                colorScheme='orange'
+                onClick={() => setIsShowFilter(!isShowFilter)}
+              >
+                <Text>{t('more_filter')}</Text>
+              </Button>
+              <Button
+                mt='0.5rem'
+                colorScheme='blackAlpha'
+                onClick={() => setIsShowFilter(!isShowFilter)}
+              >
+                <Text>{t('done')}</Text>
+              </Button>
+            </Flex>
+          ))}
+        <Flex
+          h={isMobile ? (isShowFilter ? '700px' : '0') : 'initial'}
+          transition='all 300ms ease-in-out'
+          mt='1rem'
+          direction='column'
+          w='full'
+          overflow='auto'
+          textAlign={isMobile ? 'center' : 'initial'}
+        >
           <Flex direction='column' w='full'>
             <Text mt='0.5rem' fontSize='1.5rem' fontWeight='medium'>
               {t('categories')}
             </Text>
             {Object.values(ProductCategory).map((value, index) => (
-              <Flex mt='0.5rem' key={value}>
+              <Flex
+                mt='0.5rem'
+                justifyContent={isMobile ? 'center' : 'flex-start'}
+                key={value}
+              >
                 <Flex
                   css={css`
                     &:hover .underline {
@@ -90,7 +133,11 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
               {t('brand')}
             </Text>
             {Object.values(ProductBrand).map((value, index) => (
-              <Flex mt='0.5rem' key={value}>
+              <Flex
+                mt='0.5rem'
+                justifyContent={isMobile ? 'center' : 'flex-start'}
+                key={value}
+              >
                 <Flex
                   css={css`
                     &:hover .underline {
@@ -121,7 +168,7 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
             <Text mt='0.5rem' fontSize='1.5rem' fontWeight='medium'>
               {t('colors')}
             </Text>
-            <Flex>
+            <Flex justifyContent={isMobile ? 'center' : 'flex-start'}>
               {Object.values(ProductColor).map((color) => (
                 <ColorButton
                   key={color}
@@ -137,7 +184,10 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
               ))}
             </Flex>
           </Flex>
-          <Flex direction='column'>
+          <Flex
+            direction='column'
+            alignItems={isMobile ? 'center' : 'flex-start'}
+          >
             <Text mt='0.5rem' fontSize='1.5rem' fontWeight='medium'>
               {t('prices')}
             </Text>

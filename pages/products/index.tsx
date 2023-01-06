@@ -69,7 +69,7 @@ const Products = ({
           current={t('products')}
         />
         <Container pt='5rem'>
-          <Grid w='full' templateColumns='240px 1fr'>
+          <Grid w='full' templateColumns={isMobile ? '1fr' : '240px 1fr'}>
             <Sidebar filter={filter} handleUpdateFilter={handleUpdateFilter} />
             <Flex ml='1rem' direction='column'>
               <Grid templateColumns='auto auto 1fr auto' alignItems='center'>
@@ -145,7 +145,9 @@ const Products = ({
                 mt='1.5rem'
                 gridTemplateColumns={
                   layout === Layout.grid
-                    ? isMobileOrTablet
+                    ? isMobile
+                      ? '1fr'
+                      : isMobileOrTablet
                       ? '1fr 1fr'
                       : '1fr 1fr 1fr'
                     : '1fr'

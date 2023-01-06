@@ -4,6 +4,7 @@ import React from 'react';
 
 import Container from '../../components/Container';
 import ProfileSideBar from '../../components/ProfileSideBar';
+import { useResponsive } from '../../hooks/useResponsive';
 import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
 
@@ -12,6 +13,7 @@ type Props = {} & FlexProps;
 const ProfileContainer = ({ children, ...props }: Props) => {
   const user = useAppSelector(selectors.user.selectUser);
   const { t } = useTranslation();
+  const { isMobile } = useResponsive();
   return (
     <Flex marginY='2.5rem' {...props}>
       <Container direction='column'>
@@ -31,8 +33,8 @@ const ProfileContainer = ({ children, ...props }: Props) => {
             <Text>{t('your_personal_account')}</Text>
           </Flex>
         </Flex>
-        <Flex mt='2rem'>
-          <ProfileSideBar />
+        <Flex direction={isMobile ? 'column' : 'row'} mt='2rem'>
+          <ProfileSideBar mb={isMobile ? '2rem' : '0'} />
           {children}
         </Flex>
       </Container>

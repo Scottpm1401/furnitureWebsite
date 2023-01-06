@@ -13,6 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
+import { useResponsive } from '../../../../hooks/useResponsive';
 import Eye from '../../../../public/svg/eye.svg';
 import EyeOff from '../../../../public/svg/eye_off.svg';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
@@ -31,6 +32,7 @@ const SecurityProfile = () => {
   const toast = useToast();
   const [isShowPassword1, setIsShowPassword1] = useState(false);
   const [isShowPassword2, setIsShowPassword2] = useState(false);
+  const { isMobile } = useResponsive();
 
   const authenticationSchema = Yup.object().shape({
     currentPassword: Yup.string().required(t('form_required')),
@@ -187,7 +189,8 @@ const SecurityProfile = () => {
                 direction='column'
                 w='160px'
                 h='160px'
-              ></Flex>
+                display={isMobile ? 'none' : 'flex'}
+              />
             </Flex>
           </Form>
         )}

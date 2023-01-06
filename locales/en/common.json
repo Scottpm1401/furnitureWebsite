@@ -130,5 +130,8 @@
   "empty_cart": "Your cart is empty",
   "fill_in": "Fill in",
   "your_profile": "Your profile",
-  "logout": "Log out"
+  "logout": "Log out",
+  "more_filter": "More filter",
+  "done": "Done",
+  "please_login": "Please login to process"
 }

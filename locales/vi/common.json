@@ -130,5 +130,8 @@
   "empty_cart": "Giỏ hàng của bạn đang trống",
   "fill_in": "Lấp đầy nó",
   "your_profile": "Trang cá nhân",
-  "logout": "Đăng xuất"
+  "logout": "Đăng xuất",
+  "more_filter": "Bộ lọc",
+  "done": "Xong",
+  "please_login": "Vui lòng đăng nhập để tiếp tục"
 }

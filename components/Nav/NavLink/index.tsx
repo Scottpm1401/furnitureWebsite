@@ -10,6 +10,8 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import React from 'react';
 
+import { useResponsive } from '../../../hooks/useResponsive';
+
 type NavLinkType = {
   title: string;
   href: string;
@@ -28,6 +30,8 @@ const NavLink = ({
   icon,
   ...props
 }: NavLinkType) => {
+  const { isMobile } = useResponsive();
+
   return (
     <Button
       css={css`
@@ -45,6 +49,7 @@ const NavLink = ({
     >
       <Link
         style={{
+          width: isMobile ? '100%' : 'auto',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: direction === 'center' ? 'center' : 'flex-start',

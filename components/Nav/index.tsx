@@ -49,6 +49,7 @@ import NavLink from './NavLink';
 
 type Props = {};
 const OFFSET = 160;
+const MOBILE_OFFSET = 80;
 export const NAV_HEIGHT = '84px';
 
 const Nav = (props: Props) => {
@@ -58,7 +59,7 @@ const Nav = (props: Props) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isMobileOrTablet } = useResponsive();
+  const { isMobileOrTablet, isMobile } = useResponsive();
   const {
     isOpen: isPopoverOpen,
     onToggle: onPopoverToggle,
@@ -81,13 +82,13 @@ const Nav = (props: Props) => {
     const body = document.body;
     if (body) {
       const rect = body.getBoundingClientRect();
-      if (rect.top <= -OFFSET) {
+      if (rect.top <= -(isMobile ? MOBILE_OFFSET : OFFSET)) {
         setIsTop(false);
       } else {
         setIsTop(true);
       }
     }
-  }, []);
+  }, [isMobile]);
 
   const handleLogout = async () => {
     if (refreshToken) {
@@ -130,11 +131,25 @@ const Nav = (props: Props) => {
     >
       <Container>
         <Grid
-          templateColumns={isMobileOrTablet ? '1fr 1fr' : '1fr auto 1fr'}
+          templateColumns={isMobileOrTablet ? '1fr 1fr 1fr' : '1fr auto 1fr'}
           h='full'
           w='full'
           justifyContent='center'
+          alignItems='center'
         >
+          {isMobileOrTablet && (
+            <Flex justifyContent='flex-start' alignItems='center'>
+              <Button
+                variant='unstyled'
+                w='24px'
+                h='24px'
+                ref={btnRef}
+                onClick={onOpen}
+              >
+                <MenuIcon style={{ stroke: isTop ? 'white' : 'black' }} />
+              </Button>
+            </Flex>
+          )}
           <Flex h='full'>
             <Link style={{ height: 60 }} href='/'>
               <Logo style={{ fill: isTop ? 'white' : 'black' }} />
@@ -293,23 +308,24 @@ const Nav = (props: Props) => {
               </Flex>
             </>
           ) : (
-            <Flex justifyContent='flex-end' alignItems='center'>
-              <Button
-                variant='unstyled'
-                w='24px'
-                h='24px'
-                ref={btnRef}
-                onClick={onOpen}
-              >
-                <MenuIcon style={{ stroke: isTop ? 'white' : 'black' }} />
-              </Button>
-            </Flex>
+            <Link href='/profile'>
+              <Flex justifyContent='flex-end'>
+                <Flex w='36px' h='36px'>
+                  <Avatar
+                    w='full'
+                    h='full'
+                    src={`${process.env.NEXT_PUBLIC_CDN}/${user.info?.avatar}`}
+                    name={user?.displayName}
+                  />
+                </Flex>
+              </Flex>
+            </Link>
           )}
         </Grid>
       </Container>
       <Drawer
         isOpen={isOpen}
-        placement='right'
+        placement='left'
         onClose={onClose}
         finalFocusRef={btnRef}
       >

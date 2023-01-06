@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
+import { useResponsive } from '../../../../hooks/useResponsive';
 import Camera from '../../../../public/svg/camera.svg';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';
@@ -23,6 +24,7 @@ const GeneralProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const toast = useToast();
+  const { isMobile } = useResponsive();
 
   const handleUpdateProfile = async (values: GeneralProfileType) => {
     setIsLoading(true);
@@ -115,7 +117,7 @@ const GeneralProfile = () => {
             style={{ width: '100%', marginTop: '1rem' }}
             onSubmit={handleSubmit}
           >
-            <Flex w='full'>
+            <Flex w='full' direction={isMobile ? 'column-reverse' : 'row'}>
               <Flex w='full' direction='column'>
                 <Flex direction='column' w='full'>
                   <Text fontWeight='semibold'>{t('email')}</Text>
@@ -158,7 +160,11 @@ const GeneralProfile = () => {
                   </Button>
                 </Flex>
               </Flex>
-              <Flex ml='4rem' direction='column'>
+              <Flex
+                ml={isMobile ? '0' : '4rem'}
+                mb={isMobile ? '2rem' : '0'}
+                direction='column'
+              >
                 <Text fontWeight='semibold'>{t('profile_picture')}</Text>
                 <Flex mt='0.5rem' position='relative' w='160px' h='160px'>
                   <Avatar

@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import { countries } from '../../../../constant/country';
+import { useResponsive } from '../../../../hooks/useResponsive';
 import { Gender, UserInfoType } from '../../../../models/user';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';
@@ -23,6 +24,7 @@ const AdditionalInfoProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const toast = useToast();
+  const { isMobile } = useResponsive();
 
   const handleUpdateProfile = async (values: AdditionalInfoType) => {
     setIsLoading(true);
@@ -202,7 +204,8 @@ const AdditionalInfoProfile = () => {
                 w='160px'
                 h='160px'
                 direction='column'
-              ></Flex>
+                display={isMobile ? 'none' : 'flex'}
+              />
             </Flex>
           </Form>
         )}

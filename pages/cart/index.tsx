@@ -227,7 +227,7 @@ const Cart = (props: Props) => {
                     {t('subtotal')}:
                   </Text>
                   <Text fontSize='xl' fontWeight='semibold'>
-                    ${cartTotal}
+                    ${floor(cartTotal, 2)}
                   </Text>
                 </Flex>
                 <Flex mt='0.5rem' justifyContent='space-between'>
@@ -252,7 +252,7 @@ const Cart = (props: Props) => {
                     {t('order_total')}:
                   </Text>
                   <Text fontSize='xl' fontWeight='semibold'>
-                    ${cartTotal}
+                    ${floor(cartTotal, 2)}
                   </Text>
                 </Flex>
                 <Button mt='1rem' colorScheme='orange'>

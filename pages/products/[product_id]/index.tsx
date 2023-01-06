@@ -17,6 +17,7 @@ import { Rating } from 'react-simple-star-rating';
 import Breadcrumb from '../../../components/Breadcrumb';
 import ColorButton from '../../../components/ColorButton';
 import Container from '../../../components/Container';
+import { useResponsive } from '../../../hooks/useResponsive';
 import NotAuthProvider from '../../../layout/NotAuthProvider';
 import Page from '../../../layout/Page';
 import { ProductCartType } from '../../../models/cart';
@@ -51,6 +52,8 @@ const Product = ({ ...props }: Props) => {
   const [currentSlide, setCurrentSlide] = useState<string>();
   const dispatch = useAppDispatch();
   const userCart = useAppSelector(selectors.user.selectUserCart);
+  const userId = useAppSelector(selectors.user.selectUserId);
+  const { isMobile, isSmallDevice } = useResponsive();
 
   const isAvailable = useMemo(
     () => (product ? product?.storage_quantity > 0 : false),
@@ -135,12 +138,12 @@ const Product = ({ ...props }: Props) => {
             </Link>
           </Flex>
           {product ? (
-            <Grid templateColumns='1fr 1fr' gap='2rem'>
+            <Grid templateColumns={isMobile ? '1fr' : '1fr 1fr'}>
               <Flex w='full' direction='column'>
                 <Flex
                   position='relative'
                   w='full'
-                  h='560px'
+                  h={isSmallDevice ? '360px' : isMobile ? '500px' : '560px'}
                   borderRadius='1rem'
                   overflow='hidden'
                 >
@@ -151,9 +154,11 @@ const Product = ({ ...props }: Props) => {
                   />
                 </Flex>
                 <Grid
-                  templateColumns='1fr 1fr 1fr 1fr'
+                  templateColumns={
+                    isSmallDevice ? '1fr 1fr' : '1fr 1fr 1fr 1fr'
+                  }
                   gap='1.5rem'
-                  h='100px'
+                  h={isSmallDevice ? '240px' : '100px'}
                   w='full'
                   mt='1rem'
                 >
@@ -199,7 +204,12 @@ const Product = ({ ...props }: Props) => {
                   ))}
                 </Grid>
               </Flex>
-              <Flex direction='column' w='full'>
+              <Flex
+                direction='column'
+                w='full'
+                ml={isMobile ? '0' : '2rem'}
+                mt={isMobile ? '2rem' : '0'}
+              >
                 <Text fontSize='3xl' fontWeight='bold'>
                   {product.title}
                 </Text>
@@ -292,24 +302,38 @@ const Product = ({ ...props }: Props) => {
                 </Flex>
                 {isAvailable && (
                   <Flex mt='2rem'>
-                    <Button
-                      colorScheme='orange'
-                      onClick={() => handleAddProduct()}
-                    >
-                      {t('add_to_cart')}
-                    </Button>
+                    {userId ? (
+                      <Button
+                        colorScheme='orange'
+                        onClick={() => handleAddProduct()}
+                      >
+                        {t('add_to_cart')}
+                      </Button>
+                    ) : (
+                      <Link href='/login'>
+                        <Button colorScheme='orange'>
+                          {t('please_login')}
+                        </Button>
+                      </Link>
+                    )}
                   </Flex>
                 )}
               </Flex>
             </Grid>
           ) : (
-            <Grid templateColumns='1fr 1fr' gap='2rem'>
+            <Grid templateColumns={isMobile ? '1fr' : '1fr 1fr'}>
               <Flex w='full' direction='column'>
-                <Skeleton w='full' h='500px' borderRadius='1rem' />
+                <Skeleton
+                  w='full'
+                  h={isSmallDevice ? '360px' : isMobile ? '500px' : '560px'}
+                  borderRadius='1rem'
+                />
                 <Grid
-                  templateColumns='1fr 1fr 1fr 1fr'
+                  templateColumns={
+                    isSmallDevice ? '1fr 1fr' : '1fr 1fr 1fr 1fr'
+                  }
                   gap='1.5rem'
-                  h='80px'
+                  h={isSmallDevice ? '240px' : '100px'}
                   w='full'
                   mt='1rem'
                 >
@@ -319,7 +343,12 @@ const Product = ({ ...props }: Props) => {
                   <Skeleton w='full' h='full' />
                 </Grid>
               </Flex>
-              <Flex direction='column' w='full'>
+              <Flex
+                direction='column'
+                w='full'
+                ml={isMobile ? '0' : '2rem'}
+                mt={isMobile ? '2rem' : '0'}
+              >
                 <Flex>
                   <Skeleton>
                     <Text fontSize='3xl' fontWeight='bold'>

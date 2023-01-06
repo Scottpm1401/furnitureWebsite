@@ -39,7 +39,14 @@ const Breadcrumb = ({
       {...props}
     >
       <Container>
-        <ChakraBreadcrumb separator={separator}>
+        <ChakraBreadcrumb
+          sx={{
+            ol: {
+              flexWrap: 'wrap',
+            },
+          }}
+          separator={separator}
+        >
           {links.map((item, index) => (
             <BreadcrumbItem key={`${item.title}_${index}`}>
               {item.title === current ? (

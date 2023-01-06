@@ -8,8 +8,10 @@ import {
 } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React from 'react';
 
+import { useResponsive } from '../../hooks/useResponsive';
 import SearchIcon from '../../public/svg/search.svg';
 import ShoppingBagIcon from '../../public/svg/shopping_bag.svg';
 import PopupButton from './PopupButton';
@@ -36,6 +38,8 @@ const ProductCard = ({
   isLoaded = false,
   ...props
 }: ProductCardType) => {
+  const router = useRouter();
+  const { isMobile } = useResponsive();
   const responsive = useBreakpointValue(
     {
       md: 200,
@@ -52,18 +56,19 @@ const ProductCard = ({
     <Grid
       position='relative'
       w='full'
-      h={responsive}
-      templateColumns={isHorizontal ? '360px 1fr' : 'auto'}
+      h={isHorizontal && isMobile ? '460px' : responsive}
+      templateColumns={isHorizontal && !isMobile ? '360px 1fr' : 'auto'}
       templateRows={isHorizontal ? 'auto' : '1fr auto'}
+      onClick={() => router.push(`/products/${_id}`)}
       {...props}
     >
       <Skeleton
         cursor='pointer'
         w='full'
-        h='full'
         borderRadius='1rem'
         overflow='hidden'
         isLoaded={isLoaded}
+        h={isHorizontal && isMobile ? '280px' : 'full'}
       >
         <Flex
           w='full'
@@ -94,10 +99,20 @@ const ProductCard = ({
             alignItems='center'
             gap='1rem'
           >
-            <PopupButton href='#'>
+            <PopupButton
+              href='#'
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               <ShoppingBagIcon style={{ fill: 'none', stroke: 'white' }} />
             </PopupButton>
-            <PopupButton href={`/products/${_id}`}>
+            <PopupButton
+              href={`/products/${_id}`}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               <SearchIcon style={{ fill: 'none', stroke: 'white' }} />
             </PopupButton>
           </Flex>
@@ -106,11 +121,13 @@ const ProductCard = ({
 
       <Flex
         direction={isHorizontal ? 'column' : 'row'}
-        justifyContent={isHorizontal ? 'center' : 'space-between'}
+        justifyContent={
+          isHorizontal ? (isMobile ? 'flex-start' : 'center') : 'space-between'
+        }
         mt={isHorizontal ? '0' : '0.75rem'}
         w='full'
         h='full'
-        ml={isHorizontal ? '2rem' : '0'}
+        ml={isHorizontal && !isMobile ? '2rem' : '0'}
       >
         <Skeleton isLoaded={isLoaded}>
           <Text fontWeight='semibold' fontSize={isHorizontal ? '2xl' : 'md'}>
