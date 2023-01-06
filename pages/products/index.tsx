@@ -73,54 +73,64 @@ const Products = ({
             <Sidebar filter={filter} handleUpdateFilter={handleUpdateFilter} />
             <Flex ml={isMobile ? '0' : '1rem'} direction='column'>
               <Grid
-                display={isMobile ? 'none' : 'grid'}
-                templateColumns='auto auto 1fr auto'
+                templateColumns={isMobile ? '1fr' : 'auto 1fr auto'}
                 alignItems='center'
               >
-                <Flex mr='2rem'>
-                  <Button
-                    variant='unstyled'
-                    w='1.75rem'
-                    h='1.75rem'
-                    p='0.25rem'
-                    borderRadius='0.25rem'
-                    border='1px solid black'
-                    minW='auto'
-                    bg={layout === Layout.grid ? 'black' : 'white'}
-                    onClick={() => setLayout(Layout.grid)}
-                  >
-                    <GridIcon
-                      style={{
-                        fill: 'white',
-                        stroke: layout === Layout.grid ? 'white' : 'black',
-                      }}
-                    />
-                  </Button>
-                  <Button
-                    variant='unstyled'
-                    w='1.75rem'
-                    h='1.75rem'
-                    p='0.25rem'
-                    borderRadius='0.25rem'
-                    border='1px solid black'
-                    minW='auto'
-                    ml='0.5rem'
-                    bg={layout === Layout.list ? 'black' : 'white'}
-                    onClick={() => setLayout(Layout.list)}
-                  >
-                    <ListIcon
-                      style={{
-                        fill: 'white',
-                        stroke: layout === Layout.list ? 'white' : 'black',
-                      }}
-                    />
-                  </Button>
+                <Flex
+                  mr={isMobile ? '0' : '2rem'}
+                  justifyContent={isMobile ? 'space-between' : 'flex-start'}
+                  alignItems='center'
+                >
+                  <Flex mr='2rem'>
+                    <Button
+                      variant='unstyled'
+                      w='1.75rem'
+                      h='1.75rem'
+                      p='0.25rem'
+                      borderRadius='0.25rem'
+                      border='1px solid black'
+                      minW='auto'
+                      bg={layout === Layout.grid ? 'black' : 'white'}
+                      onClick={() => setLayout(Layout.grid)}
+                    >
+                      <GridIcon
+                        style={{
+                          fill: 'white',
+                          stroke: layout === Layout.grid ? 'white' : 'black',
+                        }}
+                      />
+                    </Button>
+                    <Button
+                      variant='unstyled'
+                      w='1.75rem'
+                      h='1.75rem'
+                      p='0.25rem'
+                      borderRadius='0.25rem'
+                      border='1px solid black'
+                      minW='auto'
+                      ml='0.5rem'
+                      bg={layout === Layout.list ? 'black' : 'white'}
+                      onClick={() => setLayout(Layout.list)}
+                    >
+                      <ListIcon
+                        style={{
+                          fill: 'white',
+                          stroke: layout === Layout.list ? 'white' : 'black',
+                        }}
+                      />
+                    </Button>
+                  </Flex>
+                  <Text fontWeight='semibold' w={isMobile ? 'auto' : 'full'}>
+                    {products.length} {t('products')}
+                  </Text>
                 </Flex>
-                <Text fontWeight='semibold' w='full' mr='2rem'>
-                  {products.length} {t('products')}
-                </Text>
-                <Flex h='1px' bg='black' />
-                <Flex ml='2rem' alignItems='center'>
+
+                <Flex display={isMobile ? 'none' : 'flex'} h='1px' bg='black' />
+                <Flex
+                  ml={isMobile ? '0' : '2rem'}
+                  mt={isMobile ? '1rem' : '0'}
+                  alignItems='center'
+                >
                   <Text fontWeight='semibold' whiteSpace='nowrap'>
                     {t('sort_by')}
                   </Text>

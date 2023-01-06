@@ -37,7 +37,12 @@ const Login = (props: Props) => {
           justifyContent='center'
         >
           <Flex mb='1rem' justifyContent='center'>
-            <Text fontSize='3xl' fontWeight='semibold'>
+            <Text
+              maxW={isSmallDevice ? '90vw' : 'unset'}
+              fontSize='3xl'
+              fontWeight='semibold'
+              textAlign={isSmallDevice ? 'center' : 'initial'}
+            >
               {t('sign_in_to_comfysloth')}
             </Text>
           </Flex>
