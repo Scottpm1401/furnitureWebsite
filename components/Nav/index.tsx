@@ -150,9 +150,9 @@ const Nav = (props: Props) => {
               </Button>
             </Flex>
           )}
-          <Flex h='full'>
+          <Flex sx={{ svg: { fill: isTop ? 'white' : 'black' } }} h='full'>
             <Link style={{ height: 60 }} href='/'>
-              <Logo style={{ fill: isTop ? 'white' : 'black' }} />
+              <Logo />
             </Link>
           </Flex>
           {!isMobileOrTablet ? (
@@ -308,18 +308,19 @@ const Nav = (props: Props) => {
               </Flex>
             </>
           ) : (
-            <Link href='/profile'>
-              <Flex justifyContent='flex-end'>
+            <Flex justifyContent='flex-end'>
+              <Link href='/profile'>
                 <Flex w='36px' h='36px'>
                   <Avatar
                     w='full'
                     h='full'
                     src={`${process.env.NEXT_PUBLIC_CDN}/${user.info?.avatar}`}
                     name={user?.displayName}
+                    bg='orange.300'
                   />
                 </Flex>
-              </Flex>
-            </Link>
+              </Link>
+            </Flex>
           )}
         </Grid>
       </Container>
