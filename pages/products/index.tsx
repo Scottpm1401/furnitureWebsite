@@ -72,7 +72,11 @@ const Products = ({
           <Grid w='full' templateColumns={isMobile ? '1fr' : '240px 1fr'}>
             <Sidebar filter={filter} handleUpdateFilter={handleUpdateFilter} />
             <Flex ml={isMobile ? '0' : '1rem'} direction='column'>
-              <Grid templateColumns='auto auto 1fr auto' alignItems='center'>
+              <Grid
+                display={isMobile ? 'none' : 'grid'}
+                templateColumns='auto auto 1fr auto'
+                alignItems='center'
+              >
                 <Flex mr='2rem'>
                   <Button
                     variant='unstyled'
