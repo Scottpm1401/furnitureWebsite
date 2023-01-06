@@ -364,8 +364,10 @@ const Nav = (props: Props) => {
                   </Flex>
                 </Link>
               ) : (
-                <Link style={{ height: 48 }} href='/' onClick={onClose}>
-                  <Logo id='2' style={{ fill: 'white' }} />
+                <Link href='/' onClick={onClose}>
+                  <Flex height='48px' sx={{ svg: { fill: 'white' } }}>
+                    <Logo id='test' style={{ fill: 'white' }} />
+                  </Flex>
                 </Link>
               )}
 

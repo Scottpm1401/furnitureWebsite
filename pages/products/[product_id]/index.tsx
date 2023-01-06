@@ -280,6 +280,7 @@ const Product = ({ ...props }: Props) => {
                 <Flex alignItems='center' mt='1.5rem'>
                   <Button
                     variant='unstyled'
+                    w={isMobile ? '40px' : 'auto'}
                     onClick={() => handleQuantity(true)}
                   >
                     <MinusIcon />
@@ -295,6 +296,7 @@ const Product = ({ ...props }: Props) => {
                   </Text>
                   <Button
                     variant='unstyled'
+                    w={isMobile ? '40px' : 'auto'}
                     onClick={() => handleQuantity(false)}
                   >
                     <PlusIcon />
