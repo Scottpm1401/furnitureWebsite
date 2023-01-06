@@ -6,10 +6,7 @@ import { useResponsive } from '../../hooks/useResponsive';
 const Container = ({ children, ...props }: FlexProps) => {
   const { isBigScreen } = useResponsive();
   return (
-    <Flex
-      style={{ width: isBigScreen ? '95vw' : '90vw', margin: '0 auto' }}
-      {...props}
-    >
+    <Flex style={{ width: '90vw', margin: '0 auto' }} {...props}>
       {children}
     </Flex>
   );
