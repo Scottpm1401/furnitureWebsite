@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import { useResponsive } from '../../../hooks/useResponsive';
 import ArrowRight from '../../../public/svg/arrow_right.svg';
 import Refund from '../../../public/svg/refund.svg';
 import Shipping from '../../../public/svg/shipping.svg';
@@ -11,19 +12,24 @@ type Props = {} & FlexProps;
 
 const Newsletter = ({ ...props }: Props) => {
   const { t } = useTranslation();
+  const { isMobile, isSmallDevice } = useResponsive();
 
   return (
     <Container
       display='grid'
-      gridTemplateColumns='30% 30% 40%'
+      gridTemplateColumns={isMobile ? '1fr' : '30% 30% 40%'}
       alignItems='center'
       justifyContent='center'
       border='1px solid rgb(65, 64, 66)'
-      p='5rem 8rem'
+      p={isSmallDevice ? '1rem 1.75rem' : isMobile ? '2rem 3rem' : '5rem 8rem'}
       borderRadius='1rem'
       {...props}
     >
-      <Flex mr='2rem' alignItems='center'>
+      <Flex
+        mr={isMobile ? '0' : '2rem'}
+        mb={isMobile ? '1rem' : '0'}
+        alignItems='center'
+      >
         <Flex w='3rem' h='3rem' justifyContent='center' alignItems='center'>
           <Refund />
         </Flex>
@@ -34,7 +40,11 @@ const Newsletter = ({ ...props }: Props) => {
           <Text mt='0.5rem'>{t('20_days_des')}</Text>
         </Flex>
       </Flex>
-      <Flex mr='2rem' alignItems='center'>
+      <Flex
+        mr={isMobile ? '0' : '2rem'}
+        mb={isMobile ? '1rem' : '0'}
+        alignItems='center'
+      >
         <Flex w='3rem' h='3rem' justifyContent='center' alignItems='center'>
           <Shipping />
         </Flex>

@@ -45,8 +45,8 @@ const Products = ({
   const [products, setProducts] = useState<ProductType[]>(productsList);
   const [isLoading, setIsLoading] = useState(false);
   const [layout, setLayout] = useState<Layout>(Layout.grid);
-  const { isDesktop } = useResponsive();
   const { t } = useTranslation();
+  const { isMobile, isMobileOrTablet } = useResponsive();
 
   const handleUpdateFilter = async (newFilter: Filter) => {
     setIsLoading(true);
@@ -144,7 +144,11 @@ const Products = ({
               <Grid
                 mt='1.5rem'
                 gridTemplateColumns={
-                  layout === Layout.grid ? '1fr 1fr 1fr' : '1fr'
+                  layout === Layout.grid
+                    ? isMobileOrTablet
+                      ? '1fr 1fr'
+                      : '1fr 1fr 1fr'
+                    : '1fr'
                 }
                 gap='2rem'
               >

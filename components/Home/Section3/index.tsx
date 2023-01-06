@@ -1,7 +1,8 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Stack, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import { useResponsive } from '../../../hooks/useResponsive';
 import Container from '../../Container';
 import TeamCard from '../../TeamCard';
 
@@ -9,6 +10,7 @@ type Props = {};
 
 const Section3 = (props: Props) => {
   const { t } = useTranslation();
+  const { isMobile } = useResponsive();
   return (
     <Flex w='full' direction='column'>
       <Flex
@@ -29,7 +31,13 @@ const Section3 = (props: Props) => {
         <Flex mt='0.5rem' h='1px' w='120px' background='black' />
       </Flex>
       <Container>
-        <Flex w='full' transform='translateY(-100px)'>
+        <Stack
+          direction={isMobile ? 'column' : 'row'}
+          w='full'
+          transform='translateY(-100px)'
+          spacing='3rem'
+          alignItems='center'
+        >
           <TeamCard
             name='Nicolette Ritonni'
             role={t('fine-ceramics')}
@@ -39,21 +47,18 @@ const Section3 = (props: Props) => {
             name='Juliette Massé'
             role={t('store-manager')}
             img='/images/team/team-img-3.jpg'
-            ml='3rem'
           />
           <TeamCard
             name='Nicolas Waldau'
             role={t('architech')}
             img='/images/team/team-img-2.jpg'
-            ml='3rem'
           />
           <TeamCard
             name='Yeung Ngai'
             role={t('designer')}
             img='/images/team/team-img-1.jpg'
-            ml='3rem'
           />
-        </Flex>
+        </Stack>
       </Container>
     </Flex>
   );

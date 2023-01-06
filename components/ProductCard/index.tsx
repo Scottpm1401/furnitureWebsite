@@ -40,7 +40,7 @@ const ProductCard = ({
     {
       md: 200,
       lg: 280,
-      xl: 360,
+      xl: 400,
       '2xl': 440,
       base: 280,
     },

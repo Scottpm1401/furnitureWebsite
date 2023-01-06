@@ -5,6 +5,7 @@ import React from 'react';
 import Breadcrumb from '../../components/Breadcrumb';
 import LoginForm from '../../components/Form/LoginForm';
 import NavLink from '../../components/Nav/NavLink';
+import { useResponsive } from '../../hooks/useResponsive';
 import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
 
@@ -12,6 +13,7 @@ type Props = {};
 
 const Login = (props: Props) => {
   const { t } = useTranslation();
+  const { isSmallDevice } = useResponsive();
   return (
     <NotAuthProvider>
       <Page
@@ -30,7 +32,7 @@ const Login = (props: Props) => {
         <Flex
           mt='5rem'
           direction='column'
-          minW='340px'
+          minW={isSmallDevice ? '90%' : '340px'}
           minHeight='60vh'
           justifyContent='center'
         >

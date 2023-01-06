@@ -5,6 +5,7 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import { useResponsive } from '../../../../hooks/useResponsive';
 import Circle from '../../../../public/svg/circle_3_4.svg';
 
 type SlideType = {
@@ -15,21 +16,27 @@ type SlideType = {
 
 const Slide = ({ title, description, banner, ...props }: SlideType) => {
   const { t } = useTranslation();
+  const { isMobile } = useResponsive();
   return (
     <Flex w='full' h='full' position='relative' {...props}>
       <Flex
         direction='column'
         position='relative'
-        ml={180}
+        ml={isMobile ? 8 : 180}
         maxWidth={500}
         h='full'
         justifyContent='center'
         zIndex={2}
+        overflow='hidden'
       >
-        <Text color='white' fontSize='6xl' fontWeight='semibold'>
+        <Text
+          color='white'
+          fontSize={isMobile ? '3xl' : '6xl'}
+          fontWeight='semibold'
+        >
           {title}
         </Text>
-        <Text maxWidth='60%' color='white' fontSize='md'>
+        <Text maxWidth={isMobile ? '80%' : '60%'} color='white' fontSize='md'>
           {description}
         </Text>
         <Flex mt='1.5rem'>
@@ -59,7 +66,13 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
         </Flex>
       </Flex>
       <Image
-        style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: 1,
+          objectFit: isMobile ? 'cover' : 'contain',
+        }}
         src={banner}
         fill
         alt='slide_img'

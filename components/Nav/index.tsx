@@ -9,6 +9,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Stack,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -52,7 +53,7 @@ export const NAV_HEIGHT = '84px';
 
 const Nav = (props: Props) => {
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const [isTop, setIsTop] = useState(true);
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -314,8 +315,13 @@ const Nav = (props: Props) => {
       >
         <DrawerOverlay />
         <DrawerContent bg='orange.200'>
-          <Flex h='full' direction='column' justifyContent='space-between'>
-            <Flex p='1rem 1.5rem' w='full' justifyContent='space-between'>
+          <Flex
+            marginX='1.5rem'
+            h='full'
+            direction='column'
+            justifyContent='space-between'
+          >
+            <Flex paddingY='1rem' w='full' justifyContent='space-between'>
               {user._id ? (
                 <Link href='/profile' onClick={onClose}>
                   <Flex alignItems='center'>
@@ -347,7 +353,6 @@ const Nav = (props: Props) => {
             </Flex>
             <Flex
               mt='1.5rem'
-              marginX='1.5rem'
               direction='column'
               justifyContent='flex-start'
               h='full'
@@ -401,44 +406,7 @@ const Nav = (props: Props) => {
                 mt='0.5rem'
                 onClick={onClose}
               />
-              {!user._id ? (
-                <>
-                  <NavLink
-                    title={t('sign_in')}
-                    href='/login'
-                    textProps={{
-                      color: 'black',
-                      fontSize: 'xl',
-                      fontWeight: 'semibold',
-                    }}
-                    direction='left'
-                    icon={
-                      <LoginIcon
-                        style={{ width: 24, height: 24, stroke: 'black' }}
-                      />
-                    }
-                    mt='0.5rem'
-                    onClick={onClose}
-                  />
-                  <NavLink
-                    title={t('sign_up')}
-                    href='/signup'
-                    textProps={{
-                      color: 'black',
-                      fontSize: 'xl',
-                      fontWeight: 'semibold',
-                    }}
-                    direction='left'
-                    icon={
-                      <SignupIcon
-                        style={{ width: 24, height: 24, stroke: 'black' }}
-                      />
-                    }
-                    mt='0.5rem'
-                    onClick={onClose}
-                  />
-                </>
-              ) : (
+              {user._id && (
                 <>
                   <NavLink
                     title={t('cart')}
@@ -472,9 +440,76 @@ const Nav = (props: Props) => {
                     mt='0.5rem'
                     onClick={onClose}
                   />
+                </>
+              )}
+            </Flex>
+            <Stack mb='2.5rem' spacing='0.5rem'>
+              <Popover
+                isOpen={isOpenLanguage}
+                onClose={() => setIsOpenLanguage(false)}
+              >
+                <PopoverTrigger>
+                  <Button
+                    display='flex'
+                    variant='unstyled'
+                    minWidth={0}
+                    onClick={() => setIsOpenLanguage(true)}
+                    justifyContent='flex-start'
+                  >
+                    <Flex w='24px' h='24px'>
+                      <LanguageIcon
+                        style={{
+                          stroke: 'black',
+                          strokeWidth: 1.75,
+                        }}
+                      />
+                    </Flex>
+
+                    <Text ml='1rem' fontSize='lg' fontWeight='semibold'>
+                      {lang == 'vi' ? 'Tiếng Việt' : 'English'}
+                    </Text>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent w='120px'>
+                  <Button
+                    variant='unstyled'
+                    onClick={() => handleChangeLanguage('en')}
+                  >
+                    English
+                  </Button>
+                  <Button
+                    variant='unstyled'
+                    onClick={() => handleChangeLanguage('vi')}
+                  >
+                    Tiếng Việt
+                  </Button>
+                </PopoverContent>
+              </Popover>
+              {user._id ? (
+                <NavLink
+                  title={t('logout')}
+                  href={router.pathname}
+                  textProps={{
+                    color: 'black',
+                    fontSize: 'xl',
+                    fontWeight: 'semibold',
+                  }}
+                  direction='left'
+                  icon={
+                    <LogoutIcon
+                      style={{ width: 24, height: 24, stroke: 'black' }}
+                    />
+                  }
+                  onClick={() => {
+                    handleLogout();
+                    onClose();
+                  }}
+                />
+              ) : (
+                <>
                   <NavLink
-                    title={t('logout')}
-                    href={router.pathname}
+                    title={t('sign_in')}
+                    href='/login'
                     textProps={{
                       color: 'black',
                       fontSize: 'xl',
@@ -482,56 +517,72 @@ const Nav = (props: Props) => {
                     }}
                     direction='left'
                     icon={
-                      <LogoutIcon
+                      <LoginIcon
                         style={{ width: 24, height: 24, stroke: 'black' }}
                       />
                     }
-                    onClick={() => {
-                      handleLogout();
-                      onClose();
+                    onClick={onClose}
+                  />
+                  <NavLink
+                    title={t('sign_up')}
+                    href='/signup'
+                    textProps={{
+                      color: 'black',
+                      fontSize: 'xl',
+                      fontWeight: 'semibold',
                     }}
-                    mt='0.5rem'
+                    direction='left'
+                    icon={
+                      <SignupIcon
+                        style={{ width: 24, height: 24, stroke: 'black' }}
+                      />
+                    }
+                    onClick={onClose}
                   />
                 </>
               )}
-            </Flex>
-            <Flex mb='2.5rem' justifyContent='center'>
-              <SocialIcon
-                href='https://www.facebook.com'
-                icon={<Facebook />}
-                hoverColor='rgb(56, 88, 152)'
-              />
 
-              <SocialIcon
-                href='https://www.instagram.com'
-                icon={
-                  <>
-                    <svg
-                      className='instargram_linear'
-                      style={{ width: 0, height: 0 }}
-                    >
-                      <radialGradient id='rg' r='150%' cx='30%' cy='107%'>
-                        <stop stop-color='#fdf497' offset='0' />
-                        <stop stop-color='#fdf497' offset='0.05' />
-                        <stop stop-color='#fd5949' offset='0.45' />
-                        <stop stop-color='#d6249f' offset='0.6' />
-                        <stop stop-color='#285AEB' offset='0.9' />
-                      </radialGradient>
-                    </svg>
-                    <Instagram />
-                  </>
-                }
-                hoverColor='url(#rg)'
-                strokeColor='white'
-                ml='2rem'
-              />
-              <SocialIcon
-                href='https://twitter.com'
-                icon={<Twitter />}
-                hoverColor='rgb(29, 161, 242)'
-                ml='2rem'
-              />
-            </Flex>
+              <Stack
+                mt='2rem !important'
+                direction='row'
+                spacing='2rem'
+                justifyContent='center'
+              >
+                <SocialIcon
+                  href='https://www.facebook.com'
+                  icon={<Facebook />}
+                  hoverColor='rgb(56, 88, 152)'
+                />
+
+                <SocialIcon
+                  href='https://www.instagram.com'
+                  icon={
+                    <>
+                      <svg
+                        className='instargram_linear'
+                        style={{ width: 0, height: 0 }}
+                      >
+                        <radialGradient id='rg' r='150%' cx='30%' cy='107%'>
+                          <stop stop-color='#fdf497' offset='0' />
+                          <stop stop-color='#fdf497' offset='0.05' />
+                          <stop stop-color='#fd5949' offset='0.45' />
+                          <stop stop-color='#d6249f' offset='0.6' />
+                          <stop stop-color='#285AEB' offset='0.9' />
+                        </radialGradient>
+                      </svg>
+                      <Instagram />
+                    </>
+                  }
+                  hoverColor='url(#rg)'
+                  strokeColor='white'
+                />
+                <SocialIcon
+                  href='https://twitter.com'
+                  icon={<Twitter />}
+                  hoverColor='rgb(29, 161, 242)'
+                />
+              </Stack>
+            </Stack>
           </Flex>
         </DrawerContent>
       </Drawer>

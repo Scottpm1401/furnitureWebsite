@@ -1,9 +1,10 @@
-import { Button, Flex, Text } from '@chakra-ui/react';
+import { Button, Flex, Stack, Text } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import { useResponsive } from '../../hooks/useResponsive';
 import Facebook from '../../public/svg/facebook.svg';
 import Instagram from '../../public/svg/instagram.svg';
 import Logo from '../../public/svg/logo.svg';
@@ -18,12 +19,21 @@ type Props = {};
 
 const Footer = (props: Props) => {
   const { t } = useTranslation();
+  const { isMobile } = useResponsive();
 
   return (
     <Container direction='column' pt='5rem'>
-      <Flex w='full' justifyContent='space-between'>
-        <Flex direction='column' mr='2rem' maxW='260px'>
-          <Flex>
+      <Stack
+        direction={isMobile ? 'column' : 'row'}
+        w='full'
+        justifyContent='space-between'
+        alignItems={isMobile ? 'center' : 'initial'}
+        textAlign={isMobile ? 'center' : 'start'}
+        spacing={isMobile ? '2rem' : '0'}
+        wrap='wrap'
+      >
+        <Flex direction='column' mr={isMobile ? '0' : '2rem'} maxW='260px'>
+          <Flex justifyContent={isMobile ? 'center' : 'flex-start'}>
             <Link href='/'>
               <Button variant='unstyled' h='40px'>
                 <Logo />
@@ -40,7 +50,10 @@ const Footer = (props: Props) => {
           >
             {t('footer_welcome')}
           </Text>
-          <Flex mt={'0.5rem'}>
+          <Flex
+            mt={'0.5rem'}
+            justifyContent={isMobile ? 'center' : 'flex-start'}
+          >
             <SocialIcon
               href='https://www.facebook.com'
               icon={<Facebook />}
@@ -84,39 +97,39 @@ const Footer = (props: Props) => {
           </Text>
 
           <NavLink
-            mr='0px'
+            mr='0px !important'
             mt='22px'
             title={t('visit_our_store')}
             href='/product'
-            direction='left'
+            direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
-            mr='0px'
+            mr='0px !important'
             title={t('about_us')}
             href='/about'
-            direction='left'
+            direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
-            mr='0px'
+            mr='0px !important'
             title={t('contact_us')}
             href='/contact'
-            direction='left'
+            direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
-            mr='0px'
+            mr='0px !important'
             title={t('terms_and_conditions')}
             href='/legal/terms_and_conditions'
-            direction='left'
+            direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
-            mr='0px'
+            mr='0px !important'
             title={t('privacy_policy')}
             href='/legal/privacy_policy'
-            direction='left'
+            direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
         </Flex>
@@ -126,25 +139,25 @@ const Footer = (props: Props) => {
           </Text>
 
           <NavLink
-            mr='0px'
+            mr='0px !important'
             mt='22px'
             title={t('your_cart')}
             href='/user/cart'
-            direction='left'
+            direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
-            mr='0px'
+            mr='0px !important'
             title={t('your_orders')}
             href='/user/purchase'
-            direction='left'
+            direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
-            mr='0px'
+            mr='0px !important'
             title={t('settings')}
             href='/user/profile'
-            direction='left'
+            direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
         </Flex>
@@ -154,6 +167,7 @@ const Footer = (props: Props) => {
           </Text>
           <Text mt='1rem'>{t('payment_method_des')}</Text>
           <Flex
+            justifyContent={isMobile ? 'center' : 'flex-start'}
             css={css`
               svg {
                 width: 60px;
@@ -171,8 +185,12 @@ const Footer = (props: Props) => {
             </Link>
           </Flex>
         </Flex>
-      </Flex>
-      <Flex mt='5rem' borderTop='1px solid black' justifyContent='center'>
+      </Stack>
+      <Flex
+        mt={isMobile ? '2.5rem' : '5rem'}
+        borderTop='1px solid black'
+        justifyContent='center'
+      >
         <Text fontSize='sm' marginY='1rem'>
           © 2022 ComfySloth All rights reserved
         </Text>

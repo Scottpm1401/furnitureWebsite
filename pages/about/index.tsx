@@ -6,6 +6,7 @@ import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import Container from '../../components/Container';
+import { useResponsive } from '../../hooks/useResponsive';
 import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
 
@@ -13,6 +14,7 @@ type Props = {};
 
 const About = (props: Props) => {
   const { t } = useTranslation();
+  const { isMobile } = useResponsive();
   return (
     <NotAuthProvider>
       <Page
@@ -29,7 +31,11 @@ const About = (props: Props) => {
           current={t('about')}
         />
         <Flex mt='4rem'>
-          <Container gap='2rem' h='500px'>
+          <Container
+            direction={isMobile ? 'column' : 'row'}
+            h={isMobile ? '1200px' : '600px'}
+            textAlign={isMobile ? 'center' : 'start'}
+          >
             <Flex
               flex={1}
               position='relative'
@@ -37,16 +43,29 @@ const About = (props: Props) => {
               overflow='hidden'
             >
               <Image
+                style={{ objectFit: isMobile ? 'cover' : 'contain' }}
                 src={'/images/about_banner.jpg'}
                 fill
                 alt={'about_banner'}
               />
             </Flex>
 
-            <Flex direction='column' justifyContent='flex-start' flex={1}>
-              <Flex>
+            <Flex
+              ml={isMobile ? '0' : '2rem'}
+              mt={isMobile ? '2rem' : '0'}
+              direction='column'
+              justifyContent='flex-start'
+              flex={1}
+            >
+              <Flex justifyContent={isMobile ? 'center' : 'start'}>
                 <Text
                   css={css`
+                    ${isMobile
+                      ? `display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    `
+                      : null}
                     &::after {
                       width: 50%;
                       height: 4px;
@@ -64,7 +83,7 @@ const About = (props: Props) => {
               <Text
                 mt='2rem'
                 color='#5B5F62'
-                fontWeight='medium' 
+                fontWeight='medium'
                 lineHeight={2}
               >
                 {t('about_text')}

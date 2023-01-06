@@ -3,6 +3,8 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import React from 'react';
 
+import { useResponsive } from '../../hooks/useResponsive';
+
 type TeamCardType = {
   img: string;
   name: string;
@@ -10,8 +12,13 @@ type TeamCardType = {
 } & FlexProps;
 
 const TeamCard = ({ img, name, role, ...props }: TeamCardType) => {
+  const { isMobile, isSmallDevice } = useResponsive();
   return (
-    <Flex direction='column' w='25%' {...props}>
+    <Flex
+      direction='column'
+      w={isSmallDevice ? '80%' : isMobile ? '50%' : '25%'}
+      {...props}
+    >
       <Flex
         css={css`
           overflow: hidden;

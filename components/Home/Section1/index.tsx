@@ -10,16 +10,18 @@ import React from 'react';
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { useResponsive } from '../../../hooks/useResponsive';
 import Slide from './Slide';
 
 type Props = {};
 
 const Section1 = (props: Props) => {
   const { t } = useTranslation();
+  const { isMobile } = useResponsive();
   return (
     <Flex id='section1'>
       <Swiper
-        style={{ width: '100vw', height: '100vh' }}
+        style={{ width: '100vw', height: isMobile ? '50vh' : '100vh' }}
         spaceBetween={30}
         effect={'fade'}
         pagination={{
@@ -30,7 +32,7 @@ const Section1 = (props: Props) => {
           disableOnInteraction: false,
         }}
         loop
-        navigation
+        navigation={!isMobile}
         modules={[EffectFade, Navigation, Pagination, Autoplay]}
         className='mySwiper'
       >
