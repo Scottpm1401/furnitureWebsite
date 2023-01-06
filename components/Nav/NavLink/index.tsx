@@ -1,8 +1,8 @@
 import {
   Button,
   ButtonProps,
-  ColorProps,
   Flex,
+  HStack,
   Text,
   TextProps,
 } from '@chakra-ui/react';
@@ -16,6 +16,7 @@ type NavLinkType = {
   textProps?: TextProps;
   direction?: 'left' | 'center';
   isSpacing?: boolean;
+  icon?: React.ReactNode;
 } & ButtonProps;
 
 const NavLink = ({
@@ -24,6 +25,7 @@ const NavLink = ({
   textProps,
   direction = 'center',
   isSpacing = true,
+  icon,
   ...props
 }: NavLinkType) => {
   return (
@@ -50,9 +52,13 @@ const NavLink = ({
         }}
         href={href}
       >
-        <Text fontWeight='medium' {...textProps}>
-          {title}
-        </Text>
+        <HStack alignItems='center' spacing='1rem'>
+          {icon}
+          <Text fontWeight='medium' {...textProps}>
+            {title}
+          </Text>
+        </HStack>
+
         <Flex
           className='underline'
           h='1px'

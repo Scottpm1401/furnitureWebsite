@@ -128,5 +128,7 @@
   "checkout": "Checkout",
   "order": "Your order",
   "empty_cart": "Your cart is empty",
-  "fill_in": "Fill in"
+  "fill_in": "Fill in",
+  "your_profile": "Your profile",
+  "logout": "Log out"
 }

@@ -128,5 +128,7 @@
   "checkout": "Thanh toán",
   "order": "Đơn hàng của bạn",
   "empty_cart": "Giỏ hàng của bạn đang trống",
-  "fill_in": "Lấp đầy nó"
+  "fill_in": "Lấp đầy nó",
+  "your_profile": "Trang cá nhân",
+  "logout": "Đăng xuất"
 }
