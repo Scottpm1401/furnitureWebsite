@@ -152,7 +152,7 @@ const Nav = (props: Props) => {
           )}
           <Flex sx={{ svg: { fill: isTop ? 'white' : 'black' } }} h='full'>
             <Link style={{ height: 60 }} href='/'>
-              <Logo id='1' />
+              <Logo id='mobile_logo' />
             </Link>
           </Flex>
           {!isMobileOrTablet ? (
@@ -366,7 +366,7 @@ const Nav = (props: Props) => {
               ) : (
                 <Link href='/' onClick={onClose}>
                   <Flex height='48px' sx={{ svg: { fill: 'white' } }}>
-                    <Logo id='test' style={{ fill: 'white' }} />
+                    <Logo id='sidebar_logo' />
                   </Flex>
                 </Link>
               )}

@@ -36,7 +36,7 @@ const Footer = (props: Props) => {
           <Flex justifyContent={isMobile ? 'center' : 'flex-start'}>
             <Link href='/'>
               <Button variant='unstyled' h='40px'>
-                <Logo />
+                <Logo id='footer_logo' />
               </Button>
             </Link>
           </Flex>
