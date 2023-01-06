@@ -338,7 +338,12 @@ const Nav = (props: Props) => {
             direction='column'
             justifyContent='space-between'
           >
-            <Flex paddingY='1rem' w='full' justifyContent='space-between'>
+            <Stack
+              direction='row'
+              paddingY='1rem'
+              w='full'
+              justifyContent='space-between'
+            >
               {user._id ? (
                 <Link href='/profile' onClick={onClose}>
                   <Flex alignItems='center'>
@@ -364,10 +369,16 @@ const Nav = (props: Props) => {
                 </Link>
               )}
 
-              <Button p='10px' variant='unstyled' onClick={onClose}>
+              <Button
+                p='10px'
+                variant='unstyled'
+                w='40px'
+                h='40px'
+                onClick={onClose}
+              >
                 <CloseIcon style={{ stroke: 'black' }} />
               </Button>
-            </Flex>
+            </Stack>
             <Flex
               mt='1.5rem'
               direction='column'
