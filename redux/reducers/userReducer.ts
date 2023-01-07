@@ -1,14 +1,14 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { ProductCartType } from '../../models/cart';
-import { UserType } from '../../models/user';
+import { ProductCartType } from "../../models/cart";
+import { UserType } from "../../models/user";
 
 const initialState: UserType = {
-  _id: '',
-  email: '',
-  username: '',
-  role: 'USER',
-  birthday: '',
+  _id: "",
+  email: "",
+  username: "",
+  role: "USER",
+  birthday: "",
   cart_total: 0,
   cart: [],
   purchase: [],
@@ -16,7 +16,7 @@ const initialState: UserType = {
 
 // Actual Slice
 export const { actions, reducer } = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     // Action to set the authentication status
@@ -37,6 +37,10 @@ export const { actions, reducer } = createSlice({
       state.cart = action.payload;
     },
 
+    setUserCartTotal(state, action: PayloadAction<number>) {
+      state.cart_total += action.payload;
+    },
+
     reset: () => initialState,
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
@@ -49,7 +53,7 @@ const selectors = (<S extends { user: UserType }>() => {
   const selectUserId = createSelector(getState, (state) => state._id);
   const selectUserCart = createSelector(getState, (state) => state.cart);
   const selectCartTotal = createSelector(getState, (state) => state.cart_total);
-  const isAdmin = createSelector(getState, (state) => state.role === 'ADMIN');
+  const isAdmin = createSelector(getState, (state) => state.role === "ADMIN");
 
   return {
     selectUser,
