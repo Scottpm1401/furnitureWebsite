@@ -32,8 +32,11 @@ const GeneralProfile = () => {
       const formData = new FormData();
       let signatureParam: GetSignatureType = {};
       if (user.info?.avatar) {
-        signatureParam.public_id = user.info.avatar;
-        formData.append('public_id', user.info.avatar);
+        const publicId = user.info.avatar.slice(
+          user.info.avatar.indexOf('/furniture')
+        );
+        signatureParam.public_id = publicId;
+        formData.append('public_id', publicId);
       } else {
         const folder = 'furniture/users';
         signatureParam.folder = folder;
