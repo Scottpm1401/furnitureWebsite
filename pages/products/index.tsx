@@ -203,7 +203,7 @@ const Products = ({
                 hasMore={hasMore}
                 loader={
                   <>
-                    {new Array(products.length % 3)
+                    {new Array(3)
                       .fill(0)
                       .map((item, index) => (
                         <ProductCard
@@ -222,7 +222,7 @@ const Products = ({
                 dataLength={products.length}
               >
                 {isLoading ? (
-                  new Array(6)
+                  new Array(9)
                     .fill(0)
                     .map((item, index) => (
                       <ProductCard
