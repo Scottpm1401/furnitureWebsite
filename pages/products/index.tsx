@@ -1,7 +1,8 @@
 import { Button, Flex, Grid, Select, Text } from '@chakra-ui/react';
 import { InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import Container from '../../components/Container';
@@ -38,6 +39,20 @@ export const getStaticProps = async () => {
   };
 };
 
+const LoadingProductCard = (layout: Layout) => {
+  return (
+    <ProductCard
+      title='loading'
+      image={'/temp'}
+      price={99.99}
+      isLoaded={true}
+      isHorizontal={layout === Layout.list}
+      description='Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal'
+      _id='loading'
+    />
+  );
+};
+
 const Products = ({
   productsList,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -47,6 +62,10 @@ const Products = ({
   const [layout, setLayout] = useState<Layout>(Layout.grid);
   const { t } = useTranslation();
   const { isMobile, isMobileOrTablet } = useResponsive();
+  const hasMore = useMemo(
+    () => products.length !== 0 && products.length % LIMITED === 0,
+    [products.length]
+  );
 
   const handleUpdateFilter = async (newFilter: Filter) => {
     setIsLoading(true);
@@ -56,6 +75,15 @@ const Products = ({
       setProducts(data);
       setIsLoading(false);
     }
+  };
+
+  const handleLoadMore = async () => {
+    try {
+      const newFilter = { ...filter, offset: filter.offset + LIMITED };
+      const moreProductLists = await getProducts(newFilter);
+      setFilter(newFilter);
+      setProducts((prev) => [...prev, ...moreProductLists]);
+    } catch (error) {}
   };
 
   return (
@@ -155,32 +183,78 @@ const Products = ({
                   </Select>
                 </Flex>
               </Grid>
-              <Grid
-                mt='1.5rem'
-                gridTemplateColumns={
-                  layout === Layout.grid
-                    ? isMobile
-                      ? '1fr'
-                      : isMobileOrTablet
-                      ? '1fr 1fr'
-                      : '1fr 1fr 1fr'
-                    : '1fr'
+
+              <InfiniteScroll
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns:
+                    layout === Layout.grid
+                      ? isMobile
+                        ? '1fr'
+                        : isMobileOrTablet
+                        ? '1fr 1fr'
+                        : '1fr 1fr 1fr'
+                      : '1fr',
+                  marginTop: '1.5rem',
+                  gap: '2rem',
+                  overflow: 'unset',
+                }}
+                next={() => handleLoadMore()}
+                hasMore={hasMore}
+                loader={
+                  <>
+                    {new Array(products.length % 3)
+                      .fill(0)
+                      .map((item, index) => (
+                        <ProductCard
+                          title='loading'
+                          image={'/temp'}
+                          price={99.99}
+                          isLoaded={false}
+                          isHorizontal={layout === Layout.list}
+                          description='Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal'
+                          _id='loading'
+                          key={`loading_${index}`}
+                        />
+                      ))}
+                  </>
                 }
-                gap='2rem'
+                dataLength={products.length}
               >
-                {products.map((item) => (
-                  <ProductCard
-                    key={item._id}
-                    title={item.title}
-                    image={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
-                    price={item.price}
-                    isLoaded={!isLoading}
-                    isHorizontal={layout === Layout.list}
-                    description={item.description}
-                    _id={item._id}
-                  />
-                ))}
-              </Grid>
+                {isLoading ? (
+                  new Array(6)
+                    .fill(0)
+                    .map((item, index) => (
+                      <ProductCard
+                        title='loading'
+                        image={'/temp'}
+                        price={99.99}
+                        isLoaded={false}
+                        isHorizontal={layout === Layout.list}
+                        description='Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal'
+                        _id='loading'
+                        key={`loading_${index}`}
+                      />
+                    ))
+                ) : products.length === 0 ? (
+                  <Text fontWeight='semibold' fontSize='xl'>
+                    Product not found
+                  </Text>
+                ) : (
+                  products.map((item) => (
+                    <ProductCard
+                      key={item._id}
+                      title={item.title}
+                      image={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
+                      price={item.price}
+                      isLoaded={true}
+                      isHorizontal={layout === Layout.list}
+                      description={item.description}
+                      _id={item._id}
+                    />
+                  ))
+                )}
+              </InfiniteScroll>
             </Flex>
           </Grid>
         </Container>

@@ -35,11 +35,13 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
   const { isMobile } = useResponsive();
   const [isShowFilter, setIsShowFilter] = useState(false);
   const filterByTitle = debounce(
-    (value: string) => handleUpdateFilter({ ...filter, title: value }),
+    (value: string) =>
+      handleUpdateFilter({ ...filter, offset: 0, title: value }),
     300
   );
   const filterByPrice = debounce(
-    (value: number) => handleUpdateFilter({ ...filter, price: value }),
+    (value: number) =>
+      handleUpdateFilter({ ...filter, offset: 0, price: value }),
     1000
   );
   return (
@@ -112,8 +114,16 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
                   direction='column'
                   onClick={() =>
                     value === filter.category
-                      ? handleUpdateFilter({ ...filter, category: undefined })
-                      : handleUpdateFilter({ ...filter, category: value })
+                      ? handleUpdateFilter({
+                          ...filter,
+                          offset: 0,
+                          category: undefined,
+                        })
+                      : handleUpdateFilter({
+                          ...filter,
+                          offset: 0,
+                          category: value,
+                        })
                   }
                 >
                   <Text>{t(value)}</Text>
@@ -147,8 +157,16 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
                   cursor='pointer'
                   onClick={() =>
                     value === filter.brand
-                      ? handleUpdateFilter({ ...filter, brand: undefined })
-                      : handleUpdateFilter({ ...filter, brand: value })
+                      ? handleUpdateFilter({
+                          ...filter,
+                          offset: 0,
+                          brand: undefined,
+                        })
+                      : handleUpdateFilter({
+                          ...filter,
+                          offset: 0,
+                          brand: value,
+                        })
                   }
                   direction='column'
                 >
@@ -177,8 +195,12 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
                   active={filter.color === color}
                   onClick={() =>
                     filter.color === color
-                      ? handleUpdateFilter({ ...filter, color: undefined })
-                      : handleUpdateFilter({ ...filter, color })
+                      ? handleUpdateFilter({
+                          ...filter,
+                          offset: 0,
+                          color: undefined,
+                        })
+                      : handleUpdateFilter({ ...filter, offset: 0, color })
                   }
                 />
               ))}

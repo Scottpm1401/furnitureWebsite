@@ -59,7 +59,7 @@ const ProductCard = ({
       h={isHorizontal && isMobile ? '460px' : responsive}
       templateColumns={isHorizontal && !isMobile ? '360px 1fr' : 'auto'}
       templateRows={isHorizontal ? 'auto' : '1fr auto'}
-      onClick={() => router.push(`/products/${_id}`)}
+      onClick={() => isLoaded && router.push(`/products/${_id}`)}
       {...props}
     >
       <Skeleton
