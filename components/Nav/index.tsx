@@ -316,7 +316,7 @@ const Nav = (props: Props) => {
                     h='full'
                     src={`${process.env.NEXT_PUBLIC_CDN}/${user.info?.avatar}`}
                     name={user?.displayName}
-                    bg='orange.300'
+                    bg={user?.displayName ? 'initial' : 'orange.300'}
                   />
                 </Flex>
               </Link>
