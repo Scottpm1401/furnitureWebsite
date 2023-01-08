@@ -33,7 +33,7 @@ const GeneralProfile = () => {
       let signatureParam: GetSignatureType = {};
       if (user.info?.avatar) {
         const publicId = user.info.avatar.slice(
-          user.info.avatar.indexOf('/furniture')
+          user.info.avatar.indexOf('furniture')
         );
         signatureParam.public_id = publicId;
         formData.append('public_id', publicId);
