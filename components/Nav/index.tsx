@@ -122,7 +122,11 @@ const Nav = (props: Props) => {
               handleLogout={handleLogout}
             />
           )}
-          <Flex sx={{ svg: { fill: isTop ? 'white' : 'black' } }} h='full'>
+          <Flex
+            sx={{ svg: { fill: isTop ? 'white' : 'black' } }}
+            h='full'
+            justifyContent={isMobileOrTablet ? 'center' : 'flex-start'}
+          >
             <Link style={{ height: 60 }} href='/'>
               <Logo id='mobile_logo' />
             </Link>
