@@ -135,5 +135,8 @@
   "logout": "Log out",
   "more_filter": "More filter",
   "done": "Done",
-  "please_login": "Please login to process"
+  "please_login": "Please login to process",
+  "summary": "Summary",
+  "continue": "Continue",
+  "processing": "Processing..."
 }

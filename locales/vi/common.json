@@ -135,5 +135,8 @@
   "logout": "Đăng xuất",
   "more_filter": "Bộ lọc",
   "done": "Xong",
-  "please_login": "Vui lòng đăng nhập để tiếp tục"
+  "please_login": "Vui lòng đăng nhập để tiếp tục",
+  "summary": "Tổng kết",
+  "continue": "Tiếp tục",
+  "processing": "Đang xử lý..."
 }
