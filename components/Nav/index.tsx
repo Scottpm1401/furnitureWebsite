@@ -6,6 +6,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Stack,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -16,8 +17,11 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useResponsive } from '../../hooks/useResponsive';
+import AccountIcon from '../../public/svg/account.svg';
 import LanguageIcon from '../../public/svg/language.svg';
+import LogoutIcon from '../../public/svg/log-out.svg';
 import Logo from '../../public/svg/logo.svg';
+import PackageIcon from '../../public/svg/package.svg';
 import ShoppingBagIcon from '../../public/svg/shopping_bag.svg';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { actions, selectors } from '../../redux/reducer';
@@ -234,24 +238,51 @@ const Nav = (props: Props) => {
                           />
                         </Button>
                       </PopoverTrigger>
-                      <PopoverContent maxW='120px'>
-                        <Flex direction='column'>
+                      <PopoverContent maxW='220px'>
+                        <Stack
+                          p='0.5rem'
+                          sx={{
+                            svg: {
+                              width: '24px',
+                              height: '24px',
+                            },
+                          }}
+                          spacing={4}
+                        >
                           <Link href='/profile'>
-                            <Button
-                              w='full'
-                              variant='unstyled'
+                            <Stack
+                              direction='row'
                               onClick={onPopoverToggle}
+                              w='full'
                             >
-                              {t('your_profile')}
-                            </Button>
+                              <AccountIcon />
+                              <Text fontWeight='medium'>
+                                {t('your_profile')}
+                              </Text>
+                            </Stack>
                           </Link>
-                          <Button
-                            variant='unstyled'
+                          <Link href='/ordered'>
+                            <Stack
+                              direction='row'
+                              onClick={onPopoverToggle}
+                              w='full'
+                            >
+                              <PackageIcon />
+                              <Text fontWeight='medium'>
+                                {t('your_ordered')}
+                              </Text>
+                            </Stack>
+                          </Link>
+
+                          <Stack
+                            cursor='pointer'
+                            direction='row'
                             onClick={() => handleLogout()}
                           >
-                            {t('logout')}
-                          </Button>
-                        </Flex>
+                            <LogoutIcon />
+                            <Text fontWeight='medium'>{t('logout')}</Text>
+                          </Stack>
+                        </Stack>
                       </PopoverContent>
                     </Popover>
                   </>
@@ -292,7 +323,6 @@ const Nav = (props: Props) => {
                     h='full'
                     src={`${process.env.NEXT_PUBLIC_CDN}/${user.info?.avatar}`}
                     name={user?.displayName}
-                    // bg={user?.displayName ? '' : 'orange.300'}
                   />
                 </Flex>
               </Link>

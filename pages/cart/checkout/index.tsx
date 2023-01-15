@@ -1,6 +1,14 @@
-import { Flex, Skeleton, SkeletonText, Stack, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Skeleton,
+  SkeletonText,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 import { Elements } from '@stripe/react-stripe-js';
 import { Appearance, loadStripe } from '@stripe/stripe-js';
+import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
@@ -43,19 +51,30 @@ const Checkout = (props: Props) => {
           current={t('checkout')}
         />
         <Flex mt='5rem'>
-          <Container direction='column'>
+          <Container direction='column' minH='60vh' justifyContent='center'>
             <Flex mb='1rem' justifyContent='center'>
               <Text fontSize='3xl' fontWeight='semibold'>
                 {t('checkout')}
               </Text>
             </Flex>
             {!isLoading ? (
-              <Elements
-                stripe={stripePromise}
-                options={{ clientSecret, appearance }}
-              >
-                <CheckoutForm />
-              </Elements>
+              clientSecret ? (
+                <Elements
+                  stripe={stripePromise}
+                  options={{ clientSecret, appearance }}
+                >
+                  <CheckoutForm />
+                </Elements>
+              ) : (
+                <Stack w='full' mt='0.5rem' spacing={4} alignItems='center'>
+                  <Text fontSize='xl'>{t('empty_checkout')}</Text>
+                  <Link href='/products'>
+                    <Button colorScheme='orange'>
+                      <Text>{t('fill_in')}</Text>
+                    </Button>
+                  </Link>
+                </Stack>
+              )
             ) : (
               <Flex
                 w='full'

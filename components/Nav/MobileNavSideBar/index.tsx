@@ -27,6 +27,7 @@ import LoginIcon from '../../../public/svg/log-in.svg';
 import LogoutIcon from '../../../public/svg/log-out.svg';
 import Logo from '../../../public/svg/logo.svg';
 import MenuIcon from '../../../public/svg/menu.svg';
+import PackageIcon from '../../../public/svg/package.svg';
 import ShoppingBagIcon from '../../../public/svg/shopping_bag.svg';
 import StoreIcon from '../../../public/svg/store.svg';
 import Twitter from '../../../public/svg/twitter.svg';
@@ -213,6 +214,23 @@ const MobileNavSideBar = ({
                     mt='0.5rem'
                     onClick={onClose}
                   />
+                  <NavLink
+                    title={t('your_ordered')}
+                    href='/ordered'
+                    textProps={{
+                      color: 'black',
+                      fontSize: 'xl',
+                      fontWeight: 'semibold',
+                    }}
+                    direction='left'
+                    icon={
+                      <PackageIcon
+                        style={{ width: 24, height: 24, stroke: 'black' }}
+                      />
+                    }
+                    mt='0.5rem'
+                    onClick={onClose}
+                  />
                 </>
               )}
             </Flex>
@@ -238,7 +256,12 @@ const MobileNavSideBar = ({
                       />
                     </Flex>
 
-                    <Text ml='1rem' fontSize='lg' fontWeight='semibold'>
+                    <Text
+                      ml='1rem'
+                      fontSize='xl'
+                      fontWeight='semibold'
+                      color='black'
+                    >
                       {lang == 'vi' ? 'Tiếng Việt' : 'English'}
                     </Text>
                   </Button>
@@ -248,13 +271,13 @@ const MobileNavSideBar = ({
                     variant='unstyled'
                     onClick={() => handleChangeLanguage('en')}
                   >
-                    English
+                    <Text color='black'>English</Text>
                   </Button>
                   <Button
                     variant='unstyled'
                     onClick={() => handleChangeLanguage('vi')}
                   >
-                    Tiếng Việt
+                    <Text color='black'>Tiếng Việt</Text>
                   </Button>
                 </PopoverContent>
               </Popover>

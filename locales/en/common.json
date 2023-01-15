@@ -138,5 +138,7 @@
   "please_login": "Please login to process",
   "summary": "Summary",
   "continue": "Continue",
-  "processing": "Processing..."
+  "processing": "Processing...",
+  "empty_checkout": "Your cart is empty, please fill it before checkout.",
+  "your_ordered": "Your Ordered"
 }

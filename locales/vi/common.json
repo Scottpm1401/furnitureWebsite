@@ -138,5 +138,7 @@
   "please_login": "Vui lòng đăng nhập để tiếp tục",
   "summary": "Tổng kết",
   "continue": "Tiếp tục",
-  "processing": "Đang xử lý..."
+  "processing": "Đang xử lý...",
+  "empty_checkout": "Giỏ hàng của bạn đang trống, vui lòng chọn sản phẩm trước khi tiến hành thanh toán.",
+  "your_ordered": "Đơn hàng của bạn"
 }
