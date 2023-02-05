@@ -1,14 +1,14 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ProductCartType } from "../../models/cart";
-import { UserType } from "../../models/user";
+import { ProductCartType } from '../../models/cart';
+import { UserType } from '../../models/user';
 
 const initialState: UserType = {
-  _id: "",
-  email: "",
-  username: "",
-  role: "USER",
-  birthday: "",
+  _id: '',
+  email: '',
+  username: '',
+  role: 'USER',
+  birthday: '',
   cart_total: 0,
   cart: [],
   purchase: [],
@@ -16,7 +16,7 @@ const initialState: UserType = {
 
 // Actual Slice
 export const { actions, reducer } = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     // Action to set the authentication status
@@ -53,7 +53,8 @@ const selectors = (<S extends { user: UserType }>() => {
   const selectUserId = createSelector(getState, (state) => state._id);
   const selectUserCart = createSelector(getState, (state) => state.cart);
   const selectCartTotal = createSelector(getState, (state) => state.cart_total);
-  const isAdmin = createSelector(getState, (state) => state.role === "ADMIN");
+  const selectUserOrdered = createSelector(getState, (state) => state.purchase);
+  const isAdmin = createSelector(getState, (state) => state.role === 'ADMIN');
 
   return {
     selectUser,
@@ -61,6 +62,7 @@ const selectors = (<S extends { user: UserType }>() => {
     isAdmin,
     selectUserCart,
     selectCartTotal,
+    selectUserOrdered,
   };
 })();
 

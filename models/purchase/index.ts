@@ -2,6 +2,7 @@ import { ProductCartType } from '../cart';
 import { AddressType } from '../user';
 
 export type PurchaseType = {
+  _id: string;
   status: 'PACKAGE' | 'SHIPPING' | 'DELIVERED';
   total_bill: number;
   payment_method: string;

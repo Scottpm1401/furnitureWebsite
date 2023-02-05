@@ -140,5 +140,18 @@
   "continue": "Tiếp tục",
   "processing": "Đang xử lý...",
   "empty_checkout": "Giỏ hàng của bạn đang trống, vui lòng chọn sản phẩm trước khi tiến hành thanh toán.",
-  "your_ordered": "Đơn hàng của bạn"
+  "your_ordered": "Đơn hàng của bạn",
+  "empty_orders": "Đơn hàng của bạn hiện đang trống.",
+  "customer_info": "Thông tin khách hàng",
+  "payment_info": "Thanh toán",
+  "package_info": "Hàng hóa",
+  "PACKAGE": "Đóng gói",
+  "SHIPPING": "Đang giao",
+  "DELIVERED": "Đã giao",
+  "address": "Địa chỉ",
+  "status": "Tình trạng",
+  "package_date": "Ngày đóng gói",
+  "arrive_date": "Ngày nhận hàng",
+  "total": "Tổng cộng",
+  "rating": "Đánh giá"
 }

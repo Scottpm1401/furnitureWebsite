@@ -140,5 +140,18 @@
   "continue": "Continue",
   "processing": "Processing...",
   "empty_checkout": "Your cart is empty, please fill it before checkout.",
-  "your_ordered": "Your Ordered"
+  "your_ordered": "Your Ordered",
+  "empty_orders": "You haven't orders anything yet.",
+  "customer_info": "Customer",
+  "payment_info": "Payment",
+  "package_info": "Package",
+  "PACKAGE": "Package",
+  "SHIPPING": "Shipping",
+  "DELIVERED": "Delivered",
+  "address": "Address",
+  "status": "Status",
+  "package_date": "Package Date",
+  "arrive_date": "Arrive Date",
+  "total": "Total",
+  "rating": "Rating"
 }
