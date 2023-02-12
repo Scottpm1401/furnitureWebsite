@@ -22,20 +22,38 @@ import { Rating } from 'react-simple-star-rating';
 import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
 import Container from '../../components/Container';
+import { STAR_COLOR } from '../../constant';
 import { useResponsive } from '../../hooks/useResponsive';
 import AuthProvider from '../../layout/AuthProvider';
 import Page from '../../layout/Page';
+import { PurchaseProduct } from '../../models/purchase';
 import StarIcon from '../../public/svg/star.svg';
 import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
+import { ratingProduct } from '../../services/product';
 import { formatAddress, formatDateTime } from '../../utils/common';
 
 type Props = {};
-
 const Ordered = (props: Props) => {
   const { t } = useTranslation();
   const orders = useAppSelector(selectors.user.selectUserOrdered);
   const { isMobileOrTablet } = useResponsive();
+
+  const handleRating = async (
+    rate: number,
+    purchase_id: string,
+    product: PurchaseProduct
+  ) => {
+    try {
+      await ratingProduct(product.product_id, {
+        purchase_id,
+        rate,
+        color: product.color,
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
 
   return (
     <AuthProvider>
@@ -264,12 +282,16 @@ const Ordered = (props: Props) => {
                                         style={{
                                           width: 24,
                                           height: 24,
-                                          fill: 'rgb(255, 188, 11)',
+                                          fill: STAR_COLOR,
                                           display: 'inline-block',
                                         }}
                                       />
                                     }
                                     initialValue={item.rating}
+                                    onClick={(value) =>
+                                      handleRating(value, order._id, item)
+                                    }
+                                    readonly={item.rating ? true : false}
                                   />
                                 </Td>
                               </Tr>

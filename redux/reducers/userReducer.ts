@@ -1,6 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ProductCartType } from '../../models/cart';
+import { PurchaseType } from '../../models/purchase';
 import { UserType } from '../../models/user';
 
 const initialState: UserType = {

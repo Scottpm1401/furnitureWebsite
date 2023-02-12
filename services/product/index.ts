@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { API } from '../../constant/api';
 import axiosClient from '../../interceptor';
+import { ProductRatingRequest } from '../../models/api/product';
 import { Filter, ProductType } from '../../models/product';
 
 export const getFeaturedProduct = async () => {
@@ -23,4 +24,9 @@ export const getProducts = async (filter: Filter) => {
 export const getProductById = async (id: string) => {
   const res = await axiosClient.get(API.PRODUCT.GETPRODUCT(id));
   return res.data as ProductType;
+};
+
+export const ratingProduct = async (id: string, body: ProductRatingRequest) => {
+  const res = await axiosClient.post(API.PRODUCT.RATINGPRODUCT(id), body);
+  return res.data as { success: boolean };
 };

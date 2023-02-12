@@ -20,5 +20,6 @@ export type BillingDetailsType = {
 };
 
 export type PurchaseProduct = {
+  _id: string;
   rating?: number;
 } & ProductCartType;
