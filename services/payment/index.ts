@@ -5,6 +5,7 @@ import {
   CreatePaymentRequest,
   CreatePaymentResponse,
 } from '../../models/api/payment';
+import { PurchaseType } from '../../models/purchase';
 
 export const createPayment = async () => {
   const res = await axiosClient.post(API.PAYMENT.CHECKOUT, {
@@ -16,5 +17,5 @@ export const createPayment = async () => {
 
 export const confirmPayment = async (body: confirmPaymentResquest) => {
   const res = await axiosClient.post(API.PAYMENT.CONFIRM, body);
-  return res.data as { success: boolean };
+  return res.data as PurchaseType[];
 };

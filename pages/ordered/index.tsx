@@ -28,9 +28,10 @@ import AuthProvider from '../../layout/AuthProvider';
 import Page from '../../layout/Page';
 import { PurchaseProduct } from '../../models/purchase';
 import StarIcon from '../../public/svg/star.svg';
-import { useAppSelector } from '../../redux/hooks';
-import { selectors } from '../../redux/reducer';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { actions, selectors } from '../../redux/reducer';
 import { ratingProduct } from '../../services/product';
+import { getProfile } from '../../services/user';
 import { formatAddress, formatDateTime } from '../../utils/common';
 
 type Props = {};
@@ -38,6 +39,7 @@ const Ordered = (props: Props) => {
   const { t } = useTranslation();
   const orders = useAppSelector(selectors.user.selectUserOrdered);
   const { isMobileOrTablet } = useResponsive();
+  const dispatch = useAppDispatch();
 
   const handleRating = async (
     rate: number,
@@ -45,11 +47,15 @@ const Ordered = (props: Props) => {
     product: PurchaseProduct
   ) => {
     try {
-      await ratingProduct(product.product_id, {
+      const res = await ratingProduct(product.product_id, {
         purchase_id,
         rate,
         color: product.color,
       });
+      if (res.success) {
+        const userProfile = await getProfile();
+        dispatch(actions.user.setUser(userProfile));
+      }
     } catch (error) {
       console.log('error', error);
     }

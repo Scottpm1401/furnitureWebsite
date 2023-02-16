@@ -42,6 +42,10 @@ export const { actions, reducer } = createSlice({
       state.cart_total += action.payload;
     },
 
+    setUserOrdered(state, action: PayloadAction<PurchaseType[]>) {
+      state.purchase = action.payload;
+    },
+
     reset: () => initialState,
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper

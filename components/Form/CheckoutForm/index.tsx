@@ -58,31 +58,39 @@ const CheckoutForm = () => {
 
   const handleCheckout = async (values: BillingDetailsType) => {
     if (!stripe || !elements) return;
+    try {
+      setIsLoading(true);
+      setErrorMessage(undefined);
 
-    setIsLoading(true);
-    setErrorMessage(undefined);
-
-    const { error } = await stripe.confirmPayment({
-      //`Elements` instance that was used to create the Payment Element
-      elements,
-      redirect: 'if_required',
-    });
-    if (error) {
-      // This point will only be reached if there is an immediate error when
-      // confirming the payment. Show error to your customer (for example, payment
-      // details incomplete)
-      setErrorMessage(error.message);
-    } else {
-      // Your customer will be redirected to your `return_url`. For some payment
-      // methods like iDEAL, your customer will be redirected to an intermediate
-      // site first to authorize the payment, then redirected to the `return_url`.
-      await confirmPayment({ card_brand: 'visa', billing_details: values });
-      await clearProductCart();
-      dispatch(actions.user.setUserCart([]));
-      dispatch(actions.user.setUserCartTotal(0));
+      const { error, paymentIntent } = await stripe.confirmPayment({
+        //`Elements` instance that was used to create the Payment Element
+        elements,
+        redirect: 'if_required',
+      });
+      if (error) {
+        // This point will only be reached if there is an immediate error when
+        // confirming the payment. Show error to your customer (for example, payment
+        // details incomplete)
+        setErrorMessage(error.message);
+      } else {
+        // Your customer will be redirected to your `return_url`. For some payment
+        // methods like iDEAL, your customer will be redirected to an intermediate
+        // site first to authorize the payment, then redirected to the `return_url`.
+        const newOrdered = await confirmPayment({
+          payment_method: paymentIntent.payment_method?.toString() || '',
+          billing_details: values,
+        });
+        await clearProductCart();
+        dispatch(actions.user.setUserCart([]));
+        dispatch(actions.user.setUserCartTotal(0));
+        dispatch(actions.user.setUserOrdered(newOrdered));
+        router.push('/ordered');
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -248,7 +256,6 @@ const CheckoutForm = () => {
                     type='submit'
                     isLoading={isLoading}
                     loadingText={t('processing')}
-                    disabled={!stripe}
                   >
                     {t('continue')}
                   </Button>

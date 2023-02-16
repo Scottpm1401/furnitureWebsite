@@ -11,6 +11,6 @@ export type CreatePaymentResponse = {
 };
 
 export type confirmPaymentResquest = {
-  card_brand: string;
+  payment_method: string;
   billing_details: BillingDetailsType;
 };
