@@ -42,6 +42,7 @@ const ProductCard = ({
   const { isMobile } = useResponsive();
   const responsive = useBreakpointValue(
     {
+      sm: 360,
       md: 200,
       lg: 280,
       xl: 400,

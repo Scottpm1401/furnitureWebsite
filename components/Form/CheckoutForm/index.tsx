@@ -4,15 +4,14 @@ import {
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js';
-import { isAxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import { floor } from 'lodash';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useMemo, useState } from 'react';
-import * as Yup from 'yup';
+import { useMemo, useState } from 'react';
 
 import { countries } from '../../../constant/country';
+import { useResponsive } from '../../../hooks/useResponsive';
 import { BillingDetailsType } from '../../../models/purchase';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { actions, selectors } from '../../../redux/reducer';
@@ -30,6 +29,7 @@ const CheckoutForm = () => {
   const userCart = useAppSelector(selectors.user.selectUserCart);
   const stripe = useStripe();
   const elements = useElements();
+  const { isMobileOrTablet } = useResponsive();
 
   const totalCartItem = useMemo(() => {
     let count = 0;
@@ -110,7 +110,7 @@ const CheckoutForm = () => {
       >
         {({ handleSubmit, handleChange, values, errors, touched }) => (
           <Form style={{ width: '100%' }} onSubmit={handleSubmit}>
-            <Stack direction='row' spacing={5}>
+            <Stack direction={isMobileOrTablet ? 'column' : 'row'} spacing={5}>
               <Flex direction='column' w='full'>
                 <Flex direction='column' w='full'>
                   <Text fontWeight='semibold'>{t('name')}</Text>
@@ -221,7 +221,11 @@ const CheckoutForm = () => {
                   />
                 </Flex>
               </Flex>
-              <Flex direction='column' w='40%' justifyContent='space-between'>
+              <Stack
+                w={isMobileOrTablet ? 'full' : '40%'}
+                justifyContent='space-between'
+                spacing={isMobileOrTablet ? 5 : 0}
+              >
                 <PaymentElement />
 
                 <Stack spacing={3}>
@@ -260,7 +264,7 @@ const CheckoutForm = () => {
                     {t('continue')}
                   </Button>
                 </Stack>
-              </Flex>
+              </Stack>
             </Stack>
           </Form>
         )}

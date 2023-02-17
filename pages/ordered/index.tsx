@@ -86,7 +86,10 @@ const Ordered = (props: Props) => {
               <Stack key={order._id} spacing={0}>
                 <Stack bg='orange.100' paddingY='1rem'>
                   <Container>
-                    <Grid w='full' templateColumns='1fr 1fr 1fr'>
+                    <Grid
+                      w='full'
+                      templateColumns={isMobileOrTablet ? '1fr' : '1fr 1fr 1fr'}
+                    >
                       <Stack spacing={2}>
                         <Text fontWeight='semibold'>{t('customer_info')}</Text>
                         <Stack spacing={1}>
@@ -141,7 +144,7 @@ const Ordered = (props: Props) => {
                 <Stack bg='gray.100' paddingY='1rem'>
                   <Container>
                     {isMobileOrTablet ? (
-                      <Stack spacing='2rem' mt='2.5rem'>
+                      <Stack spacing='2rem' mt='2.5rem' w='full'>
                         {order.products.map((item) => (
                           <Flex
                             position='relative'
@@ -180,6 +183,32 @@ const Ordered = (props: Props) => {
                                     opacity={1}
                                   />
                                 </Flex>
+                                <Rating
+                                  emptyIcon={
+                                    <StarIcon
+                                      style={{
+                                        width: 24,
+                                        height: 24,
+                                        display: 'inline-block',
+                                      }}
+                                    />
+                                  }
+                                  fillIcon={
+                                    <StarIcon
+                                      style={{
+                                        width: 24,
+                                        height: 24,
+                                        fill: STAR_COLOR,
+                                        display: 'inline-block',
+                                      }}
+                                    />
+                                  }
+                                  initialValue={item.rating}
+                                  onClick={(value) =>
+                                    handleRating(value, order._id, item)
+                                  }
+                                  readonly={item.rating ? true : false}
+                                />
                               </Stack>
                             </Flex>
                             <Flex
@@ -187,19 +216,16 @@ const Ordered = (props: Props) => {
                               alignItems='center'
                               mt='1rem'
                             >
-                              <Text fontWeight='semibold' mt='0.5rem'>
-                                {t('subtotal')}: $
-                                {floor(item.price * item.quantity, 2)}
+                              <Text textAlign='center' fontWeight='semibold'>
+                                {`${t('quantity')}: ${item.quantity}`}
                               </Text>
-                              <Flex alignItems='center'>
-                                <Text
-                                  textAlign='center'
-                                  w='24px'
-                                  fontWeight='medium'
-                                >
-                                  {item.quantity}
-                                </Text>
-                              </Flex>
+
+                              <Text fontWeight='semibold'>
+                                {`${t('subtotal')}: $${floor(
+                                  item.price * item.quantity,
+                                  2
+                                )}`}
+                              </Text>
                             </Flex>
                           </Flex>
                         ))}
