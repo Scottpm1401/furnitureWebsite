@@ -1,10 +1,10 @@
 import '../styles/globals.css';
 
-import { ChakraProvider, ColorModeScript, Stack } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript, Flex } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -30,13 +30,13 @@ const App = ({ Component, pageProps }: AppProps) => {
             <title>Comfysloth</title>
             <link rel='icon' href='/favicon.svg' />
           </Head>
-          <Stack spacing={0} direction={isInCms ? 'row' : 'column'}>
+          <Flex direction={isInCms ? 'row' : 'column'}>
             {!isInCms ? <Nav /> : <CmsSideBar />}
 
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <Component {...pageProps} />
             {!isInCms && <Footer />}
-          </Stack>
+          </Flex>
         </ChakraProvider>
       </PersistGate>
     </Provider>
