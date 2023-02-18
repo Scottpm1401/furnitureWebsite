@@ -3,6 +3,7 @@ import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import GeneralProfile from '../../components/Form/Profile/General';
+import { APP_ROUTES } from '../../constant';
 import AuthProvider from '../../layout/AuthProvider';
 import Page from '../../layout/Page';
 import ProfileContainer from '../../layout/ProfileContainer';
@@ -21,8 +22,8 @@ const Profile = (props: Props) => {
       >
         <Breadcrumb
           links={[
-            { title: t('home'), href: '/' },
-            { title: t('profile'), href: '/profile' },
+            { title: t('home'), href: APP_ROUTES.home },
+            { title: t('profile'), href: APP_ROUTES.profile },
           ]}
           current={t('profile')}
         />

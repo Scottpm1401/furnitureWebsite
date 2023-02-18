@@ -4,6 +4,7 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/useResponsive';
 import Facebook from '../../public/svg/facebook.svg';
 import Instagram from '../../public/svg/instagram.svg';
@@ -34,7 +35,7 @@ const Footer = (props: Props) => {
       >
         <Flex direction='column' mr={isMobile ? '0' : '2rem'} maxW='260px'>
           <Flex justifyContent={isMobile ? 'center' : 'flex-start'}>
-            <Link href='/'>
+            <Link href={APP_ROUTES.home}>
               <Button variant='unstyled' h='40px'>
                 <Logo id='footer_logo' />
               </Button>
@@ -100,35 +101,35 @@ const Footer = (props: Props) => {
             mr='0px !important'
             mt='22px'
             title={t('visit_our_store')}
-            href='/product'
+            href={APP_ROUTES.products}
             direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
             mr='0px !important'
             title={t('about_us')}
-            href='/about'
+            href={APP_ROUTES.about}
             direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
             mr='0px !important'
             title={t('contact_us')}
-            href='/contact'
+            href={APP_ROUTES.contact}
             direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
             mr='0px !important'
             title={t('terms_and_conditions')}
-            href='/legal/terms_and_conditions'
+            href={APP_ROUTES.termAndCondition}
             direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
             mr='0px !important'
             title={t('privacy_policy')}
-            href='/legal/privacy_policy'
+            href={APP_ROUTES.privacyPolicy}
             direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
@@ -142,21 +143,21 @@ const Footer = (props: Props) => {
             mr='0px !important'
             mt='22px'
             title={t('your_cart')}
-            href='/user/cart'
+            href={APP_ROUTES.cart}
             direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
             mr='0px !important'
             title={t('your_orders')}
-            href='/user/purchase'
+            href={APP_ROUTES.ordered}
             direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />
           <NavLink
             mr='0px !important'
             title={t('settings')}
-            href='/user/profile'
+            href={APP_ROUTES.profile}
             direction={isMobile ? 'center' : 'left'}
             textProps={{ color: 'black' }}
           />

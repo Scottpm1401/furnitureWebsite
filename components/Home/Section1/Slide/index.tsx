@@ -5,6 +5,7 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import { APP_ROUTES } from '../../../../constant';
 import { useResponsive } from '../../../../hooks/useResponsive';
 import Circle from '../../../../public/svg/circle_3_4.svg';
 
@@ -53,7 +54,7 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
               }
             `}
           >
-            <Link href='/products'>
+            <Link href={APP_ROUTES.products}>
               <Flex position='absolute' left='0' top='0' w='40px' h='40px'>
                 <Circle style={{ color: 'white' }} />
               </Flex>

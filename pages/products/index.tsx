@@ -8,6 +8,7 @@ import Breadcrumb from '../../components/Breadcrumb';
 import Container from '../../components/Container';
 import ProductCard from '../../components/ProductCard';
 import Sidebar from '../../components/Sidebar';
+import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/useResponsive';
 import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
@@ -91,8 +92,8 @@ const Products = ({
       <Page w='full' direction='column' title='Products'>
         <Breadcrumb
           links={[
-            { title: t('home'), href: '/' },
-            { title: t('products'), href: '/products' },
+            { title: t('home'), href: APP_ROUTES.home },
+            { title: t('products'), href: APP_ROUTES.products },
           ]}
           current={t('products')}
         />
@@ -203,20 +204,18 @@ const Products = ({
                 hasMore={hasMore}
                 loader={
                   <>
-                    {new Array(3)
-                      .fill(0)
-                      .map((item, index) => (
-                        <ProductCard
-                          title='loading'
-                          image={'/temp'}
-                          price={99.99}
-                          isLoaded={false}
-                          isHorizontal={layout === Layout.list}
-                          description='Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal'
-                          _id='loading'
-                          key={`loading_${index}`}
-                        />
-                      ))}
+                    {new Array(3).fill(0).map((item, index) => (
+                      <ProductCard
+                        title='loading'
+                        image={'/temp'}
+                        price={99.99}
+                        isLoaded={false}
+                        isHorizontal={layout === Layout.list}
+                        description='Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal'
+                        _id='loading'
+                        key={`loading_${index}`}
+                      />
+                    ))}
                   </>
                 }
                 dataLength={products.length}

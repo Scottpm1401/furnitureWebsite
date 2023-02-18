@@ -9,14 +9,14 @@ type Props = { children: JSX.Element };
 
 const NotAuthProvider = ({ children }: Props) => {
   const { isLoading } = useUser();
-  const userId = useAppSelector(selectors.user.selectUserId);
+
   const [verified, setVerified] = React.useState(false);
   useEffect(() => {
     if (isLoading) return;
     setVerified(true);
   }, [isLoading]);
 
-  if (verified || userId) return children;
+  if (verified) return children;
 
   return <Loader />;
 };

@@ -153,5 +153,7 @@
   "package_date": "Ngày đóng gói",
   "arrive_date": "Ngày nhận hàng",
   "total": "Tổng cộng",
-  "rating": "Đánh giá"
+  "rating": "Đánh giá",
+  "ordered": "Hoá đơn",
+  "users": "Người dùng"
 }

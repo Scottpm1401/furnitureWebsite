@@ -3,6 +3,7 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import { APP_ROUTES } from '../constant';
 import NotAuthProvider from '../layout/NotAuthProvider';
 import Page from '../layout/Page';
 
@@ -23,7 +24,7 @@ const NotFound = (props: Props) => {
           404 {t('page_not_found')}
         </Text>
         <Flex mt='1rem'>
-          <Link href='/'>
+          <Link href={APP_ROUTES.home}>
             <Button colorScheme='orange'>{t('back_to_home')}</Button>
           </Link>
         </Flex>

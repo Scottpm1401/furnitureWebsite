@@ -4,6 +4,7 @@ import React from 'react';
 
 import Breadcrumb from '../../../components/Breadcrumb';
 import AdditionalInfoProfile from '../../../components/Form/Profile/AdditionalInfo';
+import { APP_ROUTES } from '../../../constant';
 import AuthProvider from '../../../layout/AuthProvider';
 import Page from '../../../layout/Page';
 import ProfileContainer from '../../../layout/ProfileContainer';
@@ -17,9 +18,9 @@ const InfoProfile = (props: Props) => {
       <Page alignItems='center' justifyContent='center' direction='column'>
         <Breadcrumb
           links={[
-            { title: t('home'), href: '/' },
-            { title: t('profile'), href: '/profile' },
-            { title: t('additional_info'), href: '/profile/additional_info' },
+            { title: t('home'), href: APP_ROUTES.home },
+            { title: t('profile'), href: APP_ROUTES.profile },
+            { title: t('additional_info'), href: APP_ROUTES.additionalInfo },
           ]}
           current={t('additional_info')}
         />

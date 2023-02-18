@@ -6,6 +6,7 @@ import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import Container from '../../components/Container';
+import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/useResponsive';
 import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
@@ -25,8 +26,8 @@ const About = (props: Props) => {
       >
         <Breadcrumb
           links={[
-            { title: t('home'), href: '/' },
-            { title: t('about'), href: '/about' },
+            { title: t('home'), href: APP_ROUTES.home },
+            { title: t('about'), href: APP_ROUTES.about },
           ]}
           current={t('about')}
         />

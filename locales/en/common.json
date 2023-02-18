@@ -153,5 +153,7 @@
   "package_date": "Package Date",
   "arrive_date": "Arrive Date",
   "total": "Total",
-  "rating": "Rating"
+  "rating": "Rating",
+  "ordered": "Ordered",
+  "users": "Users"
 }

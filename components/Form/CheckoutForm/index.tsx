@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useMemo, useState } from 'react';
 
+import { APP_ROUTES } from '../../../constant';
 import { countries } from '../../../constant/country';
 import { useResponsive } from '../../../hooks/useResponsive';
 import { BillingDetailsType } from '../../../models/purchase';
@@ -84,7 +85,7 @@ const CheckoutForm = () => {
         dispatch(actions.user.setUserCart([]));
         dispatch(actions.user.setUserCartTotal(0));
         dispatch(actions.user.setUserOrdered(newOrdered));
-        router.push('/ordered');
+        router.push(APP_ROUTES.ordered);
       }
     } catch (err) {
       console.log(err);

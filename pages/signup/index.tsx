@@ -5,6 +5,7 @@ import React from 'react';
 import Breadcrumb from '../../components/Breadcrumb';
 import SignupForm from '../../components/Form/SignupForm';
 import NavLink from '../../components/Nav/NavLink';
+import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/useResponsive';
 import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
@@ -23,8 +24,8 @@ const Login = (props: Props) => {
       >
         <Breadcrumb
           links={[
-            { title: t('home'), href: '/' },
-            { title: t('sign_up'), href: '/signup' },
+            { title: t('home'), href: APP_ROUTES.home },
+            { title: t('sign_up'), href: APP_ROUTES.signup },
           ]}
           current={t('sign_up')}
         />
@@ -52,7 +53,7 @@ const Login = (props: Props) => {
           >
             <NavLink
               title={t('already_have_an_account')}
-              href='/login'
+              href={APP_ROUTES.login}
               textProps={{ color: 'orange.400' }}
               isSpacing={false}
             />

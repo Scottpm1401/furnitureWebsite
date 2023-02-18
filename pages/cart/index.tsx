@@ -20,6 +20,7 @@ import React, { useMemo } from 'react';
 import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
 import Container from '../../components/Container';
+import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/useResponsive';
 import AuthProvider from '../../layout/AuthProvider';
 import Page from '../../layout/Page';
@@ -95,8 +96,8 @@ const Cart = (props: Props) => {
       <Page direction='column' title='Cart'>
         <Breadcrumb
           links={[
-            { title: t('home'), href: '/' },
-            { title: t('cart'), href: '/cart' },
+            { title: t('home'), href: APP_ROUTES.home },
+            { title: t('cart'), href: APP_ROUTES.cart },
           ]}
           current={t('cart')}
         />
@@ -309,7 +310,7 @@ const Cart = (props: Props) => {
             )}
 
             <Flex w='full' justifyContent='space-between' mt='1rem'>
-              <Link href='/products'>
+              <Link href={APP_ROUTES.products}>
                 <Button colorScheme='orange' size='sm'>
                   {t('continue_shopping')}
                 </Button>
@@ -367,7 +368,7 @@ const Cart = (props: Props) => {
                     ${floor(cartTotal, 2)}
                   </Text>
                 </Flex>
-                <Link style={{ marginTop: '1rem' }} href='/cart/checkout'>
+                <Link style={{ marginTop: '1rem' }} href={APP_ROUTES.checkout}>
                   <Button colorScheme='orange' w='full'>
                     {t('checkout')}
                   </Button>
@@ -386,7 +387,7 @@ const Cart = (props: Props) => {
             <Text fontSize='3xl' fontWeight='semibold'>
               {t('empty_cart')}
             </Text>
-            <Link href='/products'>
+            <Link href={APP_ROUTES.products}>
               <Button mt='1rem' colorScheme='orange' size='lg'>
                 {t('fill_in')}
               </Button>

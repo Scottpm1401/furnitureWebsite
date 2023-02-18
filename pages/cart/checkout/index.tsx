@@ -15,6 +15,7 @@ import React from 'react';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Container from '../../../components/Container';
 import CheckoutForm from '../../../components/Form/CheckoutForm';
+import { APP_ROUTES } from '../../../constant';
 import { usePayment } from '../../../hooks/usePayment';
 import { useResponsive } from '../../../hooks/useResponsive';
 import AuthProvider from '../../../layout/AuthProvider';
@@ -44,9 +45,9 @@ const Checkout = (props: Props) => {
       <Page direction='column' title='Checkout'>
         <Breadcrumb
           links={[
-            { title: t('home'), href: '/' },
-            { title: t('cart'), href: '/cart' },
-            { title: t('checkout'), href: '/cart/checkout' },
+            { title: t('home'), href: APP_ROUTES.home },
+            { title: t('cart'), href: APP_ROUTES.cart },
+            { title: t('checkout'), href: APP_ROUTES.checkout },
           ]}
           current={t('checkout')}
         />
@@ -68,7 +69,7 @@ const Checkout = (props: Props) => {
               ) : (
                 <Stack w='full' mt='0.5rem' spacing={4} alignItems='center'>
                   <Text fontSize='xl'>{t('empty_checkout')}</Text>
-                  <Link href='/products'>
+                  <Link href={APP_ROUTES.products}>
                     <Button colorScheme='orange'>
                       <Text>{t('fill_in')}</Text>
                     </Button>

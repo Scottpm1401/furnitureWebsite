@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/useResponsive';
 import SearchIcon from '../../public/svg/search.svg';
 import ShoppingBagIcon from '../../public/svg/shopping_bag.svg';
@@ -60,7 +61,6 @@ const ProductCard = ({
       h={isHorizontal && isMobile ? '460px' : responsive}
       templateColumns={isHorizontal && !isMobile ? '360px 1fr' : 'auto'}
       templateRows={isHorizontal ? 'auto' : '1fr auto'}
-      onClick={() => isLoaded && router.push(`/products/${_id}`)}
       {...props}
     >
       <Skeleton
@@ -82,6 +82,7 @@ const ProductCard = ({
               z-index: 1;
             }
           `}
+          onClick={() => isLoaded && router.push(APP_ROUTES.product(_id))}
         >
           <Image src={image} fill alt={title} />
           <Flex
@@ -101,7 +102,6 @@ const ProductCard = ({
             gap='1rem'
           >
             <PopupButton
-              href='#'
               onClick={(e) => {
                 e.stopPropagation();
               }}
@@ -109,9 +109,9 @@ const ProductCard = ({
               <ShoppingBagIcon style={{ fill: 'none', stroke: 'white' }} />
             </PopupButton>
             <PopupButton
-              href={`/products/${_id}`}
               onClick={(e) => {
                 e.stopPropagation();
+                router.push(APP_ROUTES.product(_id));
               }}
             >
               <SearchIcon style={{ fill: 'none', stroke: 'white' }} />

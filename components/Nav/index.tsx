@@ -16,6 +16,7 @@ import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/useResponsive';
 import AccountIcon from '../../public/svg/account.svg';
 import LanguageIcon from '../../public/svg/language.svg';
@@ -75,7 +76,7 @@ const Nav = (props: Props) => {
     if (refreshToken) {
       const data = await logout({ refreshToken });
       if (data.success) {
-        await router.push('/');
+        await router.push(APP_ROUTES.home);
         dispatch(actions.auth.reset());
         dispatch(actions.user.reset());
       }
@@ -85,7 +86,7 @@ const Nav = (props: Props) => {
   };
 
   useEffect(() => {
-    if (router.pathname === '/') {
+    if (router.pathname === APP_ROUTES.home) {
       setIsTop(true);
       if (document) {
         document.addEventListener('scroll', scrollEvent);
@@ -140,17 +141,17 @@ const Nav = (props: Props) => {
               <Flex alignItems='center'>
                 <NavLink
                   title={t('home')}
-                  href='/'
+                  href={APP_ROUTES.home}
                   textProps={{ color: isTop ? 'white' : 'black' }}
                 />
                 <NavLink
                   title={t('about')}
-                  href='/about'
+                  href={APP_ROUTES.about}
                   textProps={{ color: isTop ? 'white' : 'black' }}
                 />
                 <NavLink
                   title={t('products')}
-                  href='/products'
+                  href={APP_ROUTES.products}
                   textProps={{ color: isTop ? 'white' : 'black' }}
                 />
               </Flex>
@@ -194,7 +195,7 @@ const Nav = (props: Props) => {
                 </Popover>
                 {user._id ? (
                   <>
-                    <Link href='/cart'>
+                    <Link href={APP_ROUTES.cart}>
                       <Button
                         w='27px'
                         h='30px'
@@ -249,7 +250,7 @@ const Nav = (props: Props) => {
                           }}
                           spacing={4}
                         >
-                          <Link href='/profile'>
+                          <Link href={APP_ROUTES.profile}>
                             <Stack
                               direction='row'
                               onClick={onPopoverToggle}
@@ -261,7 +262,7 @@ const Nav = (props: Props) => {
                               </Text>
                             </Stack>
                           </Link>
-                          <Link href='/ordered'>
+                          <Link href={APP_ROUTES.ordered}>
                             <Stack
                               direction='row'
                               onClick={onPopoverToggle}
@@ -288,7 +289,7 @@ const Nav = (props: Props) => {
                   </>
                 ) : (
                   <>
-                    <Link href='/login'>
+                    <Link href={APP_ROUTES.login}>
                       <Button
                         variant='ghost'
                         ml='1rem'
@@ -299,7 +300,7 @@ const Nav = (props: Props) => {
                         </Text>
                       </Button>
                     </Link>
-                    <Link href='/signup'>
+                    <Link href={APP_ROUTES.signup}>
                       <Button
                         variant='outline'
                         ml='0.5rem'
@@ -316,7 +317,7 @@ const Nav = (props: Props) => {
             </>
           ) : (
             <Flex justifyContent='flex-end'>
-              <Link href='/profile'>
+              <Link href={APP_ROUTES.profile}>
                 <Flex w='36px' h='36px'>
                   <Avatar
                     w='full'

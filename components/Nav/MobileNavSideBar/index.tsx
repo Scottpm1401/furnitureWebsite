@@ -17,6 +17,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useRef, useState } from 'react';
 
+import { APP_ROUTES } from '../../../constant';
 import CloseIcon from '../../../public/svg/close.svg';
 import Facebook from '../../../public/svg/facebook.svg';
 import HomeIcon from '../../../public/svg/home.svg';
@@ -89,7 +90,7 @@ const MobileNavSideBar = ({
               justifyContent='space-between'
             >
               {user._id ? (
-                <Link href='/profile' onClick={onClose}>
+                <Link href={APP_ROUTES.profile} onClick={onClose}>
                   <Flex alignItems='center'>
                     <Flex mr='0.5rem' w='48px' h='48px'>
                       <Avatar
@@ -108,7 +109,7 @@ const MobileNavSideBar = ({
                   </Flex>
                 </Link>
               ) : (
-                <Link href='/' onClick={onClose}>
+                <Link href={APP_ROUTES.home} onClick={onClose}>
                   <Flex height='48px' sx={{ svg: { fill: 'white' } }}>
                     <Logo id='sidebar_logo' />
                   </Flex>
@@ -133,7 +134,7 @@ const MobileNavSideBar = ({
             >
               <NavLink
                 title={t('home')}
-                href='/'
+                href={APP_ROUTES.home}
                 textProps={{
                   color: 'black',
                   fontSize: 'xl',
@@ -149,7 +150,7 @@ const MobileNavSideBar = ({
               />
               <NavLink
                 title={t('about')}
-                href='/about'
+                href={APP_ROUTES.about}
                 textProps={{
                   color: 'black',
                   fontSize: 'xl',
@@ -167,7 +168,7 @@ const MobileNavSideBar = ({
 
               <NavLink
                 title={t('products')}
-                href='/products'
+                href={APP_ROUTES.products}
                 textProps={{
                   color: 'black',
                   fontSize: 'xl',
@@ -184,7 +185,7 @@ const MobileNavSideBar = ({
                 <>
                   <NavLink
                     title={t('cart')}
-                    href='/cart'
+                    href={APP_ROUTES.cart}
                     textProps={{
                       color: 'black',
                       fontSize: 'xl',
@@ -216,7 +217,7 @@ const MobileNavSideBar = ({
                   />
                   <NavLink
                     title={t('your_ordered')}
-                    href='/ordered'
+                    href={APP_ROUTES.ordered}
                     textProps={{
                       color: 'black',
                       fontSize: 'xl',
@@ -305,7 +306,7 @@ const MobileNavSideBar = ({
                 <>
                   <NavLink
                     title={t('sign_in')}
-                    href='/login'
+                    href={APP_ROUTES.login}
                     textProps={{
                       color: 'black',
                       fontSize: 'xl',
@@ -325,7 +326,7 @@ const MobileNavSideBar = ({
                   />
                   <NavLink
                     title={t('sign_up')}
-                    href='/signup'
+                    href={APP_ROUTES.signup}
                     textProps={{
                       color: 'black',
                       fontSize: 'xl',

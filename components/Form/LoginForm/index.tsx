@@ -13,6 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
+import { APP_ROUTES } from '../../../constant';
 import { LoginRequest } from '../../../models/api/user';
 import Eye from '../../../public/svg/eye.svg';
 import EyeOff from '../../../public/svg/eye_off.svg';
@@ -61,7 +62,7 @@ const LoginForm = () => {
       dispatch(actions.auth.setAuth(data));
       const userProfile = await getProfile();
       dispatch(actions.user.setUser(userProfile));
-      await router.push('/');
+      await router.push(APP_ROUTES.home);
     } catch (err) {
       if (isAxiosError(err)) setErrorMessage(t(err.response?.data.message));
     }
@@ -105,7 +106,7 @@ const LoginForm = () => {
                 <Text>{t('password')}</Text>
                 <NavLink
                   title={t('forgot_password')}
-                  href='#'
+                  href={APP_ROUTES.forgotPassword}
                   textProps={{ color: 'orange.400', fontSize: 'smaller' }}
                   isSpacing={false}
                 />

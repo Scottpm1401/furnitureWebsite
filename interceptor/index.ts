@@ -1,6 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 
+import { APP_ROUTES } from '../constant';
 import { API } from '../constant/api';
 import { actions } from '../redux/reducer';
 import { AuthState } from '../redux/reducers/authReducer';
@@ -53,7 +54,7 @@ axiosClient.interceptors.response.use(
       return Promise.reject(err);
     }
     const originalConfig = err.config;
-    if (originalConfig.url !== '/login' && err.response) {
+    if (originalConfig.url !== APP_ROUTES.login && err.response) {
       // Access Token was expired
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;

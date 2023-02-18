@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import { APP_ROUTES } from '../../constant';
 import ShieldIcon from '../../public/svg/shield.svg';
 import UserIcon from '../../public/svg/user.svg';
 import UserAdvanceIcon from '../../public/svg/user_advance.svg';
@@ -20,19 +21,19 @@ type settingType = {
 const settingList: settingType[] = [
   {
     title: 'public_profile',
-    path: '/profile',
+    path: APP_ROUTES.profile,
     icon: <UserIcon />,
     pageTitle: 'Your Profile',
   },
   {
     title: 'additional_info',
-    path: '/profile/additional_info',
+    path: APP_ROUTES.additionalInfo,
     icon: <UserAdvanceIcon />,
     pageTitle: 'Profile Advanced',
   },
   {
     title: 'password_and_authentication',
-    path: '/profile/authentication',
+    path: APP_ROUTES.authentication,
     icon: <ShieldIcon />,
     pageTitle: 'Authentication',
   },

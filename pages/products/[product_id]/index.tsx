@@ -17,7 +17,7 @@ import { Rating } from 'react-simple-star-rating';
 import Breadcrumb from '../../../components/Breadcrumb';
 import ColorButton from '../../../components/ColorButton';
 import Container from '../../../components/Container';
-import { STAR_COLOR } from '../../../constant';
+import { APP_ROUTES, STAR_COLOR } from '../../../constant';
 import { useResponsive } from '../../../hooks/useResponsive';
 import NotAuthProvider from '../../../layout/NotAuthProvider';
 import Page from '../../../layout/Page';
@@ -121,7 +121,7 @@ const Product = ({ ...props }: Props) => {
         );
       }
 
-      router.push('/cart');
+      router.push(APP_ROUTES.cart);
     } catch (error) {}
   };
 
@@ -134,15 +134,15 @@ const Product = ({ ...props }: Props) => {
       <Page w='full' direction='column' title={product?.title || 'Product'}>
         <Breadcrumb
           links={[
-            { title: t('home'), href: '/' },
-            { title: t('products'), href: '/products' },
-            { title: product?.title || '', href: '/' },
+            { title: t('home'), href: APP_ROUTES.home },
+            { title: t('products'), href: APP_ROUTES.products },
+            { title: product?.title || '', href: APP_ROUTES.home },
           ]}
           current={product?.title || ''}
         />
         <Container direction='column'>
           <Flex marginY='2.5rem'>
-            <Link href='/products'>
+            <Link href={APP_ROUTES.products}>
               <Button colorScheme='orange'>
                 <Text>{t('back_to_products')}</Text>
               </Button>
@@ -323,7 +323,7 @@ const Product = ({ ...props }: Props) => {
                         {t('add_to_cart')}
                       </Button>
                     ) : (
-                      <Link href='/login'>
+                      <Link href={APP_ROUTES.login}>
                         <Button colorScheme='orange'>
                           {t('please_login')}
                         </Button>

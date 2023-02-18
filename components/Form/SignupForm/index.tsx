@@ -15,6 +15,7 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import CustomDatePicker from '../../../components/CustomeDatePicker';
+import { APP_ROUTES } from '../../../constant';
 import Eye from '../../../public/svg/eye.svg';
 import EyeOff from '../../../public/svg/eye_off.svg';
 import { useAppDispatch } from '../../../redux/hooks';
@@ -65,7 +66,7 @@ const SignupForm = () => {
       dispatch(actions.auth.setAuth(data));
       const userProfile = await getProfile();
       dispatch(actions.user.setUser(userProfile));
-      await router.push('/');
+      await router.push(APP_ROUTES.home);
     } catch (err) {
       if (isAxiosError(err)) setErrorMessage(t(err.response?.data.message));
     }

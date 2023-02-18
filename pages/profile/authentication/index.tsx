@@ -4,6 +4,7 @@ import React from 'react';
 
 import Breadcrumb from '../../../components/Breadcrumb';
 import SecurityProfile from '../../../components/Form/Profile/Security';
+import { APP_ROUTES } from '../../../constant';
 import AuthProvider from '../../../layout/AuthProvider';
 import Page from '../../../layout/Page';
 import ProfileContainer from '../../../layout/ProfileContainer';
@@ -17,11 +18,11 @@ const AuthenticationProfile = (props: Props) => {
       <Page alignItems='center' justifyContent='center' direction='column'>
         <Breadcrumb
           links={[
-            { title: t('home'), href: '/' },
-            { title: t('profile'), href: '/profile' },
+            { title: t('home'), href: APP_ROUTES.home },
+            { title: t('profile'), href: APP_ROUTES.profile },
             {
               title: t('password_and_authentication'),
-              href: '/profile/authentication',
+              href: APP_ROUTES.authentication,
             },
           ]}
           current={t('password_and_authentication')}

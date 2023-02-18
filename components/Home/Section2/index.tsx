@@ -4,6 +4,7 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import { APP_ROUTES } from '../../../constant';
 import { ProductType } from '../../../models/product';
 import AshleyIcon from '../../../public/svg/ashley.svg';
 import HabitatIcon from '../../../public/svg/habitat.svg';
@@ -58,7 +59,7 @@ const Section2 = ({ products }: Props) => {
           ))}
         </Grid>
         <Flex mt='5rem' justifyContent='center'>
-          <Link href='/products'>
+          <Link href={APP_ROUTES.products}>
             <Button
               variant='outline'
               _hover={{

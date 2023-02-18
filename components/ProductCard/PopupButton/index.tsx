@@ -1,34 +1,23 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
-import Link from 'next/link';
 
-type PopupButtonType = {
-  href: string;
-} & FlexProps;
+type PopupButtonType = {} & FlexProps;
 
-const PopupButton = ({ href, children, ...props }: PopupButtonType) => {
+const PopupButton = ({ children, ...props }: PopupButtonType) => {
   return (
-    <Link
-      style={{
-        width: 60,
-        height: 60,
+    <Flex
+      w='60px'
+      h='60px'
+      p='16px'
+      borderRadius='full'
+      alignItems='center'
+      justifyContent='center'
+      _hover={{
+        background: 'rgba(0,0,0,0.25)',
       }}
-      href={href}
+      {...props}
     >
-      <Flex
-        w='full'
-        h='full'
-        p='16px'
-        borderRadius='full'
-        alignItems='center'
-        justifyContent='center'
-        _hover={{
-          background: 'rgba(0,0,0,0.25)',
-        }}
-        {...props}
-      >
-        {children}
-      </Flex>
-    </Link>
+      {children}
+    </Flex>
   );
 };
 

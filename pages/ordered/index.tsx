@@ -22,7 +22,7 @@ import { Rating } from 'react-simple-star-rating';
 import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
 import Container from '../../components/Container';
-import { STAR_COLOR } from '../../constant';
+import { APP_ROUTES, STAR_COLOR } from '../../constant';
 import { useResponsive } from '../../hooks/useResponsive';
 import AuthProvider from '../../layout/AuthProvider';
 import Page from '../../layout/Page';
@@ -71,10 +71,10 @@ const Ordered = (props: Props) => {
       >
         <Breadcrumb
           links={[
-            { title: t('home'), href: '/' },
+            { title: t('home'), href: APP_ROUTES.home },
             {
               title: t('your_ordered'),
-              href: '/ordered',
+              href: APP_ROUTES.ordered,
             },
           ]}
           current={t('your_ordered')}
@@ -348,7 +348,7 @@ const Ordered = (props: Props) => {
                 {t('empty_orders')}
               </Text>
               <Stack>
-                <Link href='products'>
+                <Link href={APP_ROUTES.products}>
                   <Button colorScheme='orange'>{t('continue_shopping')}</Button>
                 </Link>
               </Stack>
