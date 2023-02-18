@@ -1,20 +1,29 @@
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import Loader from '../../components/Loader';
+import { APP_ROUTES } from '../../constant';
 import { useUser } from '../../hooks/useUser';
-import { useAppSelector } from '../../redux/hooks';
-import { selectors } from '../../redux/reducer';
 
 type Props = { children: JSX.Element };
 
 const NotAuthProvider = ({ children }: Props) => {
-  const { isLoading } = useUser();
-
+  const router = useRouter();
+  const { user, isLoading } = useUser();
   const [verified, setVerified] = React.useState(false);
+
   useEffect(() => {
     if (isLoading) return;
+    if (
+      user &&
+      (router.pathname === APP_ROUTES.login ||
+        router.pathname === APP_ROUTES.signup)
+    ) {
+      router.push(APP_ROUTES.home);
+      return;
+    }
     setVerified(true);
-  }, [isLoading]);
+  }, [isLoading, router, user]);
 
   if (verified) return children;
 

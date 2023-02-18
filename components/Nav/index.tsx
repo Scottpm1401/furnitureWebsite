@@ -19,6 +19,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/useResponsive';
 import AccountIcon from '../../public/svg/account.svg';
+import CompanyIcon from '../../public/svg/company.svg';
 import LanguageIcon from '../../public/svg/language.svg';
 import LogoutIcon from '../../public/svg/log-out.svg';
 import Logo from '../../public/svg/logo.svg';
@@ -59,6 +60,7 @@ const Nav = (props: Props) => {
     await setLanguage(lang);
     setIsOpenLanguage(false);
   };
+  const isAdmin = useAppSelector(selectors.user.isAdmin);
 
   const scrollEvent = useCallback(() => {
     const body = document.body;
@@ -274,6 +276,18 @@ const Nav = (props: Props) => {
                               </Text>
                             </Stack>
                           </Link>
+                          {isAdmin && (
+                            <Link href={APP_ROUTES.cms}>
+                              <Stack
+                                direction='row'
+                                onClick={onPopoverToggle}
+                                w='full'
+                              >
+                                <CompanyIcon />
+                                <Text fontWeight='medium'>CMS</Text>
+                              </Stack>
+                            </Link>
+                          )}
 
                           <Stack
                             cursor='pointer'

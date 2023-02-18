@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript, Stack } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -30,11 +30,13 @@ const App = ({ Component, pageProps }: AppProps) => {
             <title>Comfysloth</title>
             <link rel='icon' href='/favicon.svg' />
           </Head>
-          {!isInCms ? <Nav /> : <CmsSideBar />}
+          <Stack spacing={0} direction={isInCms ? 'row' : 'column'}>
+            {!isInCms ? <Nav /> : <CmsSideBar />}
 
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-          <Component {...pageProps} />
-          {!isInCms && <Footer />}
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+            <Component {...pageProps} />
+            {!isInCms && <Footer />}
+          </Stack>
         </ChakraProvider>
       </PersistGate>
     </Provider>

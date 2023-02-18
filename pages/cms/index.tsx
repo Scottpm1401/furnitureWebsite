@@ -1,7 +1,7 @@
+import { Stack } from '@chakra-ui/react';
 import React from 'react';
 
 import AdminAuthProvider from '../../layout/AdminAuthProvider';
-import CmsSideBar from '../../layout/CmsSideBar';
 import Page from '../../layout/Page';
 
 type Props = {};
@@ -9,8 +9,8 @@ type Props = {};
 const Cms = (props: Props) => {
   return (
     <AdminAuthProvider>
-      <Page direction='row' title='CMS' minH='100vh'>
-        {/* <CmsSideBar /> */}
+      <Page direction='row' title='Dashboard' minH='100vh'>
+        Dashboard
       </Page>
     </AdminAuthProvider>
   );
