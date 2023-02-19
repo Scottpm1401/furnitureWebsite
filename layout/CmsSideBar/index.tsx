@@ -22,12 +22,15 @@ import PackageIcon from '../../public/svg/package.svg';
 import SettingsIcon from '../../public/svg/settings.svg';
 import TaskIcon from '../../public/svg/task.svg';
 import UserIcon from '../../public/svg/user.svg';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { actions, selectors } from '../../redux/reducer';
 
 type Props = {};
 
 const CmsSideBar = (props: Props) => {
   const router = useRouter();
-  const [isCollapse, setIsCollapse] = useState(false);
+  const isCollapse = useAppSelector(selectors.global.getIsCollapse);
+  const dispatch = useAppDispatch();
   const { t, lang } = useTranslation();
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
 
@@ -55,7 +58,7 @@ const CmsSideBar = (props: Props) => {
             h='40px'
             _hover={{ bg: 'blackAlpha.200' }}
             borderRadius='full'
-            onClick={() => setIsCollapse(!isCollapse)}
+            onClick={() => dispatch(actions.global.setIsCollapse(!isCollapse))}
           >
             <MenuIcon style={{ stroke: 'white' }} />
           </Button>
