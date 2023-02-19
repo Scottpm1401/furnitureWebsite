@@ -1,4 +1,5 @@
 import { Avatar, Button, Flex, Input, Text, useToast } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
@@ -27,58 +28,71 @@ const GeneralProfile = () => {
   const { isMobile } = useResponsive();
 
   const handleUpdateProfile = async (values: GeneralProfileType) => {
-    setIsLoading(true);
-    if (values.avatar) {
-      const formData = new FormData();
-      let signatureParam: GetSignatureType = {};
-      if (user.info?.avatar) {
-        const publicId = user.info.avatar.slice(
-          user.info.avatar.indexOf('furniture')
+    try {
+      setIsLoading(true);
+      if (values.avatar) {
+        const formData = new FormData();
+        let signatureParam: GetSignatureType = {};
+        if (user.info?.avatar) {
+          const publicId = user.info.avatar.slice(
+            user.info.avatar.indexOf('furniture')
+          );
+          signatureParam.public_id = publicId;
+          formData.append('public_id', publicId);
+        } else {
+          const folder = 'furniture/users';
+          signatureParam.folder = folder;
+          formData.append('folder', folder);
+        }
+        const { signature, timestamp } = await getSignature(signatureParam);
+        formData.append('file', values.avatar);
+        formData.append(
+          'api_key',
+          process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || ''
         );
-        signatureParam.public_id = publicId;
-        formData.append('public_id', publicId);
+        formData.append('timestamp', timestamp.toString());
+        formData.append('signature', signature);
+        formData.append(
+          'upload_preset',
+          process.env.NEXT_PUBLIC_CLOUDINARY_PRESET || ''
+        );
+        const { public_id, version } = await uploadUserAva(formData);
+        const updatedUser = await updateUser({
+          username: values.username,
+          displayName: values.displayName,
+          info: {
+            ...user.info,
+            avatar: version ? `v${version}/${public_id}` : public_id,
+          },
+        });
+        dispatch(actions.user.setUser(updatedUser));
       } else {
-        const folder = 'furniture/users';
-        signatureParam.folder = folder;
-        formData.append('folder', folder);
+        const updatedUser = await updateUser({
+          username: values.username,
+          displayName: values.displayName,
+        });
+        dispatch(actions.user.setUser(updatedUser));
       }
-      const { signature, timestamp } = await getSignature(signatureParam);
-      formData.append('file', values.avatar);
-      formData.append(
-        'api_key',
-        process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || ''
-      );
-      formData.append('timestamp', timestamp.toString());
-      formData.append('signature', signature);
-      formData.append(
-        'upload_preset',
-        process.env.NEXT_PUBLIC_CLOUDINARY_PRESET || ''
-      );
-
-      const { public_id, version } = await uploadUserAva(formData);
-      const updatedUser = await updateUser({
-        username: values.username,
-        displayName: values.displayName,
-        info: {
-          ...user.info,
-          avatar: version ? `v${version}/${public_id}` : public_id,
-        },
+      toast({
+        title: t('update_profile_success'),
+        status: 'success',
+        duration: 5000,
+        position: 'top-right',
       });
-      dispatch(actions.user.setUser(updatedUser));
-    } else {
-      const updatedUser = await updateUser({
-        username: values.username,
-        displayName: values.displayName,
-      });
-      dispatch(actions.user.setUser(updatedUser));
+    } catch (error) {
+      if (isAxiosError(error)) {
+        toast({
+          title: error.response?.data.error.message
+            ? t('error.upload_size')
+            : error.response?.data.message,
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+      }
+    } finally {
+      setIsLoading(false);
     }
-    toast({
-      title: t('update_profile_success'),
-      status: 'success',
-      duration: 5000,
-      position: 'top-right',
-    });
-    setIsLoading(false);
   };
 
   return (

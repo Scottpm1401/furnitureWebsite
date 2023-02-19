@@ -156,5 +156,8 @@
   "rating": "Rating",
   "ordered": "Ordered",
   "users": "Users",
-  "dashboard": "Dashboard"
+  "dashboard": "Dashboard",
+  "error": {
+    "upload_size": "Failed to upload image, please make sure your image less than 10MB."
+  }
 }

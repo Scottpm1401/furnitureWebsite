@@ -156,5 +156,8 @@
   "rating": "Đánh giá",
   "ordered": "Hoá đơn",
   "users": "Người dùng",
-  "dashboard": "Tổng quát"
+  "dashboard": "Tổng quát",
+  "error": {
+    "upload_size": "Đăng tải hình thất bại, vui lòng đăng tải hình dưới 10MB."
+  }
 }
