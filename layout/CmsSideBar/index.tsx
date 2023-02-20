@@ -1,6 +1,5 @@
 import {
   Button,
-  Flex,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -10,7 +9,7 @@ import {
 import { useRouter } from 'next/router';
 import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import SideBarItem from '../../components/SideBarItem';
 import { APP_ROUTES } from '../../constant';
@@ -43,7 +42,7 @@ const CmsSideBar = (props: Props) => {
     <Stack
       w={isCollapse ? '64px' : '260px'}
       transition='all 200ms ease-in-out'
-      bg='orange.400'
+      bg='orange.300'
       paddingY='12px'
       minH='100vh'
       overflow='hidden'

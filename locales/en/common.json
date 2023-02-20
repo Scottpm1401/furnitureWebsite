@@ -1,4 +1,7 @@
 {
+  "error": {
+    "upload_size": "Failed to upload image, please make sure your image less than 10MB."
+  },
   "view_more": "View More",
   "better_interiors": "Better Interior",
   "beauty_indoors": "Beauty Indoors",
@@ -157,7 +160,7 @@
   "ordered": "Ordered",
   "users": "Users",
   "dashboard": "Dashboard",
-  "error": {
-    "upload_size": "Failed to upload image, please make sure your image less than 10MB."
-  }
+  "users_list": "Users List",
+  "products_list": "Products List",
+  "ordered_list": "Ordered List"
 }

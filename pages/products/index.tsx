@@ -40,20 +40,6 @@ export const getStaticProps = async () => {
   };
 };
 
-const LoadingProductCard = (layout: Layout) => {
-  return (
-    <ProductCard
-      title='loading'
-      image={'/temp'}
-      price={99.99}
-      isLoaded={true}
-      isHorizontal={layout === Layout.list}
-      description='Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal'
-      _id='loading'
-    />
-  );
-};
-
 const Products = ({
   productsList,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {

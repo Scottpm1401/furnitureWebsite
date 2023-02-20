@@ -1,4 +1,7 @@
 {
+  "error": {
+    "upload_size": "Đăng tải hình thất bại, vui lòng đăng tải hình dưới 10MB."
+  },
   "view_more": "Xem Thêm",
   "better_interiors": "Tốt từ bên trong",
   "beauty_indoors": "Đẹp từ bên trong",
@@ -157,7 +160,7 @@
   "ordered": "Hoá đơn",
   "users": "Người dùng",
   "dashboard": "Tổng quát",
-  "error": {
-    "upload_size": "Đăng tải hình thất bại, vui lòng đăng tải hình dưới 10MB."
-  }
+  "users_list": "Danh sách người dùng",
+  "products_list": "Danh sách hàng hoá",
+  "ordered_list": "Danh sách hoá đơn"
 }

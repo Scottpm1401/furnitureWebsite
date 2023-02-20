@@ -10,14 +10,12 @@ import { Elements } from '@stripe/react-stripe-js';
 import { Appearance, loadStripe } from '@stripe/stripe-js';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
 
 import Breadcrumb from '../../../components/Breadcrumb';
 import Container from '../../../components/Container';
 import CheckoutForm from '../../../components/Form/CheckoutForm';
 import { APP_ROUTES } from '../../../constant';
 import { usePayment } from '../../../hooks/usePayment';
-import { useResponsive } from '../../../hooks/useResponsive';
 import AuthProvider from '../../../layout/AuthProvider';
 import Page from '../../../layout/Page';
 
@@ -37,7 +35,7 @@ const appearance: Appearance = {
 
 const Checkout = (props: Props) => {
   const { t } = useTranslation();
-  const { isSmallDevice } = useResponsive();
+
   const { clientSecret, isLoading } = usePayment();
 
   return (
