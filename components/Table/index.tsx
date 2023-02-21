@@ -11,6 +11,7 @@ import {
   Text,
   Thead,
 } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import NavigateBeforeIcon from '../../public/svg/arrow_left.svg';
@@ -23,6 +24,8 @@ type LabelDisplayedRowsProps = {
 };
 
 const LabelDisplayedRows = ({ from, to, count }: LabelDisplayedRowsProps) => {
+  const { t } = useTranslation();
+
   const calcFrom = () => {
     if (from === 0) return to > 0 ? from + 1 : from;
     return to === 0 ? 0 : from + 1;
@@ -33,7 +36,7 @@ const LabelDisplayedRows = ({ from, to, count }: LabelDisplayedRowsProps) => {
     return from + to;
   };
 
-  return <Text>{`${calcFrom()} - ${calcTo()} / ${count} line`}</Text>;
+  return <Text>{`${calcFrom()} - ${calcTo()} / ${count} ${t('result')}`}</Text>;
 };
 
 type Props = {
@@ -69,6 +72,8 @@ const Table = ({
     onChangeRowsPerPage,
   } = tablePaginationProps;
 
+  const { t } = useTranslation();
+
   return (
     <Stack
       bg='white'
@@ -88,7 +93,7 @@ const Table = ({
         spacing={3}
       >
         <Stack direction='row' spacing={1} alignItems='center'>
-          <Text>on 1 page</Text>
+          <Text>{t('on_1_page')}</Text>
           <Select
             onChange={(e) => onChangeRowsPerPage(+e.target.value)}
             value={rowsPerPage}
@@ -100,15 +105,17 @@ const Table = ({
               </option>
             ))}
           </Select>
-          <Text>View threads</Text>
+          <Text>{t('view_threads')}</Text>
         </Stack>
         {labelDisplayedRows && <LabelDisplayedRows {...labelDisplayedRows} />}
         <Stack direction='row' spacing={2} alignItems='center'>
           <IconButton
+            p='6px'
             icon={<NavigateBeforeIcon style={{ stroke: 'black' }} />}
             {...prevButtonProps}
           />
           <IconButton
+            p='6px'
             icon={<NavigateNextIcon style={{ stroke: 'black' }} />}
             {...nextButtonProps}
           />

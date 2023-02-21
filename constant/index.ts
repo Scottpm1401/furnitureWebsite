@@ -23,4 +23,7 @@ export const APP_ROUTES = {
   cmsProducts: '/cms/products',
   cmsSettings: '/cms/settings',
   cmsUsers: '/cms/users',
+  cmsUser: (id: string) => `/cms/users/${id}`,
+  cmsProduct: (id: string) => `/cms/products/${id}`,
+  cmsOrder: (id: string) => `/cms/ordered/${id}`,
 };

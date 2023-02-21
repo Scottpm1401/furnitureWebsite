@@ -1,37 +1,36 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { UserType } from '../models/user';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { actions, selectors } from '../redux/reducer';
-import { getProfile } from '../services/user';
+import { getUserById } from '../services/cms';
 
 export const useUser = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const dispatch = useAppDispatch();
-  const storedUser = useAppSelector(selectors.user.selectUser);
   const [user, setUser] = useState<UserType>();
+  const userId = useMemo(
+    () => router.query.user_id?.toString(),
+    [router.query.user_id]
+  );
 
   const getUser = useCallback(async () => {
     try {
-      const currentUser = await getProfile();
+      const currentUser = await getUserById(userId || '');
       setUser(currentUser);
-      dispatch(actions.user.setUser(currentUser));
       return currentUser;
     } catch (err) {
       return undefined;
     } finally {
       setIsLoading(false);
     }
-  }, [dispatch]);
+  }, [userId]);
 
   useEffect(() => {
-    if (!storedUser._id) {
+    if (!router.isReady) return;
+    if (userId) {
       getUser();
-    } else {
-      setUser(storedUser);
-      setIsLoading(false);
     }
-  }, [getUser, storedUser]);
+  }, [getUser, router.isReady, userId]);
 
   return { isLoading, user };
 };

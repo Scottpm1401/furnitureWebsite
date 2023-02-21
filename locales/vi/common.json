@@ -162,5 +162,8 @@
   "dashboard": "Tổng quát",
   "users_list": "Danh sách người dùng",
   "products_list": "Danh sách hàng hoá",
-  "ordered_list": "Danh sách hoá đơn"
+  "ordered_list": "Danh sách hoá đơn",
+  "view_threads": "Chủ đề",
+  "on_1_page": "Trong 1 trang",
+  "result": "Kết quả"
 }

@@ -1,16 +1,17 @@
-import { Stack } from '@chakra-ui/react';
-import React from 'react';
+import useTranslation from 'next-translate/useTranslation';
 
 import AdminAuthProvider from '../../layout/AdminAuthProvider';
+import CmsContainer from '../../layout/CmsContainer';
 import Page from '../../layout/Page';
 
 type Props = {};
 
 const Cms = (props: Props) => {
+  const { t } = useTranslation();
   return (
     <AdminAuthProvider>
-      <Page direction='row' title='Dashboard' minH='100vh'>
-        Dashboard
+      <Page direction='row' w='full' title='Dashboard' minH='100vh'>
+        <CmsContainer title={t('dashboard')} />
       </Page>
     </AdminAuthProvider>
   );

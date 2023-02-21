@@ -3,6 +3,7 @@ import React from 'react';
 
 import AdminAuthProvider from '../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../layout/CmsContainer';
+import Page from '../../../layout/Page';
 
 type Props = {};
 
@@ -11,7 +12,9 @@ const CmsProducts = (props: Props) => {
 
   return (
     <AdminAuthProvider>
-      <CmsContainer title={t('products_list')} />
+      <Page direction='row' w='full' title='Products List'>
+        <CmsContainer title={t('products_list')} />
+      </Page>
     </AdminAuthProvider>
   );
 };

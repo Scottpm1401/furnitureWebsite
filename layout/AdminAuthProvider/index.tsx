@@ -3,13 +3,13 @@ import React, { useEffect } from 'react';
 
 import Loader from '../../components/Loader';
 import { APP_ROUTES } from '../../constant';
-import { useUser } from '../../hooks/useUser';
+import { useCurrentUser } from '../../hooks/useCurrentUser';
 
 type Props = { children: JSX.Element };
 
 const AdminAuthProvider = ({ children }: Props) => {
   const router = useRouter();
-  const { isLoading, user } = useUser();
+  const { isLoading, user } = useCurrentUser();
   const [verified, setVerified] = React.useState(false);
   useEffect(() => {
     if (isLoading) return;

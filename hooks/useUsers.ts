@@ -47,12 +47,16 @@ export const useUsers = () => {
         });
         setUsers(data);
         setTotal(total);
+        handleQuery({
+          offset: resOffset,
+          limit: resLimit,
+          search: resSearch,
+        });
         return data;
       } catch (err) {
         return undefined;
       } finally {
         setIsLoading(false);
-        handleQuery({ offset: resOffset, limit: resLimit, search: resSearch });
       }
     },
     [handleQuery]

@@ -3,13 +3,13 @@ import React, { useEffect } from 'react';
 
 import Loader from '../../components/Loader';
 import { APP_ROUTES } from '../../constant';
-import { useUser } from '../../hooks/useUser';
+import { useCurrentUser } from '../../hooks/useCurrentUser';
 
 type Props = { children: JSX.Element };
 
 const NotAuthProvider = ({ children }: Props) => {
   const router = useRouter();
-  const { user, isLoading } = useUser();
+  const { user, isLoading } = useCurrentUser();
   const [verified, setVerified] = React.useState(false);
 
   useEffect(() => {
