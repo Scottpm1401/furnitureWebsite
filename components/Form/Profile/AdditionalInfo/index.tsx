@@ -2,8 +2,7 @@ import { Button, Flex, Input, Select, Text, useToast } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useState } from 'react';
-import * as Yup from 'yup';
+import { useState } from 'react';
 
 import { countries } from '../../../../constant/country';
 import { useResponsive } from '../../../../hooks/useResponsive';
@@ -12,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';
 import { updateUser } from '../../../../services/user';
 import CustomDatePicker from '../../../CustomeDatePicker';
+import CustomInput from '../../../CustomInput';
 
 type AdditionalInfoType = {
   birthday: string;
@@ -83,23 +83,25 @@ const AdditionalInfoProfile = () => {
           >
             <Flex w='full'>
               <Flex w='full' direction='column'>
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('first_name')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.info?.first_name}
-                    onChange={handleChange('info.first_name')}
-                  />
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('first_name')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.info?.first_name,
+                    onChange: handleChange('info.first_name'),
+                  }}
+                />
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('last_name')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.info?.last_name}
-                    onChange={handleChange('info.last_name')}
-                  />
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('last_name')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.info?.last_name,
+                    onChange: handleChange('info.last_name'),
+                  }}
+                />
 
                 <Flex mt='1.5rem' direction='column' w='full'>
                   <Text fontWeight='semibold'>{t('birthday')}</Text>
@@ -112,14 +114,15 @@ const AdditionalInfoProfile = () => {
                   />
                 </Flex>
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('phone')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.info?.phone}
-                    onChange={handleChange('info.phone')}
-                  />
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('phone')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.info?.phone,
+                    onChange: handleChange('info.phone'),
+                  }}
+                />
 
                 <Flex mt='1.5rem' direction='column' w='full'>
                   <Text fontWeight='semibold'>{t('gender')}</Text>
@@ -151,41 +154,45 @@ const AdditionalInfoProfile = () => {
                   </Select>
                 </Flex>
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('city')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.info?.address?.city}
-                    onChange={handleChange('info.address.city')}
-                  />
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('city')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.info?.address?.city,
+                    onChange: handleChange('info.address.city'),
+                  }}
+                />
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('state')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.info?.address?.state}
-                    onChange={handleChange('info.address.state')}
-                  />
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('state')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.info?.address?.state,
+                    onChange: handleChange('info.address.state'),
+                  }}
+                />
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('line1')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.info?.address?.line1}
-                    onChange={handleChange('info.address.line1')}
-                  />
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('line1')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.info?.address?.line1,
+                    onChange: handleChange('info.address.line1'),
+                  }}
+                />
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('line2')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.info?.address?.line2}
-                    onChange={handleChange('info.address.line2')}
-                  />
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('line2')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.info?.address?.line2,
+                    onChange: handleChange('info.address.line2'),
+                  }}
+                />
 
                 <Flex mt='2rem'>
                   <Button

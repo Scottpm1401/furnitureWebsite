@@ -22,6 +22,7 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { actions } from '../../../redux/reducer';
 import { signup } from '../../../services/auth';
 import { getProfile } from '../../../services/user';
+import CustomInput from '../../CustomInput';
 
 type SignupFormType = {
   displayName: string;
@@ -98,48 +99,61 @@ const SignupForm = () => {
         }) => (
           <Form style={{ width: '100%' }} onSubmit={handleSubmit}>
             <Flex direction='column' w='full'>
-              <Flex direction='column'>
-                <Text>{t('name')}</Text>
-                <Input
-                  mt='0.5rem'
-                  value={values.displayName}
-                  onChange={handleChange('displayName')}
-                />
-                {errors.displayName && touched.displayName && (
-                  <Text fontSize='smaller' color='red'>
-                    {errors.displayName}
-                  </Text>
-                )}
-              </Flex>
+              <CustomInput
+                title={t('name')}
+                textProps={{ fontWeight: 'normal' }}
+                inputProps={{
+                  mt: '0.5rem',
+                  value: values.displayName,
+                  onChange: handleChange('displayName'),
+                }}
+                error={
+                  errors.displayName &&
+                  touched.displayName && (
+                    <Text fontSize='smaller' color='red'>
+                      {errors.displayName}
+                    </Text>
+                  )
+                }
+              />
 
-              <Flex direction='column' mt='0.5rem'>
-                <Text>{t('username')}</Text>
-                <Input
-                  mt='0.5rem'
-                  value={values.username}
-                  onChange={handleChange('username')}
-                />
-                {errors.username && touched.username && (
-                  <Text fontSize='smaller' color='red'>
-                    {errors.username}
-                  </Text>
-                )}
-              </Flex>
+              <CustomInput
+                mt='0.5rem'
+                title={t('username')}
+                textProps={{ fontWeight: 'normal' }}
+                inputProps={{
+                  mt: '0.5rem',
+                  value: values.username,
+                  onChange: handleChange('username'),
+                }}
+                error={
+                  errors.username &&
+                  touched.username && (
+                    <Text fontSize='smaller' color='red'>
+                      {errors.username}
+                    </Text>
+                  )
+                }
+              />
 
-              <Flex direction='column' mt='0.5rem'>
-                <Text>{t('email')}</Text>
-                <Input
-                  mt='0.5rem'
-                  type='email'
-                  value={values.email}
-                  onChange={handleChange('email')}
-                />
-                {errors.email && touched.email && (
-                  <Text fontSize='smaller' color='red'>
-                    {errors.email}
-                  </Text>
-                )}
-              </Flex>
+              <CustomInput
+                mt='0.5rem'
+                title={t('email')}
+                textProps={{ fontWeight: 'normal' }}
+                inputProps={{
+                  mt: '0.5rem',
+                  value: values.email,
+                  onChange: handleChange('email'),
+                }}
+                error={
+                  errors.email &&
+                  touched.email && (
+                    <Text fontSize='smaller' color='red'>
+                      {errors.email}
+                    </Text>
+                  )
+                }
+              />
 
               <Flex direction='column' mt='0.5rem'>
                 <Text>{t('birthday')}</Text>

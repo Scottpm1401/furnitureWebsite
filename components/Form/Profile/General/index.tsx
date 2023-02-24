@@ -12,6 +12,7 @@ import { actions, selectors } from '../../../../redux/reducer';
 import { getSignature, GetSignatureType } from '../../../../services/upload';
 import { updateUser, uploadUserAva } from '../../../../services/user';
 import { convertToBase64 } from '../../../../utils/common';
+import CustomInput from '../../../CustomInput';
 
 type GeneralProfileType = {
   avatar?: string;
@@ -136,36 +137,51 @@ const GeneralProfile = () => {
           >
             <Flex w='full' direction={isMobile ? 'column-reverse' : 'row'}>
               <Flex w='full' direction='column'>
-                <Flex direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('email')}</Text>
-                  <Input mt='0.5rem' value={user.email} disabled />
-                </Flex>
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('name')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.displayName}
-                    onChange={handleChange('displayName')}
-                  />
-                  {errors.displayName && touched.displayName && (
-                    <Text fontSize='smaller' color='red'>
-                      {errors.displayName}
-                    </Text>
-                  )}
-                </Flex>
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('username')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.username}
-                    onChange={handleChange('username')}
-                  />
-                  {errors.username && touched.username && (
-                    <Text fontSize='smaller' color='red'>
-                      {errors.username}
-                    </Text>
-                  )}
-                </Flex>
+                <CustomInput
+                  title={t('email')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: user.email,
+                  }}
+                  disabled
+                />
+
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('name')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.displayName,
+                    onChange: handleChange('displayName'),
+                  }}
+                  error={
+                    errors.displayName &&
+                    touched.displayName && (
+                      <Text fontSize='smaller' color='red'>
+                        {errors.displayName}
+                      </Text>
+                    )
+                  }
+                />
+
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('username')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.username,
+                    onChange: handleChange('username'),
+                  }}
+                  error={
+                    errors.username &&
+                    touched.username && (
+                      <Text fontSize='smaller' color='red'>
+                        {errors.username}
+                      </Text>
+                    )
+                  }
+                />
+
                 <Flex mt='2rem'>
                   <Button
                     isLoading={isLoading}

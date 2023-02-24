@@ -22,6 +22,7 @@ import { actions } from '../../../redux/reducer';
 import { login } from '../../../services/auth';
 import { getProfile } from '../../../services/user';
 import { validateEmail } from '../../../utils/common';
+import CustomInput from '../../CustomInput';
 import NavLink from '../../Nav/NavLink';
 
 type LoginFormType = {
@@ -87,17 +88,23 @@ const LoginForm = () => {
         {({ handleSubmit, handleChange, values, errors, touched }) => (
           <Form style={{ width: '100%' }} onSubmit={handleSubmit}>
             <Flex direction='column' w='full'>
-              <Text>{t('username_or_email')}</Text>
-              <Input
-                mt='0.5rem'
-                value={values.userinput}
-                onChange={handleChange('userinput')}
+              <CustomInput
+                title={t('username_or_email')}
+                textProps={{ fontWeight: 'normal' }}
+                inputProps={{
+                  mt: '0.5rem',
+                  value: values.userinput,
+                  onChange: handleChange('userinput'),
+                }}
+                error={
+                  errors.userinput &&
+                  touched.userinput && (
+                    <Text fontSize='smaller' color='red'>
+                      {errors.userinput}
+                    </Text>
+                  )
+                }
               />
-              {errors.userinput && touched.userinput && (
-                <Text fontSize='smaller' color='red'>
-                  {errors.userinput}
-                </Text>
-              )}
               <Flex
                 mt='0.5rem'
                 justifyContent='space-between'
