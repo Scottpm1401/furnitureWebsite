@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { actions, selectors } from '../../../redux/reducer';
 import { clearProductCart } from '../../../services/cart';
 import { confirmPayment } from '../../../services/payment';
+import CustomInput from '../../CustomInput';
 
 const CheckoutForm = () => {
   const router = useRouter();
@@ -113,47 +114,58 @@ const CheckoutForm = () => {
           <Form style={{ width: '100%' }} onSubmit={handleSubmit}>
             <Stack direction={isMobileOrTablet ? 'column' : 'row'} spacing={5}>
               <Flex direction='column' w='full'>
-                <Flex direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('name')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.name}
-                    onChange={handleChange('name')}
-                  />
-                  {errors.name && touched.name && (
-                    <Text fontSize='smaller' color='red'>
-                      {errors.name}
-                    </Text>
-                  )}
-                </Flex>
+                <CustomInput
+                  title={t('name')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.name,
+                    onChange: handleChange('name'),
+                  }}
+                  error={
+                    errors.name &&
+                    touched.name && (
+                      <Text fontSize='smaller' color='red'>
+                        {errors.name}
+                      </Text>
+                    )
+                  }
+                />
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('email')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.email}
-                    onChange={handleChange('email')}
-                  />
-                  {errors.email && touched.email && (
-                    <Text fontSize='smaller' color='red'>
-                      {errors.email}
-                    </Text>
-                  )}
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('email')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.email,
+                    onChange: handleChange('email'),
+                  }}
+                  error={
+                    errors.email &&
+                    touched.email && (
+                      <Text fontSize='smaller' color='red'>
+                        {errors.email}
+                      </Text>
+                    )
+                  }
+                />
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('phone')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.phone}
-                    onChange={handleChange('phone')}
-                  />
-                  {errors.phone && touched.phone && (
-                    <Text fontSize='smaller' color='red'>
-                      {errors.phone}
-                    </Text>
-                  )}
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('phone')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.phone,
+                    onChange: handleChange('phone'),
+                  }}
+                  error={
+                    errors.phone &&
+                    touched.phone && (
+                      <Text fontSize='smaller' color='red'>
+                        {errors.phone}
+                      </Text>
+                    )
+                  }
+                />
 
                 <Flex mt='1.5rem' direction='column' w='full'>
                   <Text fontWeight='semibold'>{t('country')}</Text>
@@ -170,57 +182,69 @@ const CheckoutForm = () => {
                   </Select>
                 </Flex>
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('city')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.address.city}
-                    onChange={handleChange('address.city')}
-                  />
-                  {errors.address?.city && touched.address?.city && (
-                    <Text fontSize='smaller' color='red'>
-                      {errors.address?.city}
-                    </Text>
-                  )}
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('city')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.address.city,
+                    onChange: handleChange('address.city'),
+                  }}
+                  error={
+                    errors.address?.city &&
+                    touched.address?.city && (
+                      <Text fontSize='smaller' color='red'>
+                        {errors.address.city}
+                      </Text>
+                    )
+                  }
+                />
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('state')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.address.state}
-                    onChange={handleChange('address.state')}
-                  />
-                  {errors.address?.state && touched.address?.state && (
-                    <Text fontSize='smaller' color='red'>
-                      {errors.address?.state}
-                    </Text>
-                  )}
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('state')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.address.state,
+                    onChange: handleChange('address.state'),
+                  }}
+                  error={
+                    errors.address?.state &&
+                    touched.address?.state && (
+                      <Text fontSize='smaller' color='red'>
+                        {errors.address.state}
+                      </Text>
+                    )
+                  }
+                />
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('line1')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.address.line1}
-                    onChange={handleChange('address.line1')}
-                  />
-                  {errors.address?.line1 && touched.address?.line1 && (
-                    <Text fontSize='smaller' color='red'>
-                      {errors.address?.line1}
-                    </Text>
-                  )}
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('line1')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.address.line1,
+                    onChange: handleChange('address.line1'),
+                  }}
+                  error={
+                    errors.address?.line1 &&
+                    touched.address?.line1 && (
+                      <Text fontSize='smaller' color='red'>
+                        {errors.address.line1}
+                      </Text>
+                    )
+                  }
+                />
 
-                <Flex mt='1.5rem' direction='column' w='full'>
-                  <Text fontWeight='semibold'>{t('line2')}</Text>
-                  <Input
-                    mt='0.5rem'
-                    value={values.address.line2}
-                    onChange={handleChange('address.line2')}
-                    placeholder='Optional'
-                  />
-                </Flex>
+                <CustomInput
+                  mt='1.5rem'
+                  title={t('line2')}
+                  inputProps={{
+                    mt: '0.5rem',
+                    value: values.address.line2,
+                    onChange: handleChange('address.line2'),
+                  }}
+                />
               </Flex>
               <Stack
                 w={isMobileOrTablet ? 'full' : '40%'}
