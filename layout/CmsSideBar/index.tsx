@@ -6,6 +6,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+import moment from 'moment';
 import { useRouter } from 'next/router';
 import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
@@ -34,6 +35,7 @@ const CmsSideBar = (props: Props) => {
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
 
   const handleChangeLanguage = async (lang: string) => {
+    moment.locale(lang);
     await setLanguage(lang);
     setIsOpenLanguage(false);
   };

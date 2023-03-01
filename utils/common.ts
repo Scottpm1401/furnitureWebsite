@@ -1,5 +1,7 @@
+import { isNumber, isString } from 'lodash';
 import moment from 'moment';
 
+import { countries } from '../constant/country';
 import { AddressType } from '../models/user';
 
 export const validateEmail = (email: string) => {
@@ -11,6 +13,10 @@ export const validateEmail = (email: string) => {
 
 export const formatDate = (date: Date | string) => {
   return moment(date).format('ll');
+};
+
+export const formatDateLong = (date: Date | string) => {
+  return moment(date).format('LL');
 };
 
 export const formatDateTime = (date: Date | string) => {
@@ -35,4 +41,12 @@ export const convertToBase64 = (file: File) => {
       reader.readAsDataURL(file);
     }.bind(this)
   );
+};
+
+export const isText = (value: React.ReactNode) => {
+  return isString(value) || isNumber(value);
+};
+
+export const getCountryName = (code?: string) => {
+  return countries.find((country) => country.code === code)?.name;
 };

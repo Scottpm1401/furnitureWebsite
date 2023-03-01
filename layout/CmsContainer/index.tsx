@@ -16,7 +16,7 @@ const CmsContainer = ({
 }: Props) => {
   return (
     <Stack w='full' p='2rem 1.5rem' bg={CMS_BG_COLOR} {...props}>
-      <Text fontSize='4xl' fontWeight='semibold' {...titleProps}>
+      <Text fontSize='4xl' mb='1rem' fontWeight='semibold' {...titleProps}>
         {title}
       </Text>
       {children}

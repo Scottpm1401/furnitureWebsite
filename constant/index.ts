@@ -1,5 +1,6 @@
 export const STAR_COLOR = 'rgb(255, 188, 11)';
 export const CMS_BG_COLOR = 'rgb(245, 245, 245)';
+export const BORDER_COLOR = 'rgba(224, 224, 224, 1)';
 
 export const APP_ROUTES = {
   home: '/',

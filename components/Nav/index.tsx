@@ -10,6 +10,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
+import moment from 'moment';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import setLanguage from 'next-translate/setLanguage';
@@ -57,6 +58,7 @@ const Nav = (props: Props) => {
   }, [user]);
   const refreshToken = useAppSelector(selectors.auth.selectRefreshToken);
   const handleChangeLanguage = async (lang: string) => {
+    moment.locale(lang);
     await setLanguage(lang);
     setIsOpenLanguage(false);
   };

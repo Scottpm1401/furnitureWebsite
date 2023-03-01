@@ -128,8 +128,8 @@ const AdditionalInfoProfile = () => {
                   <Text fontWeight='semibold'>{t('gender')}</Text>
                   <Select
                     mt='0.5rem'
-                    value={values.info?.phone}
-                    onChange={handleChange('info.gender')}
+                    value={values.info?.sex}
+                    onChange={handleChange('info.sex')}
                   >
                     {Object.values(Gender).map((gen) => (
                       <option value={gen} key={gen}>
@@ -144,7 +144,7 @@ const AdditionalInfoProfile = () => {
                   <Select
                     mt='0.5rem'
                     value={values.info?.address?.country}
-                    onChange={handleChange('info.country')}
+                    onChange={handleChange('info.address.country')}
                   >
                     {countries.map((country) => (
                       <option value={country.code} key={country.code}>

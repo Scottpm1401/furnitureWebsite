@@ -26,12 +26,17 @@ export type AddressType = {
   line2?: string;
 };
 
+export enum Role {
+  user = 'USER',
+  admin = 'ADMIN',
+}
+
 export type UserType = {
   _id: string;
   displayName?: string;
   email: string;
   username: string;
-  role: 'ADMIN' | 'USER';
+  role: Role;
   birthday: string;
   info?: UserInfoType;
   cart_total: number;

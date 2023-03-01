@@ -166,5 +166,7 @@
   "view_threads": "Chủ đề",
   "on_1_page": "Trong 1 trang",
   "result": "Kết quả",
-  "user_details": "Thông tin người dùng"
+  "user_details": "Thông tin người dùng",
+  "display_name": "Tên hiển thị",
+  "role": "Quyền hạn"
 }

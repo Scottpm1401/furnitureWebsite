@@ -166,5 +166,7 @@
   "view_threads": "View threads",
   "on_1_page": "On 1 page",
   "result": "Result",
-  "user_details": "User Details"
+  "user_details": "User Details",
+  "display_name": "Display Name",
+  "role": "Role"
 }
