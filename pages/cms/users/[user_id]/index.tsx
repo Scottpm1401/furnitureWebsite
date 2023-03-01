@@ -5,7 +5,7 @@ import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 
-import CustomDatePicker from '../../../../components/CustomeDatePicker';
+import CustomDatePicker from '../../../../components/CustomDatePicker';
 import TableDetail from '../../../../components/Table/TableDetail';
 import TableDetailSkeleton from '../../../../components/Table/TableDetailSkeleton';
 import { countries } from '../../../../constant/country';

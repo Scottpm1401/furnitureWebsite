@@ -10,7 +10,7 @@ import { Gender, UserInfoType } from '../../../../models/user';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';
 import { updateUser } from '../../../../services/user';
-import CustomDatePicker from '../../../CustomeDatePicker';
+import CustomDatePicker from '../../../CustomDatePicker';
 import CustomInput from '../../../CustomInput';
 
 type AdditionalInfoType = {

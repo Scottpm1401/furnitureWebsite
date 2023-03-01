@@ -14,7 +14,6 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
-import CustomDatePicker from '../../../components/CustomeDatePicker';
 import { APP_ROUTES } from '../../../constant';
 import Eye from '../../../public/svg/eye.svg';
 import EyeOff from '../../../public/svg/eye_off.svg';
@@ -22,6 +21,7 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { actions } from '../../../redux/reducer';
 import { signup } from '../../../services/auth';
 import { getProfile } from '../../../services/user';
+import CustomDatePicker from '../../CustomDatePicker';
 import CustomInput from '../../CustomInput';
 
 type SignupFormType = {
