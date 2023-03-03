@@ -31,5 +31,10 @@ export const API = {
   UPLOAD: {
     SIGNATURE: '/upload/signature',
   },
+  ORDERED: {
+    GETSELF: '/ordered/getself',
+    GETALL: '/ordered/all',
+    GETORDERD: (id: string) => `/ordered/${id}`,
+  },
   REFRESHTOKEN: '/user/refreshToken',
 };

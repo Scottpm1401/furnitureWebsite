@@ -10,6 +10,7 @@ import AdminAuthProvider from '../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../layout/CmsContainer';
 import Page from '../../../layout/Page';
 import EditIcon from '../../../public/svg/edit.svg';
+import { formatDateLong } from '../../../utils/common';
 
 const CmsUsers = () => {
   const {
@@ -37,8 +38,8 @@ const CmsUsers = () => {
                 <Th>Name</Th>
                 <Th>Username</Th>
                 <Th>Email</Th>
+                <Th>Birthday</Th>
                 <Th>Role</Th>
-                <Th>Bought</Th>
                 <Th></Th>
               </Tr>
             }
@@ -50,8 +51,8 @@ const CmsUsers = () => {
                     <Td>{user.displayName}</Td>
                     <Td>{user.username}</Td>
                     <Td>{user.email}</Td>
+                    <Td>{formatDateLong(user.birthday)}</Td>
                     <Td>{user.role}</Td>
-                    <Td>{user.purchase.length}</Td>
                     <Td>
                       <IconButton
                         minW='unset'

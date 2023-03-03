@@ -41,5 +41,4 @@ export type UserType = {
   info?: UserInfoType;
   cart_total: number;
   cart: ProductCartType[];
-  purchase: PurchaseType[];
 };

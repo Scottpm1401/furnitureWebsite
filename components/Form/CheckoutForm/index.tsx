@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Select, Stack, Text } from '@chakra-ui/react';
+import { Button, Flex, Select, Stack, Text } from '@chakra-ui/react';
 import {
   PaymentElement,
   useElements,
@@ -85,7 +85,6 @@ const CheckoutForm = () => {
         await clearProductCart();
         dispatch(actions.user.setUserCart([]));
         dispatch(actions.user.setUserCartTotal(0));
-        dispatch(actions.user.setUserOrdered(newOrdered));
         router.push(APP_ROUTES.ordered);
       }
     } catch (err) {

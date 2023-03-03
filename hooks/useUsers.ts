@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { GetAllUsersParams } from '../models/api/cms';
+import { SearchPagination } from '../models/api/cms';
 import { UserType } from '../models/user';
 import { getAllUsers } from '../services/cms';
 
@@ -27,7 +27,7 @@ export const useUsers = () => {
   const hasNext = useMemo(() => offset + limit < total, [limit, offset, total]);
 
   const handleQuery = useCallback(
-    (args: GetAllUsersParams) => {
+    (args: SearchPagination) => {
       const newQuery = { ...router.query, ...args };
       const url = { pathname: router.pathname, query: newQuery };
       const opts = { shallow: true, scroll: false };

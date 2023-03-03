@@ -10,6 +10,9 @@ export type PurchaseType = {
   arrive_date?: string;
   billingDetails: BillingDetailsType;
   products: PurchaseProduct[];
+  user_id: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type BillingDetailsType = {

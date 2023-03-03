@@ -16,30 +16,25 @@ import { floor } from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
 import { Rating } from 'react-simple-star-rating';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
 import Container from '../../components/Container';
 import { APP_ROUTES, STAR_COLOR } from '../../constant';
+import { useOrdered } from '../../hooks/useOrdered';
 import { useResponsive } from '../../hooks/useResponsive';
 import AuthProvider from '../../layout/AuthProvider';
 import Page from '../../layout/Page';
 import { PurchaseProduct } from '../../models/purchase';
 import StarIcon from '../../public/svg/star.svg';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { actions, selectors } from '../../redux/reducer';
 import { ratingProduct } from '../../services/product';
-import { getProfile } from '../../services/user';
 import { formatAddress, formatDateTime } from '../../utils/common';
 
-type Props = {};
-const Ordered = (props: Props) => {
+const Ordered = () => {
   const { t } = useTranslation();
-  const orders = useAppSelector(selectors.user.selectUserOrdered);
+  const { ordered: orders } = useOrdered();
   const { isMobileOrTablet } = useResponsive();
-  const dispatch = useAppDispatch();
 
   const handleRating = async (
     rate: number,
@@ -47,15 +42,11 @@ const Ordered = (props: Props) => {
     product: PurchaseProduct
   ) => {
     try {
-      const res = await ratingProduct(product.product_id, {
+      await ratingProduct(product.product_id, {
         purchase_id,
         rate,
         color: product.color,
       });
-      if (res.success) {
-        const userProfile = await getProfile();
-        dispatch(actions.user.setUser(userProfile));
-      }
     } catch (error) {
       console.log('error', error);
     }
@@ -81,7 +72,7 @@ const Ordered = (props: Props) => {
         />
 
         <Stack w='full' spacing={0}>
-          {orders.length > 0 ? (
+          {orders && orders.length > 0 ? (
             orders.map((order, index) => (
               <Stack key={order._id} spacing={0}>
                 <Stack bg='orange.100' paddingY='1rem'>

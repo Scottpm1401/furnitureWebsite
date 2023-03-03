@@ -1,7 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ProductCartType } from '../../models/cart';
-import { PurchaseType } from '../../models/purchase';
 import { Role, UserType } from '../../models/user';
 
 const initialState: UserType = {
@@ -12,7 +11,6 @@ const initialState: UserType = {
   birthday: '',
   cart_total: 0,
   cart: [],
-  purchase: [],
 };
 
 // Actual Slice
@@ -31,7 +29,6 @@ export const { actions, reducer } = createSlice({
       state.username = action.payload.username;
       state.cart = action.payload.cart;
       state.cart_total = action.payload.cart_total;
-      state.purchase = action.payload.purchase;
     },
 
     setUserCart(state, action: PayloadAction<ProductCartType[]>) {
@@ -40,10 +37,6 @@ export const { actions, reducer } = createSlice({
 
     setUserCartTotal(state, action: PayloadAction<number>) {
       state.cart_total += action.payload;
-    },
-
-    setUserOrdered(state, action: PayloadAction<PurchaseType[]>) {
-      state.purchase = action.payload;
     },
 
     reset: () => initialState,
@@ -58,7 +51,6 @@ const selectors = (<S extends { user: UserType }>() => {
   const selectUserId = createSelector(getState, (state) => state._id);
   const selectUserCart = createSelector(getState, (state) => state.cart);
   const selectCartTotal = createSelector(getState, (state) => state.cart_total);
-  const selectUserOrdered = createSelector(getState, (state) => state.purchase);
   const isAdmin = createSelector(getState, (state) => state.role === 'ADMIN');
 
   return {
@@ -67,7 +59,6 @@ const selectors = (<S extends { user: UserType }>() => {
     isAdmin,
     selectUserCart,
     selectCartTotal,
-    selectUserOrdered,
   };
 })();
 
