@@ -2,13 +2,13 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ProductCartType } from '../../models/cart';
 import { PurchaseType } from '../../models/purchase';
-import { UserType } from '../../models/user';
+import { Role, UserType } from '../../models/user';
 
 const initialState: UserType = {
   _id: '',
   email: '',
   username: '',
-  role: 'USER',
+  role: Role.user,
   birthday: '',
   cart_total: 0,
   cart: [],
