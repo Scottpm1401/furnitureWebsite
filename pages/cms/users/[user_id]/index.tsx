@@ -8,6 +8,7 @@ import { useState } from 'react';
 import CustomDatePicker from '../../../../components/CustomDatePicker';
 import TableDetail from '../../../../components/Table/TableDetail';
 import TableDetailSkeleton from '../../../../components/Table/TableDetailSkeleton';
+import { APP_ROUTES } from '../../../../constant';
 import { countries } from '../../../../constant/country';
 import { useUser } from '../../../../hooks/useUser';
 import AdminAuthProvider from '../../../../layout/AdminAuthProvider';
@@ -16,7 +17,11 @@ import Page from '../../../../layout/Page';
 import { UpdateUserRequest } from '../../../../models/api/cms';
 import { Gender, Role } from '../../../../models/user';
 import { updateUserById } from '../../../../services/cms';
-import { formatDateLong, getCountryName } from '../../../../utils/common';
+import {
+  formatDateLong,
+  getCountryName,
+  isReqError,
+} from '../../../../utils/common';
 
 const CmsUser = () => {
   const { user, isLoading } = useUser();
@@ -39,7 +44,9 @@ const CmsUser = () => {
       if (isAxiosError(error)) {
         toast({
           title:
-            error.response?.data.error.message || error.response?.data.message,
+            isReqError(error) ||
+            t(error.response?.data?.message) ||
+            error.response?.data?.error?.message,
           status: 'error',
           duration: 5000,
           position: 'top-right',
@@ -53,7 +60,7 @@ const CmsUser = () => {
   return (
     <AdminAuthProvider>
       <Page direction='row' w='full' title={t('user_details')}>
-        <CmsContainer title={t('user_details')}>
+        <CmsContainer title={t('user_details')} href={APP_ROUTES.cmsUsers}>
           {!user || isLoading ? (
             <TableDetailSkeleton rows={7} />
           ) : (
@@ -78,6 +85,7 @@ const CmsUser = () => {
                 handleChange,
                 setFieldValue,
                 handleSubmit,
+                handleReset,
               }) => (
                 <Form onSubmit={handleSubmit}>
                   <TableDetail
@@ -292,9 +300,21 @@ const CmsUser = () => {
                       },
                     ]}
                   />
-                  <Stack direction='column'>
+                  <Stack
+                    direction='row'
+                    mt='2rem'
+                    alignItems='center'
+                    justifyContent='center'
+                    spacing={8}
+                  >
                     <Button
-                      mt='1rem'
+                      colorScheme='orange'
+                      variant='outline'
+                      onClick={handleReset}
+                    >
+                      {t('reset')}
+                    </Button>
+                    <Button
                       isLoading={isUpdating}
                       loadingText={t('updating')}
                       type='submit'

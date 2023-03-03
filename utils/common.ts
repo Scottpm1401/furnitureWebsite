@@ -50,3 +50,9 @@ export const isText = (value: React.ReactNode) => {
 export const getCountryName = (code?: string) => {
   return countries.find((country) => country.code === code)?.name;
 };
+
+export const isReqError = (error: any) => {
+  if (error.response?.data?.error?.details?.length > 0)
+    return error.response.data.error.details[0].message as string;
+  return undefined;
+};

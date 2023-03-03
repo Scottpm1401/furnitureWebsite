@@ -168,5 +168,6 @@
   "result": "Kết quả",
   "user_details": "Thông tin người dùng",
   "display_name": "Tên hiển thị",
-  "role": "Quyền hạn"
+  "role": "Quyền hạn",
+  "reset": "Tải lại dữ liệu"
 }

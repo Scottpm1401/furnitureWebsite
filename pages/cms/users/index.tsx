@@ -11,9 +11,7 @@ import CmsContainer from '../../../layout/CmsContainer';
 import Page from '../../../layout/Page';
 import EditIcon from '../../../public/svg/edit.svg';
 
-type Props = {};
-
-const CmsUsers = (props: Props) => {
+const CmsUsers = () => {
   const {
     total,
     isLoading,

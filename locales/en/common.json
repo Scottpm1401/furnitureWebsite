@@ -168,5 +168,6 @@
   "result": "Result",
   "user_details": "User Details",
   "display_name": "Display Name",
-  "role": "Role"
+  "role": "Role",
+  "reset": "Reset Data"
 }
