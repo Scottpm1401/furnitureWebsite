@@ -2,13 +2,16 @@ import {
   Avatar,
   Flex,
   IconButton,
+  Input,
   Link,
   Stack,
   StackProps,
   Text,
   TextProps,
 } from '@chakra-ui/react';
+import { debounce } from 'lodash';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import { APP_ROUTES, CMS_BG_COLOR } from '../../constant';
@@ -21,6 +24,9 @@ type Props = {
   titleProps?: TextProps;
   href?: string;
   containerProps?: StackProps;
+  search?: {
+    handleSearch: (offset: number, limit: number, search: string) => void;
+  };
 } & StackProps;
 
 const CmsContainer = ({
@@ -29,10 +35,17 @@ const CmsContainer = ({
   titleProps,
   href,
   containerProps,
+  search,
   ...props
 }: Props) => {
-  const router = useRouter();
   const user = useAppSelector(selectors.user.selectUser);
+  const { t } = useTranslation();
+  const router = useRouter();
+
+  const debounceSearch = debounce(
+    (value) => search?.handleSearch(0, Number(router.query.limit), value),
+    300
+  );
 
   return (
     <Stack w='full' {...containerProps}>
@@ -64,9 +77,24 @@ const CmsContainer = ({
         </Link>
       </Stack>
       <Stack w='full' h='full' p='2rem 1.5rem' bg={CMS_BG_COLOR} {...props}>
-        <Text fontSize='4xl' mb='1rem' fontWeight='semibold' {...titleProps}>
-          {title}
-        </Text>
+        <Stack
+          direction='row'
+          alignItems='center'
+          justifyContent='space-between'
+          w='full'
+        >
+          <Text fontSize='4xl' mb='1rem' fontWeight='semibold' {...titleProps}>
+            {title}
+          </Text>
+          {search && (
+            <Input
+              w='300px'
+              placeholder={t('search_place_holder')}
+              onChange={(e) => debounceSearch(e.target.value)}
+            />
+          )}
+        </Stack>
+
         {children}
       </Stack>
     </Stack>

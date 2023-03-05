@@ -30,7 +30,10 @@ const CmsUsers = () => {
   return (
     <AdminAuthProvider>
       <Page direction='row' w='full' title='Users List'>
-        <CmsContainer title={t('users_list')}>
+        <CmsContainer
+          title={t('users_list')}
+          search={{ handleSearch: getUsers }}
+        >
           <Table
             headers={
               <Tr>

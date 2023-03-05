@@ -10,6 +10,7 @@ const useOrderedList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [orderedList, setOrderedList] = useState<PurchaseType[]>([]);
   const [total, setTotal] = useState(0);
+  const [empty, setEmpty] = useState(false);
 
   const offset = useMemo(
     () => (router.query.offset ? Number(router.query.offset) : 0),
@@ -45,6 +46,7 @@ const useOrderedList = () => {
           limit: resLimit,
           search: resSearch,
         });
+        setEmpty(data.length < 1);
         setOrderedList(data);
         setTotal(total);
         handleQuery({
@@ -65,7 +67,7 @@ const useOrderedList = () => {
   useEffect(() => {
     if (!router.isReady) return;
 
-    if (orderedList.length < 1 && !isLoading) {
+    if (orderedList.length < 1 && !isLoading && !empty) {
       getOrderedList(offset, limit, search);
     }
   }, [
@@ -76,6 +78,7 @@ const useOrderedList = () => {
     router.isReady,
     search,
     orderedList.length,
+    empty,
   ]);
 
   return {

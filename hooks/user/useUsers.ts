@@ -10,6 +10,7 @@ const useUsers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState<UserType[]>([]);
   const [total, setTotal] = useState(0);
+  const [empty, setEmpty] = useState(false);
 
   const offset = useMemo(
     () => (router.query.offset ? Number(router.query.offset) : 0),
@@ -45,6 +46,7 @@ const useUsers = () => {
           limit: resLimit,
           search: resSearch,
         });
+        setEmpty(data.length < 1);
         setUsers(data);
         setTotal(total);
         handleQuery({
@@ -65,7 +67,7 @@ const useUsers = () => {
   useEffect(() => {
     if (!router.isReady) return;
 
-    if (users.length < 1 && !isLoading) {
+    if (users.length < 1 && !isLoading && !empty) {
       getUsers(offset, limit, search);
     }
   }, [
@@ -76,6 +78,7 @@ const useUsers = () => {
     router.isReady,
     search,
     users.length,
+    empty,
   ]);
 
   return {
