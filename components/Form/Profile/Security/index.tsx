@@ -11,7 +11,7 @@ import { isAxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
-import * as Yup from 'Yup';
+import * as Yup from 'yup';
 
 import { useResponsive } from '../../../../hooks/responsive';
 import Eye from '../../../../public/svg/eye.svg';
