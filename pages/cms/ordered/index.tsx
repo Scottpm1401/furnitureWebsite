@@ -32,7 +32,10 @@ const CmcOrdered = (props: Props) => {
   return (
     <AdminAuthProvider>
       <Page direction='row' w='full' title='Ordered List'>
-        <CmsContainer title={t('ordered_list')}>
+        <CmsContainer
+          title={t('ordered_list')}
+          search={{ handleSearch: getOrderedList }}
+        >
           <Table
             headers={
               <Tr>
