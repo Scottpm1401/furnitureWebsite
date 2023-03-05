@@ -170,5 +170,9 @@
   "display_name": "Display Name",
   "role": "Role",
   "reset": "Reset Data",
-  "optional": "Optional"
+  "optional": "Optional",
+  "ordered_details": "Ordered Details",
+  "update_ordered": "Update Ordered",
+  "update_ordered_success": "Update ordered successful",
+  "update_user_success": "Update user successful"
 }

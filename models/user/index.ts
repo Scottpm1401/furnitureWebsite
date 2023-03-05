@@ -1,7 +1,6 @@
 /*********************TYPE & INTERFACE*****************************/
 
 import { ProductCartType } from '../cart';
-import { PurchaseType } from '../purchase';
 
 export enum Gender {
   male = 'MALE',

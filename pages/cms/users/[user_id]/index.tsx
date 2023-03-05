@@ -35,7 +35,7 @@ const CmsUser = () => {
       setIsUpdating(true);
       await updateUserById(user._id, values);
       toast({
-        title: 'Update user successful',
+        title: t('update_user_success'),
         status: 'success',
         duration: 5000,
         position: 'top-right',

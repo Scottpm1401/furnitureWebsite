@@ -5,6 +5,7 @@ import React from 'react';
 
 import Table from '../../../components/Table';
 import TableSkeleton from '../../../components/Table/TableSkeleton';
+import { APP_ROUTES } from '../../../constant';
 import { useOrderedList } from '../../../hooks/ordered';
 import AdminAuthProvider from '../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../layout/CmsContainer';
@@ -63,7 +64,9 @@ const CmcOrdered = (props: Props) => {
                         colorScheme='orange'
                         icon={<EditIcon />}
                         aria-label={`edit_icon_${ordered._id}`}
-                        onClick={() => {}}
+                        onClick={() =>
+                          router.push(APP_ROUTES.cmsOrder(ordered._id))
+                        }
                       />
                     </Td>
                   </Tr>

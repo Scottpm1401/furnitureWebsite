@@ -170,5 +170,9 @@
   "display_name": "Tên hiển thị",
   "role": "Quyền hạn",
   "reset": "Tải lại dữ liệu",
-  "optional": "Không bắt buộc"
+  "optional": "Không bắt buộc",
+  "ordered_details": "Thông tin hoá đơn",
+  "update_ordered": "Cập nhật hoá đơn",
+  "update_ordered_success": "Cập nhật hoá đơn thành công",
+  "update_user_success": "Cập nhật người dùng thành công"
 }

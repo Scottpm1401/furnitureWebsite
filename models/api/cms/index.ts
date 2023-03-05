@@ -1,3 +1,8 @@
+import {
+  BillingDetailsType,
+  PurchaseProduct,
+  PurchaseStatus,
+} from '../../purchase';
 import { UserInfoType } from '../../user';
 
 export type CMSList<T> = {
@@ -16,10 +21,19 @@ export type SearchPagination = {
 
 export type UpdateUserRequest = {
   displayName?: String;
-  username: string;
-  birthday: string;
+  username?: string;
+  birthday?: string;
   info?: UserInfoType;
-  role: 'ADMIN' | 'USER';
-  email: string;
+  role?: 'ADMIN' | 'USER';
+  email?: string;
   password?: string;
+};
+
+export type UpdateOrderedRequest = {
+  status?: PurchaseStatus;
+  arrive_date?: string;
+  package_date?: string;
+  total_bill?: number;
+  products?: PurchaseProduct[];
+  billingDetails?: BillingDetailsType;
 };

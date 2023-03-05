@@ -34,7 +34,8 @@ export const API = {
   ORDERED: {
     GETSELF: '/ordered/getself',
     GETALL: '/ordered/all',
-    GETORDERD: (id: string) => `/ordered/${id}`,
+    GETORDERD: (id: string) => `/ordered/get/${id}`,
+    UPDATEORDERD: (id: string) => `/ordered/update/${id}`,
   },
   REFRESHTOKEN: '/user/refreshToken',
 };

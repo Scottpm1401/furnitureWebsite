@@ -11,16 +11,20 @@ export const validateEmail = (email: string) => {
   );
 };
 
-export const formatDate = (date: Date | string) => {
+export const formatDate = (date?: Date | string) => {
   return moment(date).format('ll');
 };
 
-export const formatDateLong = (date: Date | string) => {
+export const formatDateLong = (date?: Date | string) => {
   return moment(date).format('LL');
 };
 
-export const formatDateTime = (date: Date | string) => {
+export const formatDateTime = (date?: Date | string) => {
   return moment(date).format('lll');
+};
+
+export const formatDateTimeLong = (date?: Date | string) => {
+  return moment(date).format('LLL');
 };
 
 export const formatAddress = (address: AddressType) => {

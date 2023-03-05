@@ -10,32 +10,32 @@ import TableDetail from '../../../../components/Table/TableDetail';
 import TableDetailSkeleton from '../../../../components/Table/TableDetailSkeleton';
 import { APP_ROUTES } from '../../../../constant';
 import { countries } from '../../../../constant/country';
-import { useUser } from '../../../../hooks/user';
+import useOrdered from '../../../../hooks/ordered/useOrdered';
 import AdminAuthProvider from '../../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../../layout/CmsContainer';
 import Page from '../../../../layout/Page';
-import { UpdateUserRequest } from '../../../../models/api/cms';
-import { Gender, Role } from '../../../../models/user';
-import { updateUserById } from '../../../../services/cms';
+import { UpdateOrderedRequest } from '../../../../models/api/cms';
+import { PurchaseStatus } from '../../../../models/purchase';
+import { updateOrderedById } from '../../../../services/cms';
 import {
-  formatDateLong,
+  formatDateTimeLong,
   getCountryName,
   isReqError,
 } from '../../../../utils/common';
 
 const CmsOrdered = () => {
-  const { user, isLoading } = useUser();
+  const { ordered, isLoading } = useOrdered();
   const { t } = useTranslation();
   const toast = useToast();
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const handleUpdateUser = async (values: UpdateUserRequest) => {
-    if (!user) return;
+  const handleUpdateUser = async (values: UpdateOrderedRequest) => {
+    if (!ordered) return;
     try {
       setIsUpdating(true);
-      await updateUserById(user._id, values);
+      await updateOrderedById(ordered._id, values);
       toast({
-        title: 'Update user successful',
+        title: t('update_ordered_success'),
         status: 'success',
         duration: 5000,
         position: 'top-right',
@@ -59,22 +59,21 @@ const CmsOrdered = () => {
 
   return (
     <AdminAuthProvider>
-      <Page direction='row' w='full' title={t('user_details')}>
-        <CmsContainer title={t('user_details')} href={APP_ROUTES.cmsUsers}>
-          {!user || isLoading ? (
+      <Page direction='row' w='full' title={t('ordered_details')}>
+        <CmsContainer title={t('ordered_details')} href={APP_ROUTES.cmsOrdered}>
+          {!ordered || isLoading ? (
             <TableDetailSkeleton rows={7} />
           ) : (
             <Formik
               initialValues={
                 {
-                  displayName: user.displayName,
-                  username: user.username,
-                  birthday: user.birthday,
-                  role: user.role,
-                  info: user.info,
-                  password: undefined,
-                  email: user.email,
-                } as UpdateUserRequest
+                  status: ordered.status,
+                  arrive_date: ordered.arrive_date,
+                  package_date: ordered.package_date,
+                  total_bill: ordered.total_bill,
+                  products: ordered.products,
+                  billingDetails: ordered.billingDetails,
+                } as UpdateOrderedRequest
               }
               onSubmit={handleUpdateUser}
               enableReinitialize
@@ -92,151 +91,111 @@ const CmsOrdered = () => {
                     rows={[
                       {
                         title: 'ID',
-                        content: user._id,
+                        content: ordered._id,
+                      },
+                      {
+                        title: t('name'),
+                        content: ordered.billingDetails.name,
                       },
                       {
                         title: t('email'),
-                        content: values.email,
+                        content: ordered.billingDetails.email,
+                      },
+                      {
+                        title: t('phone'),
+                        content: ordered.billingDetails.phone,
+                      },
+                      {
+                        title: t('payment_method'),
+                        content: ordered.payment_method,
+                      },
+                      {
+                        title: t('status'),
+                        content: values.status,
                         edit: {
-                          inputProps: {
-                            onChange: handleChange('email'),
-                          },
-                          isInit: initialValues.email === values.email,
+                          customInput: (
+                            <Select
+                              value={values.status}
+                              onChange={handleChange('status')}
+                            >
+                              <option value={PurchaseStatus.package}>
+                                {PurchaseStatus.package}
+                              </option>
+                              <option value={PurchaseStatus.shipping}>
+                                {PurchaseStatus.shipping}
+                              </option>
+                              <option value={PurchaseStatus.delivered}>
+                                {PurchaseStatus.delivered}
+                              </option>
+                            </Select>
+                          ),
+                          isInit: initialValues.status === values.status,
                         },
                       },
                       {
-                        title: t('username'),
-                        content: values.username,
-                        edit: {
-                          inputProps: {
-                            onChange: handleChange('username'),
-                          },
-                          isInit: initialValues.username === values.username,
-                        },
-                      },
-                      {
-                        title: t('display_name'),
-                        content: values.displayName,
-                        edit: {
-                          inputProps: {
-                            onChange: handleChange('displayName'),
-                          },
-                          isInit:
-                            initialValues.displayName === values.displayName,
-                        },
-                      },
-                      {
-                        title: t('password'),
-                        content: values.password || '* * * * * * * * * * * *',
-                        edit: {
-                          inputProps: {
-                            onChange: handleChange('password'),
-                            value: values.password,
-                          },
-                          isInit: false,
-                        },
-                      },
-                      {
-                        title: t('birthday'),
-                        content: formatDateLong(values.birthday),
+                        title: t('package_date'),
+                        content: formatDateTimeLong(values.package_date),
                         edit: {
                           customInput: (
                             <CustomDatePicker
                               w='full'
-                              currentDate={moment(values.birthday).toDate()}
+                              currentDate={moment(values.package_date).toDate()}
                               callback={(date) =>
-                                setFieldValue('birthday', date?.toString())
+                                setFieldValue('package_date', date?.toString())
                               }
                             />
                           ),
-                          isInit: moment(initialValues.birthday).isSame(
-                            values.birthday,
+                          isInit: moment(initialValues.package_date).isSame(
+                            values.package_date,
                             'day'
                           ),
                         },
                       },
                       {
-                        title: t('role'),
-                        content: values.role,
+                        title: t('arrive_date'),
+                        content: formatDateTimeLong(values.arrive_date),
                         edit: {
                           customInput: (
-                            <Select
-                              value={values.role}
-                              onChange={handleChange('role')}
-                            >
-                              <option value={Role.user}>{Role.user}</option>
-                              <option value={Role.admin}>{Role.admin}</option>
-                            </Select>
+                            <CustomDatePicker
+                              w='full'
+                              currentDate={moment(values.arrive_date).toDate()}
+                              callback={(date) =>
+                                setFieldValue('arrive_date', date?.toString())
+                              }
+                            />
                           ),
-                          isInit: initialValues.role === values.role,
+
+                          isInit: moment(initialValues.arrive_date).isSame(
+                            values.arrive_date,
+                            'day'
+                          ),
+                        },
+                      },
+                      {
+                        title: t('total'),
+                        content: `$${values.total_bill}`,
+                        edit: {
+                          inputProps: {
+                            onChange: handleChange('total_bill'),
+                            value: values.total_bill,
+                          },
+                          isInit:
+                            initialValues.total_bill === values.total_bill,
                         },
                       },
 
-                      //Info
-                      {
-                        title: t('phone'),
-                        content: values.info?.phone,
-                        edit: {
-                          inputProps: {
-                            onChange: handleChange('info.phone'),
-                          },
-                          isInit:
-                            initialValues.info?.phone === values.info?.phone,
-                        },
-                      },
-                      {
-                        title: t('first_name'),
-                        content: values.info?.first_name,
-                        edit: {
-                          inputProps: {
-                            onChange: handleChange('info.first_name'),
-                          },
-                          isInit:
-                            initialValues.info?.first_name ===
-                            values.info?.first_name,
-                        },
-                      },
-                      {
-                        title: t('last_name'),
-                        content: values.info?.last_name,
-                        edit: {
-                          inputProps: {
-                            onChange: handleChange('info.last_name'),
-                          },
-                          isInit:
-                            initialValues.info?.last_name ===
-                            values.info?.last_name,
-                        },
-                      },
-                      {
-                        title: t('gender'),
-                        content: t(values.info?.sex || ''),
-                        edit: {
-                          customInput: (
-                            <Select
-                              value={values.info?.sex}
-                              onChange={handleChange('info.sex')}
-                            >
-                              {Object.values(Gender).map((gen) => (
-                                <option value={gen} key={gen}>
-                                  {t(gen)}
-                                </option>
-                              ))}
-                            </Select>
-                          ),
-                          isInit: initialValues.info?.sex === values.info?.sex,
-                        },
-                      },
-
-                      //Address
                       {
                         title: t('country'),
-                        content: getCountryName(values.info?.address?.country),
+                        content: getCountryName(
+                          values.billingDetails?.address.country
+                        ),
                         edit: {
                           customInput: (
                             <Select
-                              value={values.info?.address?.country}
-                              onChange={handleChange('info.address.country')}
+                              value={values.billingDetails?.address?.country}
+                              onChange={handleChange(
+                                'billingDetails.address.country'
+                              )}
                             >
                               {countries.map((country) => (
                                 <option value={country.code} key={country.code}>
@@ -246,56 +205,64 @@ const CmsOrdered = () => {
                             </Select>
                           ),
                           isInit:
-                            initialValues.info?.address?.country ===
-                            values.info?.address?.country,
+                            initialValues.billingDetails?.address?.country ===
+                            values.billingDetails?.address?.country,
                         },
                       },
                       {
                         title: t('city'),
-                        content: values.info?.address?.city,
+                        content: values.billingDetails?.address.city,
                         edit: {
                           inputProps: {
-                            onChange: handleChange('info.address.city'),
+                            onChange: handleChange(
+                              'billingDetails.address.city'
+                            ),
                           },
                           isInit:
-                            initialValues.info?.address?.city ===
-                            values.info?.address?.city,
+                            initialValues.billingDetails?.address?.city ===
+                            values.billingDetails?.address?.city,
                         },
                       },
                       {
                         title: t('state'),
-                        content: values.info?.address?.state,
+                        content: values.billingDetails?.address.state,
                         edit: {
                           inputProps: {
-                            onChange: handleChange('info.address.state'),
+                            onChange: handleChange(
+                              'billingDetails.address.state'
+                            ),
                           },
                           isInit:
-                            initialValues.info?.address?.state ===
-                            values.info?.address?.state,
+                            initialValues.billingDetails?.address?.state ===
+                            values.billingDetails?.address?.state,
                         },
                       },
                       {
                         title: t('line1'),
-                        content: values.info?.address?.line1,
+                        content: values.billingDetails?.address.line1,
                         edit: {
                           inputProps: {
-                            onChange: handleChange('info.address.line1'),
+                            onChange: handleChange(
+                              'billingDetails.address.line1'
+                            ),
                           },
                           isInit:
-                            initialValues.info?.address?.line1 ===
-                            values.info?.address?.line1,
+                            initialValues.billingDetails?.address?.line1 ===
+                            values.billingDetails?.address?.line1,
                         },
                       },
                       {
                         title: t('line2'),
-                        content: values.info?.address?.line2,
+                        content: values.billingDetails?.address.line2,
                         edit: {
                           inputProps: {
-                            onChange: handleChange('info.address.line2'),
+                            onChange: handleChange(
+                              'billingDetails.address.line2'
+                            ),
                           },
                           isInit:
-                            initialValues.info?.address?.line2 ===
-                            values.info?.address?.line2,
+                            initialValues.billingDetails?.address?.line2 ===
+                            values.billingDetails?.address?.line2,
                         },
                       },
                     ]}
@@ -320,7 +287,7 @@ const CmsOrdered = () => {
                       type='submit'
                       colorScheme='orange'
                     >
-                      {t('update_profile')}
+                      {t('update_ordered')}
                     </Button>
                   </Stack>
                 </Form>

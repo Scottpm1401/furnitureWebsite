@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { SearchPagination } from '../../models/api/cms';
 import { PurchaseType } from '../../models/purchase';
-import { getAllOrdered } from '../../services/ordered';
+import { getAllOrdered } from '../../services/cms';
 
 const useOrderedList = () => {
   const router = useRouter();
