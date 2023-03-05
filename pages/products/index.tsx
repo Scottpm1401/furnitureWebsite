@@ -47,7 +47,6 @@ const Products = ({
   const [products, setProducts] = useState<ProductType[]>(productsList);
   const [isLoading, setIsLoading] = useState(false);
   const [layout, setLayout] = useState<Layout>(Layout.grid);
-  console.log('test');
   const { t } = useTranslation();
   const { isMobile, isMobileOrTablet } = useResponsive();
   const hasMore = useMemo(
