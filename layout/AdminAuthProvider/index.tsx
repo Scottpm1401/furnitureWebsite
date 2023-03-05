@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 import Loader from '../../components/Loader';
 import { APP_ROUTES } from '../../constant';
-import { useCurrentUser } from '../../hooks/useCurrentUser';
+import { useCurrentUser } from '../../hooks/user';
 
 type Props = { children: JSX.Element };
 

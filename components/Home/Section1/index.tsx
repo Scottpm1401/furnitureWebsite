@@ -10,7 +10,7 @@ import React from 'react';
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { useResponsive } from '../../../hooks/useResponsive';
+import { useResponsive } from '../../../hooks/responsive';
 import Slide from './Slide';
 
 type Props = {};

@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { SearchPagination } from '../models/api/cms';
-import { UserType } from '../models/user';
-import { getAllUsers } from '../services/cms';
+import { SearchPagination } from '../../models/api/cms';
+import { UserType } from '../../models/user';
+import { getAllUsers } from '../../services/cms';
 
-export const useUsers = () => {
+const useUsers = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState<UserType[]>([]);
@@ -90,3 +90,5 @@ export const useUsers = () => {
     hasNext,
   };
 };
+
+export default useUsers;

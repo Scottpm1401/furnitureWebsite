@@ -169,5 +169,6 @@
   "user_details": "User Details",
   "display_name": "Display Name",
   "role": "Role",
-  "reset": "Reset Data"
+  "reset": "Reset Data",
+  "optional": "Optional"
 }

@@ -15,7 +15,7 @@ import Breadcrumb from '../../../components/Breadcrumb';
 import Container from '../../../components/Container';
 import CheckoutForm from '../../../components/Form/CheckoutForm';
 import { APP_ROUTES } from '../../../constant';
-import { usePayment } from '../../../hooks/usePayment';
+import { usePayment } from '../../../hooks/payment';
 import AuthProvider from '../../../layout/AuthProvider';
 import Page from '../../../layout/Page';
 

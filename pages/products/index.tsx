@@ -9,7 +9,7 @@ import Container from '../../components/Container';
 import ProductCard from '../../components/ProductCard';
 import Sidebar from '../../components/Sidebar';
 import { APP_ROUTES } from '../../constant';
-import { useResponsive } from '../../hooks/useResponsive';
+import { useResponsive } from '../../hooks/responsive';
 import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
 import { Filter, ProductSort, ProductType } from '../../models/product';

@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 
 import { countries } from '../../../../constant/country';
-import { useResponsive } from '../../../../hooks/useResponsive';
+import { useResponsive } from '../../../../hooks/responsive';
 import { Gender, UserInfoType } from '../../../../models/user';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';

@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Table from '../../../components/Table';
 import TableSkeleton from '../../../components/Table/TableSkeleton';
 import { APP_ROUTES } from '../../../constant';
-import { useUsers } from '../../../hooks/useUsers';
+import { useUsers } from '../../../hooks/user';
 import AdminAuthProvider from '../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../layout/CmsContainer';
 import Page from '../../../layout/Page';

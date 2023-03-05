@@ -2,7 +2,7 @@ import { Flex, Stack, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useResponsive } from '../../../hooks/useResponsive';
+import { useResponsive } from '../../../hooks/responsive';
 import Container from '../../Container';
 import TeamCard from '../../TeamCard';
 

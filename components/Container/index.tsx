@@ -1,7 +1,7 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
 import React from 'react';
 
-import { useResponsive } from '../../hooks/useResponsive';
+import { useResponsive } from '../../hooks/responsive';
 
 const Container = ({ children, ...props }: FlexProps) => {
   const { isBigScreen } = useResponsive();

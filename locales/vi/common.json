@@ -169,5 +169,6 @@
   "user_details": "Thông tin người dùng",
   "display_name": "Tên hiển thị",
   "role": "Quyền hạn",
-  "reset": "Tải lại dữ liệu"
+  "reset": "Tải lại dữ liệu",
+  "optional": "Không bắt buộc"
 }

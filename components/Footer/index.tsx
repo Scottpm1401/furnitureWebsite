@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import { APP_ROUTES } from '../../constant';
-import { useResponsive } from '../../hooks/useResponsive';
+import { useResponsive } from '../../hooks/responsive';
 import Facebook from '../../public/svg/facebook.svg';
 import Instagram from '../../public/svg/instagram.svg';
 import Logo from '../../public/svg/logo.svg';

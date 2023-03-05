@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { APP_ROUTES } from '../../constant';
-import { useResponsive } from '../../hooks/useResponsive';
+import { useResponsive } from '../../hooks/responsive';
 import SearchIcon from '../../public/svg/search.svg';
 import ShoppingBagIcon from '../../public/svg/shopping_bag.svg';
 import PopupButton from './PopupButton';

@@ -10,7 +10,7 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import React from 'react';
 
-import { useResponsive } from '../../../hooks/useResponsive';
+import { useResponsive } from '../../../hooks/responsive';
 
 type NavLinkType = {
   title: string;

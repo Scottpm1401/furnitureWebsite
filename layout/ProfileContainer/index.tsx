@@ -4,7 +4,7 @@ import React from 'react';
 
 import Container from '../../components/Container';
 import ProfileSideBar from '../../components/ProfileSideBar';
-import { useResponsive } from '../../hooks/useResponsive';
+import { useResponsive } from '../../hooks/responsive';
 import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
 

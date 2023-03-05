@@ -22,8 +22,8 @@ import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
 import Container from '../../components/Container';
 import { APP_ROUTES, STAR_COLOR } from '../../constant';
-import { useOrdered } from '../../hooks/useOrdered';
-import { useResponsive } from '../../hooks/useResponsive';
+import { useSelfOrdered } from '../../hooks/ordered';
+import { useResponsive } from '../../hooks/responsive';
 import AuthProvider from '../../layout/AuthProvider';
 import Page from '../../layout/Page';
 import { PurchaseProduct } from '../../models/purchase';
@@ -33,7 +33,7 @@ import { formatAddress, formatDateTime } from '../../utils/common';
 
 const Ordered = () => {
   const { t } = useTranslation();
-  const { ordered: orders } = useOrdered();
+  const { ordered: orders } = useSelfOrdered();
   const { isMobileOrTablet } = useResponsive();
 
   const handleRating = async (

@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import { APP_ROUTES } from '../../../../constant';
-import { useResponsive } from '../../../../hooks/useResponsive';
+import { useResponsive } from '../../../../hooks/responsive';
 import Circle from '../../../../public/svg/circle_3_4.svg';
 
 type SlideType = {

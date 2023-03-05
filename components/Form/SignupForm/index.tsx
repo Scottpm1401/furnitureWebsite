@@ -12,7 +12,7 @@ import moment from 'moment';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
-import * as Yup from 'yup';
+import * as Yup from 'Yup';
 
 import { APP_ROUTES } from '../../../constant';
 import Eye from '../../../public/svg/eye.svg';

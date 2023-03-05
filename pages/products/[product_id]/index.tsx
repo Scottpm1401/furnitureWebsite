@@ -18,7 +18,7 @@ import Breadcrumb from '../../../components/Breadcrumb';
 import ColorButton from '../../../components/ColorButton';
 import Container from '../../../components/Container';
 import { APP_ROUTES, STAR_COLOR } from '../../../constant';
-import { useResponsive } from '../../../hooks/useResponsive';
+import { useResponsive } from '../../../hooks/responsive';
 import NotAuthProvider from '../../../layout/NotAuthProvider';
 import Page from '../../../layout/Page';
 import { ProductCartType } from '../../../models/cart';

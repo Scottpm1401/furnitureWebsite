@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { UserType } from '../models/user';
-import { getUserById } from '../services/cms';
+import { UserType } from '../../models/user';
+import { getUserById } from '../../services/cms';
 
-export const useUser = () => {
+const useUser = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<UserType>();
@@ -34,3 +34,5 @@ export const useUser = () => {
 
   return { isLoading, user };
 };
+
+export default useUser;

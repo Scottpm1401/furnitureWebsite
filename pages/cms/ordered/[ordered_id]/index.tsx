@@ -23,7 +23,7 @@ import {
   isReqError,
 } from '../../../../utils/common';
 
-const CmsUser = () => {
+const CmsOrdered = () => {
   const { user, isLoading } = useUser();
   const { t } = useTranslation();
   const toast = useToast();
@@ -333,4 +333,4 @@ const CmsUser = () => {
   );
 };
 
-export default CmsUser;
+export default CmsOrdered;

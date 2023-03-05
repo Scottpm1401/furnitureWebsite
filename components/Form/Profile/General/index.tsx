@@ -3,9 +3,8 @@ import { isAxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
-import * as Yup from 'yup';
 
-import { useResponsive } from '../../../../hooks/useResponsive';
+import { useResponsive } from '../../../../hooks/responsive';
 import Camera from '../../../../public/svg/camera.svg';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';

@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { PurchaseType } from '../models/purchase';
-import { getSelfOrdered } from '../services/ordered';
+import { PurchaseType } from '../../models/purchase';
+import { getSelfOrdered } from '../../services/ordered';
 
-export const useOrdered = () => {
+const useSelfOrdered = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [ordered, setOrdered] = useState<PurchaseType[]>();
 
@@ -25,3 +25,5 @@ export const useOrdered = () => {
 
   return { isLoading, ordered };
 };
+
+export default useSelfOrdered;

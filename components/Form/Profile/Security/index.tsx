@@ -10,14 +10,14 @@ import {
 import { isAxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useState } from 'react';
-import * as Yup from 'yup';
+import { useState } from 'react';
+import * as Yup from 'Yup';
 
-import { useResponsive } from '../../../../hooks/useResponsive';
+import { useResponsive } from '../../../../hooks/responsive';
 import Eye from '../../../../public/svg/eye.svg';
 import EyeOff from '../../../../public/svg/eye_off.svg';
-import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { actions, selectors } from '../../../../redux/reducer';
+import { useAppDispatch } from '../../../../redux/hooks';
+import { actions } from '../../../../redux/reducer';
 import { changePassword } from '../../../../services/user';
 type SecurityType = {
   currentPassword: string;
@@ -26,7 +26,6 @@ type SecurityType = {
 
 const SecurityProfile = () => {
   const { t } = useTranslation();
-  const user = useAppSelector(selectors.user.selectUser);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const toast = useToast();

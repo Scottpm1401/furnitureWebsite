@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import React from 'react';
 
-import { useResponsive } from '../../hooks/useResponsive';
+import { useResponsive } from '../../hooks/responsive';
 
 type TeamCardType = {
   img: string;

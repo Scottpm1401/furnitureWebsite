@@ -18,7 +18,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { APP_ROUTES } from '../../constant';
-import { useResponsive } from '../../hooks/useResponsive';
+import { useResponsive } from '../../hooks/responsive';
 import AccountIcon from '../../public/svg/account.svg';
 import CompanyIcon from '../../public/svg/company.svg';
 import LanguageIcon from '../../public/svg/language.svg';

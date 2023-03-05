@@ -21,7 +21,7 @@ import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
 import Container from '../../components/Container';
 import { APP_ROUTES } from '../../constant';
-import { useResponsive } from '../../hooks/useResponsive';
+import { useResponsive } from '../../hooks/responsive';
 import AuthProvider from '../../layout/AuthProvider';
 import Page from '../../layout/Page';
 import { ProductCartType } from '../../models/cart';

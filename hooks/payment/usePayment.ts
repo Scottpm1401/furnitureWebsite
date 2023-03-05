@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { useAppSelector } from '../redux/hooks';
-import { selectors } from '../redux/reducer';
-import { createPayment } from '../services/payment';
+import { useAppSelector } from '../../redux/hooks';
+import { selectors } from '../../redux/reducer';
+import { createPayment } from '../../services/payment';
 
-export const usePayment = () => {
+const usePayment = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [clientSecret, setClientSecret] = useState<string | undefined>(
     undefined
@@ -33,3 +33,5 @@ export const usePayment = () => {
 
   return { isLoading, clientSecret };
 };
+
+export default usePayment;

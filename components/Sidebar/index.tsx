@@ -14,7 +14,7 @@ import { debounce } from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 
-import { useResponsive } from '../../hooks/useResponsive';
+import { useResponsive } from '../../hooks/responsive';
 import {
   Filter,
   ProductBrand,

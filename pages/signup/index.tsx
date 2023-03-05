@@ -6,7 +6,7 @@ import Breadcrumb from '../../components/Breadcrumb';
 import SignupForm from '../../components/Form/SignupForm';
 import NavLink from '../../components/Nav/NavLink';
 import { APP_ROUTES } from '../../constant';
-import { useResponsive } from '../../hooks/useResponsive';
+import { useResponsive } from '../../hooks/responsive';
 import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
 type Props = {};

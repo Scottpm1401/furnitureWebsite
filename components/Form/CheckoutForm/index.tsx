@@ -9,10 +9,11 @@ import { floor } from 'lodash';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useMemo, useState } from 'react';
+import * as Yup from 'Yup';
 
 import { APP_ROUTES } from '../../../constant';
 import { countries } from '../../../constant/country';
-import { useResponsive } from '../../../hooks/useResponsive';
+import { useResponsive } from '../../../hooks/responsive';
 import { BillingDetailsType } from '../../../models/purchase';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { actions, selectors } from '../../../redux/reducer';
@@ -32,6 +33,18 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const { isMobileOrTablet } = useResponsive();
+
+  const checkoutSchema = Yup.object().shape({
+    name: Yup.string().required(t('form_required')),
+    email: Yup.string().email().required(t('form_required')),
+    phone: Yup.string().required(t('form_required')),
+    address: Yup.object().shape({
+      country: Yup.string().required(t('form_required')),
+      city: Yup.string().required(t('form_required')),
+      state: Yup.string().required(t('form_required')),
+      line1: Yup.string().required(t('form_required')),
+    }),
+  });
 
   const totalCartItem = useMemo(() => {
     let count = 0;
@@ -108,6 +121,7 @@ const CheckoutForm = () => {
         initialValues={initValue}
         onSubmit={handleCheckout}
         enableReinitialize
+        validationSchema={checkoutSchema}
       >
         {({ handleSubmit, handleChange, values, errors, touched }) => (
           <Form style={{ width: '100%' }} onSubmit={handleSubmit}>
@@ -237,7 +251,7 @@ const CheckoutForm = () => {
 
                 <CustomInput
                   mt='1.5rem'
-                  title={t('line2')}
+                  title={`${t('line2')} (${t('optional')})`}
                   inputProps={{
                     mt: '0.5rem',
                     value: values.address.line2,

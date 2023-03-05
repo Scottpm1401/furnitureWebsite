@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { useResponsive } from '../../../hooks/useResponsive';
+import { useResponsive } from '../../../hooks/responsive';
 import ArrowRight from '../../../public/svg/arrow_right.svg';
 import Refund from '../../../public/svg/refund.svg';
 import Shipping from '../../../public/svg/shipping.svg';
