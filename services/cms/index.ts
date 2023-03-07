@@ -6,6 +6,7 @@ import {
   UpdateOrderedRequest,
   UpdateUserRequest,
 } from '../../models/api/cms';
+import { ProductType } from '../../models/product';
 import { PurchaseType } from '../../models/purchase';
 import { UserType } from '../../models/user';
 
@@ -40,4 +41,9 @@ export const updateOrderedById = async (
 ) => {
   const res = await axiosClient.post(API.ORDERED.UPDATEORDERD(id), body);
   return res.data as PurchaseType;
+};
+
+export const getAllProducts = async (params: SearchPagination) => {
+  const res = await axiosClient.get(API.PRODUCT.GETCMSALL);
+  return res.data as CMSList<ProductType[]>;
 };

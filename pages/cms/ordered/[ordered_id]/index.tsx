@@ -111,7 +111,7 @@ const CmsOrdered = () => {
                       },
                       {
                         title: t('status'),
-                        content: values.status,
+                        content: values.status && t(values.status),
                         edit: {
                           customInput: (
                             <Select
@@ -119,13 +119,13 @@ const CmsOrdered = () => {
                               onChange={handleChange('status')}
                             >
                               <option value={PurchaseStatus.package}>
-                                {PurchaseStatus.package}
+                                {t(PurchaseStatus.package)}
                               </option>
                               <option value={PurchaseStatus.shipping}>
-                                {PurchaseStatus.shipping}
+                                {t(PurchaseStatus.shipping)}
                               </option>
                               <option value={PurchaseStatus.delivered}>
-                                {PurchaseStatus.delivered}
+                                {t(PurchaseStatus.delivered)}
                               </option>
                             </Select>
                           ),

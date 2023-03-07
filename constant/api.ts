@@ -18,6 +18,7 @@ export const API = {
   PRODUCT: {
     GETFEATURED: '/product/featured',
     GETALL: '/product/all',
+    GETCMSALL: '/product/cms_all',
     GETPRODUCT: (id: string) => `/product/get/${id}`,
     CREATEPRODUCT: '/product/create',
     UPDATEPRODUCT: (id: string) => `/product/update/${id}`,

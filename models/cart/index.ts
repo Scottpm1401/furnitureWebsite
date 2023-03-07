@@ -7,4 +7,6 @@ export type ProductCartType = {
   price: number;
   color: ProductColor;
   quantity: number;
+  brand: string;
+  category: string;
 };

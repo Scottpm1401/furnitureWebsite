@@ -1,7 +1,6 @@
 import {
   Button,
   Flex,
-  FlexProps,
   Grid,
   Skeleton,
   SkeletonText,
@@ -11,27 +10,25 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
 
 import Breadcrumb from '../../../components/Breadcrumb';
 import ColorButton from '../../../components/ColorButton';
 import Container from '../../../components/Container';
 import { APP_ROUTES, STAR_COLOR } from '../../../constant';
+import { useProduct } from '../../../hooks/product';
 import { useResponsive } from '../../../hooks/responsive';
 import NotAuthProvider from '../../../layout/NotAuthProvider';
 import Page from '../../../layout/Page';
 import { ProductCartType } from '../../../models/cart';
-import { ProductColor, ProductType } from '../../../models/product';
+import { ProductColor } from '../../../models/product';
 import MinusIcon from '../../../public/svg/minus.svg';
 import PlusIcon from '../../../public/svg/plus.svg';
 import StarIcon from '../../../public/svg/star.svg';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { actions, selectors } from '../../../redux/reducer';
 import { addProductCart, updateCartQuantity } from '../../../services/cart';
-import { getProductById } from '../../../services/product';
-
-type Props = {} & FlexProps;
 
 const initProductCart: ProductCartType = {
   product_id: '',
@@ -40,13 +37,13 @@ const initProductCart: ProductCartType = {
   price: 0,
   quantity: 1,
   color: ProductColor.BLACK,
+  brand: '',
+  category: '',
 };
 
-const Product = ({ ...props }: Props) => {
+const Product = () => {
   const router = useRouter();
-  const { product_id } = router.query;
-  const productId = product_id?.toString();
-  const [product, setProduct] = useState<ProductType>();
+  const { product } = useProduct();
   const { t } = useTranslation();
   const [addedProduct, setAddedProduct] =
     useState<ProductCartType>(initProductCart);
@@ -61,21 +58,20 @@ const Product = ({ ...props }: Props) => {
     [product]
   );
 
-  const handleGetProduct = useCallback(async () => {
-    if (productId) {
-      const data = await getProductById(productId);
-      setProduct(data);
-      setCurrentSlide(data.img);
-      setAddedProduct({
-        product_id: data._id,
-        img: data.img,
-        title: data.title,
-        price: data.price,
-        quantity: 1,
-        color: data.colors[0],
-      });
-    }
-  }, [productId]);
+  useEffect(() => {
+    if (!product) return;
+    setCurrentSlide(product.img);
+    setAddedProduct({
+      product_id: product._id,
+      img: product.img,
+      title: product.title,
+      price: product.price,
+      quantity: 1,
+      color: product.colors[0],
+      brand: product.brand,
+      category: product.category,
+    });
+  }, [product]);
 
   const handleQuantity = (isMinus: boolean) => {
     if (isMinus) {
@@ -120,14 +116,9 @@ const Product = ({ ...props }: Props) => {
           )
         );
       }
-
       router.push(APP_ROUTES.cart);
     } catch (error) {}
   };
-
-  useEffect(() => {
-    handleGetProduct();
-  }, [handleGetProduct]);
 
   return (
     <NotAuthProvider>
@@ -148,7 +139,7 @@ const Product = ({ ...props }: Props) => {
               </Button>
             </Link>
           </Flex>
-          {product ? (
+          {product && currentSlide ? (
             <Grid templateColumns={isMobile ? '1fr' : '1fr 1fr'}>
               <Flex w='full' direction='column'>
                 <Flex

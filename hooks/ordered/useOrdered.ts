@@ -13,7 +13,7 @@ const useOrdered = () => {
     [router.query.ordered_id]
   );
 
-  const getUser = useCallback(async () => {
+  const getOrdered = useCallback(async () => {
     try {
       const currentOrdered = await getOrderedById(orderedId || '');
       setOrdered(currentOrdered);
@@ -28,9 +28,9 @@ const useOrdered = () => {
   useEffect(() => {
     if (!router.isReady) return;
     if (orderedId) {
-      getUser();
+      getOrdered();
     }
-  }, [getUser, router.isReady, orderedId]);
+  }, [getOrdered, router.isReady, orderedId]);
 
   return { isLoading, ordered };
 };
