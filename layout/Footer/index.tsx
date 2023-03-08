@@ -4,6 +4,8 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
+import Container from '../../components/Container';
+import SocialIcon from '../../components/SocialIcon';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
 import Facebook from '../../public/svg/facebook.svg';
@@ -13,9 +15,7 @@ import MasterCard from '../../public/svg/master_card.svg';
 import Cirrus from '../../public/svg/master_card_cirrus.svg';
 import Twitter from '../../public/svg/twitter.svg';
 import Visa from '../../public/svg/visa.svg';
-import Container from '../Container';
 import NavLink from '../Nav/NavLink';
-import SocialIcon from '../SocialIcon';
 type Props = {};
 
 const Footer = (props: Props) => {

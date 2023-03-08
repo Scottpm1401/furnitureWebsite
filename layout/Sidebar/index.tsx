@@ -14,6 +14,7 @@ import { debounce } from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 
+import ColorButton from '../../components/ColorButton';
 import { useResponsive } from '../../hooks/responsive';
 import {
   Filter,
@@ -21,7 +22,6 @@ import {
   ProductCategory,
   ProductColor,
 } from '../../models/product';
-import ColorButton from '../ColorButton';
 import { NAV_HEIGHT } from '../Nav';
 
 type SidebarType = {

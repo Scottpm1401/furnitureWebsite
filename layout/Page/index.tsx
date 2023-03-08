@@ -3,8 +3,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useMemo } from 'react';
 
-import { NAV_HEIGHT } from '../../components/Nav';
 import { APP_ROUTES } from '../../constant';
+import { NAV_HEIGHT } from '../Nav';
 
 type Props = { title?: string } & FlexProps;
 

@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import { APP_ROUTES } from '../../../constant';
+import NavLink from '../../../layout/Nav/NavLink';
 import { LoginRequest } from '../../../models/api/user';
 import Eye from '../../../public/svg/eye.svg';
 import EyeOff from '../../../public/svg/eye_off.svg';
@@ -23,7 +24,6 @@ import { login } from '../../../services/auth';
 import { getProfile } from '../../../services/user';
 import { validateEmail } from '../../../utils/common';
 import CustomInput from '../../CustomInput';
-import NavLink from '../../Nav/NavLink';
 
 type LoginFormType = {
   userinput: string;

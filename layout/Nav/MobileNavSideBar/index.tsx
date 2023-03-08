@@ -17,6 +17,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useRef, useState } from 'react';
 
+import SocialIcon from '../../../components/SocialIcon';
 import { APP_ROUTES } from '../../../constant';
 import CloseIcon from '../../../public/svg/close.svg';
 import Facebook from '../../../public/svg/facebook.svg';
@@ -35,7 +36,6 @@ import Twitter from '../../../public/svg/twitter.svg';
 import SignupIcon from '../../../public/svg/user-plus.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
-import SocialIcon from '../../SocialIcon';
 import NavLink from '../NavLink';
 
 type MobileNavSideBarType = {

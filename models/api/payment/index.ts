@@ -10,7 +10,7 @@ export type CreatePaymentResponse = {
   nextAction?: string;
 };
 
-export type confirmPaymentResquest = {
+export type confirmPaymentRequest = {
   payment_method: string;
   billing_details: BillingDetailsType;
 };

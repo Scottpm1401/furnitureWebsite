@@ -44,6 +44,6 @@ export const updateOrderedById = async (
 };
 
 export const getAllProducts = async (params: SearchPagination) => {
-  const res = await axiosClient.get(API.PRODUCT.GETCMSALL);
+  const res = await axiosClient.get(API.PRODUCT.GETCMSALL, { params });
   return res.data as CMSList<ProductType[]>;
 };

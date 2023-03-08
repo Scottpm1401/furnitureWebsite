@@ -12,7 +12,6 @@ import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 
-import SideBarItem from '../../components/SideBarItem';
 import { APP_ROUTES } from '../../constant';
 import HomeIcon from '../../public/svg/home.svg';
 import LanguageIcon from '../../public/svg/language.svg';
@@ -24,6 +23,7 @@ import TaskIcon from '../../public/svg/task.svg';
 import UserIcon from '../../public/svg/user.svg';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { actions, selectors } from '../../redux/reducer';
+import SideBarItem from '../SideBarItem';
 
 type Props = {};
 

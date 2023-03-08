@@ -11,10 +11,10 @@ import { useEffect, useMemo } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import Footer from '../components/Footer';
-import Nav from '../components/Nav';
 import { APP_ROUTES } from '../constant';
 import CmsSideBar from '../layout/CmsSideBar';
+import Footer from '../layout/Footer';
+import Nav from '../layout/Nav';
 import { persistor, store } from '../redux/store';
 import theme from '../theme';
 

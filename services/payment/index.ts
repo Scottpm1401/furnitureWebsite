@@ -1,7 +1,7 @@
 import { API } from '../../constant/api';
 import axiosClient from '../../interceptor';
 import {
-  confirmPaymentResquest,
+  confirmPaymentRequest,
   CreatePaymentRequest,
   CreatePaymentResponse,
 } from '../../models/api/payment';
@@ -15,7 +15,7 @@ export const createPayment = async () => {
   return res.data as CreatePaymentResponse;
 };
 
-export const confirmPayment = async (body: confirmPaymentResquest) => {
+export const confirmPayment = async (body: confirmPaymentRequest) => {
   const res = await axiosClient.post(API.PAYMENT.CONFIRM, body);
   return res.data as PurchaseType[];
 };

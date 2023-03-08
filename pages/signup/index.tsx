@@ -4,9 +4,9 @@ import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import SignupForm from '../../components/Form/SignupForm';
-import NavLink from '../../components/Nav/NavLink';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
+import NavLink from '../../layout/Nav/NavLink';
 import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
 type Props = {};

@@ -17,6 +17,7 @@ import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import Container from '../../components/Container';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
 import AccountIcon from '../../public/svg/account.svg';
@@ -29,7 +30,6 @@ import ShoppingBagIcon from '../../public/svg/shopping_bag.svg';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { actions, selectors } from '../../redux/reducer';
 import { logout } from '../../services/auth';
-import Container from '../Container';
 import MobileNavSideBar from './MobileNavSideBar';
 import NavLink from './NavLink';
 

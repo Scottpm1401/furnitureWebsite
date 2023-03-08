@@ -1,9 +1,6 @@
-import {
-  BillingDetailsType,
-  PurchaseProduct,
-  PurchaseStatus,
-} from '../../purchase';
-import { UserInfoType } from '../../user';
+import { ProductType } from '../../product';
+import { PurchaseType } from '../../purchase';
+import { UserType } from '../../user';
 
 export type CMSList<T> = {
   total: number;
@@ -19,21 +16,17 @@ export type SearchPagination = {
   search?: string;
 } & Pagination;
 
-export type UpdateUserRequest = {
-  displayName?: String;
-  username?: string;
-  birthday?: string;
-  info?: UserInfoType;
-  role?: 'ADMIN' | 'USER';
-  email?: string;
+export type UpdateUserRequest = Partial<
+  Omit<UserType, '_id' | 'cart' | 'cart_total'>
+> & {
   password?: string;
 };
 
-export type UpdateOrderedRequest = {
-  status?: PurchaseStatus;
-  arrive_date?: string;
-  package_date?: string;
-  total_bill?: number;
-  products?: PurchaseProduct[];
-  billingDetails?: BillingDetailsType;
-};
+export type UpdateOrderedRequest = Partial<
+  Omit<
+    PurchaseType,
+    '_id' | 'user_id' | 'createdAt' | 'updatedAt' | 'payment_method'
+  >
+>;
+
+export type UpdateProductRequest = Partial<Omit<ProductType, '_id'>>;
