@@ -10,7 +10,7 @@ import {
   TextProps,
   Tr,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { BORDER_COLOR } from '../../../constant';
 import CheckIcon from '../../../public/svg/check.svg';
@@ -37,6 +37,18 @@ interface TableDetailProps {
 const TableDetailRow = ({ row }: { row: TableDetailRowProps }) => {
   const [isEditing, setIsEditing] = useState(false);
   const { title, content, edit, textProps } = row;
+  const isContentText = isText(content) || content === undefined;
+  const renderContent = useCallback(
+    () =>
+      isContentText ? (
+        <Text w='full' {...textProps}>
+          {content}
+        </Text>
+      ) : (
+        content
+      ),
+    [content, isContentText, textProps]
+  );
 
   return (
     <Tr height='90px' borderBottom={`1px solid ${BORDER_COLOR}`}>
@@ -44,73 +56,70 @@ const TableDetailRow = ({ row }: { row: TableDetailRowProps }) => {
         <Text fontWeight='semibold'>{title}</Text>
       </Td>
       <Td w='80%'>
-        {isText(content) || content === undefined ? (
-          edit ? (
-            isEditing ? (
-              <Stack
-                direction='row'
-                alignItems='center'
-                justifyContent='space-between'
-                spacing={3}
-              >
-                {edit.customInput ? (
-                  edit.customInput
-                ) : (
-                  <Input
-                    autoFocus
-                    onBlur={() => setIsEditing(false)}
-                    value={content as string}
-                    {...edit.inputProps}
-                  />
-                )}
+        {edit ? (
+          isEditing ? (
+            <Stack
+              direction='row'
+              alignItems='center'
+              justifyContent='space-between'
+              spacing={3}
+            >
+              {edit.customInput ? (
+                edit.customInput
+              ) : (
+                <Input
+                  autoFocus
+                  onBlur={() => setIsEditing(false)}
+                  value={content as string}
+                  {...edit.inputProps}
+                />
+              )}
 
-                <IconButton
-                  minW='unset'
-                  p='6px'
-                  minWidth='32px'
-                  w='32px'
-                  h='32px'
-                  colorScheme='orange'
-                  icon={
-                    edit.isInit ? (
-                      <CloseIcon style={{ stroke: 'white' }} />
-                    ) : (
-                      <CheckIcon
-                        style={{
-                          stroke: 'white',
-                        }}
-                      />
-                    )
-                  }
-                  aria-label={`confirm_icon_${title}`}
-                  onClick={() => setIsEditing(false)}
-                />
-              </Stack>
-            ) : (
-              <Stack
-                direction='row'
-                alignItems='center'
-                justifyContent='space-between'
-                spacing={3}
-              >
-                <Text {...textProps}>{content}</Text>
-                <IconButton
-                  minW='unset'
-                  p='6px'
-                  w='32px'
-                  h='32px'
-                  colorScheme='orange'
-                  icon={<EditIcon />}
-                  aria-label={`edit_icon_${title}`}
-                  onClick={() => setIsEditing(true)}
-                />
-              </Stack>
-            )
+              <IconButton
+                minW='unset'
+                p='6px'
+                minWidth='32px'
+                w='32px'
+                h='32px'
+                colorScheme='orange'
+                icon={
+                  edit.isInit ? (
+                    <CloseIcon style={{ stroke: 'white' }} />
+                  ) : (
+                    <CheckIcon
+                      style={{
+                        stroke: 'white',
+                      }}
+                    />
+                  )
+                }
+                aria-label={`confirm_icon_${title}`}
+                onClick={() => setIsEditing(false)}
+              />
+            </Stack>
           ) : (
-            <Text {...row.textProps}>{content}</Text>
+            <Stack
+              direction='row'
+              alignItems='center'
+              justifyContent='space-between'
+              spacing={3}
+            >
+              {renderContent()}
+
+              <IconButton
+                minW='unset'
+                p='6px'
+                w='32px'
+                h='32px'
+                colorScheme='orange'
+                icon={<EditIcon />}
+                aria-label={`edit_icon_${title}`}
+                onClick={() => setIsEditing(true)}
+              />
+            </Stack>
           )
         ) : (
-          content
+          renderContent()
         )}
       </Td>
     </Tr>

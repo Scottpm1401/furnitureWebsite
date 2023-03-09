@@ -19,7 +19,7 @@ const theme = extendTheme({
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif`,
         padding: 0,
         margin: 0,
-        'scroll-behavior': 'smooth',
+        scrollBehavior: 'smooth',
       },
     },
   },

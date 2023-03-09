@@ -2,14 +2,18 @@ import { Avatar, Button, Flex, Input, Text, useToast } from '@chakra-ui/react';
 import { isAxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { useResponsive } from '../../../../hooks/responsive';
 import Camera from '../../../../public/svg/camera.svg';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';
-import { getSignature, GetSignatureType } from '../../../../services/upload';
-import { updateUser, uploadUserAva } from '../../../../services/user';
+import {
+  getSignature,
+  GetSignatureType,
+  uploadImage,
+} from '../../../../services/upload';
+import { updateUser } from '../../../../services/user';
 import { convertToBase64 } from '../../../../utils/common';
 import CustomInput from '../../../CustomInput';
 
@@ -56,13 +60,13 @@ const GeneralProfile = () => {
           'upload_preset',
           process.env.NEXT_PUBLIC_CLOUDINARY_PRESET || ''
         );
-        const { public_id, version } = await uploadUserAva(formData);
+        const { public_id, version } = await uploadImage(formData);
         const updatedUser = await updateUser({
           username: values.username,
           displayName: values.displayName,
           info: {
             ...user.info,
-            avatar: version ? `v${version}/${public_id}` : public_id,
+            avatar: version ? `/v${version}/${public_id}` : public_id,
           },
         });
         dispatch(actions.user.setUser(updatedUser));
@@ -113,7 +117,7 @@ const GeneralProfile = () => {
         initialValues={
           {
             avatar: user.info?.avatar
-              ? `${process.env.NEXT_PUBLIC_CDN}/${user.info.avatar}`
+              ? `${process.env.NEXT_PUBLIC_CDN}${user.info.avatar}`
               : undefined,
             displayName: user.displayName,
             username: user.username,

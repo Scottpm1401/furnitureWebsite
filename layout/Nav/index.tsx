@@ -238,7 +238,7 @@ const Nav = (props: Props) => {
                           <Avatar
                             ml='1rem'
                             name={user?.displayName}
-                            src={`${process.env.NEXT_PUBLIC_CDN}/${user?.info?.avatar}`}
+                            src={`${process.env.NEXT_PUBLIC_CDN}${user?.info?.avatar}`}
                             size='sm'
                           />
                         </Button>
@@ -338,7 +338,7 @@ const Nav = (props: Props) => {
                   <Avatar
                     w='full'
                     h='full'
-                    src={`${process.env.NEXT_PUBLIC_CDN}/${user.info?.avatar}`}
+                    src={`${process.env.NEXT_PUBLIC_CDN}${user.info?.avatar}`}
                     name={user?.displayName}
                   />
                 </Flex>

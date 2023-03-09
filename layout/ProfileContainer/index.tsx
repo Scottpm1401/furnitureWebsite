@@ -22,7 +22,7 @@ const ProfileContainer = ({ children, ...props }: Props) => {
             <Avatar
               w='full'
               h='full'
-              src={`${process.env.NEXT_PUBLIC_CDN}/${user.info?.avatar}`}
+              src={`${process.env.NEXT_PUBLIC_CDN}${user.info?.avatar}`}
               name={user?.displayName}
             />
           </Flex>

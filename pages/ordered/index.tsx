@@ -16,6 +16,7 @@ import { floor } from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
+import { useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
 
 import Breadcrumb from '../../components/Breadcrumb';
@@ -30,6 +31,163 @@ import { PurchaseProduct } from '../../models/purchase';
 import StarIcon from '../../public/svg/star.svg';
 import { ratingProduct } from '../../services/product';
 import { formatAddress, formatDateTime } from '../../utils/common';
+
+type OrderedItemProps = {
+  item: PurchaseProduct;
+  handleRating: (
+    rate: number,
+    purchase_id: string,
+    product: PurchaseProduct
+  ) => Promise<void>;
+  orderId: string;
+};
+
+const OrderedItem = ({ item, handleRating, orderId }: OrderedItemProps) => {
+  const [isRating, setIsRating] = useState<boolean>(!!item.rating);
+  const { t } = useTranslation();
+  const { isMobileOrTablet } = useResponsive();
+
+  return isMobileOrTablet ? (
+    <Flex position='relative' direction='column'>
+      <Flex>
+        <Flex
+          w='200px'
+          h='160px'
+          mr='0.5rem'
+          position='relative'
+          overflow='hidden'
+          borderRadius='1rem'
+        >
+          <Image
+            src={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
+            alt={item.title}
+            fill
+          />
+        </Flex>
+        <Stack spacing='0.5rem' justifyContent='center'>
+          <Text fontWeight='semibold'>{item.title}</Text>
+          <Text fontWeight='semibold'>
+            {t('price')}: ${item.price}
+          </Text>
+          <Flex alignItems='center'>
+            <Text fontWeight='semibold' fontSize='small'>
+              {t('color')}
+            </Text>
+            <ColorButton
+              product_color={item.color}
+              active={false}
+              cursor='default'
+              ml='0.5rem'
+              opacity={1}
+            />
+          </Flex>
+          <Rating
+            emptyIcon={
+              <StarIcon
+                style={{
+                  width: 24,
+                  height: 24,
+                  display: 'inline-block',
+                }}
+              />
+            }
+            fillIcon={
+              <StarIcon
+                style={{
+                  width: 24,
+                  height: 24,
+                  fill: STAR_COLOR,
+                  display: 'inline-block',
+                }}
+              />
+            }
+            initialValue={item.rating}
+            onClick={(value) => {
+              setIsRating(true);
+              handleRating(value, orderId, item);
+            }}
+            readonly={isRating}
+          />
+        </Stack>
+      </Flex>
+      <Flex justifyContent='space-between' alignItems='center' mt='1rem'>
+        <Text textAlign='center' fontWeight='semibold'>
+          {`${t('quantity')}: ${item.quantity}`}
+        </Text>
+
+        <Text fontWeight='semibold'>
+          {`${t('subtotal')}: $${floor(item.price * item.quantity, 2)}`}
+        </Text>
+      </Flex>
+    </Flex>
+  ) : (
+    <Tr>
+      <Td>
+        <Flex>
+          <Flex
+            w='200px'
+            h='160px'
+            mr='0.5rem'
+            position='relative'
+            overflow='hidden'
+            borderRadius='1rem'
+          >
+            <Image
+              src={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
+              alt={item.title}
+              fill
+            />
+          </Flex>
+          <Flex direction='column' justifyContent='center'>
+            <Text fontWeight='semibold'>{item.title}</Text>
+            <Flex alignItems='center' mt='0.5rem'>
+              <Text fontWeight='semibold' fontSize='small'>
+                {t('color')}:
+              </Text>
+              <ColorButton
+                product_color={item.color}
+                active={false}
+                cursor='default'
+                ml='0.5rem'
+                opacity={1}
+              />
+            </Flex>
+          </Flex>
+        </Flex>
+      </Td>
+      <Td fontWeight='medium'>${item.price}</Td>
+      <Td fontWeight='medium'>{item.quantity}</Td>
+
+      <Td fontWeight='medium'>${floor(item.price * item.quantity, 2)}</Td>
+      <Td>
+        <Rating
+          emptyIcon={
+            <StarIcon
+              style={{
+                width: 24,
+                height: 24,
+                display: 'inline-block',
+              }}
+            />
+          }
+          fillIcon={
+            <StarIcon
+              style={{
+                width: 24,
+                height: 24,
+                fill: STAR_COLOR,
+                display: 'inline-block',
+              }}
+            />
+          }
+          initialValue={item.rating}
+          onClick={(value) => handleRating(value, orderId, item)}
+          readonly={item.rating ? true : false}
+        />
+      </Td>
+    </Tr>
+  );
+};
 
 const Ordered = () => {
   const { t } = useTranslation();
@@ -137,88 +295,12 @@ const Ordered = () => {
                     {isMobileOrTablet ? (
                       <Stack spacing='2rem' mt='2.5rem' w='full'>
                         {order.products.map((item) => (
-                          <Flex
-                            position='relative'
-                            direction='column'
+                          <OrderedItem
+                            handleRating={handleRating}
                             key={item.product_id}
-                          >
-                            <Flex>
-                              <Flex
-                                w='200px'
-                                h='160px'
-                                mr='0.5rem'
-                                position='relative'
-                                overflow='hidden'
-                                borderRadius='1rem'
-                              >
-                                <Image
-                                  src={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
-                                  alt={item.title}
-                                  fill
-                                />
-                              </Flex>
-                              <Stack spacing='0.5rem' justifyContent='center'>
-                                <Text fontWeight='semibold'>{item.title}</Text>
-                                <Text fontWeight='semibold'>
-                                  {t('price')}: ${item.price}
-                                </Text>
-                                <Flex alignItems='center'>
-                                  <Text fontWeight='semibold' fontSize='small'>
-                                    {t('color')}:
-                                  </Text>
-                                  <ColorButton
-                                    product_color={item.color}
-                                    active={false}
-                                    cursor='default'
-                                    ml='0.5rem'
-                                    opacity={1}
-                                  />
-                                </Flex>
-                                <Rating
-                                  emptyIcon={
-                                    <StarIcon
-                                      style={{
-                                        width: 24,
-                                        height: 24,
-                                        display: 'inline-block',
-                                      }}
-                                    />
-                                  }
-                                  fillIcon={
-                                    <StarIcon
-                                      style={{
-                                        width: 24,
-                                        height: 24,
-                                        fill: STAR_COLOR,
-                                        display: 'inline-block',
-                                      }}
-                                    />
-                                  }
-                                  initialValue={item.rating}
-                                  onClick={(value) =>
-                                    handleRating(value, order._id, item)
-                                  }
-                                  readonly={item.rating ? true : false}
-                                />
-                              </Stack>
-                            </Flex>
-                            <Flex
-                              justifyContent='space-between'
-                              alignItems='center'
-                              mt='1rem'
-                            >
-                              <Text textAlign='center' fontWeight='semibold'>
-                                {`${t('quantity')}: ${item.quantity}`}
-                              </Text>
-
-                              <Text fontWeight='semibold'>
-                                {`${t('subtotal')}: $${floor(
-                                  item.price * item.quantity,
-                                  2
-                                )}`}
-                              </Text>
-                            </Flex>
-                          </Flex>
+                            item={item}
+                            orderId={order._id}
+                          />
                         ))}
                       </Stack>
                     ) : (
@@ -241,83 +323,12 @@ const Ordered = () => {
                           </Thead>
                           <Tbody>
                             {order.products.map((item) => (
-                              <Tr key={item.product_id}>
-                                <Td>
-                                  <Flex>
-                                    <Flex
-                                      w='200px'
-                                      h='160px'
-                                      mr='0.5rem'
-                                      position='relative'
-                                      overflow='hidden'
-                                      borderRadius='1rem'
-                                    >
-                                      <Image
-                                        src={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
-                                        alt={item.title}
-                                        fill
-                                      />
-                                    </Flex>
-                                    <Flex
-                                      direction='column'
-                                      justifyContent='center'
-                                    >
-                                      <Text fontWeight='semibold'>
-                                        {item.title}
-                                      </Text>
-                                      <Flex alignItems='center' mt='0.5rem'>
-                                        <Text
-                                          fontWeight='semibold'
-                                          fontSize='small'
-                                        >
-                                          {t('color')}:
-                                        </Text>
-                                        <ColorButton
-                                          product_color={item.color}
-                                          active={false}
-                                          cursor='default'
-                                          ml='0.5rem'
-                                          opacity={1}
-                                        />
-                                      </Flex>
-                                    </Flex>
-                                  </Flex>
-                                </Td>
-                                <Td fontWeight='medium'>${item.price}</Td>
-                                <Td fontWeight='medium'>{item.quantity}</Td>
-
-                                <Td fontWeight='medium'>
-                                  ${floor(item.price * item.quantity, 2)}
-                                </Td>
-                                <Td>
-                                  <Rating
-                                    emptyIcon={
-                                      <StarIcon
-                                        style={{
-                                          width: 24,
-                                          height: 24,
-                                          display: 'inline-block',
-                                        }}
-                                      />
-                                    }
-                                    fillIcon={
-                                      <StarIcon
-                                        style={{
-                                          width: 24,
-                                          height: 24,
-                                          fill: STAR_COLOR,
-                                          display: 'inline-block',
-                                        }}
-                                      />
-                                    }
-                                    initialValue={item.rating}
-                                    onClick={(value) =>
-                                      handleRating(value, order._id, item)
-                                    }
-                                    readonly={item.rating ? true : false}
-                                  />
-                                </Td>
-                              </Tr>
+                              <OrderedItem
+                                handleRating={handleRating}
+                                key={item.product_id}
+                                item={item}
+                                orderId={order._id}
+                              />
                             ))}
                           </Tbody>
                         </Table>

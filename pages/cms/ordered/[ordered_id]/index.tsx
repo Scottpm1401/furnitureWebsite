@@ -29,7 +29,7 @@ const CmsOrdered = () => {
   const toast = useToast();
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const handleUpdateUser = async (values: UpdateOrderedRequest) => {
+  const handleUpdateOrdered = async (values: UpdateOrderedRequest) => {
     if (!ordered) return;
     try {
       setIsUpdating(true);
@@ -75,7 +75,7 @@ const CmsOrdered = () => {
                   billingDetails: ordered.billingDetails,
                 } as UpdateOrderedRequest
               }
-              onSubmit={handleUpdateUser}
+              onSubmit={handleUpdateOrdered}
               enableReinitialize
             >
               {({

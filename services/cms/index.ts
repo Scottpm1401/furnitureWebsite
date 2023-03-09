@@ -4,6 +4,7 @@ import {
   CMSList,
   SearchPagination,
   UpdateOrderedRequest,
+  UpdateProductRequest,
   UpdateUserRequest,
 } from '../../models/api/cms';
 import { ProductType } from '../../models/product';
@@ -46,4 +47,12 @@ export const updateOrderedById = async (
 export const getAllProducts = async (params: SearchPagination) => {
   const res = await axiosClient.get(API.PRODUCT.GETCMSALL, { params });
   return res.data as CMSList<ProductType[]>;
+};
+
+export const updateProductById = async (
+  id: string,
+  body: UpdateProductRequest
+) => {
+  const res = await axiosClient.patch(API.PRODUCT.UPDATEPRODUCT(id), body);
+  return res.data as ProductType;
 };

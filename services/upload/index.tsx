@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { API } from '../../constant/api';
 import axiosClient from '../../interceptor';
 import { SignedUpload } from '../../models/upload';
@@ -7,6 +9,11 @@ export type GetSignatureType = {
   folder?: string;
 };
 
+export type UploadedImage = {
+  public_id: string;
+  version?: number;
+};
+
 export const getSignature = async ({ public_id, folder }: GetSignatureType) => {
   const res = await axiosClient.post(API.UPLOAD.SIGNATURE, {
     upload_preset: process.env.NEXT_PUBLIC_CLOUDINARY_PRESET,
@@ -14,4 +21,18 @@ export const getSignature = async ({ public_id, folder }: GetSignatureType) => {
     folder,
   });
   return res.data as SignedUpload;
+};
+
+export const uploadImage = async (body: FormData) => {
+  const res = await axios.post(
+    process.env.NEXT_PUBLIC_CLOUDINARY_URL || '',
+    body,
+    {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }
+  );
+  return {
+    public_id: res.data.public_id,
+    version: res.data.version,
+  } as UploadedImage;
 };

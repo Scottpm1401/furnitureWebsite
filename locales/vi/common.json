@@ -19,7 +19,7 @@
   "your_email": "Email của bạn",
   "fine-ceramics": "Nghệ nhân làm gốm",
   "store-manager": "Quản lý",
-  "architech": "Kiến trúc sư",
+  "architect": "Kiến trúc sư",
   "designer": "Nhà thiết kế",
   "meet-our-team": "Gặp gỡ đội ngũ của chúng tôi",
   "our-creative-force": "Đội ngũ sáng tạo",
@@ -161,7 +161,7 @@
   "users": "Người dùng",
   "dashboard": "Tổng quát",
   "users_list": "Danh sách người dùng",
-  "products_list": "Danh sách hàng hoá",
+  "products_list": "Danh sách sản phẩm",
   "ordered_list": "Danh sách hoá đơn",
   "view_threads": "Chủ đề",
   "on_1_page": "Trong 1 trang",
@@ -174,5 +174,11 @@
   "ordered_details": "Thông tin hoá đơn",
   "update_ordered": "Cập nhật hoá đơn",
   "update_ordered_success": "Cập nhật hoá đơn thành công",
-  "update_user_success": "Cập nhật người dùng thành công"
+  "update_user_success": "Cập nhật người dùng thành công",
+  "title": "Tiêu đề",
+  "description": "Nội dung",
+  "product_details": "Thông tin sản phẩm",
+  "update_product": "Cập nhật sản phẩm",
+  "gallery": "Hình ảnh",
+  "update_product_success": "Cập nhật sản phẩm thành công"
 }

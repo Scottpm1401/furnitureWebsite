@@ -19,7 +19,7 @@
   "your_email": "Your email",
   "fine-ceramics": "Fine Ceramics",
   "store-manager": "Store Manager",
-  "architech": "Architech",
+  "architect": "Architect",
   "designer": "Designer",
   "meet-our-team": "Meet our team",
   "our-creative-force": "Our Creative Force",
@@ -174,5 +174,11 @@
   "ordered_details": "Ordered Details",
   "update_ordered": "Update Ordered",
   "update_ordered_success": "Update ordered successful",
-  "update_user_success": "Update user successful"
+  "update_user_success": "Update user successful",
+  "title": "Title",
+  "description": "Description",
+  "product_details": "Product Details",
+  "update_product": "Update product",
+  "gallery": "Gallery",
+  "update_product_success": "Update product successful"
 }

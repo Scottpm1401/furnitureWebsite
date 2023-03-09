@@ -50,7 +50,7 @@ const Section3 = (props: Props) => {
           />
           <TeamCard
             name='Nicolas Waldau'
-            role={t('architech')}
+            role={t('architect')}
             img='/images/team/team-img-2.jpg'
           />
           <TeamCard

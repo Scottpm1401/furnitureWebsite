@@ -60,3 +60,15 @@ export const isReqError = (error: any) => {
     return error.response.data.error.details[0].message as string;
   return undefined;
 };
+
+export const isBase64Image = (str: string): boolean => {
+  try {
+    const mimeType = str.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/);
+    return (
+      (mimeType && mimeType.length === 2 && mimeType[1].startsWith('image/')) ||
+      false
+    );
+  } catch (err) {
+    return false;
+  }
+};
