@@ -1,6 +1,7 @@
 import {
   Button,
   IconButton,
+  Input,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -10,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { isAxiosError } from 'axios';
 import { Form, Formik } from 'formik';
-import { difference, isEqual } from 'lodash';
+import { difference, isEqual, max } from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 
@@ -31,12 +32,22 @@ import {
 } from '../../../../models/product';
 import MinusIcon from '../../../../public/svg/minus.svg';
 import PlusIcon from '../../../../public/svg/plus.svg';
+import UploadIcon from '../../../../public/svg/upload.svg';
 import { updateProductById } from '../../../../services/cms';
-import { getSignature, uploadImage } from '../../../../services/upload';
-import { isReqError } from '../../../../utils/common';
+import {
+  destroyImage,
+  getSignature,
+  GetSignatureType,
+  uploadImage,
+} from '../../../../services/upload';
+import {
+  convertToBase64,
+  isBase64Image,
+  isReqError,
+} from '../../../../utils/common';
 
 const CmsProduct = () => {
-  const { product, isLoading } = useProduct();
+  const { product, isLoading, getProduct } = useProduct();
   const { t } = useTranslation();
   const toast = useToast();
   const [isUpdating, setIsUpdating] = useState(false);
@@ -54,13 +65,28 @@ const CmsProduct = () => {
         req.img = newImage;
       }
       if (values.gallery && !isEqual(values.gallery, product.gallery)) {
-        for (let index = 0; index < product.gallery.length; index++) {
+        for (
+          let index = 0;
+          index < (max([values.gallery.length, product.gallery.length]) || 0);
+          index++
+        ) {
           if (!isEqual(product.gallery[index], values.gallery[index])) {
-            const newGalleryImg = await handleUploadProductImage(
-              product.gallery[index],
-              values.gallery[index]
-            );
-            req.gallery![index] = newGalleryImg;
+            if (!isBase64Image(values.gallery[index])) {
+              if (values.gallery[index] === undefined) {
+                await handleDeleteProductImage(product.gallery[index]);
+                req.gallery = req.gallery?.filter(
+                  (item) => item !== req.gallery![index]
+                );
+              } else {
+                req.gallery![index] = values.gallery[index];
+              }
+            } else {
+              const newGalleryImg = await handleUploadProductImage(
+                values.gallery[index],
+                product.gallery[index]
+              );
+              req.gallery![index] = newGalleryImg;
+            }
           }
         }
       }
@@ -85,17 +111,41 @@ const CmsProduct = () => {
       }
     } finally {
       setIsUpdating(false);
+      getProduct();
     }
   };
 
-  const handleUploadProductImage = async (img: string, uploadImg: string) => {
+  const handleDeleteProductImage = async (img: string) => {
     const formData = new FormData();
-
     const publicId = img.slice(img.indexOf('furniture'));
     formData.append('public_id', publicId);
     const { signature, timestamp } = await getSignature({
       public_id: publicId,
     });
+    formData.append(
+      'api_key',
+      process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || ''
+    );
+    formData.append('timestamp', timestamp.toString());
+    formData.append('signature', signature);
+
+    await destroyImage(formData);
+  };
+
+  const handleUploadProductImage = async (uploadImg: string, img?: string) => {
+    const formData = new FormData();
+    let signatureParam: GetSignatureType = {};
+    if (img) {
+      const publicId = img.slice(img.indexOf('furniture'));
+      signatureParam.public_id = publicId;
+      formData.append('public_id', publicId);
+    } else {
+      const folder = 'furniture/products/extra';
+      signatureParam.folder = folder;
+      formData.append('folder', folder);
+    }
+
+    const { signature, timestamp } = await getSignature(signatureParam);
     formData.append('file', uploadImg);
     formData.append(
       'api_key',
@@ -103,10 +153,7 @@ const CmsProduct = () => {
     );
     formData.append('timestamp', timestamp.toString());
     formData.append('signature', signature);
-    formData.append(
-      'upload_preset',
-      process.env.NEXT_PUBLIC_CLOUDINARY_PRESET || ''
-    );
+
     const { public_id, version } = await uploadImage(formData);
     return version ? `/v${version}/${public_id}` : public_id;
   };
@@ -260,6 +307,7 @@ const CmsProduct = () => {
                                   setFieldValue('img', result)
                                 }
                               />
+
                               {values.gallery?.map((item) => (
                                 <CmsProductImage
                                   src={item}
@@ -272,8 +320,85 @@ const CmsProduct = () => {
                                       )
                                     )
                                   }
+                                  onDelete={() =>
+                                    setFieldValue(
+                                      'gallery',
+                                      values.gallery?.filter(
+                                        (img) => img !== item
+                                      )
+                                    )
+                                  }
                                 />
                               ))}
+                              {values.gallery && values.gallery.length < 3 && (
+                                <>
+                                  <Stack
+                                    w='full'
+                                    h='full'
+                                    borderRadius='0.5rem'
+                                    overflow='hidden'
+                                  >
+                                    <Stack
+                                      w='full'
+                                      h='full'
+                                      transition='all 300ms ease-in-out'
+                                      background='blackAlpha.600'
+                                      justifyContent='center'
+                                      alignItems='center'
+                                      gap='1rem'
+                                      spacing={0}
+                                    >
+                                      <label htmlFor={`upload_new`}>
+                                        <Stack
+                                          w='40px'
+                                          h='40px'
+                                          p='8px'
+                                          bg='whiteAlpha.400'
+                                          _hover={{
+                                            bg: 'whiteAlpha.600',
+                                          }}
+                                          transition='all 200ms ease-in-out'
+                                          borderRadius='full'
+                                          cursor='pointer'
+                                          spacing={0}
+                                        >
+                                          <UploadIcon stroke='white' />
+                                        </Stack>
+                                      </label>
+
+                                      <Input
+                                        id={`upload_new`}
+                                        display='none'
+                                        type='file'
+                                        accept='image/png, image/gif, image/jpeg'
+                                        onChange={async (e) => {
+                                          const { result } =
+                                            await convertToBase64(
+                                              e.target.files?.[0] as File
+                                            );
+
+                                          setFieldValue(
+                                            'gallery',
+                                            values.gallery && [
+                                              ...values.gallery,
+                                              result,
+                                            ]
+                                          );
+                                        }}
+                                      />
+                                    </Stack>
+                                  </Stack>
+                                  {new Array(2 - values.gallery.length)
+                                    .fill(0)
+                                    .map((item, index) => (
+                                      <Stack
+                                        w='full'
+                                        h='full'
+                                        key={`${item}_${index}`}
+                                      />
+                                    ))}
+                                </>
+                              )}
                             </Stack>
                           ),
                         },

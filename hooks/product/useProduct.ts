@@ -26,14 +26,13 @@ const useProduct = () => {
   }, [productId]);
 
   useEffect(() => {
-    console.log('test', productId);
     if (!router.isReady) return;
     if (productId) {
       getProduct();
     }
   }, [getProduct, router.isReady, productId]);
 
-  return { isLoading, product };
+  return { isLoading, product, getProduct };
 };
 
 export default useProduct;

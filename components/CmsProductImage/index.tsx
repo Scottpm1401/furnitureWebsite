@@ -76,20 +76,22 @@ const CmsProductImage = ({
           </Stack>
         </label>
 
-        <IconButton
-          position='absolute'
-          w='24px'
-          h='24px'
-          p='4px'
-          minW='unset'
-          top='8px'
-          right='8px'
-          colorScheme='whiteAlpha'
-          borderRadius='full'
-          icon={<CloseIcon stroke='white' />}
-          aria-label={`delete_${src}`}
-          onClick={onDelete}
-        />
+        {onDelete && (
+          <IconButton
+            position='absolute'
+            w='24px'
+            h='24px'
+            p='4px'
+            minW='unset'
+            top='8px'
+            right='8px'
+            colorScheme='whiteAlpha'
+            borderRadius='full'
+            icon={<CloseIcon stroke='white' />}
+            aria-label={`delete_${src}`}
+            onClick={onDelete}
+          />
+        )}
 
         <Input
           id={`upload_${src}`}

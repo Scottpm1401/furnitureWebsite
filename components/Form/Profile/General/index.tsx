@@ -56,10 +56,6 @@ const GeneralProfile = () => {
         );
         formData.append('timestamp', timestamp.toString());
         formData.append('signature', signature);
-        formData.append(
-          'upload_preset',
-          process.env.NEXT_PUBLIC_CLOUDINARY_PRESET || ''
-        );
         const { public_id, version } = await uploadImage(formData);
         const updatedUser = await updateUser({
           username: values.username,
