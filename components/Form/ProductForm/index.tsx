@@ -54,6 +54,7 @@ const ProductForm = ({ product, onSubmit, create }: ProductFormProps) => {
       await onSubmit(values);
     } catch (err) {
       console.log(err);
+      console.log('test');
     } finally {
       setIsUpdating(false);
     }
