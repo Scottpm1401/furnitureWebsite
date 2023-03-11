@@ -29,4 +29,4 @@ export type UpdateOrderedRequest = Partial<
   >
 >;
 
-export type UpdateProductRequest = Partial<Omit<ProductType, '_id'>>;
+export type UpdateProductRequest = Omit<ProductType, '_id'>;

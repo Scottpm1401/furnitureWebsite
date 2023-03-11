@@ -68,7 +68,7 @@ const CmcOrdered = (props: Props) => {
                         icon={<EditIcon />}
                         aria-label={`edit_icon_${ordered._id}`}
                         onClick={() =>
-                          router.push(APP_ROUTES.cmsOrder(ordered._id))
+                          router.push(APP_ROUTES.cms.ordered.index(ordered._id))
                         }
                       />
                     </Td>

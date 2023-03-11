@@ -1,10 +1,9 @@
 import { IconButton, Input, Stack } from '@chakra-ui/react';
 import Image from 'next/image';
-import React, { useState } from 'react';
 
-import CloseIcon from '../../public/svg/close.svg';
-import UploadIcon from '../../public/svg/upload.svg';
-import { convertToBase64, isBase64Image } from '../../utils/common';
+import CloseIcon from '../../../../public/svg/close.svg';
+import UploadIcon from '../../../../public/svg/upload.svg';
+import { convertToBase64, isBase64Image } from '../../../../utils/common';
 
 type CmsProductProps = {
   src: string;

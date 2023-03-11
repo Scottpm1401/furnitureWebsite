@@ -11,7 +11,7 @@ type Props = { title?: string } & FlexProps;
 const Page = ({ children, title, ...props }: Props) => {
   const router = useRouter();
   const isInCms = useMemo(
-    () => router.pathname.includes(APP_ROUTES.cms),
+    () => router.pathname.includes(APP_ROUTES.cms.dashboard),
     [router.pathname]
   );
   return (

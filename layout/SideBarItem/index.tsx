@@ -14,7 +14,10 @@ const SideBarItem = ({ title, icon, href, ...props }: Props) => {
   const router = useRouter();
 
   const isSelected = useMemo(() => {
-    if (href === APP_ROUTES.cms && router.pathname !== APP_ROUTES.cms)
+    if (
+      href === APP_ROUTES.cms.dashboard &&
+      router.pathname !== APP_ROUTES.cms.dashboard
+    )
       return false;
     return router.pathname.includes(href);
   }, [href, router.pathname]);

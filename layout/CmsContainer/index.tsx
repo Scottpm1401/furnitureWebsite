@@ -27,6 +27,7 @@ type Props = {
   search?: {
     handleSearch: (offset: number, limit: number, search: string) => void;
   };
+  rightElement?: React.ReactNode;
 } & StackProps;
 
 const CmsContainer = ({
@@ -36,6 +37,7 @@ const CmsContainer = ({
   href,
   containerProps,
   search,
+  rightElement,
   ...props
 }: Props) => {
   const user = useAppSelector(selectors.user.selectUser);
@@ -65,7 +67,7 @@ const CmsContainer = ({
           />
         )}
 
-        <Link href={APP_ROUTES.cmsUser(user._id)}>
+        <Link href={APP_ROUTES.cms.users.index(user._id)}>
           <Flex w='40px' h='40px'>
             <Avatar
               w='full'
@@ -86,13 +88,16 @@ const CmsContainer = ({
           <Text fontSize='4xl' mb='1rem' fontWeight='semibold' {...titleProps}>
             {title}
           </Text>
-          {search && (
-            <Input
-              w='300px'
-              placeholder={t('search_place_holder')}
-              onChange={(e) => debounceSearch(e.target.value)}
-            />
-          )}
+          <Stack direction='row' alignItems='center' spacing={4}>
+            {search && (
+              <Input
+                w='300px'
+                placeholder={t('search_place_holder')}
+                onChange={(e) => debounceSearch(e.target.value)}
+              />
+            )}
+            {rightElement}
+          </Stack>
         </Stack>
 
         {children}

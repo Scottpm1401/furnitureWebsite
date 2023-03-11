@@ -19,12 +19,23 @@ export const APP_ROUTES = {
   contact: '/contact',
   termAndCondition: '/legal/terms_and_conditions',
   privacyPolicy: '/legal/privacy_policy',
-  cms: '/cms',
-  cmsOrdered: '/cms/ordered',
-  cmsProducts: '/cms/products',
-  cmsSettings: '/cms/settings',
-  cmsUsers: '/cms/users',
-  cmsUser: (id: string) => `/cms/users/${id}`,
-  cmsProduct: (id: string) => `/cms/products/${id}`,
-  cmsOrder: (id: string) => `/cms/ordered/${id}`,
+  cms: {
+    dashboard: '/cms',
+    ordered: {
+      list: '/cms/ordered',
+      create: '/cms/ordered/create',
+      index: (id: string) => `/cms/ordered/${id}`,
+    },
+    products: {
+      list: '/cms/products',
+      create: '/cms/products/create',
+      index: (id: string) => `/cms/products/${id}`,
+    },
+    users: {
+      list: '/cms/users',
+      create: '/cms/create',
+      index: (id: string) => `/cms/users/${id}`,
+    },
+    settings: '/cms/settings',
+  },
 };

@@ -180,5 +180,9 @@
   "product_details": "Thông tin sản phẩm",
   "update_product": "Cập nhật sản phẩm",
   "gallery": "Hình ảnh",
-  "update_product_success": "Cập nhật sản phẩm thành công"
+  "update_product_success": "Cập nhật sản phẩm thành công",
+  "create": "Tạo mới",
+  "auto_generate": "Khởi tạo tự động",
+  "create_product": "Tạo sản phẩm",
+  "creating": "Đang tạo"
 }

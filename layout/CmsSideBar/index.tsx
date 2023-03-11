@@ -68,27 +68,27 @@ const CmsSideBar = (props: Props) => {
           <SideBarItem
             icon={<HomeIcon style={{ stroke: 'white' }} />}
             title={t('dashboard')}
-            href={APP_ROUTES.cms}
+            href={APP_ROUTES.cms.dashboard}
           />
           <SideBarItem
             icon={<UserIcon style={{ stroke: 'white' }} />}
             title={t('users')}
-            href={APP_ROUTES.cmsUsers}
+            href={APP_ROUTES.cms.users.list}
           />
           <SideBarItem
             icon={<TaskIcon style={{ fill: 'white' }} />}
             title={t('ordered')}
-            href={APP_ROUTES.cmsOrdered}
+            href={APP_ROUTES.cms.ordered.list}
           />
           <SideBarItem
             icon={<PackageIcon style={{ stroke: 'white' }} />}
             title={t('products')}
-            href={APP_ROUTES.cmsProducts}
+            href={APP_ROUTES.cms.products.list}
           />
           <SideBarItem
             icon={<SettingsIcon style={{ stroke: 'white', fill: 'none' }} />}
             title={t('settings')}
-            href={APP_ROUTES.cmsSettings}
+            href={APP_ROUTES.cms.settings}
           />
         </Stack>
       </Stack>

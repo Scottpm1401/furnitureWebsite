@@ -60,7 +60,10 @@ const CmsUser = () => {
   return (
     <AdminAuthProvider>
       <Page direction='row' w='full' title={t('user_details')}>
-        <CmsContainer title={t('user_details')} href={APP_ROUTES.cmsUsers}>
+        <CmsContainer
+          title={t('user_details')}
+          href={APP_ROUTES.cms.users.list}
+        >
           {!user || isLoading ? (
             <TableDetailSkeleton rows={7} />
           ) : (

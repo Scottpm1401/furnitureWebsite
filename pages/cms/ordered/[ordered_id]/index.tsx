@@ -60,7 +60,10 @@ const CmsOrdered = () => {
   return (
     <AdminAuthProvider>
       <Page direction='row' w='full' title={t('ordered_details')}>
-        <CmsContainer title={t('ordered_details')} href={APP_ROUTES.cmsOrdered}>
+        <CmsContainer
+          title={t('ordered_details')}
+          href={APP_ROUTES.cms.ordered.list}
+        >
           {!ordered || isLoading ? (
             <TableDetailSkeleton rows={7} />
           ) : (

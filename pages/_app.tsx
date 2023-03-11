@@ -22,7 +22,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
   const { lang } = useTranslation();
   const isInCms = useMemo(
-    () => router.pathname.includes(APP_ROUTES.cms),
+    () => router.pathname.includes(APP_ROUTES.cms.dashboard),
     [router.pathname]
   );
 

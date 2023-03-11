@@ -66,7 +66,7 @@ const CmsUsers = () => {
                         icon={<EditIcon />}
                         aria-label={`edit_icon_${user._id}`}
                         onClick={() =>
-                          router.push(APP_ROUTES.cmsUser(user._id))
+                          router.push(APP_ROUTES.cms.users.index(user._id))
                         }
                       />
                     </Td>

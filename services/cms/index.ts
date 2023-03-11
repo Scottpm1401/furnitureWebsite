@@ -56,3 +56,8 @@ export const updateProductById = async (
   const res = await axiosClient.patch(API.PRODUCT.UPDATEPRODUCT(id), body);
   return res.data as ProductType;
 };
+
+export const createProduct = async (body: UpdateProductRequest) => {
+  const res = await axiosClient.post(API.PRODUCT.CREATEPRODUCT, body);
+  return res.data as ProductType;
+};

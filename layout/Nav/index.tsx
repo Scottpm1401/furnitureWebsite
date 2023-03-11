@@ -279,7 +279,7 @@ const Nav = (props: Props) => {
                             </Stack>
                           </Link>
                           {isAdmin && (
-                            <Link href={APP_ROUTES.cms}>
+                            <Link href={APP_ROUTES.cms.dashboard}>
                               <Stack
                                 direction='row'
                                 onClick={onPopoverToggle}

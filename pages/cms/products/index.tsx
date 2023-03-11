@@ -1,4 +1,4 @@
-import { IconButton, Td, Th, Tr } from '@chakra-ui/react';
+import { Button, IconButton, Td, Th, Tr } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
@@ -11,6 +11,7 @@ import AdminAuthProvider from '../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../layout/CmsContainer';
 import Page from '../../../layout/Page';
 import EditIcon from '../../../public/svg/edit.svg';
+import PlusIcon from '../../../public/svg/plus.svg';
 
 type Props = {};
 
@@ -35,6 +36,15 @@ const CmsProducts = (props: Props) => {
         <CmsContainer
           title={t('products_list')}
           search={{ handleSearch: getProductsList }}
+          rightElement={
+            <Button
+              leftIcon={<PlusIcon width={16} height={16} strokeWidth={4} />}
+              colorScheme='orange'
+              onClick={() => router.push(APP_ROUTES.cms.products.create)}
+            >
+              {t('create')}
+            </Button>
+          }
         >
           <Table
             headers={
@@ -68,7 +78,9 @@ const CmsProducts = (props: Props) => {
                         icon={<EditIcon />}
                         aria-label={`edit_icon_${product._id}`}
                         onClick={() =>
-                          router.push(APP_ROUTES.cmsProduct(product._id))
+                          router.push(
+                            APP_ROUTES.cms.products.index(product._id)
+                          )
                         }
                       />
                     </Td>
