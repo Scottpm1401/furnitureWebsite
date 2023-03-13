@@ -10,7 +10,7 @@ import {
   TextProps,
   Tr,
 } from '@chakra-ui/react';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { BORDER_COLOR } from '../../../constant';
 import CheckIcon from '../../../public/svg/check.svg';
@@ -26,6 +26,7 @@ export interface TableDetailRowProps {
   edit?: {
     inputProps?: InputProps;
     customInput?: React.ReactNode;
+    error?: string;
     isInit: boolean;
   };
 }
@@ -39,15 +40,19 @@ const TableDetailRow = ({ row }: { row: TableDetailRowProps }) => {
   const { title, content, edit, textProps } = row;
   const isContentText = isText(content) || content === undefined;
   const renderContent = useCallback(
-    () =>
-      isContentText ? (
-        <Text w='full' {...textProps}>
-          {content}
-        </Text>
-      ) : (
-        content
-      ),
-    [content, isContentText, textProps]
+    () => (
+      <Stack w='full' spacing={0}>
+        {isContentText ? (
+          <Text w='full' {...textProps}>
+            {content}
+          </Text>
+        ) : (
+          content
+        )}
+        {edit?.error && <Text color='red.600'>{edit.error}</Text>}
+      </Stack>
+    ),
+    [content, edit?.error, isContentText, textProps]
   );
 
   return (
@@ -64,16 +69,19 @@ const TableDetailRow = ({ row }: { row: TableDetailRowProps }) => {
               justifyContent='space-between'
               spacing={3}
             >
-              {edit.customInput ? (
-                edit.customInput
-              ) : (
-                <Input
-                  autoFocus
-                  onBlur={() => setIsEditing(false)}
-                  value={content as string}
-                  {...edit.inputProps}
-                />
-              )}
+              <Stack w='full' spacing={2}>
+                {edit.customInput ? (
+                  edit.customInput
+                ) : (
+                  <Input
+                    autoFocus
+                    onBlur={() => setIsEditing(false)}
+                    value={content as string}
+                    {...edit.inputProps}
+                  />
+                )}
+                {edit?.error && <Text color='red.600'>{edit.error}</Text>}
+              </Stack>
 
               <IconButton
                 minW='unset'

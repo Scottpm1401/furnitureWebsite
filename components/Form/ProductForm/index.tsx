@@ -6,6 +6,7 @@ import {
   PopoverTrigger,
   Select,
   Stack,
+  Text,
 } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
 import { difference, isEqual } from 'lodash';
@@ -102,6 +103,7 @@ const ProductForm = ({ product, onSubmit, create }: ProductFormProps) => {
                       onChange: handleChange('title'),
                     },
                     isInit: initialValues.title === values.title,
+                    error: touched.title ? errors.title : undefined,
                   },
                 },
                 {
@@ -131,6 +133,7 @@ const ProductForm = ({ product, onSubmit, create }: ProductFormProps) => {
                       </Select>
                     ),
                     isInit: initialValues.category === values.category,
+                    error: touched.category ? errors.category : undefined,
                   },
                 },
                 {
@@ -150,6 +153,7 @@ const ProductForm = ({ product, onSubmit, create }: ProductFormProps) => {
                       </Select>
                     ),
                     isInit: initialValues.brand === values.brand,
+                    error: touched.brand ? errors.brand : undefined,
                   },
                 },
                 {
@@ -171,6 +175,7 @@ const ProductForm = ({ product, onSubmit, create }: ProductFormProps) => {
                       onChange: handleChange('sku'),
                     },
                     isInit: initialValues.sku === values.sku,
+                    error: touched.sku ? errors.sku : undefined,
                   },
                 },
                 {
@@ -188,67 +193,72 @@ const ProductForm = ({ product, onSubmit, create }: ProductFormProps) => {
                 {
                   title: t('gallery'),
                   content: (
-                    <Stack direction='row' w='full' h='230px' spacing={4}>
-                      {values.img ? (
-                        <CmsProductImage
-                          src={values.img}
-                          handleChangeImage={(result) =>
-                            setFieldValue('img', result)
-                          }
-                        />
-                      ) : (
-                        <CmsProductUpload
-                          id='upload_img_new'
-                          onChange={(result) => setFieldValue('img', result)}
-                        />
-                      )}
+                    <Stack w='full' spacing={2}>
+                      <Stack direction='row' w='full' h='230px' spacing={4}>
+                        {values.img ? (
+                          <CmsProductImage
+                            src={values.img}
+                            handleChangeImage={(result) =>
+                              setFieldValue('img', result)
+                            }
+                          />
+                        ) : (
+                          <CmsProductUpload
+                            id='upload_img_new'
+                            onChange={(result) => setFieldValue('img', result)}
+                          />
+                        )}
 
-                      {values.gallery.map((item) => (
-                        <CmsProductImage
-                          src={item}
-                          key={item}
-                          handleChangeImage={(result) =>
-                            setFieldValue(
-                              'gallery',
-                              values.gallery.map((img) =>
-                                img === item ? result : img
+                        {values.gallery.map((item) => (
+                          <CmsProductImage
+                            src={item}
+                            key={item}
+                            handleChangeImage={(result) =>
+                              setFieldValue(
+                                'gallery',
+                                values.gallery.map((img) =>
+                                  img === item ? result : img
+                                )
                               )
-                            )
-                          }
-                          onDelete={() =>
-                            setFieldValue(
-                              'gallery',
-                              values.gallery.filter((img) => img !== item)
-                            )
-                          }
-                        />
-                      ))}
-                      {values.gallery.length < 3 && (
-                        <>
-                          {values.img && (
-                            <CmsProductUpload
-                              id='upload_new'
-                              onChange={(result) =>
-                                setFieldValue('gallery', [
-                                  ...values.gallery,
-                                  result,
-                                ])
-                              }
-                            />
-                          )}
-
-                          {new Array(
-                            (values.img ? 2 : 3) - values.gallery.length
-                          )
-                            .fill(0)
-                            .map((item, index) => (
-                              <Stack
-                                w='full'
-                                h='full'
-                                key={`${item}_${index}`}
+                            }
+                            onDelete={() =>
+                              setFieldValue(
+                                'gallery',
+                                values.gallery.filter((img) => img !== item)
+                              )
+                            }
+                          />
+                        ))}
+                        {values.gallery.length < 3 && (
+                          <>
+                            {values.img && (
+                              <CmsProductUpload
+                                id='upload_new'
+                                onChange={(result) =>
+                                  setFieldValue('gallery', [
+                                    ...values.gallery,
+                                    result,
+                                  ])
+                                }
                               />
-                            ))}
-                        </>
+                            )}
+
+                            {new Array(
+                              (values.img ? 2 : 3) - values.gallery.length
+                            )
+                              .fill(0)
+                              .map((item, index) => (
+                                <Stack
+                                  w='full'
+                                  h='full'
+                                  key={`${item}_${index}`}
+                                />
+                              ))}
+                          </>
+                        )}
+                      </Stack>
+                      {touched.img && errors.img && (
+                        <Text color='red.600'>{errors.img}</Text>
                       )}
                     </Stack>
                   ),
@@ -330,6 +340,9 @@ const ProductForm = ({ product, onSubmit, create }: ProductFormProps) => {
                       </Stack>
                     ),
                     isInit: isEqual(initialValues.colors, values.colors),
+                    error: touched.colors
+                      ? errors.colors?.toString()
+                      : undefined,
                   },
                 },
               ]}
