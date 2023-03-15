@@ -20,7 +20,7 @@ export const confirmPayment = async (body: confirmPaymentRequest) => {
   return res.data as PurchaseType[];
 };
 
-export const productCheck = async (id: string) => {
-  const res = await axiosClient.get(API.PAYMENT.CHECK(id));
+export const productCheck = async (id: string, quantity: number) => {
+  const res = await axiosClient.post(API.PAYMENT.CHECK(id), { quantity });
   return res.data as { success: boolean };
 };

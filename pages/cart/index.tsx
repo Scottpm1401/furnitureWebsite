@@ -169,7 +169,6 @@ const Cart = () => {
                           onClick={() => handleQuantity(item, true)}
                           w='24px'
                           h='24px'
-                          disabled={!item.isAvailable}
                         >
                           <MinusIcon />
                         </Button>
@@ -186,7 +185,6 @@ const Cart = () => {
                           onClick={() => handleQuantity(item, false)}
                           w='24px'
                           h='24px'
-                          disabled={!item.isAvailable}
                         >
                           <PlusIcon />
                         </Button>
@@ -282,7 +280,6 @@ const Cart = () => {
                               onClick={() => handleQuantity(item, true)}
                               w='24px'
                               h='24px'
-                              disabled={!item.isAvailable}
                             >
                               <MinusIcon />
                             </Button>
@@ -299,7 +296,6 @@ const Cart = () => {
                               onClick={() => handleQuantity(item, false)}
                               w='24px'
                               h='24px'
-                              disabled={!item.isAvailable}
                             >
                               <PlusIcon />
                             </Button>

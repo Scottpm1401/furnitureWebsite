@@ -1,5 +1,6 @@
 import { Button, Flex, Stack, Text } from '@chakra-ui/react';
 import { css } from '@emotion/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
@@ -183,6 +184,19 @@ const Footer = (props: Props) => {
             </Link>
             <Link href='https://www.visa.com' target='_blank'>
               <Visa style={{ marginLeft: 16 }} />
+            </Link>
+            <Link
+              style={{ display: 'flex', alignItems: 'center' }}
+              href='https://www.americanexpress.com'
+              target='_blank'
+            >
+              <Image
+                style={{ marginLeft: 16, borderRadius: 4 }}
+                width={60}
+                height={60}
+                src='/images/american_express.jpg'
+                alt='american express'
+              />
             </Link>
           </Flex>
         </Flex>

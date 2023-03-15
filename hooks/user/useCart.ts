@@ -19,7 +19,9 @@ const useCart = () => {
         ...item,
       };
       try {
-        req.isAvailable = (await productCheck(req.product_id)).success;
+        req.isAvailable = (
+          await productCheck(req.product_id, req.quantity)
+        ).success;
       } catch (error) {
         req.isAvailable = false;
       }

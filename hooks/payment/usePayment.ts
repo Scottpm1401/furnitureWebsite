@@ -42,7 +42,7 @@ const usePayment = () => {
   const checkCart = useCallback(async () => {
     try {
       const checkReq = await userCart.map(
-        async (item) => await productCheck(item.product_id)
+        async (item) => await productCheck(item.product_id, item.quantity)
       );
       await Promise.all(checkReq);
       return true;
