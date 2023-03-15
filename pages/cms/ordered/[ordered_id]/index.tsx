@@ -146,6 +146,8 @@ const CmsOrdered = () => {
                               callback={(date) =>
                                 setFieldValue('package_date', date?.toString())
                               }
+                              format='dd/MM/yyyy h:mm aa'
+                              showTimeSelect
                             />
                           ),
                           isInit: moment(initialValues.package_date).isSame(
@@ -156,7 +158,9 @@ const CmsOrdered = () => {
                       },
                       {
                         title: t('arrive_date'),
-                        content: formatDateTimeLong(values.arrive_date),
+                        content:
+                          values.arrive_date &&
+                          formatDateTimeLong(values.arrive_date),
                         edit: {
                           customInput: (
                             <CustomDatePicker
@@ -165,6 +169,8 @@ const CmsOrdered = () => {
                               callback={(date) =>
                                 setFieldValue('arrive_date', date?.toString())
                               }
+                              format='dd/MM/yyyy h:mm aa'
+                              showTimeSelect
                             />
                           ),
 

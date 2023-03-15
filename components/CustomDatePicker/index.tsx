@@ -7,12 +7,14 @@ type CustomDateProps = {
   currentDate: Date | null;
   callback: (date: Date | null) => void;
   format?: string;
+  showTimeSelect?: boolean;
 } & FlexProps;
 
 const CustomDatePicker = ({
   currentDate,
   callback,
   format = 'dd/MM/yyyy',
+  showTimeSelect,
   ...props
 }: CustomDateProps) => {
   return (
@@ -35,6 +37,7 @@ const CustomDatePicker = ({
         dateFormat={format}
         selected={currentDate}
         onChange={(date) => callback(date)}
+        showTimeSelect={showTimeSelect}
       />
     </Flex>
   );
