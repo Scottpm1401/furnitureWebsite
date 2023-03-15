@@ -1,22 +1,23 @@
 import { Button, Flex, Stack, Text } from '@chakra-ui/react';
 import { css } from '@emotion/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
 
 import Container from '../../components/Container';
 import SocialIcon from '../../components/SocialIcon';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
+import AmericanExpress from '../../public/svg/american_express.svg';
 import Facebook from '../../public/svg/facebook.svg';
 import Instagram from '../../public/svg/instagram.svg';
 import Logo from '../../public/svg/logo.svg';
 import MasterCard from '../../public/svg/master_card.svg';
 import Cirrus from '../../public/svg/master_card_cirrus.svg';
 import Twitter from '../../public/svg/twitter.svg';
+import UnionPay from '../../public/svg/unionpay.svg';
 import Visa from '../../public/svg/visa.svg';
 import NavLink from '../Nav/NavLink';
+
 type Props = {};
 
 const Footer = (props: Props) => {
@@ -171,6 +172,12 @@ const Footer = (props: Props) => {
           <Flex
             justifyContent={isMobile ? 'center' : 'flex-start'}
             css={css`
+              a {
+                transition: all 200ms ease-in-out;
+              }
+              a:hover {
+                scale: 1.2;
+              }
               svg {
                 width: 60px;
               }
@@ -185,18 +192,11 @@ const Footer = (props: Props) => {
             <Link href='https://www.visa.com' target='_blank'>
               <Visa style={{ marginLeft: 16 }} />
             </Link>
-            <Link
-              style={{ display: 'flex', alignItems: 'center' }}
-              href='https://www.americanexpress.com'
-              target='_blank'
-            >
-              <Image
-                style={{ marginLeft: 16, borderRadius: 4 }}
-                width={60}
-                height={60}
-                src='/images/american_express.jpg'
-                alt='american express'
-              />
+            <Link href='https://www.americanexpress.com' target='_blank'>
+              <AmericanExpress style={{ marginLeft: 16 }} />
+            </Link>
+            <Link href='https://www.unionpayintl.com' target='_blank'>
+              <UnionPay style={{ marginLeft: 16 }} />
             </Link>
           </Flex>
         </Flex>
