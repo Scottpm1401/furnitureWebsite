@@ -28,6 +28,7 @@ export const API = {
   PAYMENT: {
     CHECKOUT: '/payment/checkout',
     CONFIRM: '/payment/confirm',
+    CHECK: (id: string) => `/payment/check/${id}`,
   },
   UPLOAD: {
     SIGNATURE: '/upload/signature',

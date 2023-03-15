@@ -184,5 +184,6 @@
   "create": "Create",
   "auto_generate": "Auto generate",
   "create_product": "Create product",
-  "creating": "Creating"
+  "creating": "Creating",
+  "remove_out_of_stock": "Please remove out of stock product before checkout"
 }

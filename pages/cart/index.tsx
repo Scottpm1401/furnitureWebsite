@@ -15,13 +15,14 @@ import { debounce, floor } from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
 import Container from '../../components/Container';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
+import { useCart } from '../../hooks/user';
 import AuthProvider from '../../layout/AuthProvider';
 import Page from '../../layout/Page';
 import { ProductCartType } from '../../models/cart';
@@ -36,19 +37,22 @@ import {
   updateCartQuantity,
 } from '../../services/cart';
 
-type Props = {};
-
-const Cart = (props: Props) => {
+const Cart = () => {
   const { t } = useTranslation();
-  const userCart = useAppSelector(selectors.user.selectUserCart);
+  const { cart } = useCart();
   const cartTotal = useAppSelector(selectors.user.selectCartTotal);
   const dispatch = useAppDispatch();
   const { isMobileOrTablet } = useResponsive();
   const totalCartItem = useMemo(() => {
     let count = 0;
-    userCart.forEach((item) => (count += item.quantity));
+    cart.forEach((item) => (count += item.quantity));
     return count;
-  }, [userCart]);
+  }, [cart]);
+
+  const isHasOutOfStockItem = useMemo(
+    () => cart.every((item) => item.isAvailable === true),
+    [cart]
+  );
 
   const handleQuantity = debounce(
     async (product: ProductCartType, isMinus: boolean) => {
@@ -101,15 +105,16 @@ const Cart = (props: Props) => {
           ]}
           current={t('cart')}
         />
-        {userCart.length > 0 ? (
+        {cart.length > 0 ? (
           <Container direction='column'>
             {isMobileOrTablet ? (
               <Stack spacing='2rem' mt='2.5rem'>
-                {userCart.map((item) => (
+                {cart.map((item) => (
                   <Flex
                     position='relative'
                     direction='column'
                     key={item.product_id}
+                    opacity={item.isAvailable ? 1 : 0.7}
                   >
                     <Flex>
                       <Flex
@@ -143,6 +148,11 @@ const Cart = (props: Props) => {
                             opacity={1}
                           />
                         </Flex>
+                        {!item.isAvailable && (
+                          <Text color='red.600' fontWeight='semibold'>
+                            {t('out_of_stock')}
+                          </Text>
+                        )}
                       </Stack>
                     </Flex>
                     <Flex
@@ -159,6 +169,7 @@ const Cart = (props: Props) => {
                           onClick={() => handleQuantity(item, true)}
                           w='24px'
                           h='24px'
+                          disabled={!item.isAvailable}
                         >
                           <MinusIcon />
                         </Button>
@@ -175,6 +186,7 @@ const Cart = (props: Props) => {
                           onClick={() => handleQuantity(item, false)}
                           w='24px'
                           h='24px'
+                          disabled={!item.isAvailable}
                         >
                           <PlusIcon />
                         </Button>
@@ -219,8 +231,11 @@ const Cart = (props: Props) => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {userCart.map((item) => (
-                      <Tr key={item.product_id}>
+                    {cart.map((item) => (
+                      <Tr
+                        key={item.product_id}
+                        opacity={item.isAvailable ? 1 : 0.6}
+                      >
                         <Td>
                           <Flex>
                             <Flex
@@ -251,6 +266,11 @@ const Cart = (props: Props) => {
                                   opacity={1}
                                 />
                               </Flex>
+                              {!item.isAvailable && (
+                                <Text color='red.600' fontWeight='semibold'>
+                                  {t('out_of_stock')}
+                                </Text>
+                              )}
                             </Flex>
                           </Flex>
                         </Td>
@@ -262,6 +282,7 @@ const Cart = (props: Props) => {
                               onClick={() => handleQuantity(item, true)}
                               w='24px'
                               h='24px'
+                              disabled={!item.isAvailable}
                             >
                               <MinusIcon />
                             </Button>
@@ -278,6 +299,7 @@ const Cart = (props: Props) => {
                               onClick={() => handleQuantity(item, false)}
                               w='24px'
                               h='24px'
+                              disabled={!item.isAvailable}
                             >
                               <PlusIcon />
                             </Button>
@@ -368,8 +390,18 @@ const Cart = (props: Props) => {
                     ${floor(cartTotal, 2)}
                   </Text>
                 </Flex>
+                {!isHasOutOfStockItem && (
+                  <Flex mt='1rem' fontWeight='semibold'>
+                    <Text color='red.600'>{t('remove_out_of_stock')}</Text>
+                  </Flex>
+                )}
+
                 <Link style={{ marginTop: '1rem' }} href={APP_ROUTES.checkout}>
-                  <Button colorScheme='orange' w='full'>
+                  <Button
+                    colorScheme='orange'
+                    w='full'
+                    disabled={!isHasOutOfStockItem}
+                  >
                     {t('checkout')}
                   </Button>
                 </Link>

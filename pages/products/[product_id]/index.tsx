@@ -279,48 +279,51 @@ const Product = () => {
                     ))}
                   </Flex>
                 </Grid>
-                <Flex alignItems='center' mt='1.5rem'>
-                  <Button
-                    variant='unstyled'
-                    w={isMobile ? '40px' : 'auto'}
-                    onClick={() => handleQuantity(true)}
-                  >
-                    <MinusIcon />
-                  </Button>
-                  <Text
-                    marginX='0.5rem'
-                    textAlign='center'
-                    w='60px'
-                    fontWeight='semibold'
-                    fontSize='4xl'
-                  >
-                    {addedProduct.quantity}
-                  </Text>
-                  <Button
-                    variant='unstyled'
-                    w={isMobile ? '40px' : 'auto'}
-                    onClick={() => handleQuantity(false)}
-                  >
-                    <PlusIcon />
-                  </Button>
-                </Flex>
                 {isAvailable && (
-                  <Flex mt='2rem'>
-                    {userId ? (
+                  <>
+                    {' '}
+                    <Flex alignItems='center' mt='1.5rem'>
                       <Button
-                        colorScheme='orange'
-                        onClick={() => handleAddProduct()}
+                        variant='unstyled'
+                        w={isMobile ? '40px' : 'auto'}
+                        onClick={() => handleQuantity(true)}
                       >
-                        {t('add_to_cart')}
+                        <MinusIcon />
                       </Button>
-                    ) : (
-                      <Link href={APP_ROUTES.login}>
-                        <Button colorScheme='orange'>
-                          {t('please_login')}
+                      <Text
+                        marginX='0.5rem'
+                        textAlign='center'
+                        w='60px'
+                        fontWeight='semibold'
+                        fontSize='4xl'
+                      >
+                        {addedProduct.quantity}
+                      </Text>
+                      <Button
+                        variant='unstyled'
+                        w={isMobile ? '40px' : 'auto'}
+                        onClick={() => handleQuantity(false)}
+                      >
+                        <PlusIcon />
+                      </Button>
+                    </Flex>
+                    <Flex mt='2rem'>
+                      {userId ? (
+                        <Button
+                          colorScheme='orange'
+                          onClick={() => handleAddProduct()}
+                        >
+                          {t('add_to_cart')}
                         </Button>
-                      </Link>
-                    )}
-                  </Flex>
+                      ) : (
+                        <Link href={APP_ROUTES.login}>
+                          <Button colorScheme='orange'>
+                            {t('please_login')}
+                          </Button>
+                        </Link>
+                      )}
+                    </Flex>
+                  </>
                 )}
               </Flex>
             </Grid>
