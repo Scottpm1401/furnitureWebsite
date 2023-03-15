@@ -19,6 +19,7 @@ import Container from '../../../components/Container';
 import { APP_ROUTES, STAR_COLOR } from '../../../constant';
 import { useProduct } from '../../../hooks/product';
 import { useResponsive } from '../../../hooks/responsive';
+import { useCart } from '../../../hooks/user';
 import NotAuthProvider from '../../../layout/NotAuthProvider';
 import Page from '../../../layout/Page';
 import { ProductCartType } from '../../../models/cart';
@@ -26,9 +27,8 @@ import { ProductColor } from '../../../models/product';
 import MinusIcon from '../../../public/svg/minus.svg';
 import PlusIcon from '../../../public/svg/plus.svg';
 import StarIcon from '../../../public/svg/star.svg';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { actions, selectors } from '../../../redux/reducer';
-import { addProductCart, updateCartQuantity } from '../../../services/cart';
+import { useAppSelector } from '../../../redux/hooks';
+import { selectors } from '../../../redux/reducer';
 
 const initProductCart: ProductCartType = {
   product_id: '',
@@ -48,10 +48,9 @@ const Product = () => {
   const [addedProduct, setAddedProduct] =
     useState<ProductCartType>(initProductCart);
   const [currentSlide, setCurrentSlide] = useState<string>();
-  const dispatch = useAppDispatch();
-  const userCart = useAppSelector(selectors.user.selectUserCart);
   const userId = useAppSelector(selectors.user.selectUserId);
   const { isMobile, isSmallDevice } = useResponsive();
+  const { handleAddProduct } = useCart();
 
   const isAvailable = useMemo(
     () => (product ? product?.storage_quantity > 0 : false),
@@ -81,43 +80,6 @@ const Product = () => {
       if (addedProduct.quantity === product?.storage_quantity) return;
       setAddedProduct({ ...addedProduct, quantity: addedProduct.quantity + 1 });
     }
-  };
-
-  const handleAddProduct = async () => {
-    try {
-      const isExistInCart =
-        userCart.findIndex(
-          (item) =>
-            item.product_id === addedProduct.product_id &&
-            item.color === addedProduct.color
-        ) > -1;
-      if (isExistInCart) {
-        const newCart = await updateCartQuantity({
-          product_id: addedProduct.product_id,
-          quantity: addedProduct.quantity,
-          color: addedProduct.color,
-        });
-        dispatch(actions.user.setUserCart(newCart));
-        dispatch(
-          actions.user.setUserCartTotal(
-            addedProduct.quantity * addedProduct.price
-          )
-        );
-      } else {
-        const newCart = await addProductCart({
-          product_id: addedProduct.product_id,
-          quantity: addedProduct.quantity,
-          color: addedProduct.color,
-        });
-        dispatch(actions.user.setUserCart(newCart));
-        dispatch(
-          actions.user.setUserCartTotal(
-            addedProduct.quantity * addedProduct.price
-          )
-        );
-      }
-      router.push(APP_ROUTES.cart);
-    } catch (error) {}
   };
 
   return (
@@ -311,7 +273,11 @@ const Product = () => {
                       {userId ? (
                         <Button
                           colorScheme='orange'
-                          onClick={() => handleAddProduct()}
+                          onClick={() =>
+                            handleAddProduct(addedProduct, () =>
+                              router.push(APP_ROUTES.cart)
+                            )
+                          }
                         >
                           {t('add_to_cart')}
                         </Button>

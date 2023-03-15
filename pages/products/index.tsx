@@ -31,6 +31,21 @@ enum Layout {
   list = 'LIST',
 }
 
+const loadingProduct: ProductType = {
+  _id: 'loading',
+  img: '/temp',
+  gallery: [],
+  title: 'loading',
+  category: '',
+  brand: '',
+  price: 99.99,
+  sku: '',
+  storage_quantity: 1,
+  colors: [],
+  description:
+    'Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal',
+};
+
 export const getStaticProps = async () => {
   const productsList = await getProducts(initFilter);
   return {
@@ -192,13 +207,9 @@ const Products = ({
                   <>
                     {new Array(3).fill(0).map((item, index) => (
                       <ProductCard
-                        title='loading'
-                        image={'/temp'}
-                        price={99.99}
+                        product={loadingProduct}
                         isLoaded={false}
                         isHorizontal={layout === Layout.list}
-                        description='Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal'
-                        _id='loading'
                         key={`loading_${index}`}
                       />
                     ))}
@@ -211,13 +222,9 @@ const Products = ({
                     .fill(0)
                     .map((item, index) => (
                       <ProductCard
-                        title='loading'
-                        image={'/temp'}
-                        price={99.99}
+                        product={loadingProduct}
                         isLoaded={false}
                         isHorizontal={layout === Layout.list}
-                        description='Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal'
-                        _id='loading'
                         key={`loading_${index}`}
                       />
                     ))
@@ -229,13 +236,10 @@ const Products = ({
                   products.map((item) => (
                     <ProductCard
                       key={item._id}
-                      title={item.title}
-                      image={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
-                      price={item.price}
+                      product={item}
                       isLoaded={true}
                       isHorizontal={layout === Layout.list}
-                      description={item.description}
-                      _id={item._id}
+                      isAvailable={item.storage_quantity > 0}
                     />
                   ))
                 )}

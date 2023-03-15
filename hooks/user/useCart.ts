@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { ProductCartType } from '../../models/cart';
-import { useAppSelector } from '../../redux/hooks';
-import { selectors } from '../../redux/reducer';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { actions, selectors } from '../../redux/reducer';
+import { addProductCart, updateCartQuantity } from '../../services/cart';
 import { productCheck } from '../../services/payment';
 
 type CartType = { isAvailable?: boolean } & ProductCartType;
@@ -11,6 +12,7 @@ const useCart = () => {
   const userCart = useAppSelector(selectors.user.selectUserCart);
   const [isLoading, setIsLoading] = useState(false);
   const [cart, setCart] = useState<CartType[]>([]);
+  const dispatch = useAppDispatch();
 
   const checkCart = useCallback(async () => {
     setIsLoading(true);
@@ -34,14 +36,47 @@ const useCart = () => {
     setIsLoading(false);
   }, [userCart]);
 
-  useEffect(() => {
-    checkCart();
-  }, [checkCart]);
+  const handleAddProduct = async (
+    product: ProductCartType,
+    onDone?: () => void
+  ) => {
+    try {
+      const isExistInCart =
+        userCart.findIndex(
+          (item) =>
+            item.product_id === product.product_id &&
+            item.color === product.color
+        ) > -1;
+      if (isExistInCart) {
+        const newCart = await updateCartQuantity({
+          product_id: product.product_id,
+          quantity: product.quantity,
+          color: product.color,
+        });
+        dispatch(actions.user.setUserCart(newCart));
+        dispatch(
+          actions.user.setUserCartTotal(product.quantity * product.price)
+        );
+      } else {
+        const newCart = await addProductCart({
+          product_id: product.product_id,
+          quantity: product.quantity,
+          color: product.color,
+        });
+        dispatch(actions.user.setUserCart(newCart));
+        dispatch(
+          actions.user.setUserCartTotal(product.quantity * product.price)
+        );
+      }
+      onDone?.();
+    } catch (error) {}
+  };
 
   return {
     isLoading,
     cart,
     checkCart,
+    handleAddProduct,
   };
 };
 

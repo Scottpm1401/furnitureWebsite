@@ -9,36 +9,32 @@ import {
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
+import { useCart } from '../../hooks/user';
+import { ProductCartType } from '../../models/cart';
+import { ProductType } from '../../models/product';
 import SearchIcon from '../../public/svg/search.svg';
 import ShoppingBagIcon from '../../public/svg/shopping_bag.svg';
 import PopupButton from './PopupButton';
 
-type ProductCardType = {
-  _id: string;
-  title: string;
-  description?: string;
-  image: string;
-  price: number;
+type ProductCardProps = {
+  product: ProductType;
   isHorizontal?: boolean;
   href?: string;
   isLoaded?: boolean;
+  isAvailable?: boolean;
 } & GridProps;
 
 const ProductCard = ({
-  _id,
-  title,
-  description,
-  image,
-  price,
+  product,
   href,
   isHorizontal = false,
   isLoaded = false,
+  isAvailable = true,
   ...props
-}: ProductCardType) => {
+}: ProductCardProps) => {
   const router = useRouter();
   const { isMobile } = useResponsive();
   const responsive = useBreakpointValue(
@@ -54,6 +50,8 @@ const ProductCard = ({
       fallback: 'md',
     }
   );
+  const { handleAddProduct } = useCart();
+
   return (
     <Grid
       position='relative'
@@ -82,9 +80,15 @@ const ProductCard = ({
               z-index: 1;
             }
           `}
-          onClick={() => isLoaded && router.push(APP_ROUTES.product(_id))}
+          onClick={() =>
+            isLoaded && router.push(APP_ROUTES.product(product._id))
+          }
         >
-          <Image src={image} fill alt={title} />
+          <Image
+            src={`${process.env.NEXT_PUBLIC_CDN}${product.img}`}
+            fill
+            alt={product.title}
+          />
           <Flex
             className='popup'
             position='absolute'
@@ -101,17 +105,31 @@ const ProductCard = ({
             alignItems='center'
             gap='1rem'
           >
+            {isAvailable && (
+              <PopupButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const addedProduct: ProductCartType = {
+                    product_id: product._id,
+                    img: product.img,
+                    title: product.title,
+                    price: product.price,
+                    color: product.colors[0],
+                    quantity: 1,
+                    brand: product.brand,
+                    category: product.category,
+                  };
+                  handleAddProduct(addedProduct);
+                }}
+              >
+                <ShoppingBagIcon style={{ fill: 'none', stroke: 'white' }} />
+              </PopupButton>
+            )}
+
             <PopupButton
               onClick={(e) => {
                 e.stopPropagation();
-              }}
-            >
-              <ShoppingBagIcon style={{ fill: 'none', stroke: 'white' }} />
-            </PopupButton>
-            <PopupButton
-              onClick={(e) => {
-                e.stopPropagation();
-                router.push(APP_ROUTES.product(_id));
+                router.push(APP_ROUTES.product(product._id));
               }}
             >
               <SearchIcon style={{ fill: 'none', stroke: 'white' }} />
@@ -132,17 +150,17 @@ const ProductCard = ({
       >
         <Skeleton isLoaded={isLoaded}>
           <Text fontWeight='semibold' fontSize={isHorizontal ? '2xl' : 'md'}>
-            {title}
+            {product.title}
           </Text>
         </Skeleton>
         <Skeleton isLoaded={isLoaded}>
-          <Text fontWeight='semibold'>${price}</Text>
+          <Text fontWeight='semibold'>${product.price}</Text>
         </Skeleton>
         {isHorizontal && (
           <Skeleton w='full' mt='0.5rem' isLoaded={isLoaded}>
             <Text>
-              {description?.slice(0, 150)}
-              {description && description.length > 150 && '...'}
+              {product.description?.slice(0, 150)}
+              {product.description && product.description.length > 150 && '...'}
             </Text>
           </Skeleton>
         )}

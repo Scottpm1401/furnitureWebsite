@@ -15,7 +15,7 @@ import { debounce, floor } from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
@@ -39,7 +39,7 @@ import {
 
 const Cart = () => {
   const { t } = useTranslation();
-  const { cart } = useCart();
+  const { cart, checkCart } = useCart();
   const cartTotal = useAppSelector(selectors.user.selectCartTotal);
   const dispatch = useAppDispatch();
   const { isMobileOrTablet } = useResponsive();
@@ -48,6 +48,10 @@ const Cart = () => {
     cart.forEach((item) => (count += item.quantity));
     return count;
   }, [cart]);
+
+  useEffect(() => {
+    checkCart();
+  }, [checkCart]);
 
   const isHasOutOfStockItem = useMemo(
     () => cart.every((item) => item.isAvailable === true),

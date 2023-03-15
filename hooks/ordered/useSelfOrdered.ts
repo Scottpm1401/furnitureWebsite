@@ -23,7 +23,7 @@ const useSelfOrdered = () => {
     getOrdered();
   }, [getOrdered]);
 
-  return { isLoading, ordered };
+  return { isLoading, ordered, getOrdered };
 };
 
 export default useSelfOrdered;

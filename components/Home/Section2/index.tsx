@@ -50,11 +50,9 @@ const Section2 = ({ products }: Props) => {
           {products.map((item, index) => (
             <ProductCard
               key={item._id}
-              title={item.title}
-              price={item.price}
-              image={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
+              product={item}
               isLoaded={true}
-              _id={item._id}
+              isAvailable={item.storage_quantity > 0}
             />
           ))}
         </Grid>

@@ -191,7 +191,7 @@ const OrderedItem = ({ item, handleRating, orderId }: OrderedItemProps) => {
 
 const Ordered = () => {
   const { t } = useTranslation();
-  const { ordered: orders } = useSelfOrdered();
+  const { ordered: orders, getOrdered } = useSelfOrdered();
   const { isMobileOrTablet } = useResponsive();
 
   const handleRating = async (
@@ -205,6 +205,7 @@ const Ordered = () => {
         rate,
         color: product.color,
       });
+      await getOrdered();
     } catch (error) {
       console.log('error', error);
     }
