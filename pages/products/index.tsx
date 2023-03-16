@@ -1,7 +1,6 @@
 import { Button, Flex, Grid, Select, Text } from '@chakra-ui/react';
-import { InferGetStaticPropsType } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import Breadcrumb from '../../components/Breadcrumb';
@@ -46,20 +45,9 @@ const loadingProduct: ProductType = {
     'Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal',
 };
 
-export const getStaticProps = async () => {
-  const productsList = await getProducts(initFilter);
-  return {
-    props: {
-      productsList,
-    },
-  };
-};
-
-const Products = ({
-  productsList,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Products = () => {
   const [filter, setFilter] = useState(initFilter);
-  const [products, setProducts] = useState<ProductType[]>(productsList);
+  const [products, setProducts] = useState<ProductType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [layout, setLayout] = useState<Layout>(Layout.grid);
   const { t } = useTranslation();
@@ -69,14 +57,22 @@ const Products = ({
     [products.length]
   );
 
-  const handleUpdateFilter = async (newFilter: Filter) => {
-    setIsLoading(true);
-    const data = await getProducts(newFilter);
-    if (data) {
-      setFilter(newFilter);
-      setProducts(data);
+  const getProductsList = useCallback(async (filter: Filter) => {
+    try {
+      setIsLoading(true);
+      const productsList = await getProducts(filter);
+      setProducts(productsList);
+    } catch (err) {
+    } finally {
       setIsLoading(false);
     }
+  }, []);
+
+  const handleUpdateFilter = async (newFilter: Filter) => {
+    try {
+      await getProductsList(newFilter);
+      setFilter(newFilter);
+    } catch (error) {}
   };
 
   const handleLoadMore = async () => {
@@ -87,6 +83,10 @@ const Products = ({
       setProducts((prev) => [...prev, ...moreProductLists]);
     } catch (error) {}
   };
+
+  useEffect(() => {
+    getProductsList(initFilter);
+  }, [getProductsList]);
 
   return (
     <NotAuthProvider>

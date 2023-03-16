@@ -2,7 +2,7 @@ import { Button, Flex, Grid, Text, useBreakpointValue } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { APP_ROUTES } from '../../../constant';
 import { ProductType } from '../../../models/product';
@@ -11,15 +11,13 @@ import HabitatIcon from '../../../public/svg/habitat.svg';
 import IkeaIcon from '../../../public/svg/ikea.svg';
 import MaisonsDuMondeIcon from '../../../public/svg/maisons-du-monde.svg';
 import WilliamsIcon from '../../../public/svg/williams-sonoma.svg';
+import { getFeaturedProduct } from '../../../services/product';
 import Container from '../../Container';
 import ProductCard from '../../ProductCard';
 
-type Props = {
-  products: ProductType[];
-};
-
-const Section2 = ({ products }: Props) => {
+const Section2 = () => {
   const { t } = useTranslation();
+  const [products, setProducts] = useState<ProductType[]>([]);
   const responsive = useBreakpointValue(
     {
       md: false,
@@ -29,6 +27,15 @@ const Section2 = ({ products }: Props) => {
       fallback: 'md',
     }
   );
+
+  const getProductsList = useCallback(async () => {
+    const productsList = await getFeaturedProduct();
+    setProducts(productsList);
+  }, []);
+
+  useEffect(() => {
+    getProductsList();
+  }, [getProductsList]);
 
   return (
     <Flex bg='#f1f5f8' minHeight={600} paddingY='7rem'>
