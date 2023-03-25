@@ -28,7 +28,10 @@ const AdditionalInfoProfile = () => {
 
   const handleUpdateProfile = async (values: AdditionalInfoType) => {
     setIsLoading(true);
-    const updatedUser = await updateUser({ ...values });
+    const updatedUser = await updateUser({
+      username: user.username,
+      ...values,
+    });
     dispatch(actions.user.setUser(updatedUser));
     toast({
       title: t('update_profile_success'),
