@@ -38,11 +38,11 @@ const CmsUsers = () => {
             headers={
               <Tr>
                 <Th>ID</Th>
-                <Th>Name</Th>
-                <Th>Username</Th>
+                <Th>{t('name_of_user')}</Th>
+                <Th>{t('username')}</Th>
                 <Th>Email</Th>
-                <Th>Birthday</Th>
-                <Th>Role</Th>
+                <Th>{t('birthday')}</Th>
+                <Th>{t('role')}</Th>
                 <Th></Th>
               </Tr>
             }

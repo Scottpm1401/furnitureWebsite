@@ -185,5 +185,7 @@
   "auto_generate": "Khởi tạo tự động",
   "create_product": "Tạo sản phẩm",
   "creating": "Đang tạo",
-  "remove_out_of_stock": "Vui lòng xoá những mặt hàng đã hết khỏi giỏ hàng trước khi tiến hành thanh toán"
+  "remove_out_of_stock": "Vui lòng xoá những mặt hàng đã hết khỏi giỏ hàng trước khi tiến hành thanh toán",
+  "name_of_user": "Tên người dùng",
+  "storage_quantity": "Tồn kho"
 }

@@ -185,5 +185,7 @@
   "auto_generate": "Auto generate",
   "create_product": "Create product",
   "creating": "Creating",
-  "remove_out_of_stock": "Please remove out of stock product before checkout"
+  "remove_out_of_stock": "Please remove out of stock product before checkout",
+  "name_of_user": "Name",
+  "storage_quantity": "Storage quantity"
 }

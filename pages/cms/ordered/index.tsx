@@ -40,11 +40,11 @@ const CmcOrdered = (props: Props) => {
             headers={
               <Tr>
                 <Th>ID</Th>
-                <Th>Name</Th>
+                <Th>{t('name_of_user')}</Th>
                 <Th>Email</Th>
-                <Th>Status</Th>
-                <Th>Total</Th>
-                <Th>Payment Method</Th>
+                <Th>{t('status')}</Th>
+                <Th>{t('total')}</Th>
+                <Th>{t('payment_method')}</Th>
                 <Th></Th>
               </Tr>
             }

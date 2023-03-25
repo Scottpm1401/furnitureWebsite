@@ -50,11 +50,11 @@ const CmsProducts = (props: Props) => {
             headers={
               <Tr>
                 <Th>ID</Th>
-                <Th>Title</Th>
-                <Th>Category</Th>
-                <Th>Brand</Th>
-                <Th>Price</Th>
-                <Th>Storage Quantity</Th>
+                <Th>{t('title')}</Th>
+                <Th>{t('categories')}</Th>
+                <Th>{t('brand')}</Th>
+                <Th>{t('price')}</Th>
+                <Th>{t('storage_quantity')}</Th>
                 <Th></Th>
               </Tr>
             }
