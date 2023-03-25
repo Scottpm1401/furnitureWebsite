@@ -3,4 +3,3 @@ node_modules
 .dockerignore
 Dockerfile
 next-env.d.ts
-.env
