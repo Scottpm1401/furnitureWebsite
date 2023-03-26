@@ -1,5 +1,6 @@
 import { API } from '../../constant/api';
 import axiosClient from '../../interceptor';
+import { DataPoint, Revenue } from '../../models/analysis';
 import {
   CMSList,
   SearchPagination,
@@ -60,4 +61,9 @@ export const updateProductById = async (
 export const createProduct = async (body: UpdateProductRequest) => {
   const res = await axiosClient.post(API.PRODUCT.CREATEPRODUCT, body);
   return res.data as ProductType;
+};
+
+export const getRevenuePerMonth = async () => {
+  const res = await axiosClient.get(API.ANALYSIS.GETREVENUEPERMONTH);
+  return res.data as Revenue[];
 };

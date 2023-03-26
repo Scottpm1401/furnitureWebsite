@@ -1,6 +1,35 @@
 export const STAR_COLOR = 'rgb(255, 188, 11)';
 export const CMS_BG_COLOR = 'rgb(245, 245, 245)';
 export const BORDER_COLOR = 'rgba(224, 224, 224, 1)';
+export const CHART_COLORS = [
+  '#FF6633',
+  '#FFB399',
+  '#FF33FF',
+  '#FFFF99',
+  '#00B3E6',
+  '#E6B333',
+  '#3366E6',
+  '#999966',
+  '#99FF99',
+  '#B34D4D',
+  '#80B300',
+  '#809900',
+];
+
+export const MONTHS = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
 
 export const APP_ROUTES = {
   home: '/',

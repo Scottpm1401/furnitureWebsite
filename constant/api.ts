@@ -39,5 +39,8 @@ export const API = {
     GETORDERD: (id: string) => `/ordered/get/${id}`,
     UPDATEORDERD: (id: string) => `/ordered/update/${id}`,
   },
+  ANALYSIS: {
+    GETREVENUEPERMONTH: '/analysis/months_revenue',
+  },
   REFRESHTOKEN: '/user/refreshToken',
 };

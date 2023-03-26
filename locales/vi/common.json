@@ -187,5 +187,18 @@
   "creating": "Đang tạo",
   "remove_out_of_stock": "Vui lòng xoá những mặt hàng đã hết khỏi giỏ hàng trước khi tiến hành thanh toán",
   "name_of_user": "Tên người dùng",
-  "storage_quantity": "Tồn kho"
+  "storage_quantity": "Tồn kho",
+  "revenue": "Doanh thu",
+  "Jan": "Tháng 1",
+  "Feb": "Tháng 2",
+  "Mar": "Tháng 3",
+  "Apr": "Tháng 4",
+  "May": "Tháng 5",
+  "Jun": "Tháng 6",
+  "Jul": "Tháng 7",
+  "Aug": "Tháng 8",
+  "Sep": "Tháng 9",
+  "Oct": "Tháng 10",
+  "Nov": "Tháng 11",
+  "Dec": "Tháng 12"
 }

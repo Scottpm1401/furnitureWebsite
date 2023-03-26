@@ -187,5 +187,18 @@
   "creating": "Creating",
   "remove_out_of_stock": "Please remove out of stock product before checkout",
   "name_of_user": "Name",
-  "storage_quantity": "Storage quantity"
+  "storage_quantity": "Storage quantity",
+  "revenue": "Revenue",
+  "Jan": "January",
+  "Feb": "February",
+  "Mar": "March",
+  "Apr": "April",
+  "May": "May",
+  "Jun": "June",
+  "Jul": "July",
+  "Aug": "August",
+  "Sep": "September",
+  "Oct": "October",
+  "Nov": "November",
+  "Dec": "December"
 }
