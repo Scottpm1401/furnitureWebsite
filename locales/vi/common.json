@@ -200,5 +200,7 @@
   "Sep": "Tháng 9",
   "Oct": "Tháng 10",
   "Nov": "Tháng 11",
-  "Dec": "Tháng 12"
+  "Dec": "Tháng 12",
+  "num_of_sales": "Số lượng đã bán",
+  "bought_products": "Các mặt hàng đã được người dùng mua"
 }

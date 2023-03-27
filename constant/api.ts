@@ -41,6 +41,8 @@ export const API = {
   },
   ANALYSIS: {
     GETREVENUEPERMONTH: '/analysis/months_revenue',
+    GETBOUGHTPRODUCTS: (month: number) =>
+      `/analysis/products_purchase/${month}`,
   },
   REFRESHTOKEN: '/user/refreshToken',
 };

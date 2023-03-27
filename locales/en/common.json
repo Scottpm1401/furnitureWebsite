@@ -200,5 +200,7 @@
   "Sep": "September",
   "Oct": "October",
   "Nov": "November",
-  "Dec": "December"
+  "Dec": "December",
+  "num_of_sales": "Number of sales",
+  "bought_products": "User bought products"
 }
