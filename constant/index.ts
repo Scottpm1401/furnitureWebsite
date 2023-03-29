@@ -1,12 +1,12 @@
 export const STAR_COLOR = 'rgb(255, 188, 11)';
 export const CMS_BG_COLOR = 'rgb(245, 245, 245)';
 export const BORDER_COLOR = 'rgba(224, 224, 224, 1)';
-export const CHART_COLORS = [
+export const CHART_COLORS_HOVER = [
   '#FF6633',
+  '#00B3E6',
   '#FFB399',
   '#FF33FF',
   '#FFFF99',
-  '#00B3E6',
   '#E6B333',
   '#3366E6',
   '#999966',
@@ -23,6 +23,16 @@ export const CHART_COLORS = [
   '#E6331A',
   '#33FFCC',
 ];
+
+export const CHART_COLORS = CHART_COLORS_HOVER.map((color) =>
+  color.replace('#', '')
+).map(
+  (color) =>
+    `rgba(${parseInt(color.substring(0, 2), 16)}, ${parseInt(
+      color.substring(2, 4),
+      16
+    )}, ${parseInt(color.substring(4), 16)}, 0.5)`
+);
 
 export const MONTHS = [
   'Jan',

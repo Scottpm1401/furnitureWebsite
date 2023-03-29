@@ -1,6 +1,7 @@
 import {
   CategoryScale,
   Chart as ChartJS,
+  ChartData,
   Legend,
   LinearScale,
   LineElement,
@@ -31,7 +32,7 @@ ChartJS.register(
 const RevenueLineChart = ({ revenue }: LineChartProps) => {
   const { t } = useTranslation();
 
-  const chartData = {
+  const chartData: ChartData<'line', number[], string> = {
     labels: MONTHS.map((month) => t(month)),
     datasets: revenue.map((item, index) => ({
       label: `${item.year}`,

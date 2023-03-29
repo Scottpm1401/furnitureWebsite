@@ -22,7 +22,7 @@ const useBoughtProducts = () => {
   }, []);
 
   useEffect(() => {
-    getBoughtProduct(parseInt(moment().format('M')));
+    getBoughtProduct(Number(moment().format('M')));
   }, [getBoughtProduct]);
 
   return {

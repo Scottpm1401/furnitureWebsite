@@ -1,8 +1,13 @@
-import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
-import useTranslation from 'next-translate/useTranslation';
+import {
+  ArcElement,
+  Chart as ChartJS,
+  ChartData,
+  Legend,
+  Tooltip,
+} from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
-import { CHART_COLORS } from '../../../constant';
+import { CHART_COLORS, CHART_COLORS_HOVER } from '../../../constant';
 import { BoughtProduct } from '../../../models/analysis';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -12,15 +17,14 @@ type Props = {
 };
 
 const ProductsPieChart = ({ boughtProducts }: Props) => {
-  const { t } = useTranslation();
-
-  const chartData = {
+  const chartData: ChartData<'pie', number[], string> = {
     labels: boughtProducts.map((product) => product.title),
     datasets: [
       {
-        label: t('num_of_sales'),
         data: boughtProducts.map((product) => product.num_of_purchase),
         backgroundColor: CHART_COLORS,
+        borderColor: CHART_COLORS_HOVER,
+        hoverBackgroundColor: CHART_COLORS_HOVER,
       },
     ],
   };

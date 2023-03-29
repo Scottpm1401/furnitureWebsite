@@ -1,6 +1,11 @@
 import { API } from '../../constant/api';
 import axiosClient from '../../interceptor';
-import { BoughtProduct, DataPoint, Revenue } from '../../models/analysis';
+import {
+  BoughtProduct,
+  DataPoint,
+  Revenue,
+  TopUser,
+} from '../../models/analysis';
 import {
   CMSList,
   SearchPagination,
@@ -71,4 +76,9 @@ export const getRevenuePerMonth = async () => {
 export const getBoughtProductByMonth = async (month: number) => {
   const res = await axiosClient.get(API.ANALYSIS.GETBOUGHTPRODUCTS(month));
   return res.data as BoughtProduct[];
+};
+
+export const getTop10UsersByMonth = async (month: number) => {
+  const res = await axiosClient.get(API.ANALYSIS.GETTOP10USERS(month));
+  return res.data as TopUser[];
 };
