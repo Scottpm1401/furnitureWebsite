@@ -148,7 +148,7 @@ const CmsSideBar = (props: Props) => {
             <LogoutIcon style={{ stroke: 'white' }} />
           </Button>
 
-          <Text minW='180px' fontWeight='semibold' color='white'>
+          <Text minW='140px' fontWeight='semibold' color='white'>
             {t('back_to_home')}
           </Text>
         </Stack>

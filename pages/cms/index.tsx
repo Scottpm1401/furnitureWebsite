@@ -49,19 +49,22 @@ const Cms = () => {
 
   return (
     <AdminAuthProvider>
-      <Page direction="row" w="full" title="Dashboard" minH="100vh">
+      <Page direction='row' w='full' title='Dashboard' minH='100vh'>
         <CmsContainer title={t('dashboard')}>
-          <Stack spacing="5rem">
-            <Stack w="full" alignItems="center">
-              <Text fontWeight="semibold" fontSize="xl">
-                {t('revenue')}
-              </Text>
-              <RevenueLineChart revenue={revenue} />
+          <Stack spacing='5rem'>
+            <Stack w='full' alignItems='center'>
+              <Stack w='80%' alignItems='center'>
+                <Text fontWeight='semibold' fontSize='xl'>
+                  {t('revenue')}
+                </Text>
+                <RevenueLineChart revenue={revenue} />
+              </Stack>
             </Stack>
-            <Stack direction="row" justifyContent="space-between">
-              <Stack w={isBigScreen ? '40%' : '30%'} alignItems="center">
-                <Stack alignItems="center" spacing={4}>
-                  <Text fontWeight="semibold" fontSize="xl">
+
+            <Stack direction='row' justifyContent='space-between'>
+              <Stack w={isBigScreen ? '40%' : '30%'} alignItems='center'>
+                <Stack alignItems='center' spacing={4}>
+                  <Text fontWeight='semibold' fontSize='xl'>
                     {t('bought_products')}
                   </Text>
                   <Select
@@ -81,12 +84,12 @@ const Cms = () => {
 
                 <ProductsPieChart boughtProducts={boughtProducts} />
               </Stack>
-              <Stack w={isBigScreen ? '40%' : '30%'} alignItems="center">
-                <Stack alignItems="center" spacing={4}>
-                  <Text fontWeight="semibold" fontSize="xl">
+              <Stack w={isBigScreen ? '40%' : '30%'} alignItems='center'>
+                <Stack alignItems='center' spacing={4}>
+                  <Text fontWeight='semibold' fontSize='xl'>
                     {t('top_10_users')}
                   </Text>
-                  <Stack direction="row" spacing={4}>
+                  <Stack direction='row' spacing={4}>
                     <Select
                       value={usersSelectedMonth}
                       onChange={(e) => {

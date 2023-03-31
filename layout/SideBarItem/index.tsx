@@ -40,7 +40,7 @@ const SideBarItem = ({ title, icon, href, ...props }: Props) => {
       <Button variant='unstyled' padding='4px' w='40px' h='40px'>
         {icon}
       </Button>
-      <Text fontWeight='semibold' minW='180px' color='white'>
+      <Text fontWeight='semibold' minW='140px' color='white'>
         {title}
       </Text>
     </Stack>

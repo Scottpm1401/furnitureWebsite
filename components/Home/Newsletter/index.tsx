@@ -65,6 +65,7 @@ const Newsletter = ({ ...props }: Props) => {
             type='email'
             mt='1rem'
             placeholder={t('your_email')}
+            _focusVisible={{ boxShadow: 'none !important' }}
           />
           <Button
             css={css`
