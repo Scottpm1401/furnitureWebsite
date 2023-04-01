@@ -15,6 +15,7 @@ import { APP_ROUTES } from '../constant';
 import CmsSideBar from '../layout/CmsSideBar';
 import Footer from '../layout/Footer';
 import Nav from '../layout/Nav';
+import TemplateProvider from '../layout/TemplateProvider';
 import { persistor, store } from '../redux/store';
 import theme from '../theme';
 
@@ -34,17 +35,23 @@ const App = ({ Component, pageProps }: AppProps) => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
-          <Head>
-            <title>Comfysloth</title>
-            <link rel='icon' href='/favicon.svg' />
-          </Head>
-          <Flex direction={isInCms ? 'row' : 'column'}>
-            {!isInCms ? <Nav /> : <CmsSideBar />}
+          <TemplateProvider>
+            <>
+              <Head>
+                <title>Comfysloth</title>
+                <link rel='icon' href='/favicon.svg' />
+              </Head>
+              <Flex direction={isInCms ? 'row' : 'column'}>
+                {!isInCms ? <Nav /> : <CmsSideBar />}
 
-            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-            <Component {...pageProps} />
-            {!isInCms && <Footer />}
-          </Flex>
+                <ColorModeScript
+                  initialColorMode={theme.config.initialColorMode}
+                />
+                <Component {...pageProps} />
+                {!isInCms && <Footer />}
+              </Flex>
+            </>
+          </TemplateProvider>
         </ChakraProvider>
       </PersistGate>
     </Provider>

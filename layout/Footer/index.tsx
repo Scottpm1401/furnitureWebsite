@@ -16,13 +16,16 @@ import Cirrus from '../../public/svg/master_card_cirrus.svg';
 import Twitter from '../../public/svg/twitter.svg';
 import UnionPay from '../../public/svg/unionpay.svg';
 import Visa from '../../public/svg/visa.svg';
+import { useAppSelector } from '../../redux/hooks';
+import { selectors } from '../../redux/reducer';
 import NavLink from '../Nav/NavLink';
 
 type Props = {};
 
 const Footer = (props: Props) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
+  const welcomeMess = useAppSelector(selectors.global.selectHomeFooter);
 
   return (
     <Container direction='column' pt='5rem'>
@@ -51,7 +54,7 @@ const Footer = (props: Props) => {
             lineHeight='26px'
             color='#5B5F62'
           >
-            {t('footer_welcome')}
+            {welcomeMess.find((item) => item.lang === lang)?.content}
           </Text>
           <Flex
             mt={'0.5rem'}

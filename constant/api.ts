@@ -45,5 +45,14 @@ export const API = {
       `/analysis/products_purchase/${month}`,
     GETTOP10USERS: (month: number) => `/analysis/top_10_users/${month}`,
   },
+  TEMPLATE: {
+    GETALL: '/template/all',
+    GETTEMPLATE: (id: string) => `/template/get/${id}`,
+    CREATETEMPLATE: '/template/create',
+    UPDATETEMPLATE: (id: string) => `/template/update/${id}`,
+    ACTIVETEMPLATE: (id: string) => `/template/active/${id}`,
+    DELETETEMPLATE: (id: string) => `/template/delete/${id}`,
+    CURRENTTEMPLATE: '/template/current',
+  },
   REFRESHTOKEN: '/user/refreshToken',
 };

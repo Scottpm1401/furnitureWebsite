@@ -1,5 +1,6 @@
 import { ProductType } from '../../product';
 import { PurchaseType } from '../../purchase';
+import { TemplateType } from '../../template';
 import { UserType } from '../../user';
 
 export type CMSList<T> = {
@@ -30,3 +31,9 @@ export type UpdateOrderedRequest = Partial<
 >;
 
 export type UpdateProductRequest = Omit<ProductType, '_id'>;
+
+export type CreateTemplateRequest = Omit<TemplateType, '_id' | 'active'>;
+
+export type UpdateTemplateRequest = Partial<
+  Omit<TemplateType, '_id' | 'active'>
+>;

@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { API } from '../../constant/api';
 import axiosClient from '../../interceptor';
 import { ProductRatingRequest } from '../../models/api/product';

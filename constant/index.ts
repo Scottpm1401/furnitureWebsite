@@ -80,9 +80,13 @@ export const APP_ROUTES = {
     },
     users: {
       list: '/cms/users',
-      create: '/cms/create',
+      create: '/cms/users/create',
       index: (id: string) => `/cms/users/${id}`,
     },
-    settings: '/cms/settings',
+    templates: {
+      list: '/cms/templates',
+      create: '/cms/templates/create',
+      index: (id: string) => `/cms/templates/${id}`,
+    },
   },
 };

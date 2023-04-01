@@ -29,7 +29,7 @@ type Props = {};
 
 const CmsSideBar = (props: Props) => {
   const router = useRouter();
-  const isCollapse = useAppSelector(selectors.global.getIsCollapse);
+  const isCollapse = useAppSelector(selectors.global.selectIsCollapse);
   const dispatch = useAppDispatch();
   const { t, lang } = useTranslation();
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
@@ -87,8 +87,8 @@ const CmsSideBar = (props: Props) => {
           />
           <SideBarItem
             icon={<SettingsIcon style={{ stroke: 'white', fill: 'none' }} />}
-            title={t('settings')}
-            href={APP_ROUTES.cms.settings}
+            title={t('template')}
+            href={APP_ROUTES.cms.templates.list}
           />
         </Stack>
       </Stack>

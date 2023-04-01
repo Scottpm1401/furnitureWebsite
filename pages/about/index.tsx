@@ -10,12 +10,16 @@ import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
 import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
+import { useAppSelector } from '../../redux/hooks';
+import { selectors } from '../../redux/reducer';
 
 type Props = {};
 
 const About = (props: Props) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
+  const aboutContent = useAppSelector(selectors.global.selectAbout);
+
   return (
     <NotAuthProvider>
       <Page
@@ -34,7 +38,7 @@ const About = (props: Props) => {
         <Flex mt='4rem'>
           <Container
             direction={isMobile ? 'column' : 'row'}
-            h={isMobile ? '1200px' : '600px'}
+            h={isMobile ? '1200px' : 'auto'}
             textAlign={isMobile ? 'center' : 'start'}
           >
             <Flex
@@ -44,8 +48,8 @@ const About = (props: Props) => {
               overflow='hidden'
             >
               <Image
-                style={{ objectFit: isMobile ? 'cover' : 'contain' }}
-                src={'/images/about_banner.jpg'}
+                style={{ objectFit: 'cover' }}
+                src={`${process.env.NEXT_PUBLIC_CDN}${aboutContent.image}`}
                 fill
                 sizes='(max-width: 768px) 100vw,
               (max-width: 1280px) 50vw,
@@ -81,7 +85,10 @@ const About = (props: Props) => {
                   fontWeight='semibold'
                   fontSize='3xl'
                 >
-                  {t('our_story')}
+                  {
+                    aboutContent.title.find((item) => item.lang === lang)
+                      ?.content
+                  }
                 </Text>
               </Flex>
               <Text
@@ -90,7 +97,10 @@ const About = (props: Props) => {
                 fontWeight='medium'
                 lineHeight={2}
               >
-                {t('about_text')}
+                {
+                  aboutContent.description.find((item) => item.lang === lang)
+                    ?.content
+                }
               </Text>
             </Flex>
           </Container>

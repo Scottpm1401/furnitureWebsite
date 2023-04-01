@@ -205,5 +205,6 @@
   "bought_products": "Các mặt hàng đã được khách hàng mua",
   "top_10_users": "Top 10 khách hàng",
   "user_paid": "Chi tiêu",
-  "user_bought": "Số lượng đã mua"
+  "user_bought": "Số lượng đã mua",
+  "template": "Giao diện"
 }

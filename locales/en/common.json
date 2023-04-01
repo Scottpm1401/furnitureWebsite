@@ -205,5 +205,6 @@
   "bought_products": "Customer bought products",
   "top_10_users": "Top 10 Customers",
   "user_paid": "Customer paid",
-  "user_bought": "Customer bought"
+  "user_bought": "Customer bought",
+  "template": "Template"
 }

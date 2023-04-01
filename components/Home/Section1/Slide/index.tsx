@@ -24,7 +24,7 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
         direction='column'
         position='relative'
         ml={isMobile ? 8 : 180}
-        maxWidth={500}
+        maxWidth={700}
         h='full'
         justifyContent='center'
         zIndex={2}

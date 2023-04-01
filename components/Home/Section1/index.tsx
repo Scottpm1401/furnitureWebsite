@@ -11,13 +11,17 @@ import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { useResponsive } from '../../../hooks/responsive';
+import { useAppSelector } from '../../../redux/hooks';
+import { selectors } from '../../../redux/reducer';
 import Slide from './Slide';
 
 type Props = {};
 
 const Section1 = (props: Props) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
+  const banners = useAppSelector(selectors.global.selectBanners);
+
   return (
     <Flex id='section1'>
       <Swiper
@@ -36,27 +40,20 @@ const Section1 = (props: Props) => {
         modules={[EffectFade, Navigation, Pagination, Autoplay]}
         className='mySwiper'
       >
-        <SwiperSlide>
-          <Slide
-            banner={`${process.env.NEXT_PUBLIC_CDN}/v1671091687/furniture/banners/slider_img_1_lt3wft.jpg`}
-            title={t('better_interiors')}
-            description={t('slide_1_des')}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide
-            banner={`${process.env.NEXT_PUBLIC_CDN}/v1671091692/furniture/banners/slider_img_2_mfdllq.jpg`}
-            title={t('beauty_indoors')}
-            description={t('slide_2_des')}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide
-            banner={`${process.env.NEXT_PUBLIC_CDN}/v1671091718/furniture/banners/slider_img_3_d716iv.jpg`}
-            title={t('superior_living')}
-            description={t('slide_3_des')}
-          />
-        </SwiperSlide>
+        {banners.map((banner) => (
+          <SwiperSlide key={banner._id}>
+            <Slide
+              banner={`${process.env.NEXT_PUBLIC_CDN}${banner.image}`}
+              title={
+                banner.title.find((item) => item.lang === lang)?.content || ''
+              }
+              description={
+                banner.description.find((item) => item.lang === lang)
+                  ?.content || ''
+              }
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </Flex>
   );
