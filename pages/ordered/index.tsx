@@ -2,6 +2,7 @@ import {
   Button,
   Flex,
   Grid,
+  Skeleton,
   Stack,
   Table,
   TableContainer,
@@ -189,9 +190,32 @@ const OrderedItem = ({ item, handleRating, orderId }: OrderedItemProps) => {
   );
 };
 
+const OrderedSkeleton = () => {
+  return (
+    <Stack
+      direction='row'
+      w='full'
+      justifyContent='space-between'
+      alignItems='center'
+    >
+      <Stack direction='row'>
+        <Skeleton w='200px' h='160px' />
+        <Stack spacing={2} justifyContent='center'>
+          <Skeleton w='160px' h='20px' />
+          <Skeleton w='80px' h='20px' />
+        </Stack>
+      </Stack>
+      <Skeleton w='70px' h='20px' />
+      <Skeleton w='120px' h='24px' />
+      <Skeleton w='70px' h='20px' />
+      <Skeleton w='120px' h='24px' />
+    </Stack>
+  );
+};
+
 const Ordered = () => {
   const { t } = useTranslation();
-  const { ordered: orders, getOrdered } = useSelfOrdered();
+  const { ordered: orders, getOrdered, isLoading } = useSelfOrdered();
   const { isMobileOrTablet } = useResponsive();
 
   const handleRating = async (
@@ -231,131 +255,147 @@ const Ordered = () => {
         />
 
         <Stack w='full' spacing={0}>
-          {orders && orders.length > 0 ? (
-            orders.map((order, index) => (
-              <Stack key={order._id} spacing={0}>
-                <Stack bg='orange.100' paddingY='1rem'>
-                  <Container>
-                    <Grid
-                      w='full'
-                      templateColumns={isMobileOrTablet ? '1fr' : '1fr 1fr 1fr'}
-                    >
-                      <Stack spacing={2}>
-                        <Text fontWeight='semibold'>{t('customer_info')}</Text>
-                        <Stack spacing={1}>
-                          <Text fontSize='sm'>{`${t('name')}: ${
-                            order.billingDetails.name
-                          }`}</Text>
-                          <Text fontSize='sm'>{`${t('email')}: ${
-                            order.billingDetails.email
-                          }`}</Text>
-                          <Text fontSize='sm'>{`${t('phone')}: ${
-                            order.billingDetails.phone
-                          }`}</Text>
-                          <Text fontSize='sm'>{`${t(
-                            'address'
-                          )}: ${formatAddress(
-                            order.billingDetails.address
-                          )}`}</Text>
-                        </Stack>
-                      </Stack>
-                      <Stack spacing={2}>
-                        <Text fontWeight='semibold'>{t('payment_info')}</Text>
-                        <Stack spacing={1}>
-                          <Text fontSize='sm'>{`${t('payment_method')}: ${
-                            order.payment_method
-                          }`}</Text>
-
-                          <Text fontSize='sm'>{`${t('total')}: $${floor(
-                            order.total_bill,
-                            2
-                          )}`}</Text>
-                        </Stack>
-                      </Stack>
-                      <Stack spacing={2}>
-                        <Text fontWeight='semibold'>{t('package_info')}</Text>
-                        <Stack spacing={1}>
-                          <Text fontSize='sm'>{`${t('status')}: ${t(
-                            order.status
-                          )}`}</Text>
-                          <Text fontSize='sm'>{`${t(
-                            'package_date'
-                          )}: ${formatDateTime(order.package_date)}`}</Text>
-                          {order.arrive_date && (
+          {!isLoading ? (
+            orders && orders.length > 0 ? (
+              orders.map((order, index) => (
+                <Stack key={order._id} spacing={0}>
+                  <Stack bg='orange.100' paddingY='1rem'>
+                    <Container>
+                      <Grid
+                        w='full'
+                        templateColumns={
+                          isMobileOrTablet ? '1fr' : '1fr 1fr 1fr'
+                        }
+                      >
+                        <Stack spacing={2}>
+                          <Text fontWeight='semibold'>
+                            {t('customer_info')}
+                          </Text>
+                          <Stack spacing={1}>
+                            <Text fontSize='sm'>{`${t('name')}: ${
+                              order.billingDetails.name
+                            }`}</Text>
+                            <Text fontSize='sm'>{`${t('email')}: ${
+                              order.billingDetails.email
+                            }`}</Text>
+                            <Text fontSize='sm'>{`${t('phone')}: ${
+                              order.billingDetails.phone
+                            }`}</Text>
                             <Text fontSize='sm'>{`${t(
-                              'arrive_date'
-                            )}: ${formatDateTime(order.arrive_date)}`}</Text>
-                          )}
+                              'address'
+                            )}: ${formatAddress(
+                              order.billingDetails.address
+                            )}`}</Text>
+                          </Stack>
                         </Stack>
-                      </Stack>
-                    </Grid>
-                  </Container>
+                        <Stack spacing={2}>
+                          <Text fontWeight='semibold'>{t('payment_info')}</Text>
+                          <Stack spacing={1}>
+                            <Text fontSize='sm'>{`${t('payment_method')}: ${
+                              order.payment_method
+                            }`}</Text>
+
+                            <Text fontSize='sm'>{`${t('total')}: $${floor(
+                              order.total_bill,
+                              2
+                            )}`}</Text>
+                          </Stack>
+                        </Stack>
+                        <Stack spacing={2}>
+                          <Text fontWeight='semibold'>{t('package_info')}</Text>
+                          <Stack spacing={1}>
+                            <Text fontSize='sm'>{`${t('status')}: ${t(
+                              order.status
+                            )}`}</Text>
+                            <Text fontSize='sm'>{`${t(
+                              'package_date'
+                            )}: ${formatDateTime(order.package_date)}`}</Text>
+                            {order.arrive_date && (
+                              <Text fontSize='sm'>{`${t(
+                                'arrive_date'
+                              )}: ${formatDateTime(order.arrive_date)}`}</Text>
+                            )}
+                          </Stack>
+                        </Stack>
+                      </Grid>
+                    </Container>
+                  </Stack>
+                  <Stack bg='gray.100' paddingY='1rem'>
+                    <Container>
+                      {isMobileOrTablet ? (
+                        <Stack spacing='2rem' mt='2.5rem' w='full'>
+                          {order.products.map((item) => (
+                            <OrderedItem
+                              handleRating={handleRating}
+                              key={item.product_id}
+                              item={item}
+                              orderId={order._id}
+                            />
+                          ))}
+                        </Stack>
+                      ) : (
+                        <TableContainer w='full'>
+                          <Table variant='simple'>
+                            <Thead>
+                              <Tr
+                                sx={{
+                                  th: {
+                                    fontSize: '1rem',
+                                  },
+                                }}
+                              >
+                                <Th>{t('products')}</Th>
+                                <Th>{t('price')}</Th>
+                                <Th>{t('quantity')}</Th>
+                                <Th>{t('subtotal')}</Th>
+                                <Th>{t('rating')}</Th>
+                              </Tr>
+                            </Thead>
+                            <Tbody>
+                              {order.products.map((item) => (
+                                <OrderedItem
+                                  handleRating={handleRating}
+                                  key={item.product_id}
+                                  item={item}
+                                  orderId={order._id}
+                                />
+                              ))}
+                            </Tbody>
+                          </Table>
+                        </TableContainer>
+                      )}
+                    </Container>
+                  </Stack>
                 </Stack>
-                <Stack bg='gray.100' paddingY='1rem'>
-                  <Container>
-                    {isMobileOrTablet ? (
-                      <Stack spacing='2rem' mt='2.5rem' w='full'>
-                        {order.products.map((item) => (
-                          <OrderedItem
-                            handleRating={handleRating}
-                            key={item.product_id}
-                            item={item}
-                            orderId={order._id}
-                          />
-                        ))}
-                      </Stack>
-                    ) : (
-                      <TableContainer w='full'>
-                        <Table variant='simple'>
-                          <Thead>
-                            <Tr
-                              sx={{
-                                th: {
-                                  fontSize: '1rem',
-                                },
-                              }}
-                            >
-                              <Th>{t('products')}</Th>
-                              <Th>{t('price')}</Th>
-                              <Th>{t('quantity')}</Th>
-                              <Th>{t('subtotal')}</Th>
-                              <Th>{t('rating')}</Th>
-                            </Tr>
-                          </Thead>
-                          <Tbody>
-                            {order.products.map((item) => (
-                              <OrderedItem
-                                handleRating={handleRating}
-                                key={item.product_id}
-                                item={item}
-                                orderId={order._id}
-                              />
-                            ))}
-                          </Tbody>
-                        </Table>
-                      </TableContainer>
-                    )}
-                  </Container>
+              ))
+            ) : (
+              <Stack
+                w='full'
+                alignItems='center'
+                justifyContent='center'
+                spacing={4}
+                minH='50vh'
+              >
+                <Text fontWeight='semibold' fontSize='2xl'>
+                  {t('empty_orders')}
+                </Text>
+                <Stack>
+                  <Link href={APP_ROUTES.products}>
+                    <Button colorScheme='orange'>
+                      {t('continue_shopping')}
+                    </Button>
+                  </Link>
                 </Stack>
               </Stack>
-            ))
+            )
           ) : (
-            <Stack
-              w='full'
-              alignItems='center'
-              justifyContent='center'
-              spacing={4}
-              minH='50vh'
-            >
-              <Text fontWeight='semibold' fontSize='2xl'>
-                {t('empty_orders')}
-              </Text>
-              <Stack>
-                <Link href={APP_ROUTES.products}>
-                  <Button colorScheme='orange'>{t('continue_shopping')}</Button>
-                </Link>
+            <Container w='full'>
+              <Stack w='full' mt='2.5rem' spacing={4}>
+                {new Array(5).fill(0).map((item, index) => (
+                  <OrderedSkeleton key={`${item}_${index}`} />
+                ))}
               </Stack>
-            </Stack>
+            </Container>
           )}
         </Stack>
       </Page>
