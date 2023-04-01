@@ -174,6 +174,7 @@ const Products = () => {
                       handleUpdateFilter({
                         ...filter,
                         sort: e.target.value as ProductSort,
+                        offset: 0,
                       })
                     }
                   >
