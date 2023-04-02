@@ -206,5 +206,8 @@
   "top_10_users": "Top 10 Customers",
   "user_paid": "Customer paid",
   "user_bought": "Customer bought",
-  "template": "Template"
+  "template": "Template",
+  "template_details": "Template Details",
+  "create_template": "Create template",
+  "update_template": "Update template"
 }

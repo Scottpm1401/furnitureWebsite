@@ -206,5 +206,8 @@
   "top_10_users": "Top 10 khách hàng",
   "user_paid": "Chi tiêu",
   "user_bought": "Số lượng đã mua",
-  "template": "Giao diện"
+  "template": "Giao diện",
+  "template_details": "Thông tin giao diện",
+  "create_template": "Tạo giao diện",
+  "update_template": "Cập nhật giao diện"
 }
