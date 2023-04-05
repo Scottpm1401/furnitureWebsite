@@ -1,34 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Node](https://img.shields.io/badge/node%40latest-%3E%3D16.16.0-red) ![Yarn](https://img.shields.io/badge/yarn%40latest-%3E%3D1.22.19-yellow) ![Next](https://img.shields.io/badge/next-12.2.3-brightgreen)
 
-## Getting Started
+# Furniture Web
 
-First, run the development server:
+### Getting start
+
+##### Run the development server (NodeJS):
 
 ```bash
-npm run dev
-# or
-yarn dev
+$ yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application is now running on http://localhost:3000.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+##### Run production mode (NodeJS):
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+$ yarn build
+$ yarn start
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The application is now running on http://localhost:3000.
 
-## Learn More
+### Editor Config
 
-To learn more about Next.js, take a look at the following resources:
+If you use VSCode, I recommend you tell VSCode to auto-fix eslint errors on save.
+Open `settings.json` or at root folder create a `.vscode/settings.json` file with the following content:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```json
+"editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+"editor.formatOnSave": true,
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Code Rule
 
-## Deploy on Vercel
+##### File naming convention
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Noun adjunct / Adjective Modifiers / Verb + Noun
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```js
+// CreateTaskModal.tsx
+// CreateChannelButton.tsx
+```
+
+##### Name functions
+
+Function names should be start with verbs.
+
+##### Variable naming convention
+
+- `PascalCase`: for component, component folder, type, interface.
+- `camelCase`: for global scope (available for change), component scope, function scope.
+- `UPPERCASE`: for global scope (constant not available for change), supplement with snake_case (ex: ROUTES_API)
