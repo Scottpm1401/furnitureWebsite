@@ -52,6 +52,7 @@
   "dining": "Phòng ăn",
   "kids": "Trẻ em",
   "search_place_holder": "Tìm kiếm...",
+  "caressa": "Caressa",
   "ikea": "Ikea",
   "ashley": "Ashley",
   "maisons_du_monde": "Maisons Du Monde",
@@ -209,5 +210,14 @@
   "template": "Giao diện",
   "template_details": "Thông tin giao diện",
   "create_template": "Tạo giao diện",
-  "update_template": "Cập nhật giao diện"
+  "update_template": "Cập nhật giao diện",
+  "cancel": "Huỷ",
+  "update": "Cập nhật",
+  "banner_details": "Thông tin banner",
+  "content_details": "Thông tin chi tiết",
+  "language": "Ngôn ngữ",
+  "home_footer": "Cuối trang",
+  "contact": "Liên hệ",
+  "banners": "Bảng hiệu",
+  "update_template_success": "Cập nhật giao diện thành công"
 }

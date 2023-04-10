@@ -1,53 +1,73 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from '@chakra-ui/react';
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
+import { Select, Stack, Text, Textarea } from '@chakra-ui/react';
+import { isEmpty } from 'lodash';
+import { ChangeEvent, useState } from 'react';
 
-import { ContentType } from '../../../../models/template';
+import { ContentFormType } from '../../../../models/api/cms';
+import { Language } from '../../../../models/template';
 
 type CmsTemplateContentProps = {
   onDelete?: () => void;
-
-  contents: ContentType[];
-  handleUpdate?: (result: ContentType[]) => void;
+  contents: ContentFormType[];
+  handleUpdate: (result: ContentFormType[]) => void;
+  title?: string;
 };
 
 const CmsTemplateContent = ({
   onDelete,
   contents,
   handleUpdate,
+  title,
 }: CmsTemplateContentProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [contentLang, setContentLang] = useState(Language.english);
+
+  const handleEditContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    if (contents.findIndex((item) => item.lang === contentLang) > -1) {
+      if (isEmpty(e.target.value)) {
+        handleUpdate(contents.filter((item) => item.lang !== contentLang));
+      } else {
+        handleUpdate(
+          contents.map((item) =>
+            item.lang === contentLang
+              ? { ...item, content: e.target.value }
+              : item
+          )
+        );
+      }
+    } else {
+      handleUpdate([
+        ...contents,
+        { lang: contentLang, content: e.target.value },
+      ]);
+    }
+  };
 
   return (
-    <>
-      <Button onClick={onOpen}>Open Modal</Button>
-
-      <Modal onClose={onClose} size='xl' isOpen={isOpen}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}></ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3}>
-              Save
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
+    <Stack>
+      <Stack direction='row' justifyContent='space-between'>
+        {title && (
+          <Text fontWeight='semibold' fontSize='xl'>
+            {title}
+          </Text>
+        )}
+        <Select
+          w='auto'
+          value={contentLang}
+          onChange={(e) => setContentLang(e.target.value as Language)}
+        >
+          {Object.values(Language).map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </Select>
+      </Stack>
+      <Textarea
+        value={
+          contents?.find((item) => item.lang === contentLang)?.content || ''
+        }
+        onChange={handleEditContent}
+      />
+    </Stack>
   );
 };
 

@@ -4,7 +4,7 @@ export type TemplateType = {
   about: BannerType;
   home_footer: ContentType[];
   contact: ContentType[];
-  terms_and_condition: ContentType[];
+  terms_and_conditions: ContentType[];
   privacy_policy: ContentType[];
   active: boolean;
   title: string;

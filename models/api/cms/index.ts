@@ -1,6 +1,6 @@
 import { ProductType } from '../../product';
 import { PurchaseType } from '../../purchase';
-import { TemplateType } from '../../template';
+import { BannerType, ContentType, TemplateType } from '../../template';
 import { UserType } from '../../user';
 
 export type CMSList<T> = {
@@ -17,6 +17,14 @@ export type SearchPagination = {
   search?: string;
 } & Pagination;
 
+export type BannerFormType = {
+  image: string;
+  title: ContentFormType[];
+  description: ContentFormType[];
+};
+
+export type ContentFormType = Omit<ContentType, '_id'>;
+
 export type UpdateUserRequest = Partial<
   Omit<UserType, '_id' | 'cart' | 'cart_total'>
 > & {
@@ -32,8 +40,16 @@ export type UpdateOrderedRequest = Partial<
 
 export type UpdateProductRequest = Omit<ProductType, '_id'>;
 
-export type CreateTemplateRequest = Omit<TemplateType, '_id' | 'active'>;
+type TemplateRequest = {
+  banners: BannerFormType[];
+  about: BannerFormType;
+  home_footer: ContentFormType[];
+  contact: ContentFormType[];
+  terms_and_conditions: ContentFormType[];
+  privacy_policy: ContentFormType[];
+  title: string;
+};
 
-export type UpdateTemplateRequest = Partial<
-  Omit<TemplateType, '_id' | 'active'>
->;
+export type CreateTemplateRequest = TemplateRequest;
+
+export type UpdateTemplateRequest = TemplateRequest;

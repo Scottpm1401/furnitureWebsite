@@ -1,4 +1,4 @@
-import { Stack, Switch, Text, useToast } from '@chakra-ui/react';
+import { Button, Stack, Switch, Text, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
@@ -9,11 +9,10 @@ import AdminAuthProvider from '../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../layout/CmsContainer';
 import Page from '../../../layout/Page';
 import { TemplateType } from '../../../models/template';
+import PlusIcon from '../../../public/svg/plus.svg';
 import { activeTemplate } from '../../../services/template';
 
-type Props = {};
-
-const CmsTemplates = (props: Props) => {
+const CmsTemplates = () => {
   const { t } = useTranslation();
   const { templates, getTemplates } = useTemplates();
   const router = useRouter();
@@ -37,7 +36,18 @@ const CmsTemplates = (props: Props) => {
   return (
     <AdminAuthProvider>
       <Page direction='row' w='full' title='Template'>
-        <CmsContainer title={t('template')}>
+        <CmsContainer
+          title={t('template')}
+          rightElement={
+            <Button
+              leftIcon={<PlusIcon width={16} height={16} strokeWidth={4} />}
+              colorScheme='orange'
+              onClick={() => router.push(APP_ROUTES.cms.templates.create)}
+            >
+              {t('create')}
+            </Button>
+          }
+        >
           <Stack spacing={4}>
             {templates.map((template) => (
               <Stack key={template._id}>

@@ -7,13 +7,11 @@ import {
 type UploadProductImageProps = {
   uploadImg: string;
   img?: string;
-  extra?: boolean;
 };
 
-export const handleUploadProductImage = async ({
+export const handleUploadTemplateImage = async ({
   uploadImg,
   img,
-  extra,
 }: UploadProductImageProps) => {
   const formData = new FormData();
   let signatureParam: GetSignatureType = {};
@@ -22,7 +20,7 @@ export const handleUploadProductImage = async ({
     signatureParam.public_id = publicId;
     formData.append('public_id', publicId);
   } else {
-    const folder = `furniture/products${extra ? '/extra' : ''}`;
+    const folder = `furniture/banners`;
     signatureParam.folder = folder;
     formData.append('folder', folder);
   }

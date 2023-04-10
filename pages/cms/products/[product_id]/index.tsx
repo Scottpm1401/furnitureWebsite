@@ -12,11 +12,12 @@ import CmsContainer from '../../../../layout/CmsContainer';
 import Page from '../../../../layout/Page';
 import { UpdateProductRequest } from '../../../../models/api/cms';
 import { updateProductById } from '../../../../services/cms';
-import { isBase64Image, isReqError } from '../../../../utils/common';
 import {
-  handleDeleteProductImage,
-  handleUploadProductImage,
-} from '../../../../utils/product';
+  handleDeleteImage,
+  isBase64Image,
+  isReqError,
+} from '../../../../utils/common';
+import { handleUploadProductImage } from '../../../../utils/product';
 
 const CmsProduct = () => {
   const { product, isLoading, getProduct } = useProduct();
@@ -44,7 +45,7 @@ const CmsProduct = () => {
           if (!isEqual(product.gallery[index], values.gallery[index])) {
             if (!isBase64Image(values.gallery[index])) {
               if (values.gallery[index] === undefined) {
-                await handleDeleteProductImage(product.gallery[index]);
+                await handleDeleteImage(product.gallery[index]);
                 req.gallery = req.gallery.filter(
                   (item) => item !== req.gallery![index]
                 );

@@ -20,7 +20,7 @@ const initialState: GlobalState = {
     },
     home_footer: [],
     contact: [],
-    terms_and_condition: [],
+    terms_and_conditions: [],
     privacy_policy: [],
     active: false,
     title: '',
@@ -60,6 +60,18 @@ const selectors = (<S extends { global: GlobalState }>() => {
     (state) => state.template.home_footer
   );
   const selectAbout = createSelector(getState, (state) => state.template.about);
+  const selectContact = createSelector(
+    getState,
+    (state) => state.template.contact
+  );
+  const selectPrivacyPolicy = createSelector(
+    getState,
+    (state) => state.template.privacy_policy
+  );
+  const selectTermsAndConditions = createSelector(
+    getState,
+    (state) => state.template.terms_and_conditions
+  );
 
   return {
     selectIsCollapse,
@@ -67,6 +79,9 @@ const selectors = (<S extends { global: GlobalState }>() => {
     selectBanners,
     selectHomeFooter,
     selectAbout,
+    selectContact,
+    selectPrivacyPolicy,
+    selectTermsAndConditions,
   };
 })();
 

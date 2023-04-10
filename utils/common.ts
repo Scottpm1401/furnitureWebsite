@@ -3,6 +3,7 @@ import moment from 'moment';
 
 import { countries } from '../constant/country';
 import { AddressType } from '../models/user';
+import { destroyImage, getSignature } from '../services/upload';
 
 export const validateEmail = (email: string) => {
   return email.match(
@@ -71,4 +72,17 @@ export const isBase64Image = (str: string): boolean => {
   } catch (err) {
     return false;
   }
+};
+export const handleDeleteImage = async (img: string) => {
+  const formData = new FormData();
+  const publicId = img.slice(img.indexOf('furniture'));
+  formData.append('public_id', publicId);
+  const { signature, timestamp } = await getSignature({
+    public_id: publicId,
+  });
+  formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || '');
+  formData.append('timestamp', timestamp.toString());
+  formData.append('signature', signature);
+
+  await destroyImage(formData);
 };

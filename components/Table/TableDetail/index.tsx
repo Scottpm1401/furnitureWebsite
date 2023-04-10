@@ -60,7 +60,7 @@ const TableDetailRow = ({ row }: { row: TableDetailRowProps }) => {
       <Td w='20%' bg='blackAlpha.300'>
         <Text fontWeight='semibold'>{title}</Text>
       </Td>
-      <Td w='80%'>
+      <Td w='80%' maxW='800px'>
         {edit ? (
           isEditing ? (
             <Stack

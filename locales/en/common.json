@@ -52,6 +52,7 @@
   "dining": "Dining",
   "kids": "Kids",
   "search_place_holder": "Search...",
+  "caressa": "Caressa",
   "ikea": "Ikea",
   "ashley": "Ashley",
   "maisons_du_monde": "Maisons Du Monde",
@@ -209,5 +210,14 @@
   "template": "Template",
   "template_details": "Template Details",
   "create_template": "Create template",
-  "update_template": "Update template"
+  "update_template": "Update template",
+  "cancel": "Cancel",
+  "update": "Update",
+  "banner_details": "Banner details",
+  "content_details": "Content details",
+  "language": "Language",
+  "home_footer": "Footer",
+  "contact": "Contact",
+  "banners": "Banners",
+  "update_template_success": "Update template successful"
 }
