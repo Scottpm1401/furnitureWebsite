@@ -153,7 +153,7 @@ const Cart = () => {
 
   return (
     <AuthProvider>
-      <Page direction='column' title='Cart'>
+      <Page direction='column' title={t('cart')}>
         <Breadcrumb
           links={[
             { title: t('home'), href: APP_ROUTES.home },

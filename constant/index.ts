@@ -24,6 +24,9 @@ export const CHART_COLORS_HOVER = [
   '#33FFCC',
 ];
 
+export const CONTACT_EMBED_MAP =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.18099308804!2d106.70323959999999!3d10.797445799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528b70447b96d%3A0xb8fb76b0fbcb717f!2zMTQxIMSQLiDEkGnhu4duIEJpw6puIFBo4bunLCBQaMaw4budbmcgMTUsIELDrG5oIFRo4bqhbmgsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1681198876105!5m2!1svi!2s';
+
 export const CHART_COLORS = CHART_COLORS_HOVER.map((color) =>
   color.replace('#', '')
 ).map(

@@ -18,7 +18,7 @@ const Profile = (props: Props) => {
         alignItems='center'
         justifyContent='center'
         direction='column'
-        title='Profile'
+        title={t('profile')}
       >
         <Breadcrumb
           links={[

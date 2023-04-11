@@ -158,6 +158,11 @@ const Nav = (props: Props) => {
                   href={APP_ROUTES.products}
                   textProps={{ color: isTop ? 'white' : 'black' }}
                 />
+                <NavLink
+                  title={t('contact')}
+                  href={APP_ROUTES.contact}
+                  textProps={{ color: isTop ? 'white' : 'black' }}
+                />
               </Flex>
               <Flex justifyContent='flex-end' alignItems='center'>
                 <Popover

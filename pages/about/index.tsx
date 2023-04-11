@@ -1,8 +1,7 @@
-import { Button, Flex, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import Container from '../../components/Container';
@@ -26,7 +25,7 @@ const About = (props: Props) => {
         alignItems='center'
         justifyContent='center'
         direction='column'
-        title='About'
+        title={t('about')}
       >
         <Breadcrumb
           links={[

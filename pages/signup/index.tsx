@@ -20,7 +20,7 @@ const Login = (props: Props) => {
         alignItems='center'
         justifyContent='center'
         direction='column'
-        title='Sign up'
+        title={t('sign_up')}
       >
         <Breadcrumb
           links={[

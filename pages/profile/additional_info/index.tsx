@@ -15,7 +15,12 @@ const InfoProfile = (props: Props) => {
   const { t } = useTranslation();
   return (
     <AuthProvider>
-      <Page alignItems='center' justifyContent='center' direction='column'>
+      <Page
+        alignItems='center'
+        justifyContent='center'
+        direction='column'
+        title={t('additional_info')}
+      >
         <Breadcrumb
           links={[
             { title: t('home'), href: APP_ROUTES.home },

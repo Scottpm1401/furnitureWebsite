@@ -108,7 +108,7 @@ const Products = () => {
 
   return (
     <NotAuthProvider>
-      <Page w='full' direction='column' title='Products'>
+      <Page w='full' direction='column' title={t('products')}>
         <Breadcrumb
           links={[
             { title: t('home'), href: APP_ROUTES.home },

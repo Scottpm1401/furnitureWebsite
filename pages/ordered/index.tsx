@@ -247,7 +247,7 @@ const Ordered = () => {
   return (
     <AuthProvider>
       <Page
-        title='Ordered'
+        title={t('your_ordered')}
         alignItems='center'
         justifyContent='center'
         direction='column'

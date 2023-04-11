@@ -15,7 +15,12 @@ const AuthenticationProfile = (props: Props) => {
   const { t } = useTranslation();
   return (
     <AuthProvider>
-      <Page alignItems='center' justifyContent='center' direction='column'>
+      <Page
+        alignItems='center'
+        justifyContent='center'
+        direction='column'
+        title={t('password_and_authentication')}
+      >
         <Breadcrumb
           links={[
             { title: t('home'), href: APP_ROUTES.home },

@@ -40,7 +40,7 @@ const Checkout = (props: Props) => {
 
   return (
     <AuthProvider>
-      <Page direction='column' title='Checkout'>
+      <Page direction='column' title={t('checkout')}>
         <Breadcrumb
           links={[
             { title: t('home'), href: APP_ROUTES.home },

@@ -20,6 +20,7 @@ import React, { useRef, useState } from 'react';
 import SocialIcon from '../../../components/SocialIcon';
 import { APP_ROUTES } from '../../../constant';
 import CloseIcon from '../../../public/svg/close.svg';
+import ContactIcon from '../../../public/svg/contact.svg';
 import Facebook from '../../../public/svg/facebook.svg';
 import HomeIcon from '../../../public/svg/home.svg';
 import InfoIcon from '../../../public/svg/info.svg';
@@ -165,7 +166,6 @@ const MobileNavSideBar = ({
                 mt='0.5rem'
                 onClick={onClose}
               />
-
               <NavLink
                 title={t('products')}
                 href={APP_ROUTES.products}
@@ -234,6 +234,19 @@ const MobileNavSideBar = ({
                   />
                 </>
               )}
+              <NavLink
+                title={t('contact')}
+                href={APP_ROUTES.contact}
+                textProps={{
+                  color: 'black',
+                  fontSize: 'xl',
+                  fontWeight: 'semibold',
+                }}
+                direction='left'
+                icon={<ContactIcon style={{ width: 24, height: 24 }} />}
+                mt='0.5rem'
+                onClick={onClose}
+              />
             </Flex>
             <Stack mb='2.5rem' spacing='0.5rem'>
               <Popover
