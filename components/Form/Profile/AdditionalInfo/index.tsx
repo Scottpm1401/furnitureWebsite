@@ -1,4 +1,5 @@
 import { Button, Flex, Input, Select, Text, useToast } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
@@ -27,19 +28,30 @@ const AdditionalInfoProfile = () => {
   const { isMobile } = useResponsive();
 
   const handleUpdateProfile = async (values: AdditionalInfoType) => {
-    setIsLoading(true);
-    const updatedUser = await updateUser({
-      username: user.username,
-      ...values,
-    });
-    dispatch(actions.user.setUser(updatedUser));
-    toast({
-      title: t('update_profile_success'),
-      status: 'success',
-      duration: 5000,
-      position: 'top-right',
-    });
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const updatedUser = await updateUser({
+        username: user.username,
+        ...values,
+      });
+      dispatch(actions.user.setUser(updatedUser));
+      toast({
+        title: t('update_profile_success'),
+        status: 'success',
+        duration: 5000,
+        position: 'top-right',
+      });
+    } catch (err) {
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

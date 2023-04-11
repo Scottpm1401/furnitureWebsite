@@ -15,7 +15,6 @@ export const getProducts = async (filter: Filter) => {
       ...filter,
     },
   });
-
   return res.data as ProductType[];
 };
 

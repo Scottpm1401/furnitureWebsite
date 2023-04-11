@@ -12,7 +12,9 @@ import {
   Th,
   Thead,
   Tr,
+  useToast,
 } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
 import { floor } from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -217,6 +219,7 @@ const Ordered = () => {
   const { t } = useTranslation();
   const { ordered: orders, getOrdered, isLoading } = useSelfOrdered();
   const { isMobileOrTablet } = useResponsive();
+  const toast = useToast();
 
   const handleRating = async (
     rate: number,
@@ -230,8 +233,14 @@ const Ordered = () => {
         color: product.color,
       });
       await getOrdered();
-    } catch (error) {
-      console.log('error', error);
+    } catch (err) {
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
     }
   };
 

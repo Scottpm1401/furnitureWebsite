@@ -1,8 +1,16 @@
-import { Button, Flex, Grid, Text, useBreakpointValue } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Grid,
+  Text,
+  useBreakpointValue,
+  useToast,
+} from '@chakra-ui/react';
 import { css } from '@emotion/react';
+import { isAxiosError } from 'axios';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { APP_ROUTES } from '../../../constant';
 import { ProductType } from '../../../models/product';
@@ -18,6 +26,7 @@ import ProductCard from '../../ProductCard';
 const Section2 = () => {
   const { t } = useTranslation();
   const [products, setProducts] = useState<ProductType[]>([]);
+  const toast = useToast();
   const responsive = useBreakpointValue(
     {
       md: false,
@@ -29,9 +38,19 @@ const Section2 = () => {
   );
 
   const getProductsList = useCallback(async () => {
-    const productsList = await getFeaturedProduct();
-    setProducts(productsList);
-  }, []);
+    try {
+      const productsList = await getFeaturedProduct();
+      setProducts(productsList);
+    } catch (err) {
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+    }
+  }, [t, toast]);
 
   useEffect(() => {
     getProductsList();

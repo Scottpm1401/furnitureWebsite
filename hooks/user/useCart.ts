@@ -1,4 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useToast } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
+import useTranslation from 'next-translate/useTranslation';
+import { useCallback, useState } from 'react';
 
 import { ProductCartType } from '../../models/cart';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -13,9 +16,11 @@ const useCart = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cart, setCart] = useState<CartType[]>([]);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  const toast = useToast();
 
   const checkCart = useCallback(async () => {
-    setIsLoading(true);
+    if (cart.length < 1) setIsLoading(true);
     const cartReq = userCart.map(async (item) => {
       const req: CartType = {
         ...item,
@@ -32,9 +37,8 @@ const useCart = () => {
     });
     const newCart = await Promise.all(cartReq);
     setCart(newCart);
-
     setIsLoading(false);
-  }, [userCart]);
+  }, [cart.length, userCart]);
 
   const handleAddProduct = async (
     product: ProductCartType,
@@ -69,7 +73,15 @@ const useCart = () => {
         );
       }
       onDone?.();
-    } catch (error) {}
+    } catch (err) {
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+    }
   };
 
   return {

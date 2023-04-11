@@ -1,4 +1,5 @@
 import { Button, Stack, Switch, Text, useToast } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
@@ -10,7 +11,8 @@ import CmsContainer from '../../../layout/CmsContainer';
 import Page from '../../../layout/Page';
 import { TemplateType } from '../../../models/template';
 import PlusIcon from '../../../public/svg/plus.svg';
-import { activeTemplate } from '../../../services/template';
+import TrashIcon from '../../../public/svg/trash.svg';
+import { activeTemplate, deleteTemplate } from '../../../services/template';
 
 const CmsTemplates = () => {
   const { t } = useTranslation();
@@ -25,11 +27,29 @@ const CmsTemplates = () => {
       await activeTemplate(template._id);
       await getTemplates();
     } catch (err) {
-      toast({
-        title: 'Failed to active template',
-        status: 'error',
-        duration: 5000,
-      });
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+    }
+  };
+
+  const handleDeleteTemplate = async (template: TemplateType) => {
+    try {
+      await deleteTemplate(template._id);
+      await getTemplates();
+    } catch (err) {
+      if (isAxiosError(err)) {
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+      }
     }
   };
 
@@ -51,7 +71,12 @@ const CmsTemplates = () => {
           <Stack spacing={4}>
             {templates.map((template) => (
               <Stack key={template._id}>
-                <Stack direction='row' alignItems='center' spacing={4}>
+                <Stack
+                  position='relative'
+                  direction='row'
+                  alignItems='center'
+                  spacing={4}
+                >
                   <Text
                     fontSize='2xl'
                     fontWeight='semibold'
@@ -70,6 +95,22 @@ const CmsTemplates = () => {
                     size='lg'
                     onChange={() => handleActiveTemplate(template)}
                   />
+                  <Stack
+                    position='absolute'
+                    top='0'
+                    right='0'
+                    bg='orange.400'
+                    p='4px'
+                    cursor='pointer'
+                    w='24px'
+                    h='24px'
+                    borderRadius='4px'
+                    _hover={{ opacity: 0.8 }}
+                    transition='all 300ms ease-in-out'
+                    onClick={() => handleDeleteTemplate(template)}
+                  >
+                    <TrashIcon style={{ stroke: 'white' }} />
+                  </Stack>
                 </Stack>
               </Stack>
             ))}

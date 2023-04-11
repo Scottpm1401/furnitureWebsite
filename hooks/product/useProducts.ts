@@ -1,4 +1,7 @@
+import { useToast } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { SearchPagination } from '../../models/api/cms';
@@ -11,6 +14,8 @@ const useProducts = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [total, setTotal] = useState(0);
   const [empty, setEmpty] = useState(false);
+  const { t } = useTranslation();
+  const toast = useToast();
 
   const offset = useMemo(
     () => (router.query.offset ? Number(router.query.offset) : 0),
@@ -56,12 +61,19 @@ const useProducts = () => {
         });
         return data;
       } catch (err) {
+        if (isAxiosError(err))
+          toast({
+            title: t(err.response?.data.message),
+            status: 'error',
+            duration: 5000,
+            position: 'top-right',
+          });
         return undefined;
       } finally {
         setIsLoading(false);
       }
     },
-    [handleQuery]
+    [handleQuery, t, toast]
   );
 
   useEffect(() => {

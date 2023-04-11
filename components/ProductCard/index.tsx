@@ -17,6 +17,8 @@ import { ProductCartType } from '../../models/cart';
 import { ProductType } from '../../models/product';
 import SearchIcon from '../../public/svg/search.svg';
 import ShoppingBagIcon from '../../public/svg/shopping_bag.svg';
+import { useAppSelector } from '../../redux/hooks';
+import { selectors } from '../../redux/reducer';
 import PopupButton from './PopupButton';
 
 type ProductCardProps = {
@@ -50,6 +52,7 @@ const ProductCard = ({
       fallback: 'md',
     }
   );
+  const userId = useAppSelector(selectors.user.selectUserId);
   const { handleAddProduct } = useCart();
 
   return (
@@ -105,7 +108,7 @@ const ProductCard = ({
             alignItems='center'
             gap='1rem'
           >
-            {isAvailable && (
+            {userId && isAvailable && (
               <PopupButton
                 onClick={(e) => {
                   e.stopPropagation();

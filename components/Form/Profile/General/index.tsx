@@ -79,12 +79,12 @@ const GeneralProfile = () => {
         duration: 5000,
         position: 'top-right',
       });
-    } catch (error) {
-      if (isAxiosError(error)) {
+    } catch (err) {
+      if (isAxiosError(err)) {
         toast({
-          title: error.response?.data.error?.message
-            ? t('error.upload_size')
-            : t(error.response?.data.message),
+          title: err.response?.data.error?.message
+            ? t('error.upload.max_size')
+            : t(err.response?.data.message),
           status: 'error',
           duration: 5000,
           position: 'top-right',

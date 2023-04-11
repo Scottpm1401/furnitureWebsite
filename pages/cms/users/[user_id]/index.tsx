@@ -40,13 +40,13 @@ const CmsUser = () => {
         duration: 5000,
         position: 'top-right',
       });
-    } catch (error) {
-      if (isAxiosError(error)) {
+    } catch (err) {
+      if (isAxiosError(err)) {
         toast({
           title:
-            isReqError(error) ||
-            t(error.response?.data?.message) ||
-            error.response?.data?.error?.message,
+            isReqError(err) ||
+            t(err.response?.data?.message) ||
+            err.response?.data?.error?.message,
           status: 'error',
           duration: 5000,
           position: 'top-right',

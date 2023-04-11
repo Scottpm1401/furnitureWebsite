@@ -11,7 +11,9 @@ import {
   Th,
   Thead,
   Tr,
+  useToast,
 } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
 import { debounce, floor } from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -67,6 +69,8 @@ const Cart = () => {
   const cartTotal = useAppSelector(selectors.user.selectCartTotal);
   const dispatch = useAppDispatch();
   const { isMobileOrTablet } = useResponsive();
+  const toast = useToast();
+
   const totalCartItem = useMemo(() => {
     let count = 0;
     cart.forEach((item) => (count += item.quantity));
@@ -97,7 +101,15 @@ const Cart = () => {
             isMinus ? -product.price : product.price
           )
         );
-      } catch (error) {}
+      } catch (err) {
+        if (isAxiosError(err))
+          toast({
+            title: t(err.response?.data.message),
+            status: 'error',
+            duration: 5000,
+            position: 'top-right',
+          });
+      }
     },
     300
   );
@@ -112,15 +124,31 @@ const Cart = () => {
       dispatch(
         actions.user.setUserCartTotal(-(product.price * product.quantity))
       );
-    } catch (error) {}
+    } catch (err) {
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+    }
   };
 
   const handleClearCart = async () => {
     try {
       await clearProductCart();
       dispatch(actions.user.setUserCart([]));
-      dispatch(actions.user.setUserCartTotal(0));
-    } catch (error) {}
+      dispatch(actions.user.setUserCartTotal(-cartTotal));
+    } catch (err) {
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+    }
   };
 
   return (

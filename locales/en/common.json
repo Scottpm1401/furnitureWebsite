@@ -1,6 +1,46 @@
 {
   "error": {
-    "upload_size": "Failed to upload image, please make sure your image less than 10MB."
+    "upload": {
+      "max_size": "Failed to upload image, please make sure your image less than 10MB."
+    },
+    "template": {
+      "not_found": "Template not found",
+      "cannot_delete_only_template": "Cannot delete only template",
+      "cannot_delete_active_template": "Cannot delete active template"
+    },
+    "auth": {
+      "email_already_existed": "Email already existed",
+      "username_already_existed": "Username already existed",
+      "user_already_existed": "User already existed",
+      "incorrect_password": "Incorrect password",
+      "invalid_email_username": "Invalid email or username",
+      "invalid_refresh_token": "Invalid refresh token",
+      "do_not_have_permission": "You Do Not Have Permission To Access This Content",
+      "invalid_token": "Invalid Token",
+      "access_denied": "Access Denied"
+    },
+    "user": {
+      "not_found": "User not found",
+      "failed_to_change_password": "Failed to change user password",
+      "cart": {
+        "failed_to_add_product": "Failed to add product",
+        "not_found": "Cart not found",
+        "product_not_exist": "Product does not exist in your cart",
+        "failed_to_remove": "Failed to remove product",
+        "failed_to_clear": "Failed to clear cart",
+        "failed_to_update_product": "Failed to update product in cart"
+      }
+    },
+    "product": {
+      "not_found": "Product not found",
+      "failed_to_create": "Failed to create product",
+      "failed_to_rating_product": "Failed to rating product",
+      "failed_to_update": "Failed to update product"
+    },
+    "purchase": {
+      "not_found": "Purchase not found",
+      "failed_to_update": "Failed to update purchase"
+    }
   },
   "view_more": "View More",
   "better_interiors": "Better Interior",
@@ -115,13 +155,7 @@
   "update_profile_success": "Successfully update your profile",
   "update_password_success": "Successfully update your password",
   "form_required": "This field cannot be empty",
-  "incorrect_password": "Incorrect password",
-  "invalid_email_username": "Invalid email or username",
-  "user_already_existed": "User already existed",
-  "username_already_existed": "Username already existed",
-  "email_already_existed": "Email already existed",
   "our_story": "Our Story",
-  "about_text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat accusantium sapiente tempora sed dolore esse deserunt eaque excepturi, delectus error accusamus vel eligendi, omnis beatae. Quisquam, dicta. Eos quod quisquam esse recusandae vitae neque dolore, obcaecati incidunt sequi blanditiis est exercitationem molestiae delectus saepe odio eligendi modi porro eaque in libero minus unde sapiente consectetur architecto. Ullam rerum, nemo iste ex, eaque perspiciatis nisi, eum totam velit saepe sed quos similique amet. Ex, voluptate accusamus nesciunt totam vitae esse iste.",
   "cart": "Cart",
   "quantity": "Quantity",
   "subtotal": "Subtotal",

@@ -1,3 +1,5 @@
+import { useToast } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -27,6 +29,7 @@ const initialProduct: ProductType = {
 const CmsCreateProduct = () => {
   const { t } = useTranslation();
   const router = useRouter();
+  const toast = useToast();
 
   const handleCreateProduct = async (values: UpdateProductRequest) => {
     try {
@@ -46,7 +49,13 @@ const CmsCreateProduct = () => {
       const newProduct = await createProduct(req);
       router.push(APP_ROUTES.cms.products.index(newProduct._id));
     } catch (err) {
-      console.log(err);
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
     }
   };
 

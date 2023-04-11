@@ -1,4 +1,5 @@
-import { Button, Flex, Grid, Select, Text } from '@chakra-ui/react';
+import { Button, Flex, Grid, Select, Text, useToast } from '@chakra-ui/react';
+import { isAxiosError } from 'axios';
 import useTranslation from 'next-translate/useTranslation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -52,6 +53,7 @@ const Products = () => {
   const [layout, setLayout] = useState<Layout>(Layout.grid);
   const { t } = useTranslation();
   const { isMobile, isMobileOrTablet } = useResponsive();
+  const toast = useToast();
   const hasMore = useMemo(
     () => products.length !== 0 && products.length % LIMITED === 0,
     [products.length]
@@ -72,7 +74,15 @@ const Products = () => {
     try {
       await getProductsList(newFilter);
       setFilter(newFilter);
-    } catch (error) {}
+    } catch (err) {
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+    }
   };
 
   const handleLoadMore = async () => {
@@ -81,7 +91,15 @@ const Products = () => {
       const moreProductLists = await getProducts(newFilter);
       setFilter(newFilter);
       setProducts((prev) => [...prev, ...moreProductLists]);
-    } catch (error) {}
+    } catch (err) {
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
+    }
   };
 
   useEffect(() => {

@@ -1,14 +1,15 @@
-import { Button, Flex, Select, Stack, Text } from '@chakra-ui/react';
+import { Button, Flex, Select, Stack, Text, useToast } from '@chakra-ui/react';
 import {
   PaymentElement,
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js';
+import { isAxiosError } from 'axios';
 import { Form, Formik } from 'formik';
 import { floor } from 'lodash';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
 
 import { APP_ROUTES } from '../../../constant';
@@ -33,6 +34,7 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const { isMobileOrTablet } = useResponsive();
+  const toast = useToast();
 
   const checkoutSchema = Yup.object().shape({
     name: Yup.string().required(t('form_required')),
@@ -101,7 +103,13 @@ const CheckoutForm = () => {
         router.push(APP_ROUTES.ordered);
       }
     } catch (err) {
-      console.log(err);
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
+        });
     } finally {
       setIsLoading(false);
     }

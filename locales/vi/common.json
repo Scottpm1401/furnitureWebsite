@@ -1,6 +1,46 @@
 {
   "error": {
-    "upload_size": "Đăng tải hình thất bại, vui lòng đăng tải hình dưới 10MB."
+    "upload": {
+      "max_size": "Đăng tải hình thất bại, vui lòng đăng tải hình dưới 10MB."
+    },
+    "template": {
+      "not_found": "Không tìm thấy giao diện",
+      "cannot_delete_only_template": "Không thể xoá giao diện duy nhất",
+      "cannot_delete_active_template": "Không thể xoá giao diện đang kích hoạt"
+    },
+    "auth": {
+      "email_already_existed": "Email đã tồn tại",
+      "username_already_existed": "Tên đăng nhập đã tồn tại",
+      "user_already_existed": "Tài khoản đã tồn tại",
+      "incorrect_password": "Sai mật khẩu",
+      "invalid_email_username": "Sai tên đăng nhập hoặc email",
+      "invalid_refresh_token": "Refresh Token Sai",
+      "do_not_have_permission": "Bạn không có quyền truy cập đến trang này",
+      "invalid_token": "Token sai",
+      "access_denied": "Truy cập thất bại"
+    },
+    "user": {
+      "not_found": "Không tìm thấy người dùng",
+      "failed_to_change_password": "Đổi mật khẩu thất bại",
+      "cart": {
+        "failed_to_add_product": "Thêm sản phẩm thất bại",
+        "not_found": "Không tìm thấy giỏ hàng",
+        "product_not_exist": "Không tìm thấy sản phầm trong giỏ hàng",
+        "failed_to_remove": "Loại bỏ sản phẩm thất bại",
+        "failed_to_clear": "Làm mới giỏ hàng thất bại",
+        "failed_to_update_product": "Cập nhật sản phầm trong giỏ hàng thất bại"
+      }
+    },
+    "product": {
+      "not_found": "Không tìm thấy sản phẩm",
+      "failed_to_create": "Tạo sản phẩm thất bại",
+      "failed_to_rating_product": "Đánh giá sản phẩm thất bại",
+      "failed_to_update": "Cập nhật sản phẩm thất bại"
+    },
+    "purchase": {
+      "not_found": "Không tìm thấy đơn hàng",
+      "failed_to_update": "Cập nhật đơn hàng thất bại"
+    }
   },
   "view_more": "Xem Thêm",
   "better_interiors": "Tốt từ bên trong",
@@ -115,13 +155,8 @@
   "update_profile_success": "Cập nhật thông tin thành công",
   "update_password_success": "Cập nhật mật khẩu thành công",
   "form_required": "Không thể bỏ trống ô này",
-  "incorrect_password": "Sai mật khẩu",
-  "invalid_email_username": "Sai tên đăng nhập hoặc email",
-  "user_already_existed": "Tài khoản đã tồn tại",
-  "username_already_existed": "Tên đăng nhập đã tồn tại",
-  "email_already_existed": "Email đã tồn tại",
+
   "our_story": "Câu chuyện của chúng tôi",
-  "about_text": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat accusantium sapiente tempora sed dolore esse deserunt eaque excepturi, delectus error accusamus vel eligendi, omnis beatae. Quisquam, dicta. Eos quod quisquam esse recusandae vitae neque dolore, obcaecati incidunt sequi blanditiis est exercitationem molestiae delectus saepe odio eligendi modi porro eaque in libero minus unde sapiente consectetur architecto. Ullam rerum, nemo iste ex, eaque perspiciatis nisi, eum totam velit saepe sed quos similique amet. Ex, voluptate accusamus nesciunt totam vitae esse iste.",
   "cart": "Giỏ hàng",
   "quantity": "Số lượng",
   "subtotal": "Tổng cộng",
