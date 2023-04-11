@@ -62,6 +62,8 @@ const Contact = (props: Props) => {
                 mt='2rem'
                 color='#5B5F62'
                 fontWeight='medium'
+                fontSize='medium'
+                whiteSpace='pre-wrap'
                 lineHeight={2}
               >
                 {contact.find((item) => item.lang === lang)?.content}

@@ -54,7 +54,9 @@ const TermsAndConditions = (props: Props) => {
                 mt='2rem'
                 color='#5B5F62'
                 fontWeight='medium'
+                fontSize='medium'
                 lineHeight={2}
+                whiteSpace='pre-wrap'
               >
                 {termsAndConditions.find((item) => item.lang === lang)?.content}
               </Text>

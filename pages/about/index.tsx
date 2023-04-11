@@ -39,12 +39,16 @@ const About = (props: Props) => {
             direction={isMobile ? 'column' : 'row'}
             h={isMobile ? '1200px' : 'auto'}
             textAlign={isMobile ? 'center' : 'start'}
+            alignItems='center'
           >
             <Flex
+              w='full'
               flex={1}
               position='relative'
               borderRadius='0.5rem'
               overflow='hidden'
+              minH={isMobile ? '350px' : '600px'}
+              maxH={isMobile ? '350px' : '600px'}
             >
               <Image
                 style={{ objectFit: 'cover' }}
@@ -94,6 +98,7 @@ const About = (props: Props) => {
                 mt='2rem'
                 color='#5B5F62'
                 fontWeight='medium'
+                whiteSpace='pre-wrap'
                 lineHeight={2}
               >
                 {
