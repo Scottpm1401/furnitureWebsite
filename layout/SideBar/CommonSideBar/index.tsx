@@ -1,51 +1,21 @@
-import { Avatar, Flex, FlexProps, Text } from '@chakra-ui/react';
+import { Flex, FlexProps, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
 
-import { APP_ROUTES } from '../../constant';
-import ShieldIcon from '../../public/svg/shield.svg';
-import UserIcon from '../../public/svg/user.svg';
-import UserAdvanceIcon from '../../public/svg/user_advance.svg';
+import { settingType } from '../../../models/common';
 
-type Props = {} & FlexProps;
+type CommonSideBarProps = {
+  settings: settingType[];
+} & FlexProps;
 
-type settingType = {
-  title: string;
-  icon: React.ReactNode;
-  path: string;
-  pageTitle: string;
-};
-
-const settingList: settingType[] = [
-  {
-    title: 'public_profile',
-    path: APP_ROUTES.profile,
-    icon: <UserIcon />,
-    pageTitle: 'Your Profile',
-  },
-  {
-    title: 'additional_info',
-    path: APP_ROUTES.additionalInfo,
-    icon: <UserAdvanceIcon />,
-    pageTitle: 'Profile Advanced',
-  },
-  {
-    title: 'password_and_authentication',
-    path: APP_ROUTES.authentication,
-    icon: <ShieldIcon />,
-    pageTitle: 'Authentication',
-  },
-];
-
-const ProfileSideBar = ({ ...props }: Props) => {
+const CommonSideBar = ({ settings, ...props }: CommonSideBarProps) => {
   const router = useRouter();
   const { t } = useTranslation();
 
   return (
     <Flex direction='column' w='360px' pr='1.5rem' {...props}>
-      {settingList.map((item) => (
+      {settings.map((item) => (
         <Link href={item.path} key={item.title}>
           <Flex
             alignItems='center'
@@ -84,4 +54,4 @@ const ProfileSideBar = ({ ...props }: Props) => {
   );
 };
 
-export default ProfileSideBar;
+export default CommonSideBar;

@@ -3,12 +3,35 @@ import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import Container from '../../components/Container';
-import ProfileSideBar from '../../components/ProfileSideBar';
+import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
+import { settingType } from '../../models/common';
+import ShieldIcon from '../../public/svg/shield.svg';
+import UserIcon from '../../public/svg/user.svg';
+import UserAdvanceIcon from '../../public/svg/user_advance.svg';
 import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
+import CommonSideBar from '../SideBar/CommonSideBar';
 
 type Props = {} & FlexProps;
+
+const settingList: settingType[] = [
+  {
+    title: 'public_profile',
+    path: APP_ROUTES.profile,
+    icon: <UserIcon />,
+  },
+  {
+    title: 'additional_info',
+    path: APP_ROUTES.additionalInfo,
+    icon: <UserAdvanceIcon />,
+  },
+  {
+    title: 'password_and_authentication',
+    path: APP_ROUTES.authentication,
+    icon: <ShieldIcon />,
+  },
+];
 
 const ProfileContainer = ({ children, ...props }: Props) => {
   const user = useAppSelector(selectors.user.selectUser);
@@ -34,7 +57,7 @@ const ProfileContainer = ({ children, ...props }: Props) => {
           </Flex>
         </Flex>
         <Flex direction={isMobile ? 'column' : 'row'} mt='2rem'>
-          <ProfileSideBar mb={isMobile ? '2rem' : '0'} />
+          <CommonSideBar settings={settingList} mb={isMobile ? '2rem' : '0'} />
           {children}
         </Flex>
       </Container>

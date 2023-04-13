@@ -2,7 +2,7 @@ import { Button, Stack, StackProps, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useMemo } from 'react';
 
-import { APP_ROUTES } from '../../constant';
+import { APP_ROUTES } from '../../../../constant';
 
 type Props = {
   icon: React.ReactNode;
@@ -10,7 +10,7 @@ type Props = {
   href: string;
 } & StackProps;
 
-const SideBarItem = ({ title, icon, href, ...props }: Props) => {
+const CmsSideBarItem = ({ title, icon, href, ...props }: Props) => {
   const router = useRouter();
 
   const isSelected = useMemo(() => {
@@ -47,4 +47,4 @@ const SideBarItem = ({ title, icon, href, ...props }: Props) => {
   );
 };
 
-export default SideBarItem;
+export default CmsSideBarItem;

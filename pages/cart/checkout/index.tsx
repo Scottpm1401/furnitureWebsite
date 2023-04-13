@@ -14,7 +14,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Container from '../../../components/Container';
 import CheckoutForm from '../../../components/Form/CheckoutForm';
-import { APP_ROUTES } from '../../../constant';
+import { APP_ROUTES, FORM_BOX_SHADOW } from '../../../constant';
 import { usePayment } from '../../../hooks/payment';
 import AuthProvider from '../../../layout/AuthProvider';
 import Page from '../../../layout/Page';
@@ -82,7 +82,7 @@ const Checkout = (props: Props) => {
                 p='1.5rem 1rem'
                 alignItems='center'
                 justifyContent='center'
-                boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px'
+                boxShadow={FORM_BOX_SHADOW}
               >
                 <Stack direction='row' spacing={5} w='full'>
                   <Stack spacing='1.5rem' w='full'>

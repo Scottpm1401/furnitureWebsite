@@ -12,7 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
 
-import { APP_ROUTES } from '../../../constant';
+import { APP_ROUTES, FORM_BOX_SHADOW } from '../../../constant';
 import { countries } from '../../../constant/country';
 import { useResponsive } from '../../../hooks/responsive';
 import { BillingDetailsType } from '../../../models/purchase';
@@ -123,7 +123,7 @@ const CheckoutForm = () => {
       p='1.5rem 1rem'
       alignItems='center'
       justifyContent='center'
-      boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px'
+      boxShadow={FORM_BOX_SHADOW}
     >
       <Formik
         initialValues={initValue}

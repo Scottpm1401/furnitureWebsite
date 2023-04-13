@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 
-import { APP_ROUTES } from '../../../constant';
+import { APP_ROUTES, FORM_BOX_SHADOW } from '../../../constant';
 import NavLink from '../../../layout/Nav/NavLink';
 import { LoginRequest } from '../../../models/api/user';
 import Eye from '../../../public/svg/eye.svg';
@@ -78,7 +78,7 @@ const LoginForm = () => {
       p='1.5rem 1rem'
       alignItems='center'
       justifyContent='center'
-      boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px'
+      boxShadow={FORM_BOX_SHADOW}
     >
       <Formik
         validationSchema={LoginSchema}

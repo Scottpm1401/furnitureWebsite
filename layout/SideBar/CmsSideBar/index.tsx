@@ -12,22 +12,20 @@ import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 
-import { APP_ROUTES } from '../../constant';
-import HomeIcon from '../../public/svg/home.svg';
-import LanguageIcon from '../../public/svg/language.svg';
-import LogoutIcon from '../../public/svg/log-out.svg';
-import MenuIcon from '../../public/svg/menu.svg';
-import PackageIcon from '../../public/svg/package.svg';
-import SettingsIcon from '../../public/svg/settings.svg';
-import TaskIcon from '../../public/svg/task.svg';
-import UserIcon from '../../public/svg/user.svg';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { actions, selectors } from '../../redux/reducer';
-import SideBarItem from '../SideBarItem';
+import { APP_ROUTES } from '../../../constant';
+import HomeIcon from '../../../public/svg/home.svg';
+import LanguageIcon from '../../../public/svg/language.svg';
+import LogoutIcon from '../../../public/svg/log-out.svg';
+import MenuIcon from '../../../public/svg/menu.svg';
+import PackageIcon from '../../../public/svg/package.svg';
+import SettingsIcon from '../../../public/svg/settings.svg';
+import TaskIcon from '../../../public/svg/task.svg';
+import UserIcon from '../../../public/svg/user.svg';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { actions, selectors } from '../../../redux/reducer';
+import SideBarItem from './CmsSideBarItem';
 
-type Props = {};
-
-const CmsSideBar = (props: Props) => {
+const CmsSideBar = () => {
   const router = useRouter();
   const isCollapse = useAppSelector(selectors.global.selectIsCollapse);
   const dispatch = useAppDispatch();

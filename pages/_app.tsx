@@ -12,9 +12,9 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { APP_ROUTES } from '../constant';
-import CmsSideBar from '../layout/CmsSideBar';
 import Footer from '../layout/Footer';
 import Nav from '../layout/Nav';
+import CmsSideBar from '../layout/SideBar/CmsSideBar';
 import TemplateProvider from '../layout/TemplateProvider';
 import { persistor, store } from '../redux/store';
 import theme from '../theme';

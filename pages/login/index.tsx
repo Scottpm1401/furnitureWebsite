@@ -4,7 +4,7 @@ import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import LoginForm from '../../components/Form/LoginForm';
-import { APP_ROUTES } from '../../constant';
+import { APP_ROUTES, FORM_BOX_SHADOW } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
 import NavLink from '../../layout/Nav/NavLink';
 import NotAuthProvider from '../../layout/NotAuthProvider';
@@ -55,7 +55,7 @@ const Login = (props: Props) => {
             justifyContent='center'
             alignItems='center'
             bg='transparent'
-            boxShadow='rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px'
+            boxShadow={FORM_BOX_SHADOW}
           >
             <Text mr='0.25rem'>{t('new_to_comfysloth')}</Text>
             <NavLink

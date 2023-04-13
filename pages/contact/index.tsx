@@ -13,9 +13,7 @@ import Page from '../../layout/Page';
 import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
 
-type Props = {};
-
-const Contact = (props: Props) => {
+const Contact = () => {
   const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
   const contact = useAppSelector(selectors.global.selectContact);

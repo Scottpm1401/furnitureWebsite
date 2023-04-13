@@ -11,7 +11,7 @@ import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
 import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
-import Sidebar from '../../layout/Sidebar';
+import ProductSidebar from '../../layout/SideBar/ProductSidebar';
 import { Filter, ProductSort, ProductType } from '../../models/product';
 import DropDownIcon from '../../public/svg/drop-down.svg';
 import GridIcon from '../../public/svg/grid.svg';
@@ -118,7 +118,10 @@ const Products = () => {
         />
         <Container pt='5rem'>
           <Grid w='full' templateColumns={isMobile ? '1fr' : '240px 1fr'}>
-            <Sidebar filter={filter} handleUpdateFilter={handleUpdateFilter} />
+            <ProductSidebar
+              filter={filter}
+              handleUpdateFilter={handleUpdateFilter}
+            />
             <Flex ml={isMobile ? '0' : '1rem'} direction='column'>
               <Grid
                 templateColumns={isMobile ? '1fr' : 'auto 1fr auto'}

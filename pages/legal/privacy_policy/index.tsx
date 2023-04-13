@@ -1,18 +1,33 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Stack, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Breadcrumb from '../../../components/Breadcrumb';
 import Container from '../../../components/Container';
-import { APP_ROUTES } from '../../../constant';
+import { APP_ROUTES, FORM_BOX_SHADOW } from '../../../constant';
 import { useResponsive } from '../../../hooks/responsive';
 import NotAuthProvider from '../../../layout/NotAuthProvider';
 import Page from '../../../layout/Page';
+import CommonSideBar from '../../../layout/SideBar/CommonSideBar';
+import { settingType } from '../../../models/common';
+import PrivacyIcon from '../../../public/svg/privacy_policy.svg';
+import TermsAndConditionsIcon from '../../../public/svg/terms_and_conditions.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
 
-type Props = {};
+const settingList: settingType[] = [
+  {
+    title: 'terms_and_conditions',
+    path: APP_ROUTES.termAndCondition,
+    icon: <TermsAndConditionsIcon />,
+  },
+  {
+    title: 'privacy_policy',
+    path: APP_ROUTES.privacyPolicy,
+    icon: <PrivacyIcon />,
+  },
+];
 
-const PrivacyPolicy = (props: Props) => {
+const PrivacyPolicy = () => {
   const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
   const privacyPolicy = useAppSelector(selectors.global.selectPrivacyPolicy);
@@ -37,28 +52,32 @@ const PrivacyPolicy = (props: Props) => {
         />
         <Flex mt='4rem'>
           <Container
-            direction={isMobile ? 'column' : 'row'}
             h={isMobile ? '1200px' : 'auto'}
             textAlign={isMobile ? 'center' : 'start'}
           >
-            <Flex
-              ml={isMobile ? '0' : '2rem'}
-              mt={isMobile ? '2rem' : '0'}
-              direction='column'
-              justifyContent='flex-start'
-              flex={1}
-            >
-              <Text
-                mt='2rem'
-                color='#5B5F62'
-                fontWeight='medium'
-                fontSize='medium'
-                lineHeight={2}
-                whiteSpace='pre-wrap'
+            <Stack direction={isMobile ? 'column' : 'row'} spacing={4}>
+              <CommonSideBar settings={settingList} />
+              <Flex
+                ml={isMobile ? '0' : '2rem'}
+                direction='column'
+                justifyContent='flex-start'
+                flex={1}
+                p='2rem'
+                borderRadius='8px'
+                bg='white'
+                boxShadow={FORM_BOX_SHADOW}
               >
-                {privacyPolicy.find((item) => item.lang === lang)?.content}
-              </Text>
-            </Flex>
+                <Text
+                  color='#5B5F62'
+                  fontWeight='medium'
+                  fontSize='medium'
+                  lineHeight={2}
+                  whiteSpace='pre-wrap'
+                >
+                  {privacyPolicy.find((item) => item.lang === lang)?.content}
+                </Text>
+              </Flex>
+            </Stack>
           </Container>
         </Flex>
       </Page>

@@ -14,22 +14,22 @@ import { debounce } from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useState } from 'react';
 
-import ColorButton from '../../components/ColorButton';
-import { useResponsive } from '../../hooks/responsive';
+import ColorButton from '../../../components/ColorButton';
+import { useResponsive } from '../../../hooks/responsive';
 import {
   Filter,
   ProductBrand,
   ProductCategory,
   ProductColor,
-} from '../../models/product';
-import { NAV_HEIGHT } from '../Nav';
+} from '../../../models/product';
+import { NAV_HEIGHT } from '../../Nav';
 
 type SidebarType = {
   filter: Filter;
   handleUpdateFilter: (newFilter: Filter) => Promise<void>;
 };
 
-const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
+const ProductSidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
   const [sliderValue, setSliderValue] = useState(1000);
   const { t } = useTranslation();
   const { isMobile } = useResponsive();
@@ -237,4 +237,4 @@ const Sidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
   );
 };
 
-export default Sidebar;
+export default ProductSidebar;
