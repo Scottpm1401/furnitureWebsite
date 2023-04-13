@@ -15,11 +15,11 @@ import { Rating } from 'react-simple-star-rating';
 
 import Breadcrumb from '../../../components/Breadcrumb';
 import ColorButton from '../../../components/ColorButton';
-import Container from '../../../components/Container';
 import { APP_ROUTES, STAR_COLOR } from '../../../constant';
 import { useProduct } from '../../../hooks/product';
 import { useResponsive } from '../../../hooks/responsive';
 import { useCart } from '../../../hooks/user';
+import Container from '../../../layout/Container';
 import Page from '../../../layout/Page';
 import NotAuthProvider from '../../../layout/Provider/NotAuthProvider';
 import { ProductCartType } from '../../../models/cart';

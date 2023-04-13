@@ -13,6 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useCallback, useEffect, useState } from 'react';
 
 import { APP_ROUTES } from '../../../constant';
+import Container from '../../../layout/Container';
 import { ProductType } from '../../../models/product';
 import AshleyIcon from '../../../public/svg/ashley.svg';
 import HabitatIcon from '../../../public/svg/habitat.svg';
@@ -20,7 +21,6 @@ import IkeaIcon from '../../../public/svg/ikea.svg';
 import MaisonsDuMondeIcon from '../../../public/svg/maisons-du-monde.svg';
 import WilliamsIcon from '../../../public/svg/williams-sonoma.svg';
 import { getFeaturedProduct } from '../../../services/product';
-import Container from '../../Container';
 import ProductCard from '../../ProductCard';
 
 const Section2 = () => {

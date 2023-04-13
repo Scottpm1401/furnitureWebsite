@@ -8,7 +8,7 @@ import TemplateForm from '../../../../components/Form/TemplateForm';
 import TableDetailSkeleton from '../../../../components/Table/TableDetailSkeleton';
 import { APP_ROUTES } from '../../../../constant';
 import { useTemplate } from '../../../../hooks/template';
-import CmsContainer from '../../../../layout/CmsContainer';
+import CmsContainer from '../../../../layout/Container/CmsContainer';
 import Page from '../../../../layout/Page';
 import AdminAuthProvider from '../../../../layout/Provider/AdminAuthProvider';
 import { UpdateTemplateRequest } from '../../../../models/api/cms';

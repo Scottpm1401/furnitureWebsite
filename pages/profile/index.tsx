@@ -4,8 +4,8 @@ import React from 'react';
 import Breadcrumb from '../../components/Breadcrumb';
 import GeneralProfile from '../../components/Form/Profile/General';
 import { APP_ROUTES } from '../../constant';
+import ProfileContainer from '../../layout/Container/ProfileContainer';
 import Page from '../../layout/Page';
-import ProfileContainer from '../../layout/ProfileContainer';
 import AuthProvider from '../../layout/Provider/AuthProvider';
 
 type Props = {};

@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
-import Container from '../../components/Container';
 import SocialIcon from '../../components/SocialIcon';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
@@ -18,6 +17,7 @@ import UnionPay from '../../public/svg/unionpay.svg';
 import Visa from '../../public/svg/visa.svg';
 import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
+import Container from '../Container';
 import NavLink from '../Nav/NavLink';
 
 type Props = {};

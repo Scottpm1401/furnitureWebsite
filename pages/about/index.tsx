@@ -4,9 +4,9 @@ import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import Breadcrumb from '../../components/Breadcrumb';
-import Container from '../../components/Container';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
+import Container from '../../layout/Container';
 import Page from '../../layout/Page';
 import NotAuthProvider from '../../layout/Provider/NotAuthProvider';
 import { useAppSelector } from '../../redux/hooks';

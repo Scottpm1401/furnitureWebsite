@@ -14,10 +14,10 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import { APP_ROUTES, CMS_BG_COLOR } from '../../constant';
-import BackIcon from '../../public/svg/back.svg';
-import { useAppSelector } from '../../redux/hooks';
-import { selectors } from '../../redux/reducer';
+import { APP_ROUTES, CMS_BG_COLOR } from '../../../constant';
+import BackIcon from '../../../public/svg/back.svg';
+import { useAppSelector } from '../../../redux/hooks';
+import { selectors } from '../../../redux/reducer';
 
 type Props = {
   title?: string;

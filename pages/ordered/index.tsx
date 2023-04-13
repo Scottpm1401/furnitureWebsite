@@ -24,10 +24,10 @@ import { Rating } from 'react-simple-star-rating';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
-import Container from '../../components/Container';
 import { APP_ROUTES, STAR_COLOR } from '../../constant';
 import { useSelfOrdered } from '../../hooks/ordered';
 import { useResponsive } from '../../hooks/responsive';
+import Container from '../../layout/Container';
 import Page from '../../layout/Page';
 import AuthProvider from '../../layout/Provider/AuthProvider';
 import { PurchaseProduct } from '../../models/purchase';

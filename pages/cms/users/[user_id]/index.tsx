@@ -11,7 +11,7 @@ import TableDetailSkeleton from '../../../../components/Table/TableDetailSkeleto
 import { APP_ROUTES } from '../../../../constant';
 import { countries } from '../../../../constant/country';
 import { useUser } from '../../../../hooks/user';
-import CmsContainer from '../../../../layout/CmsContainer';
+import CmsContainer from '../../../../layout/Container/CmsContainer';
 import Page from '../../../../layout/Page';
 import AdminAuthProvider from '../../../../layout/Provider/AdminAuthProvider';
 import { UpdateUserRequest } from '../../../../models/api/cms';

@@ -5,9 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
-import Container from '../../components/Container';
 import { APP_ROUTES, CONTACT_EMBED_MAP } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
+import Container from '../../layout/Container';
 import Page from '../../layout/Page';
 import NotAuthProvider from '../../layout/Provider/NotAuthProvider';
 import { useAppSelector } from '../../redux/hooks';

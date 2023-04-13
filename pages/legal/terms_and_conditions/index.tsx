@@ -2,9 +2,9 @@ import { Flex, Stack, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Breadcrumb from '../../../components/Breadcrumb';
-import Container from '../../../components/Container';
 import { APP_ROUTES, FORM_BOX_SHADOW } from '../../../constant';
 import { useResponsive } from '../../../hooks/responsive';
+import Container from '../../../layout/Container';
 import Page from '../../../layout/Page';
 import NotAuthProvider from '../../../layout/Provider/NotAuthProvider';
 import CommonSideBar from '../../../layout/SideBar/CommonSideBar';

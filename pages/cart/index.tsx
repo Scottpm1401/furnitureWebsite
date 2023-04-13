@@ -22,10 +22,10 @@ import { useEffect, useMemo } from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
-import Container from '../../components/Container';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
 import { useCart } from '../../hooks/user';
+import Container from '../../layout/Container';
 import Page from '../../layout/Page';
 import AuthProvider from '../../layout/Provider/AuthProvider';
 import { ProductCartType } from '../../models/cart';

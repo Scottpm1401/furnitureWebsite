@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import ProductForm from '../../../../components/Form/ProductForm';
 import { APP_ROUTES } from '../../../../constant';
-import CmsContainer from '../../../../layout/CmsContainer';
+import CmsContainer from '../../../../layout/Container/CmsContainer';
 import Page from '../../../../layout/Page';
 import AdminAuthProvider from '../../../../layout/Provider/AdminAuthProvider';
 import { UpdateProductRequest } from '../../../../models/api/cms';

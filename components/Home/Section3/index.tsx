@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import { useResponsive } from '../../../hooks/responsive';
-import Container from '../../Container';
+import Container from '../../../layout/Container';
 import TeamCard from '../../TeamCard';
 
 type Props = {};

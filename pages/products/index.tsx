@@ -5,10 +5,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import Breadcrumb from '../../components/Breadcrumb';
-import Container from '../../components/Container';
 import ProductCard from '../../components/ProductCard';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
+import Container from '../../layout/Container';
 import Page from '../../layout/Page';
 import NotAuthProvider from '../../layout/Provider/NotAuthProvider';
 import ProductSidebar from '../../layout/SideBar/ProductSidebar';

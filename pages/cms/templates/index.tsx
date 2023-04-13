@@ -6,7 +6,7 @@ import React from 'react';
 
 import { APP_ROUTES } from '../../../constant';
 import { useTemplates } from '../../../hooks/template';
-import CmsContainer from '../../../layout/CmsContainer';
+import CmsContainer from '../../../layout/Container/CmsContainer';
 import Page from '../../../layout/Page';
 import AdminAuthProvider from '../../../layout/Provider/AdminAuthProvider';
 import { TemplateType } from '../../../models/template';

@@ -6,7 +6,7 @@ import Table from '../../../components/Table';
 import TableSkeleton from '../../../components/Table/TableSkeleton';
 import { APP_ROUTES } from '../../../constant';
 import { useUsers } from '../../../hooks/user';
-import CmsContainer from '../../../layout/CmsContainer';
+import CmsContainer from '../../../layout/Container/CmsContainer';
 import Page from '../../../layout/Page';
 import AdminAuthProvider from '../../../layout/Provider/AdminAuthProvider';
 import EditIcon from '../../../public/svg/edit.svg';

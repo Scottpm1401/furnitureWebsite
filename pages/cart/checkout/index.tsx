@@ -12,10 +12,10 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import Breadcrumb from '../../../components/Breadcrumb';
-import Container from '../../../components/Container';
 import CheckoutForm from '../../../components/Form/CheckoutForm';
 import { APP_ROUTES, FORM_BOX_SHADOW } from '../../../constant';
 import { usePayment } from '../../../hooks/payment';
+import Container from '../../../layout/Container';
 import Page from '../../../layout/Page';
 import AuthProvider from '../../../layout/Provider/AuthProvider';
 

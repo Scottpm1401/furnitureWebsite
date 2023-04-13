@@ -2,16 +2,16 @@ import { Avatar, Flex, FlexProps, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import Container from '../../components/Container';
-import { APP_ROUTES } from '../../constant';
-import { useResponsive } from '../../hooks/responsive';
-import { settingType } from '../../models/common';
-import ShieldIcon from '../../public/svg/shield.svg';
-import UserIcon from '../../public/svg/user.svg';
-import UserAdvanceIcon from '../../public/svg/user_advance.svg';
-import { useAppSelector } from '../../redux/hooks';
-import { selectors } from '../../redux/reducer';
-import CommonSideBar from '../SideBar/CommonSideBar';
+import { APP_ROUTES } from '../../../constant';
+import { useResponsive } from '../../../hooks/responsive';
+import { settingType } from '../../../models/common';
+import ShieldIcon from '../../../public/svg/shield.svg';
+import UserIcon from '../../../public/svg/user.svg';
+import UserAdvanceIcon from '../../../public/svg/user_advance.svg';
+import { useAppSelector } from '../../../redux/hooks';
+import { selectors } from '../../../redux/reducer';
+import CommonSideBar from '../../SideBar/CommonSideBar';
+import Container from '..';
 
 type Props = {} & FlexProps;
 

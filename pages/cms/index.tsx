@@ -13,7 +13,7 @@ import {
   useTopUsers,
 } from '../../hooks/analysis';
 import { useResponsive } from '../../hooks/responsive';
-import CmsContainer from '../../layout/CmsContainer';
+import CmsContainer from '../../layout/Container/CmsContainer';
 import Page from '../../layout/Page';
 import AdminAuthProvider from '../../layout/Provider/AdminAuthProvider';
 
