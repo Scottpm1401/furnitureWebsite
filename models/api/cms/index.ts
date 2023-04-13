@@ -1,6 +1,6 @@
 import { ProductType } from '../../product';
 import { PurchaseType } from '../../purchase';
-import { BannerType, ContentType, TemplateType } from '../../template';
+import { ContentType } from '../../template';
 import { UserType } from '../../user';
 
 export type CMSList<T> = {

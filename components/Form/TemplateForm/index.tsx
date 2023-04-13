@@ -49,6 +49,7 @@ const TemplateForm = ({ template, onSubmit, create }: TemplateFormProps) => {
         {
           ...template,
           _id: undefined,
+          about: { ...template.about, _id: undefined },
         } as UpdateTemplateRequest
       }
       onSubmit={handleSubmit}
