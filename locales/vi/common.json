@@ -254,5 +254,6 @@
   "home_footer": "Cuối trang",
   "contact": "Liên hệ",
   "banners": "Bảng hiệu",
-  "update_template_success": "Cập nhật giao diện thành công"
+  "update_template_success": "Cập nhật giao diện thành công",
+  "not_support_resolution": "Chúng tôi không hỗ trợ phiên bản web của độ phân giải này."
 }

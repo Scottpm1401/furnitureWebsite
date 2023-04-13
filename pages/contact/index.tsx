@@ -1,11 +1,8 @@
-import { Button, Flex, Stack, Text } from '@chakra-ui/react';
-import { css } from '@emotion/react';
-import Image from 'next/image';
+import { Flex, Stack, Text } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
-import { APP_ROUTES, CONTACT_EMBED_MAP } from '../../constant';
+import { APP_ROUTES, CONTACT_EMBED_MAP, FORM_BOX_SHADOW } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
 import Container from '../../layout/Container';
 import Page from '../../layout/Page';
@@ -15,7 +12,7 @@ import { selectors } from '../../redux/reducer';
 
 const Contact = () => {
   const { t, lang } = useTranslation();
-  const { isMobile } = useResponsive();
+  const { isTabletOrLaptop, isMobileOrTablet } = useResponsive();
   const contact = useAppSelector(selectors.global.selectContact);
 
   return (
@@ -34,39 +31,45 @@ const Contact = () => {
           current={t('contact')}
         />
         <Stack mt='4rem'>
-          <Container
-            direction={isMobile ? 'column' : 'row'}
-            h={isMobile ? '1200px' : 'auto'}
-            textAlign={isMobile ? 'center' : 'start'}
-          >
-            <Flex flex={1} justifyContent='center'>
-              <iframe
-                src={CONTACT_EMBED_MAP}
-                width='600'
-                height='450'
-                allowFullScreen
-                loading='lazy'
-                referrerPolicy='no-referrer-when-downgrade'
-              />
-            </Flex>
-            <Flex
-              ml={isMobile ? '0' : '2rem'}
-              mt={isMobile ? '2rem' : '0'}
-              direction='column'
-              justifyContent='flex-start'
-              flex={1}
+          <Container>
+            <Stack
+              w='full'
+              direction={isMobileOrTablet ? 'column' : 'row'}
+              textAlign={isMobileOrTablet ? 'center' : 'start'}
+              spacing={4}
             >
-              <Text
-                mt='2rem'
-                color='#5B5F62'
-                fontWeight='medium'
-                fontSize='medium'
-                whiteSpace='pre-wrap'
-                lineHeight={2}
+              <Flex flex={1} justifyContent='center'>
+                <iframe
+                  style={{
+                    width: isTabletOrLaptop ? '600px' : '700px',
+                    height: '450px',
+                    borderRadius: '1rem',
+                  }}
+                  src={CONTACT_EMBED_MAP}
+                  allowFullScreen
+                  loading='lazy'
+                  referrerPolicy='no-referrer-when-downgrade'
+                />
+              </Flex>
+              <Flex
+                direction='column'
+                justifyContent='flex-start'
+                flex={1}
+                borderRadius='8px'
+                bg='white'
+                boxShadow={FORM_BOX_SHADOW}
+                p='2rem'
               >
-                {contact.find((item) => item.lang === lang)?.content}
-              </Text>
-            </Flex>
+                <Text
+                  fontWeight='semibold'
+                  fontSize='xl'
+                  whiteSpace='pre-wrap'
+                  lineHeight={2}
+                >
+                  {contact.find((item) => item.lang === lang)?.content}
+                </Text>
+              </Flex>
+            </Stack>
           </Container>
         </Stack>
       </Page>

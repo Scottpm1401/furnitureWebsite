@@ -253,5 +253,6 @@
   "home_footer": "Footer",
   "contact": "Contact",
   "banners": "Banners",
-  "update_template_success": "Update template successful"
+  "update_template_success": "Update template successful",
+  "not_support_resolution": "We do not support the web version of this resolution."
 }

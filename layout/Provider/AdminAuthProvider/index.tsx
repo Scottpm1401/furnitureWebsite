@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import Loader from '../../../components/Loader';
 import { APP_ROUTES } from '../../../constant';
 import { useCurrentUser } from '../../../hooks/user';
+import ScreenSizeFilteringProvider from '../ScreenSizeFilteringProvider';
 
 type Props = { children: JSX.Element };
 
@@ -24,7 +25,10 @@ const AdminAuthProvider = ({ children }: Props) => {
     setVerified(true);
   }, [isLoading, router, user]);
 
-  if (verified) return children;
+  if (verified)
+    return (
+      <ScreenSizeFilteringProvider>{children}</ScreenSizeFilteringProvider>
+    );
 
   return <Loader />;
 };

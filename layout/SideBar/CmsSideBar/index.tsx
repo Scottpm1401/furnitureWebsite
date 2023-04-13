@@ -13,6 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 
 import { APP_ROUTES } from '../../../constant';
+import { useResponsive } from '../../../hooks/responsive';
 import HomeIcon from '../../../public/svg/home.svg';
 import LanguageIcon from '../../../public/svg/language.svg';
 import LogoutIcon from '../../../public/svg/log-out.svg';
@@ -31,6 +32,7 @@ const CmsSideBar = () => {
   const dispatch = useAppDispatch();
   const { t, lang } = useTranslation();
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
+  const { isTabletOrLaptop } = useResponsive();
 
   const handleChangeLanguage = async (lang: string) => {
     moment.locale(lang);
@@ -40,7 +42,8 @@ const CmsSideBar = () => {
 
   return (
     <Stack
-      w={isCollapse ? '64px' : '260px'}
+      minW={isTabletOrLaptop || isCollapse ? '64px' : '260px'}
+      maxW={isTabletOrLaptop || isCollapse ? '64px' : '260px'}
       transition='all 200ms ease-in-out'
       bg='orange.300'
       paddingY='12px'
