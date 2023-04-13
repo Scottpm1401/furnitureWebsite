@@ -13,9 +13,9 @@ import {
   useTopUsers,
 } from '../../hooks/analysis';
 import { useResponsive } from '../../hooks/responsive';
-import AdminAuthProvider from '../../layout/AdminAuthProvider';
 import CmsContainer from '../../layout/CmsContainer';
 import Page from '../../layout/Page';
+import AdminAuthProvider from '../../layout/Provider/AdminAuthProvider';
 
 const currentMonth = Number(moment().format('M'));
 

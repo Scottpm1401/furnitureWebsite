@@ -4,8 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import { APP_ROUTES } from '../constant';
-import NotAuthProvider from '../layout/NotAuthProvider';
 import Page from '../layout/Page';
+import NotAuthProvider from '../layout/Provider/NotAuthProvider';
 
 type Props = {};
 

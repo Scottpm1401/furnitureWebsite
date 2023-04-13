@@ -1,4 +1,4 @@
-import { useCurrentTemplate } from '../../hooks/template';
+import { useCurrentTemplate } from '../../../hooks/template';
 
 type Props = { children: JSX.Element };
 

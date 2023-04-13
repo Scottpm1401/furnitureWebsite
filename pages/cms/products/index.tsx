@@ -7,9 +7,9 @@ import Table from '../../../components/Table';
 import TableSkeleton from '../../../components/Table/TableSkeleton';
 import { APP_ROUTES } from '../../../constant';
 import { useProducts } from '../../../hooks/product';
-import AdminAuthProvider from '../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../layout/CmsContainer';
 import Page from '../../../layout/Page';
+import AdminAuthProvider from '../../../layout/Provider/AdminAuthProvider';
 import EditIcon from '../../../public/svg/edit.svg';
 import PlusIcon from '../../../public/svg/plus.svg';
 

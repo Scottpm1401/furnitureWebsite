@@ -16,8 +16,8 @@ import Container from '../../../components/Container';
 import CheckoutForm from '../../../components/Form/CheckoutForm';
 import { APP_ROUTES, FORM_BOX_SHADOW } from '../../../constant';
 import { usePayment } from '../../../hooks/payment';
-import AuthProvider from '../../../layout/AuthProvider';
 import Page from '../../../layout/Page';
+import AuthProvider from '../../../layout/Provider/AuthProvider';
 
 type Props = {};
 

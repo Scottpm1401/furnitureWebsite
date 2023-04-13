@@ -7,8 +7,8 @@ import Breadcrumb from '../../components/Breadcrumb';
 import Container from '../../components/Container';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
-import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
+import NotAuthProvider from '../../layout/Provider/NotAuthProvider';
 import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
 

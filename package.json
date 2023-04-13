@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint ; eslint --fix --config ./.eslintrc.json --ext .js,.jsx,.ts,.tsx ./",
     "export": "next export"
   },
   "dependencies": {

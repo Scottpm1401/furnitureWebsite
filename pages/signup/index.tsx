@@ -7,8 +7,8 @@ import SignupForm from '../../components/Form/SignupForm';
 import { APP_ROUTES, FORM_BOX_SHADOW } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
 import NavLink from '../../layout/Nav/NavLink';
-import NotAuthProvider from '../../layout/NotAuthProvider';
 import Page from '../../layout/Page';
+import NotAuthProvider from '../../layout/Provider/NotAuthProvider';
 type Props = {};
 
 const Login = (props: Props) => {

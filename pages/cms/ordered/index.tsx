@@ -7,9 +7,9 @@ import Table from '../../../components/Table';
 import TableSkeleton from '../../../components/Table/TableSkeleton';
 import { APP_ROUTES } from '../../../constant';
 import { useOrderedList } from '../../../hooks/ordered';
-import AdminAuthProvider from '../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../layout/CmsContainer';
 import Page from '../../../layout/Page';
+import AdminAuthProvider from '../../../layout/Provider/AdminAuthProvider';
 import EditIcon from '../../../public/svg/edit.svg';
 
 type Props = {};

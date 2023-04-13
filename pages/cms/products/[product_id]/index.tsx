@@ -7,9 +7,9 @@ import ProductForm from '../../../../components/Form/ProductForm';
 import TableDetailSkeleton from '../../../../components/Table/TableDetailSkeleton';
 import { APP_ROUTES } from '../../../../constant';
 import { useProduct } from '../../../../hooks/product';
-import AdminAuthProvider from '../../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../../layout/CmsContainer';
 import Page from '../../../../layout/Page';
+import AdminAuthProvider from '../../../../layout/Provider/AdminAuthProvider';
 import { UpdateProductRequest } from '../../../../models/api/cms';
 import { updateProductById } from '../../../../services/cms';
 import {

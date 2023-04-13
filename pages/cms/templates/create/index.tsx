@@ -5,9 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import TemplateForm from '../../../../components/Form/TemplateForm';
 import { APP_ROUTES } from '../../../../constant';
-import AdminAuthProvider from '../../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../../layout/CmsContainer';
 import Page from '../../../../layout/Page';
+import AdminAuthProvider from '../../../../layout/Provider/AdminAuthProvider';
 import {
   BannerFormType,
   UpdateTemplateRequest,

@@ -6,9 +6,9 @@ import React from 'react';
 
 import { APP_ROUTES } from '../../../constant';
 import { useTemplates } from '../../../hooks/template';
-import AdminAuthProvider from '../../../layout/AdminAuthProvider';
 import CmsContainer from '../../../layout/CmsContainer';
 import Page from '../../../layout/Page';
+import AdminAuthProvider from '../../../layout/Provider/AdminAuthProvider';
 import { TemplateType } from '../../../models/template';
 import PlusIcon from '../../../public/svg/plus.svg';
 import TrashIcon from '../../../public/svg/trash.svg';

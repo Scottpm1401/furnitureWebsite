@@ -1,23 +1,24 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import Loader from '../../components/Loader';
-import { APP_ROUTES } from '../../constant';
-import { useCurrentUser } from '../../hooks/user';
+import Loader from '../../../components/Loader';
+import { APP_ROUTES } from '../../../constant';
+import { useCurrentUser } from '../../../hooks/user';
 
 type Props = { children: JSX.Element };
 
-const AdminAuthProvider = ({ children }: Props) => {
+const NotAuthProvider = ({ children }: Props) => {
   const router = useRouter();
-  const { isLoading, user } = useCurrentUser();
+  const { user, isLoading } = useCurrentUser();
   const [verified, setVerified] = React.useState(false);
+
   useEffect(() => {
     if (isLoading) return;
-    if (!user) {
-      router.push(APP_ROUTES.login);
-      return;
-    }
-    if (user.role !== 'ADMIN') {
+    if (
+      user &&
+      (router.pathname === APP_ROUTES.login ||
+        router.pathname === APP_ROUTES.signup)
+    ) {
       router.push(APP_ROUTES.home);
       return;
     }
@@ -29,4 +30,4 @@ const AdminAuthProvider = ({ children }: Props) => {
   return <Loader />;
 };
 
-export default AdminAuthProvider;
+export default NotAuthProvider;
