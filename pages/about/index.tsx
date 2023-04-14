@@ -37,7 +37,7 @@ const About = (props: Props) => {
         <Flex mt='4rem'>
           <Container
             direction={isMobile ? 'column' : 'row'}
-            h={isMobile ? '1200px' : 'auto'}
+            minH={isMobile ? '1200px' : 'auto'}
             textAlign={isMobile ? 'center' : 'start'}
             alignItems='center'
           >

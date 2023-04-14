@@ -54,7 +54,7 @@ const TermsAndConditions = () => {
         />
         <Flex mt='4rem'>
           <Container
-            h={isMobile ? '1200px' : 'auto'}
+            minH={isMobile ? '1200px' : 'auto'}
             textAlign={isMobile ? 'center' : 'start'}
           >
             <Stack direction={isMobile ? 'column' : 'row'} spacing={4}>

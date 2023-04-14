@@ -28,7 +28,8 @@
         "product_not_exist": "Không tìm thấy sản phầm trong giỏ hàng",
         "failed_to_remove": "Loại bỏ sản phẩm thất bại",
         "failed_to_clear": "Làm mới giỏ hàng thất bại",
-        "failed_to_update_product": "Cập nhật sản phầm trong giỏ hàng thất bại"
+        "failed_to_update_product": "Cập nhật sản phầm trong giỏ hàng thất bại",
+        "failed_to_checkout": "Thanh toán thất bại"
       }
     },
     "product": {

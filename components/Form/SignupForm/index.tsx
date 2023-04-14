@@ -144,6 +144,7 @@ const SignupForm = () => {
                   mt: '0.5rem',
                   value: values.email,
                   onChange: handleChange('email'),
+                  type: 'email',
                 }}
                 error={
                   errors.email &&

@@ -28,7 +28,8 @@
         "product_not_exist": "Product does not exist in your cart",
         "failed_to_remove": "Failed to remove product",
         "failed_to_clear": "Failed to clear cart",
-        "failed_to_update_product": "Failed to update product in cart"
+        "failed_to_update_product": "Failed to update product in cart",
+        "failed_to_checkout": "Failed to checkout"
       }
     },
     "product": {

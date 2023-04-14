@@ -54,5 +54,5 @@ export const API = {
     DELETETEMPLATE: (id: string) => `/template/delete/${id}`,
     CURRENTTEMPLATE: '/template/current',
   },
-  REFRESHTOKEN: '/user/refreshToken',
+  REFRESHTOKEN: '/user/refresh_token',
 };
