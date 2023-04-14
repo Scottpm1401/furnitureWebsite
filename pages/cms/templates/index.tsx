@@ -12,6 +12,8 @@ import AdminAuthProvider from '../../../layout/Provider/AdminAuthProvider';
 import { TemplateType } from '../../../models/template';
 import PlusIcon from '../../../public/svg/plus.svg';
 import TrashIcon from '../../../public/svg/trash.svg';
+import { useAppDispatch } from '../../../redux/hooks';
+import { actions } from '../../../redux/reducer';
 import { activeTemplate, deleteTemplate } from '../../../services/template';
 import { NextApplicationPage } from '../../_app';
 
@@ -20,12 +22,14 @@ const CmsTemplates: NextApplicationPage = () => {
   const { templates, getTemplates } = useTemplates();
   const router = useRouter();
   const toast = useToast();
+  const dispatch = useAppDispatch();
 
   const handleActiveTemplate = async (template: TemplateType) => {
     if (template.active) return;
 
     try {
-      await activeTemplate(template._id);
+      const res = await activeTemplate(template._id);
+      dispatch(actions.global.setTemplate(res));
       await getTemplates();
     } catch (err) {
       if (isAxiosError(err))
