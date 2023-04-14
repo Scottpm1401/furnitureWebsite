@@ -1,15 +1,19 @@
 export const API = {
+  AUTH: {
+    LOGIN: '/auth/login',
+    SIGNUP: '/auth/signup',
+    LOGOUT: '/auth/logout',
+    CHANGEPASSWORD: '/auth/change_password',
+    FORGOTPASSWORD: '/auth/forgot_password',
+    RESETPASSWORD: '/auth/reset_password',
+  },
   USER: {
-    LOGIN: '/user/login',
-    SIGNUP: '/user/signup',
-    LOGOUT: '/user/logout',
     GETUSER: (id: string) => `/user/get/${id}`,
     GETSELF: '/user/getself',
     GETALL: '/user/all',
     UPDATESELF: '/user/update_self',
     DELETEUSER: (id: string) => `/user/delete/${id}`,
     UPDATEUSER: (id: string) => `/user/update/${id}`,
-    CHANGEPASSWORD: '/user/change_password',
     ADDTOCART: '/user/cart/add',
     REMOVEFROMCART: '/user/cart/remove',
     UPDATECARTQUANTITY: '/user/cart/update_quantity',
