@@ -22,8 +22,9 @@ import {
   getCountryName,
   isReqError,
 } from '../../../../utils/common';
+import { NextApplicationPage } from '../../../_app';
 
-const CmsOrdered = () => {
+const CmsOrdered: NextApplicationPage = () => {
   const { ordered, isLoading } = useOrdered();
   const { t } = useTranslation();
   const toast = useToast();
@@ -307,6 +308,10 @@ const CmsOrdered = () => {
       </Page>
     </AdminAuthProvider>
   );
+};
+
+CmsOrdered.getLayout = (page: React.ReactElement) => {
+  return <AdminAuthProvider>{page}</AdminAuthProvider>;
 };
 
 export default CmsOrdered;

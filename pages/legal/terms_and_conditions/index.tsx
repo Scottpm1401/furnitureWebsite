@@ -13,6 +13,7 @@ import PrivacyIcon from '../../../public/svg/privacy_policy.svg';
 import TermsAndConditionsIcon from '../../../public/svg/terms_and_conditions.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
+import { NextApplicationPage } from '../../_app';
 
 const settingList: settingType[] = [
   {
@@ -27,7 +28,7 @@ const settingList: settingType[] = [
   },
 ];
 
-const TermsAndConditions = () => {
+const TermsAndConditions: NextApplicationPage = () => {
   const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
   const termsAndConditions = useAppSelector(
@@ -35,59 +36,58 @@ const TermsAndConditions = () => {
   );
 
   return (
-    <NotAuthProvider>
-      <Page
-        alignItems='center'
-        justifyContent='center'
-        direction='column'
-        title={t('terms_and_conditions')}
-      >
-        <Breadcrumb
-          links={[
-            { title: t('home'), href: APP_ROUTES.home },
-            {
-              title: t('terms_and_conditions'),
-              href: APP_ROUTES.termAndCondition,
-            },
-          ]}
-          current={t('terms_and_conditions')}
-        />
-        <Flex mt='4rem'>
-          <Container
-            minH={isMobile ? '1200px' : 'auto'}
-            textAlign={isMobile ? 'center' : 'start'}
-          >
-            <Stack direction={isMobile ? 'column' : 'row'} spacing={4}>
-              <CommonSideBar settings={settingList} />
-              <Flex
-                ml={isMobile ? '0' : '2rem'}
-                direction='column'
-                justifyContent='flex-start'
-                flex={1}
-                p='2rem'
-                borderRadius='8px'
-                bg='white'
-                boxShadow={FORM_BOX_SHADOW}
+    <Page
+      alignItems='center'
+      justifyContent='center'
+      direction='column'
+      title={t('terms_and_conditions')}
+    >
+      <Breadcrumb
+        links={[
+          { title: t('home'), href: APP_ROUTES.home },
+          {
+            title: t('terms_and_conditions'),
+            href: APP_ROUTES.termAndCondition,
+          },
+        ]}
+        current={t('terms_and_conditions')}
+      />
+      <Flex mt='4rem'>
+        <Container
+          minH={isMobile ? '1200px' : 'auto'}
+          textAlign={isMobile ? 'center' : 'start'}
+        >
+          <Stack direction={isMobile ? 'column' : 'row'} spacing={4}>
+            <CommonSideBar settings={settingList} />
+            <Flex
+              ml={isMobile ? '0' : '2rem'}
+              direction='column'
+              justifyContent='flex-start'
+              flex={1}
+              p='2rem'
+              borderRadius='8px'
+              bg='white'
+              boxShadow={FORM_BOX_SHADOW}
+            >
+              <Text
+                color='#5B5F62'
+                fontWeight='medium'
+                fontSize='medium'
+                lineHeight={2}
+                whiteSpace='pre-wrap'
               >
-                <Text
-                  color='#5B5F62'
-                  fontWeight='medium'
-                  fontSize='medium'
-                  lineHeight={2}
-                  whiteSpace='pre-wrap'
-                >
-                  {
-                    termsAndConditions.find((item) => item.lang === lang)
-                      ?.content
-                  }
-                </Text>
-              </Flex>
-            </Stack>
-          </Container>
-        </Flex>
-      </Page>
-    </NotAuthProvider>
+                {termsAndConditions.find((item) => item.lang === lang)?.content}
+              </Text>
+            </Flex>
+          </Stack>
+        </Container>
+      </Flex>
+    </Page>
   );
+};
+
+TermsAndConditions.getLayout = (page: React.ReactElement) => {
+  return <NotAuthProvider>{page}</NotAuthProvider>;
 };
 
 export default TermsAndConditions;

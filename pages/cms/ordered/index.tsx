@@ -11,10 +11,9 @@ import CmsContainer from '../../../layout/Container/CmsContainer';
 import Page from '../../../layout/Page';
 import AdminAuthProvider from '../../../layout/Provider/AdminAuthProvider';
 import EditIcon from '../../../public/svg/edit.svg';
+import { NextApplicationPage } from '../../_app';
 
-type Props = {};
-
-const CmcOrdered = (props: Props) => {
+const CmsOrderedList: NextApplicationPage = () => {
   const {
     total,
     isLoading,
@@ -105,4 +104,8 @@ const CmcOrdered = (props: Props) => {
   );
 };
 
-export default CmcOrdered;
+CmsOrderedList.getLayout = (page: React.ReactElement) => {
+  return <AdminAuthProvider>{page}</AdminAuthProvider>;
+};
+
+export default CmsOrderedList;

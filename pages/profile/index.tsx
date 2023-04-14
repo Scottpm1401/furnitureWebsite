@@ -8,31 +8,31 @@ import ProfileContainer from '../../layout/Container/ProfileContainer';
 import Page from '../../layout/Page';
 import AuthProvider from '../../layout/Provider/AuthProvider';
 
-type Props = {};
-
-const Profile = (props: Props) => {
+const Profile = () => {
   const { t } = useTranslation();
   return (
-    <AuthProvider>
-      <Page
-        alignItems='center'
-        justifyContent='center'
-        direction='column'
-        title={t('profile')}
-      >
-        <Breadcrumb
-          links={[
-            { title: t('home'), href: APP_ROUTES.home },
-            { title: t('profile'), href: APP_ROUTES.profile },
-          ]}
-          current={t('profile')}
-        />
-        <ProfileContainer>
-          <GeneralProfile />
-        </ProfileContainer>
-      </Page>
-    </AuthProvider>
+    <Page
+      alignItems='center'
+      justifyContent='center'
+      direction='column'
+      title={t('profile')}
+    >
+      <Breadcrumb
+        links={[
+          { title: t('home'), href: APP_ROUTES.home },
+          { title: t('profile'), href: APP_ROUTES.profile },
+        ]}
+        current={t('profile')}
+      />
+      <ProfileContainer>
+        <GeneralProfile />
+      </ProfileContainer>
+    </Page>
   );
+};
+
+Profile.getLayout = (page: React.ReactElement) => {
+  return <AuthProvider>{page}</AuthProvider>;
 };
 
 export default Profile;

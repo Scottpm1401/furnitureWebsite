@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import Loader from '../../../components/Loader';
 import { APP_ROUTES } from '../../../constant';
 import { useCurrentUser } from '../../../hooks/user';
+import { Role } from '../../../models/user';
 import ScreenSizeFilteringProvider from '../ScreenSizeFilteringProvider';
 
 type Props = { children: JSX.Element };
@@ -18,7 +19,7 @@ const AdminAuthProvider = ({ children }: Props) => {
       router.push(APP_ROUTES.login);
       return;
     }
-    if (user.role !== 'ADMIN') {
+    if (user.role !== Role.admin) {
       router.push(APP_ROUTES.home);
       return;
     }

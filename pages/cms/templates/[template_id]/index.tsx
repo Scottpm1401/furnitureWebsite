@@ -21,8 +21,9 @@ import {
   isReqError,
 } from '../../../../utils/common';
 import { handleUploadTemplateImage } from '../../../../utils/template';
+import { NextApplicationPage } from '../../../_app';
 
-const CmsTemplate = () => {
+const CmsTemplate: NextApplicationPage = () => {
   const { template, isLoading, getTemplateById } = useTemplate();
   const { t } = useTranslation();
   const toast = useToast();
@@ -96,21 +97,23 @@ const CmsTemplate = () => {
   };
 
   return (
-    <AdminAuthProvider>
-      <Page direction='row' w='full' title={t('template_details')}>
-        <CmsContainer
-          title={t('template_details')}
-          href={APP_ROUTES.cms.templates.list}
-        >
-          {!template || isLoading ? (
-            <TableDetailSkeleton rows={7} />
-          ) : (
-            <TemplateForm template={template} onSubmit={handleUpdateTemplate} />
-          )}
-        </CmsContainer>
-      </Page>
-    </AdminAuthProvider>
+    <Page direction='row' w='full' title={t('template_details')}>
+      <CmsContainer
+        title={t('template_details')}
+        href={APP_ROUTES.cms.templates.list}
+      >
+        {!template || isLoading ? (
+          <TableDetailSkeleton rows={7} />
+        ) : (
+          <TemplateForm template={template} onSubmit={handleUpdateTemplate} />
+        )}
+      </CmsContainer>
+    </Page>
   );
+};
+
+CmsTemplate.getLayout = (page: React.ReactElement) => {
+  return <AdminAuthProvider>{page}</AdminAuthProvider>;
 };
 
 export default CmsTemplate;

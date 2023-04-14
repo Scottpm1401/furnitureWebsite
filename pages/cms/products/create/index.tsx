@@ -12,6 +12,7 @@ import { UpdateProductRequest } from '../../../../models/api/cms';
 import { ProductType } from '../../../../models/product';
 import { createProduct } from '../../../../services/cms';
 import { handleUploadProductImage } from '../../../../utils/product';
+import { NextApplicationPage } from '../../../_app';
 
 const initialProduct: ProductType = {
   _id: '',
@@ -26,7 +27,7 @@ const initialProduct: ProductType = {
   colors: [],
 };
 
-const CmsCreateProduct = () => {
+const CmsCreateProduct: NextApplicationPage = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const toast = useToast();
@@ -60,21 +61,23 @@ const CmsCreateProduct = () => {
   };
 
   return (
-    <AdminAuthProvider>
-      <Page direction='row' w='full' title={t('product_details')}>
-        <CmsContainer
-          title={t('product_details')}
-          href={APP_ROUTES.cms.products.list}
-        >
-          <ProductForm
-            product={initialProduct}
-            onSubmit={handleCreateProduct}
-            create
-          />
-        </CmsContainer>
-      </Page>
-    </AdminAuthProvider>
+    <Page direction='row' w='full' title={t('product_details')}>
+      <CmsContainer
+        title={t('product_details')}
+        href={APP_ROUTES.cms.products.list}
+      >
+        <ProductForm
+          product={initialProduct}
+          onSubmit={handleCreateProduct}
+          create
+        />
+      </CmsContainer>
+    </Page>
   );
+};
+
+CmsCreateProduct.getLayout = (page: React.ReactElement) => {
+  return <AdminAuthProvider>{page}</AdminAuthProvider>;
 };
 
 export default CmsCreateProduct;

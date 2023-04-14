@@ -18,8 +18,9 @@ import {
   isReqError,
 } from '../../../../utils/common';
 import { handleUploadProductImage } from '../../../../utils/product';
+import { NextApplicationPage } from '../../../_app';
 
-const CmsProduct = () => {
+const CmsProduct: NextApplicationPage = () => {
   const { product, isLoading, getProduct } = useProduct();
   const { t } = useTranslation();
   const toast = useToast();
@@ -88,21 +89,23 @@ const CmsProduct = () => {
   };
 
   return (
-    <AdminAuthProvider>
-      <Page direction='row' w='full' title={t('product_details')}>
-        <CmsContainer
-          title={t('product_details')}
-          href={APP_ROUTES.cms.products.list}
-        >
-          {!product || isLoading ? (
-            <TableDetailSkeleton rows={7} />
-          ) : (
-            <ProductForm product={product} onSubmit={handleUpdateProduct} />
-          )}
-        </CmsContainer>
-      </Page>
-    </AdminAuthProvider>
+    <Page direction='row' w='full' title={t('product_details')}>
+      <CmsContainer
+        title={t('product_details')}
+        href={APP_ROUTES.cms.products.list}
+      >
+        {!product || isLoading ? (
+          <TableDetailSkeleton rows={7} />
+        ) : (
+          <ProductForm product={product} onSubmit={handleUpdateProduct} />
+        )}
+      </CmsContainer>
+    </Page>
   );
+};
+
+CmsProduct.getLayout = (page: React.ReactElement) => {
+  return <AdminAuthProvider>{page}</AdminAuthProvider>;
 };
 
 export default CmsProduct;

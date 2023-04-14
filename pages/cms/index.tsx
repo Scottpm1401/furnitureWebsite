@@ -16,6 +16,7 @@ import { useResponsive } from '../../hooks/responsive';
 import CmsContainer from '../../layout/Container/CmsContainer';
 import Page from '../../layout/Page';
 import AdminAuthProvider from '../../layout/Provider/AdminAuthProvider';
+import { NextApplicationPage } from '../_app';
 
 const currentMonth = Number(moment().format('M'));
 
@@ -24,15 +25,15 @@ enum UserChartType {
   num_of_bought = 'user_bought',
 }
 
-const Cms = () => {
+const Cms: NextApplicationPage = () => {
   const { t } = useTranslation();
   const { revenue } = useRevenue();
   const { boughtProducts, getBoughtProduct } = useBoughtProducts();
+  const { topUsers, getTopUsers } = useTopUsers();
   const [productsSelectedMonth, setProductsSelectedMonth] =
     useState(currentMonth);
   const [usersSelectedMonth, setUsersSelectedMonth] = useState(currentMonth);
   const [userChartType, setUserChartType] = useState(UserChartType.paid);
-  const { topUsers, getTopUsers } = useTopUsers();
   const { isBigScreen } = useResponsive();
 
   const topUsersTitle = useMemo(
@@ -48,30 +49,52 @@ const Cms = () => {
   );
 
   return (
-    <AdminAuthProvider>
-      <Page direction='row' w='full' title='Dashboard' minH='100vh'>
-        <CmsContainer title={t('dashboard')}>
-          <Stack spacing='5rem'>
-            <Stack w='full' alignItems='center'>
-              <Stack w='80%' alignItems='center'>
-                <Text fontWeight='semibold' fontSize='xl'>
-                  {t('revenue')}
-                </Text>
-                <RevenueLineChart revenue={revenue} />
-              </Stack>
+    <Page direction='row' w='full' title='Dashboard' minH='100vh'>
+      <CmsContainer title={t('dashboard')}>
+        <Stack spacing='5rem'>
+          <Stack w='full' alignItems='center'>
+            <Stack w='80%' alignItems='center'>
+              <Text fontWeight='semibold' fontSize='xl'>
+                {t('revenue')}
+              </Text>
+              <RevenueLineChart revenue={revenue} />
             </Stack>
+          </Stack>
 
-            <Stack direction='row' justifyContent='space-between'>
-              <Stack w={isBigScreen ? '40%' : '30%'} alignItems='center'>
-                <Stack alignItems='center' spacing={4}>
-                  <Text fontWeight='semibold' fontSize='xl'>
-                    {t('bought_products')}
-                  </Text>
+          <Stack direction='row' justifyContent='space-between'>
+            <Stack w={isBigScreen ? '40%' : '30%'} alignItems='center'>
+              <Stack alignItems='center' spacing={4}>
+                <Text fontWeight='semibold' fontSize='xl'>
+                  {t('bought_products')}
+                </Text>
+                <Select
+                  value={productsSelectedMonth}
+                  onChange={(e) => {
+                    getBoughtProduct(Number(e.target.value));
+                    setProductsSelectedMonth(Number(e.target.value));
+                  }}
+                >
+                  {MONTHS.map((item, index) => (
+                    <option value={index + 1} key={item}>
+                      {t(item)}
+                    </option>
+                  ))}
+                </Select>
+              </Stack>
+
+              <ProductsPieChart boughtProducts={boughtProducts} />
+            </Stack>
+            <Stack w={isBigScreen ? '40%' : '30%'} alignItems='center'>
+              <Stack alignItems='center' spacing={4}>
+                <Text fontWeight='semibold' fontSize='xl'>
+                  {t('top_10_users')}
+                </Text>
+                <Stack direction='row' spacing={4}>
                   <Select
-                    value={productsSelectedMonth}
+                    value={usersSelectedMonth}
                     onChange={(e) => {
-                      getBoughtProduct(Number(e.target.value));
-                      setProductsSelectedMonth(Number(e.target.value));
+                      getTopUsers(Number(e.target.value));
+                      setUsersSelectedMonth(Number(e.target.value));
                     }}
                   >
                     {MONTHS.map((item, index) => (
@@ -80,56 +103,36 @@ const Cms = () => {
                       </option>
                     ))}
                   </Select>
+                  <Select
+                    value={userChartType}
+                    onChange={(e) => {
+                      setUserChartType(e.target.value as UserChartType);
+                    }}
+                  >
+                    <option value={UserChartType.paid}>
+                      {t(UserChartType.paid)}
+                    </option>
+                    <option value={UserChartType.num_of_bought}>
+                      {t(UserChartType.num_of_bought)}
+                    </option>
+                  </Select>
                 </Stack>
-
-                <ProductsPieChart boughtProducts={boughtProducts} />
               </Stack>
-              <Stack w={isBigScreen ? '40%' : '30%'} alignItems='center'>
-                <Stack alignItems='center' spacing={4}>
-                  <Text fontWeight='semibold' fontSize='xl'>
-                    {t('top_10_users')}
-                  </Text>
-                  <Stack direction='row' spacing={4}>
-                    <Select
-                      value={usersSelectedMonth}
-                      onChange={(e) => {
-                        getTopUsers(Number(e.target.value));
-                        setUsersSelectedMonth(Number(e.target.value));
-                      }}
-                    >
-                      {MONTHS.map((item, index) => (
-                        <option value={index + 1} key={item}>
-                          {t(item)}
-                        </option>
-                      ))}
-                    </Select>
-                    <Select
-                      value={userChartType}
-                      onChange={(e) => {
-                        setUserChartType(e.target.value as UserChartType);
-                      }}
-                    >
-                      <option value={UserChartType.paid}>
-                        {t(UserChartType.paid)}
-                      </option>
-                      <option value={UserChartType.num_of_bought}>
-                        {t(UserChartType.num_of_bought)}
-                      </option>
-                    </Select>
-                  </Stack>
-                </Stack>
 
-                <TopUsersDoughnutChart
-                  title={topUsersTitle}
-                  data={topUsersData}
-                />
-              </Stack>
+              <TopUsersDoughnutChart
+                title={topUsersTitle}
+                data={topUsersData}
+              />
             </Stack>
           </Stack>
-        </CmsContainer>
-      </Page>
-    </AdminAuthProvider>
+        </Stack>
+      </CmsContainer>
+    </Page>
   );
+};
+
+Cms.getLayout = (page: React.ReactElement) => {
+  return <AdminAuthProvider>{page}</AdminAuthProvider>;
 };
 
 export default Cms;

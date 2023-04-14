@@ -15,6 +15,7 @@ import {
 import { TemplateType } from '../../../../models/template';
 import { createTemplate } from '../../../../services/template';
 import { handleUploadTemplateImage } from '../../../../utils/template';
+import { NextApplicationPage } from '../../../_app';
 
 const initialTemplate: TemplateType = {
   _id: '',
@@ -33,7 +34,7 @@ const initialTemplate: TemplateType = {
   title: '',
 };
 
-const CmsCreateTemplate = () => {
+const CmsCreateTemplate: NextApplicationPage = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const toast = useToast();
@@ -69,21 +70,23 @@ const CmsCreateTemplate = () => {
   };
 
   return (
-    <AdminAuthProvider>
-      <Page direction='row' w='full' title={t('template_details')}>
-        <CmsContainer
-          title={t('template_details')}
-          href={APP_ROUTES.cms.templates.list}
-        >
-          <TemplateForm
-            template={initialTemplate}
-            onSubmit={handleUpdateTemplate}
-            create
-          />
-        </CmsContainer>
-      </Page>
-    </AdminAuthProvider>
+    <Page direction='row' w='full' title={t('template_details')}>
+      <CmsContainer
+        title={t('template_details')}
+        href={APP_ROUTES.cms.templates.list}
+      >
+        <TemplateForm
+          template={initialTemplate}
+          onSubmit={handleUpdateTemplate}
+          create
+        />
+      </CmsContainer>
+    </Page>
   );
+};
+
+CmsCreateTemplate.getLayout = (page: React.ReactElement) => {
+  return <AdminAuthProvider>{page}</AdminAuthProvider>;
 };
 
 export default CmsCreateTemplate;

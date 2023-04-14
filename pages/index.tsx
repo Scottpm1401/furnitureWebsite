@@ -6,19 +6,22 @@ import Section2 from '../components/Home/Section2';
 import Section3 from '../components/Home/Section3';
 import Page from '../layout/Page';
 import NotAuthProvider from '../layout/Provider/NotAuthProvider';
+import { NextApplicationPage } from './_app';
 
-const Home = () => {
+const Home: NextApplicationPage = () => {
   const { t } = useTranslation();
   return (
-    <NotAuthProvider>
-      <Page direction='column' title={t('home')}>
-        <Section1 />
-        <Section2 />
-        <Section3 />
-        <Newsletter />
-      </Page>
-    </NotAuthProvider>
+    <Page direction='column' title={t('home')}>
+      <Section1 />
+      <Section2 />
+      <Section3 />
+      <Newsletter />
+    </Page>
   );
+};
+
+Home.getLayout = (page: React.ReactElement) => {
+  return <NotAuthProvider>{page}</NotAuthProvider>;
 };
 
 export default Home;

@@ -18,8 +18,7 @@ import { usePayment } from '../../../hooks/payment';
 import Container from '../../../layout/Container';
 import Page from '../../../layout/Page';
 import AuthProvider from '../../../layout/Provider/AuthProvider';
-
-type Props = {};
+import { NextApplicationPage } from '../../_app';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISH_KEY || ''
@@ -33,95 +32,93 @@ const appearance: Appearance = {
   },
 };
 
-const Checkout = (props: Props) => {
+const Checkout: NextApplicationPage = () => {
   const { t } = useTranslation();
 
   const { clientSecret, isLoading } = usePayment();
 
   return (
-    <AuthProvider>
-      <Page direction='column' title={t('checkout')}>
-        <Breadcrumb
-          links={[
-            { title: t('home'), href: APP_ROUTES.home },
-            { title: t('cart'), href: APP_ROUTES.cart },
-            { title: t('checkout'), href: APP_ROUTES.checkout },
-          ]}
-          current={t('checkout')}
-        />
-        <Flex mt='5rem'>
-          <Container direction='column' minH='60vh' justifyContent='center'>
-            <Flex mb='1rem' justifyContent='center'>
-              <Text fontSize='3xl' fontWeight='semibold'>
-                {t('checkout')}
-              </Text>
-            </Flex>
-            {!isLoading ? (
-              clientSecret ? (
-                <Elements
-                  stripe={stripePromise}
-                  options={{ clientSecret, appearance }}
-                >
-                  <CheckoutForm />
-                </Elements>
-              ) : (
-                <Stack w='full' mt='0.5rem' spacing={4} alignItems='center'>
-                  <Text fontSize='xl'>{t('empty_checkout')}</Text>
-                  <Link href={APP_ROUTES.products}>
-                    <Button colorScheme='orange'>
-                      <Text>{t('fill_in')}</Text>
-                    </Button>
-                  </Link>
-                </Stack>
-              )
-            ) : (
-              <Flex
-                w='full'
-                borderRadius='0.5rem'
-                bg='white'
-                p='1.5rem 1rem'
-                alignItems='center'
-                justifyContent='center'
-                boxShadow={FORM_BOX_SHADOW}
+    <Page direction='column' title={t('checkout')}>
+      <Breadcrumb
+        links={[
+          { title: t('home'), href: APP_ROUTES.home },
+          { title: t('cart'), href: APP_ROUTES.cart },
+          { title: t('checkout'), href: APP_ROUTES.checkout },
+        ]}
+        current={t('checkout')}
+      />
+      <Flex mt='5rem'>
+        <Container direction='column' minH='60vh' justifyContent='center'>
+          <Flex mb='1rem' justifyContent='center'>
+            <Text fontSize='3xl' fontWeight='semibold'>
+              {t('checkout')}
+            </Text>
+          </Flex>
+          {!isLoading ? (
+            clientSecret ? (
+              <Elements
+                stripe={stripePromise}
+                options={{ clientSecret, appearance }}
               >
-                <Stack direction='row' spacing={5} w='full'>
-                  <Stack spacing='1.5rem' w='full'>
-                    {new Array(8).fill(0).map((item, index) => (
-                      <Flex
-                        direction='column'
-                        w='full'
-                        key={`${item}_${index}`}
-                      >
-                        <Flex>
-                          <Skeleton>
-                            <Text fontWeight='semibold'>Loading....</Text>
-                          </Skeleton>
-                        </Flex>
-                        <Skeleton mt='0.5rem' w='full' h='24px' />
+                <CheckoutForm />
+              </Elements>
+            ) : (
+              <Stack w='full' mt='0.5rem' spacing={4} alignItems='center'>
+                <Text fontSize='xl'>{t('empty_checkout')}</Text>
+                <Link href={APP_ROUTES.products}>
+                  <Button colorScheme='orange'>
+                    <Text>{t('fill_in')}</Text>
+                  </Button>
+                </Link>
+              </Stack>
+            )
+          ) : (
+            <Flex
+              w='full'
+              borderRadius='0.5rem'
+              bg='white'
+              p='1.5rem 1rem'
+              alignItems='center'
+              justifyContent='center'
+              boxShadow={FORM_BOX_SHADOW}
+            >
+              <Stack direction='row' spacing={5} w='full'>
+                <Stack spacing='1.5rem' w='full'>
+                  {new Array(8).fill(0).map((item, index) => (
+                    <Flex direction='column' w='full' key={`${item}_${index}`}>
+                      <Flex>
+                        <Skeleton>
+                          <Text fontWeight='semibold'>Loading....</Text>
+                        </Skeleton>
                       </Flex>
-                    ))}
-                  </Stack>
-                  <Flex direction='column' w='40%'>
-                    <Flex justifyContent='center'>
-                      <Skeleton>
-                        <Text fontSize='2xl'>Summary</Text>
-                      </Skeleton>
+                      <Skeleton mt='0.5rem' w='full' h='24px' />
                     </Flex>
-                    <SkeletonText
-                      mt='1.5rem'
-                      spacing={4}
-                      noOfLines={6}
-                      skeletonHeight='4'
-                    />
-                  </Flex>
+                  ))}
                 </Stack>
-              </Flex>
-            )}
-          </Container>
-        </Flex>
-      </Page>
-    </AuthProvider>
+                <Flex direction='column' w='40%'>
+                  <Flex justifyContent='center'>
+                    <Skeleton>
+                      <Text fontSize='2xl'>Summary</Text>
+                    </Skeleton>
+                  </Flex>
+                  <SkeletonText
+                    mt='1.5rem'
+                    spacing={4}
+                    noOfLines={6}
+                    skeletonHeight='4'
+                  />
+                </Flex>
+              </Stack>
+            </Flex>
+          )}
+        </Container>
+      </Flex>
+    </Page>
   );
+};
+
+Checkout.getLayout = (page: React.ReactElement) => {
+  return <AuthProvider>{page}</AuthProvider>;
 };
 
 export default Checkout;

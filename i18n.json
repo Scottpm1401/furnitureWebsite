@@ -1,8 +1,0 @@
-{
-  "locales": ["en", "vi"],
-  "defaultLocale": "en",
-  "defaultNS": "common",
-  "pages": {
-    "*": ["common"]
-  }
-}

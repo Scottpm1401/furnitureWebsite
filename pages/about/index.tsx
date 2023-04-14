@@ -11,107 +11,105 @@ import Page from '../../layout/Page';
 import NotAuthProvider from '../../layout/Provider/NotAuthProvider';
 import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
+import { NextApplicationPage } from '../_app';
 
-type Props = {};
-
-const About = (props: Props) => {
+const About: NextApplicationPage = () => {
   const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
   const aboutContent = useAppSelector(selectors.global.selectAbout);
 
   return (
-    <NotAuthProvider>
-      <Page
-        alignItems='center'
-        justifyContent='center'
-        direction='column'
-        title={t('about')}
-      >
-        <Breadcrumb
-          links={[
-            { title: t('home'), href: APP_ROUTES.home },
-            { title: t('about'), href: APP_ROUTES.about },
-          ]}
-          current={t('about')}
-        />
-        <Flex mt='4rem'>
-          <Container
-            direction={isMobile ? 'column' : 'row'}
-            minH={isMobile ? '1200px' : 'auto'}
-            textAlign={isMobile ? 'center' : 'start'}
-            alignItems='center'
+    <Page
+      alignItems='center'
+      justifyContent='center'
+      direction='column'
+      title={t('about')}
+    >
+      <Breadcrumb
+        links={[
+          { title: t('home'), href: APP_ROUTES.home },
+          { title: t('about'), href: APP_ROUTES.about },
+        ]}
+        current={t('about')}
+      />
+      <Flex mt='4rem'>
+        <Container
+          direction={isMobile ? 'column' : 'row'}
+          minH={isMobile ? '1200px' : 'auto'}
+          textAlign={isMobile ? 'center' : 'start'}
+          alignItems='center'
+        >
+          <Flex
+            w='full'
+            flex={1}
+            position='relative'
+            borderRadius='0.5rem'
+            overflow='hidden'
+            minH={isMobile ? '350px' : '600px'}
+            maxH={isMobile ? '350px' : '600px'}
           >
-            <Flex
-              w='full'
-              flex={1}
-              position='relative'
-              borderRadius='0.5rem'
-              overflow='hidden'
-              minH={isMobile ? '350px' : '600px'}
-              maxH={isMobile ? '350px' : '600px'}
-            >
-              <Image
-                style={{ objectFit: 'cover' }}
-                src={`${process.env.NEXT_PUBLIC_CDN}${aboutContent.image}`}
-                fill
-                sizes='(max-width: 768px) 100vw,
+            <Image
+              style={{ objectFit: 'cover' }}
+              src={`${process.env.NEXT_PUBLIC_CDN}${aboutContent.image}`}
+              fill
+              sizes='(max-width: 768px) 100vw,
               (max-width: 1280px) 50vw,
               33vw'
-                alt={'about_banner'}
-              />
-            </Flex>
+              alt={'about_banner'}
+            />
+          </Flex>
 
-            <Flex
-              ml={isMobile ? '0' : '2rem'}
-              mt={isMobile ? '2rem' : '0'}
-              direction='column'
-              justifyContent='flex-start'
-              flex={1}
-            >
-              <Flex justifyContent={isMobile ? 'center' : 'start'}>
-                <Text
-                  css={css`
-                    ${isMobile
-                      ? `display: flex;
+          <Flex
+            ml={isMobile ? '0' : '2rem'}
+            mt={isMobile ? '2rem' : '0'}
+            direction='column'
+            justifyContent='flex-start'
+            flex={1}
+          >
+            <Flex justifyContent={isMobile ? 'center' : 'start'}>
+              <Text
+                css={css`
+                  ${isMobile
+                    ? `display: flex;
                     flex-direction: column;
                     align-items: center;
                     `
-                      : null}
-                    &::after {
-                      width: 50%;
-                      height: 4px;
-                      background: var(--chakra-colors-orange-400);
-                      content: '';
-                      display: block;
-                    }
-                  `}
-                  fontWeight='semibold'
-                  fontSize='3xl'
-                >
-                  {
-                    aboutContent.title.find((item) => item.lang === lang)
-                      ?.content
+                    : null}
+                  &::after {
+                    width: 50%;
+                    height: 4px;
+                    background: var(--chakra-colors-orange-400);
+                    content: '';
+                    display: block;
                   }
-                </Text>
-              </Flex>
-              <Text
-                mt='2rem'
-                color='#5B5F62'
-                fontWeight='medium'
-                whiteSpace='pre-wrap'
-                lineHeight={2}
+                `}
+                fontWeight='semibold'
+                fontSize='3xl'
               >
-                {
-                  aboutContent.description.find((item) => item.lang === lang)
-                    ?.content
-                }
+                {aboutContent.title.find((item) => item.lang === lang)?.content}
               </Text>
             </Flex>
-          </Container>
-        </Flex>
-      </Page>
-    </NotAuthProvider>
+            <Text
+              mt='2rem'
+              color='#5B5F62'
+              fontWeight='medium'
+              whiteSpace='pre-wrap'
+              lineHeight={2}
+            >
+              {
+                aboutContent.description.find((item) => item.lang === lang)
+                  ?.content
+              }
+            </Text>
+          </Flex>
+        </Container>
+      </Flex>
+    </Page>
   );
+};
+
+About.getLayout = (page: React.ReactElement) => {
+  return <NotAuthProvider>{page}</NotAuthProvider>;
 };
 
 export default About;
