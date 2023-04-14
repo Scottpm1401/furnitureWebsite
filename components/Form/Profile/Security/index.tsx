@@ -18,7 +18,8 @@ import Eye from '../../../../public/svg/eye.svg';
 import EyeOff from '../../../../public/svg/eye_off.svg';
 import { useAppDispatch } from '../../../../redux/hooks';
 import { actions } from '../../../../redux/reducer';
-import { changePassword } from '../../../../services/user';
+import { changePassword } from '../../../../services/auth';
+
 type SecurityType = {
   currentPassword: string;
   newPassword: string;
