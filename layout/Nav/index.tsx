@@ -80,9 +80,9 @@ const Nav = (props: Props) => {
     if (refreshToken) {
       const data = await logout({ refreshToken });
       if (data.success) {
-        await router.push(APP_ROUTES.home);
         dispatch(actions.auth.reset());
         dispatch(actions.user.reset());
+        await router.push(APP_ROUTES.home);
       }
     }
 

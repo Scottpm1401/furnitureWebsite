@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { UserType } from '../../models/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -18,6 +18,7 @@ const useCurrentUser = () => {
       dispatch(actions.user.setUser(currentUser));
       return currentUser;
     } catch (err) {
+      setUser(undefined);
       return undefined;
     } finally {
       setIsLoading(false);
