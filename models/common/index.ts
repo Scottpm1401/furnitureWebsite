@@ -3,3 +3,7 @@ export type settingType = {
   icon: React.ReactNode;
   path: string;
 };
+
+export type commonResponse = {
+  success: boolean;
+};

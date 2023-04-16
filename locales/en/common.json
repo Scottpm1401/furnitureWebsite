@@ -254,6 +254,9 @@
   "home_footer": "Footer",
   "contact": "Contact",
   "banners": "Banners",
+  "ok": "Ok",
   "update_template_success": "Update template successful",
-  "not_support_resolution": "We do not support the web version of this resolution."
+  "not_support_resolution": "We do not support the web version of this resolution.",
+  "subscribe_success_title": "Thank You for Subscribing to Comfysloth!",
+  "subscribe_success_description": "You have just joined the Comfysloth community, where you can find cozy and cute products for your home and lifestyle. As a subscriber, you will get exclusive access to our latest offers, discounts, and tips on how to create a relaxing and comfortable environment. We are so happy to have you on board and we can’t wait to share our passion for all things comfy and slothful with you. Stay tuned for our welcome email with a special gift just for you! 🎁\n\nP.S. Don’t forget to check your email regularly for updates on our new products and sales. You don’t want to miss out on these amazing deals! 😍"
 }

@@ -4,6 +4,7 @@ import {
   CreateTemplateRequest,
   UpdateTemplateRequest,
 } from '../../models/api/cms';
+import { commonResponse } from '../../models/common';
 import { TemplateType } from '../../models/template';
 
 export const getAllTemplate = async () => {
@@ -44,5 +45,5 @@ export const updateTemplate = async (
 
 export const deleteTemplate = async (id: string) => {
   const res = await axiosClient.delete(API.TEMPLATE.DELETETEMPLATE(id));
-  return res.data as { success: boolean };
+  return res.data as commonResponse;
 };

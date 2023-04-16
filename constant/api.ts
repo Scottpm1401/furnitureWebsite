@@ -59,4 +59,7 @@ export const API = {
     DELETETEMPLATE: (id: string) => `/template/delete/${id}`,
     CURRENTTEMPLATE: '/template/current',
   },
+  SUBSCRIPTION: {
+    SUBSCRIBE: '/subscription/subscribe',
+  },
 };

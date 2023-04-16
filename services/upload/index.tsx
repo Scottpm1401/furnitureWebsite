@@ -44,6 +44,6 @@ export const destroyImage = async (body: FormData) => {
       headers: { 'Content-Type': 'multipart/form-data' },
     }
   );
-  console.log(res.data);
+
   return res.data;
 };

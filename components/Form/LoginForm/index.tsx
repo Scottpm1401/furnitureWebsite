@@ -15,7 +15,7 @@ import * as Yup from 'yup';
 
 import { APP_ROUTES, FORM_BOX_SHADOW } from '../../../constant';
 import NavLink from '../../../layout/Nav/NavLink';
-import { LoginRequest } from '../../../models/api/user';
+import { LoginRequest } from '../../../models/api/auth';
 import Eye from '../../../public/svg/eye.svg';
 import EyeOff from '../../../public/svg/eye_off.svg';
 import { useAppDispatch } from '../../../redux/hooks';

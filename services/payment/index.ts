@@ -5,6 +5,7 @@ import {
   CreatePaymentRequest,
   CreatePaymentResponse,
 } from '../../models/api/payment';
+import { commonResponse } from '../../models/common';
 import { PurchaseType } from '../../models/purchase';
 
 export const createPayment = async () => {
@@ -22,5 +23,5 @@ export const confirmPayment = async (body: confirmPaymentRequest) => {
 
 export const productCheck = async (id: string, quantity: number) => {
   const res = await axiosClient.post(API.PAYMENT.CHECK(id), { quantity });
-  return res.data as { success: boolean };
+  return res.data as commonResponse;
 };
