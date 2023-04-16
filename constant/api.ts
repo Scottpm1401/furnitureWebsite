@@ -6,6 +6,7 @@ export const API = {
     CHANGEPASSWORD: '/auth/change_password',
     FORGOTPASSWORD: '/auth/forgot_password',
     RESETPASSWORD: '/auth/reset_password',
+    REFRESHTOKEN: '/auth/refresh_token',
   },
   USER: {
     GETUSER: (id: string) => `/user/get/${id}`,
@@ -58,5 +59,4 @@ export const API = {
     DELETETEMPLATE: (id: string) => `/template/delete/${id}`,
     CURRENTTEMPLATE: '/template/current',
   },
-  REFRESHTOKEN: '/user/refresh_token',
 };

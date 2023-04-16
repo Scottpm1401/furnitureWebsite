@@ -1,8 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import moment from 'moment';
 
 import { APP_ROUTES } from '../constant';
 import { API } from '../constant/api';
+import { Role, UserType } from '../models/user';
 import { actions } from '../redux/reducer';
 import { AuthState } from '../redux/reducers/authReducer';
 import { store } from '../redux/store';
@@ -15,6 +16,20 @@ const axiosClient = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+let isRefreshing = false;
+type FailedQueue = {
+  resolve: (value: unknown) => void;
+  reject: (reason?: any) => void;
+};
+let failedQueue: FailedQueue[] = [];
+function processQueue(error: AxiosError | Error | null, token: string | null) {
+  failedQueue.forEach((prom) => {
+    if (error) prom.reject(error);
+    else prom.resolve(token);
+  });
+  failedQueue = [];
+}
 
 // Add a request interceptor
 axiosClient.interceptors.request.use(
@@ -55,38 +70,64 @@ axiosClient.interceptors.response.use(
     }
     const originalConfig = err.config;
     if (originalConfig.url !== APP_ROUTES.login && err.response) {
-      // Access Token was expired
-      if (err.response.status === 401 && !originalConfig._retry) {
-        originalConfig._retry = true;
-        try {
-          const { data } = await axios.post(
-            API.REFRESHTOKEN,
-            {
-              refreshToken,
-            },
-            {
-              baseURL: process.env.NEXT_PUBLIC_BE_URL,
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            if (originalConfig.headers) {
+              originalConfig.headers.Authorization = `Bearer ${token}`;
             }
-          );
-          store.dispatch(
-            actions.auth.setAuth({
-              accessToken: data.accessToken,
-              expiredDate: data.expiredDate,
-              refreshToken,
-            })
-          );
-
-          originalConfig.headers = {
-            ...originalConfig.headers,
-            Authorization: `Bearer ${data.accessToken}`,
-          };
-
-          return axiosClient(originalConfig);
-        } catch (_error) {
-          return Promise.reject(_error);
-        }
+            return axiosClient(originalConfig);
+          })
+          .catch((err) => Promise.reject(err));
       }
+
+      isRefreshing = true;
+      const { role }: UserType = store.getState().user;
+
+      if (
+        err.response.status === 401 ||
+        (err.response.status === 403 && role === Role.admin)
+      )
+        return new Promise((resolve, reject) => {
+          const f = async () => {
+            try {
+              const { data } = await axios.post(
+                API.AUTH.REFRESHTOKEN,
+                {
+                  refreshToken,
+                },
+                {
+                  baseURL: process.env.NEXT_PUBLIC_BE_URL,
+                }
+              );
+              const newAccessToken = data.accessToken;
+              axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
+              if (originalConfig.headers)
+                originalConfig.headers.Authorization = `Bearer ${newAccessToken}`;
+
+              store.dispatch(
+                actions.auth.setAuth({
+                  accessToken: data.accessToken,
+                  expiredDate: data.expiredDate,
+                  refreshToken,
+                })
+              );
+              processQueue(null, newAccessToken);
+              resolve(axiosClient(originalConfig));
+            } catch (err) {
+              if (axios.isAxiosError(err) || err instanceof Error)
+                processQueue(err, null);
+              reject(err);
+            } finally {
+              isRefreshing = false;
+            }
+          };
+          f();
+        });
     }
+
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(err);
