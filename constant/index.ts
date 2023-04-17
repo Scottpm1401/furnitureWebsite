@@ -72,6 +72,7 @@ export const APP_ROUTES = {
   contact: '/contact',
   termAndCondition: '/legal/terms_and_conditions',
   privacyPolicy: '/legal/privacy_policy',
+  resetPassword: '/reset_password',
   cms: {
     dashboard: '/cms',
     ordered: {

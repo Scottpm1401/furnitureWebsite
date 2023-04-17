@@ -17,7 +17,8 @@
       "invalid_refresh_token": "Refresh Token Sai",
       "do_not_have_permission": "Bạn không có quyền truy cập đến trang này",
       "invalid_token": "Token sai",
-      "access_denied": "Truy cập thất bại"
+      "access_denied": "Truy cập thất bại",
+      "failed_to_reset_password": "Đặt lại mật khẩu thất bại"
     },
     "user": {
       "not_found": "Không tìm thấy người dùng",
@@ -259,5 +260,15 @@
   "update_template_success": "Cập nhật giao diện thành công",
   "not_support_resolution": "Chúng tôi không hỗ trợ phiên bản web của độ phân giải này.",
   "subscribe_success_title": "Cảm ơn bạn đã đăng ký Comfysloth!",
-  "subscribe_success_description": " Bạn vừa gia nhập cộng đồng Comfysloth, nơi bạn có thể tìm thấy những sản phẩm ấm cúng và đáng yêu cho ngôi nhà và lối sống của bạn. Là một người đăng ký, bạn sẽ được truy cập độc quyền vào những ưu đãi, giảm giá và mẹo mới nhất của chúng tôi về cách tạo ra một môi trường thư giãn và thoải mái. Chúng tôi rất vui mừng khi bạn tham gia và chúng tôi không thể chờ đợi để chia sẻ niềm đam mê của chúng tôi với bạn về mọi thứ ấm áp và lười biếng. Hãy theo dõi email chào mừng của chúng tôi với một món quà đặc biệt chỉ dành cho bạn! 🎁\n\nP.S. Đừng quên kiểm tra email của bạn thường xuyên để cập nhật về các sản phẩm và khuyến mãi mới của chúng tôi. Bạn không muốn bỏ lỡ những ưu đãi tuyệt vời này! 😍"
+  "subscribe_success_description": " Bạn vừa gia nhập cộng đồng Comfysloth, nơi bạn có thể tìm thấy những sản phẩm ấm cúng và đáng yêu cho ngôi nhà và lối sống của bạn. Là một người đăng ký, bạn sẽ được truy cập độc quyền vào những ưu đãi, giảm giá và mẹo mới nhất của chúng tôi về cách tạo ra một môi trường thư giãn và thoải mái. Chúng tôi rất vui mừng khi bạn tham gia và chúng tôi không thể chờ đợi để chia sẻ niềm đam mê của chúng tôi với bạn về mọi thứ ấm áp và lười biếng. Hãy theo dõi email chào mừng của chúng tôi với một món quà đặc biệt chỉ dành cho bạn! 🎁\n\nP.S. Đừng quên kiểm tra email của bạn thường xuyên để cập nhật về các sản phẩm và khuyến mãi mới của chúng tôi. Bạn không muốn bỏ lỡ những ưu đãi tuyệt vời này! 😍",
+  "back_to_login": "Trở về đăng nhập",
+  "forgot_password_title": "Nhập địa chỉ email đã được xác minh của tài khoản người dùng của bạn và chúng tôi sẽ gửi cho bạn liên kết đặt lại mật khẩu.",
+  "sending_email": "Đang gửi email",
+  "send_password_reset_email": "Gửi email đặt lại mật khẩu",
+  "forgot_password_success_title": "Email đặt lại mật khẩu đã được gửi",
+  "forgot_password_success_description": "Bạn đang tiến một bước gần hơn để tạo mật khẩu mới. Vui lòng kiểm tra hộp thư đến của bạn để nhận email từ chúng tôi và nhấp vào liên kết để tiếp tục. Liên kết chỉ có hiệu lực trong 15 phút.",
+  "reset_password": "Đặt lại mật khẩu",
+  "reset_password_title": "Tạo mật khẩu mới Bạn có thể tạo mật khẩu mới cho tài khoản của mình bằng cách nhập mật khẩu đó vào ô bên dưới.",
+  "reset_password_success_title": "Chúc mừng bạn đã có mật khẩu mới",
+  "reset_password_success_description": "Bạn đã tạo một mật khẩu mới cho tài khoản của mình. Vui lòng đăng nhập lại bằng mật khẩu mới của bạn để tận hưởng các tính năng của chúng tôi."
 }

@@ -17,7 +17,8 @@
       "invalid_refresh_token": "Invalid refresh token",
       "do_not_have_permission": "You Do Not Have Permission To Access This Content",
       "invalid_token": "Invalid Token",
-      "access_denied": "Access Denied"
+      "access_denied": "Access Denied",
+      "failed_to_reset_password": "Failed to reset password"
     },
     "user": {
       "not_found": "User not found",
@@ -258,5 +259,15 @@
   "update_template_success": "Update template successful",
   "not_support_resolution": "We do not support the web version of this resolution.",
   "subscribe_success_title": "Thank You for Subscribing to Comfysloth!",
-  "subscribe_success_description": "You have just joined the Comfysloth community, where you can find cozy and cute products for your home and lifestyle. As a subscriber, you will get exclusive access to our latest offers, discounts, and tips on how to create a relaxing and comfortable environment. We are so happy to have you on board and we can’t wait to share our passion for all things comfy and slothful with you. Stay tuned for our welcome email with a special gift just for you! 🎁\n\nP.S. Don’t forget to check your email regularly for updates on our new products and sales. You don’t want to miss out on these amazing deals! 😍"
+  "subscribe_success_description": "You have just joined the Comfysloth community, where you can find cozy and cute products for your home and lifestyle. As a subscriber, you will get exclusive access to our latest offers, discounts, and tips on how to create a relaxing and comfortable environment. We are so happy to have you on board and we can’t wait to share our passion for all things comfy and slothful with you. Stay tuned for our welcome email with a special gift just for you! 🎁\n\nP.S. Don’t forget to check your email regularly for updates on our new products and sales. You don’t want to miss out on these amazing deals! 😍",
+  "back_to_login": "Back to login",
+  "forgot_password_title": "Enter your user account's verified email address and we will send you a password reset link.",
+  "sending_email": "Sending email",
+  "send_password_reset_email": "Send password reset email",
+  "forgot_password_success_title": "Password reset email sent",
+  "forgot_password_success_description": "You’re one step closer to creating a new password. Please check your inbox for an email from us and click on the link to continue. The link is valid for 15 minutes only.",
+  "reset_password": "Reset password",
+  "reset_password_title": "Create a new password You can create a new password for your account by entering it in the box below. ",
+  "reset_password_success_title": "Congratulations, you have a new password",
+  "reset_password_success_description": "You have created a new password for your account. Please log back in with your new password to enjoy our features."
 }
