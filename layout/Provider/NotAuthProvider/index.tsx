@@ -1,8 +1,9 @@
+import { includes } from 'lodash';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import Loader from '../../../components/Loader';
-import { APP_ROUTES } from '../../../constant';
+import { APP_ROUTES, NOT_AUTH_APP_ROUTES } from '../../../constant';
 import { useCurrentUser } from '../../../hooks/user';
 
 type Props = { children: JSX.Element };
@@ -14,11 +15,7 @@ const NotAuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (isLoading) return;
-    if (
-      user &&
-      (router.pathname === APP_ROUTES.login ||
-        router.pathname === APP_ROUTES.signup)
-    ) {
+    if (user && includes(NOT_AUTH_APP_ROUTES, router.pathname)) {
       router.push(APP_ROUTES.home);
       return;
     }

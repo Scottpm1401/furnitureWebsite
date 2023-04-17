@@ -97,3 +97,10 @@ export const APP_ROUTES = {
     },
   },
 };
+
+export const NOT_AUTH_APP_ROUTES = [
+  APP_ROUTES.login,
+  APP_ROUTES.signup,
+  APP_ROUTES.forgotPassword,
+  APP_ROUTES.resetPassword,
+];
