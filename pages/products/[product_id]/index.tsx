@@ -84,7 +84,17 @@ const Product: NextApplicationPage = () => {
   };
 
   return (
-    <Page w='full' direction='column' title={product?.title || 'Product'}>
+    <Page
+      w='full'
+      direction='column'
+      title={product?.title || 'Product'}
+      image={{
+        url: `${process.env.NEXT_PUBLIC_CDN}${product?.img}`,
+        alt: product?.title,
+        width: 800,
+        height: 600,
+      }}
+    >
       <Breadcrumb
         links={[
           { title: t('home'), href: APP_ROUTES.home },
