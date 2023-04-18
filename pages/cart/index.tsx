@@ -14,7 +14,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { isAxiosError } from 'axios';
-import { debounce, floor } from 'lodash';
+import { floor } from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
@@ -22,6 +22,7 @@ import { useEffect, useMemo } from 'react';
 
 import Breadcrumb from '../../components/Breadcrumb';
 import ColorButton from '../../components/ColorButton';
+import Counter from '../../components/Counter';
 import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
 import { useCart } from '../../hooks/user';
@@ -29,8 +30,6 @@ import Container from '../../layout/Container';
 import Page from '../../layout/Page';
 import AuthProvider from '../../layout/Provider/AuthProvider';
 import { ProductCartType } from '../../models/cart';
-import MinusIcon from '../../public/svg/minus.svg';
-import PlusIcon from '../../public/svg/plus.svg';
 import TrashIcon from '../../public/svg/trash.svg';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { actions, selectors } from '../../redux/reducer';
@@ -87,33 +86,25 @@ const Cart: NextApplicationPage = () => {
     [cart]
   );
 
-  const handleQuantity = debounce(
-    async (product: ProductCartType, isMinus: boolean) => {
-      if (isMinus && product.quantity === 1) return;
-      try {
-        const newCart = await updateCartQuantity({
-          product_id: product.product_id,
-          color: product.color,
-          quantity: isMinus ? -1 : 1,
+  const handleQuantity = async (product: ProductCartType, quantity: number) => {
+    try {
+      const data = await updateCartQuantity({
+        product_id: product.product_id,
+        color: product.color,
+        quantity: quantity,
+      });
+      dispatch(actions.user.setUserCart(data.cart));
+      dispatch(actions.user.setUserCartTotal(data.cart_total));
+    } catch (err) {
+      if (isAxiosError(err))
+        toast({
+          title: t(err.response?.data.message),
+          status: 'error',
+          duration: 5000,
+          position: 'top-right',
         });
-        dispatch(actions.user.setUserCart(newCart));
-        dispatch(
-          actions.user.setUserCartTotal(
-            isMinus ? -product.price : product.price
-          )
-        );
-      } catch (err) {
-        if (isAxiosError(err))
-          toast({
-            title: t(err.response?.data.message),
-            status: 'error',
-            duration: 5000,
-            position: 'top-right',
-          });
-      }
-    },
-    300
-  );
+    }
+  };
 
   const handleRemoveProduct = async (product: ProductCartType) => {
     try {
@@ -123,7 +114,9 @@ const Cart: NextApplicationPage = () => {
       });
       dispatch(actions.user.setUserCart(newCart));
       dispatch(
-        actions.user.setUserCartTotal(-(product.price * product.quantity))
+        actions.user.setUserCartTotal(
+          cartTotal - product.price * product.quantity
+        )
       );
     } catch (err) {
       if (isAxiosError(err))
@@ -220,32 +213,10 @@ const Cart: NextApplicationPage = () => {
                       <Text fontWeight='semibold' mt='0.5rem'>
                         {t('subtotal')}: ${floor(item.price * item.quantity, 2)}
                       </Text>
-                      <Flex alignItems='center'>
-                        <Button
-                          variant='unstyled'
-                          onClick={() => handleQuantity(item, true)}
-                          w='24px'
-                          h='24px'
-                        >
-                          <MinusIcon />
-                        </Button>
-                        <Text
-                          marginX='0.25rem'
-                          textAlign='center'
-                          w='24px'
-                          fontWeight='medium'
-                        >
-                          {item.quantity}
-                        </Text>
-                        <Button
-                          variant='unstyled'
-                          onClick={() => handleQuantity(item, false)}
-                          w='24px'
-                          h='24px'
-                        >
-                          <PlusIcon />
-                        </Button>
-                      </Flex>
+                      <Counter
+                        quantity={item.quantity}
+                        onUpdate={(quantity) => handleQuantity(item, quantity)}
+                      />
                     </Flex>
 
                     <Flex
@@ -331,32 +302,12 @@ const Cart: NextApplicationPage = () => {
                         </Td>
                         <Td fontWeight='medium'>${item.price}</Td>
                         <Td>
-                          <Flex alignItems='center'>
-                            <Button
-                              variant='unstyled'
-                              onClick={() => handleQuantity(item, true)}
-                              w='24px'
-                              h='24px'
-                            >
-                              <MinusIcon />
-                            </Button>
-                            <Text
-                              marginX='0.5rem'
-                              textAlign='center'
-                              w='40px'
-                              fontWeight='medium'
-                            >
-                              {item.quantity}
-                            </Text>
-                            <Button
-                              variant='unstyled'
-                              onClick={() => handleQuantity(item, false)}
-                              w='24px'
-                              h='24px'
-                            >
-                              <PlusIcon />
-                            </Button>
-                          </Flex>
+                          <Counter
+                            quantity={item.quantity}
+                            onUpdate={(quantity) =>
+                              handleQuantity(item, quantity)
+                            }
+                          />
                         </Td>
 
                         <Td fontWeight='medium'>

@@ -73,6 +73,7 @@ export const isBase64Image = (str: string): boolean => {
     return false;
   }
 };
+
 export const handleDeleteImage = async (img: string) => {
   const formData = new FormData();
   const publicId = img.slice(img.indexOf('furniture'));

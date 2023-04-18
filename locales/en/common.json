@@ -42,6 +42,10 @@
     "purchase": {
       "not_found": "Purchase not found",
       "failed_to_update": "Failed to update purchase"
+    },
+    "subscription": {
+      "failed_to_subscribe": "Failed to subscribe",
+      "already_subscribe": "User already subscribe"
     }
   },
   "view_more": "View More",

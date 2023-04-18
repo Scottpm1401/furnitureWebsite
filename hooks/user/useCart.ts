@@ -13,6 +13,7 @@ type CartType = { isAvailable?: boolean } & ProductCartType;
 
 const useCart = () => {
   const userCart = useAppSelector(selectors.user.selectUserCart);
+  const cartTotal = useAppSelector(selectors.user.selectCartTotal);
   const [isLoading, setIsLoading] = useState(false);
   const [cart, setCart] = useState<CartType[]>([]);
   const dispatch = useAppDispatch();
@@ -20,24 +21,32 @@ const useCart = () => {
   const toast = useToast();
 
   const checkCart = useCallback(async () => {
-    if (cart.length < 1) setIsLoading(true);
-    const cartReq = userCart.map(async (item) => {
-      const req: CartType = {
-        ...item,
-      };
-      try {
-        req.isAvailable = (
-          await productCheck(req.product_id, req.quantity)
-        ).success;
-      } catch (error) {
-        req.isAvailable = false;
-      }
+    try {
+      if (cart.length < 1) setIsLoading(true);
+      const cartReq = userCart.map(async (item) => {
+        const req: CartType = {
+          ...item,
+          isAvailable: false,
+        };
 
-      return req;
-    });
-    const newCart = await Promise.all(cartReq);
-    setCart(newCart);
-    setIsLoading(false);
+        try {
+          const isAvailable = await productCheck(req.product_id, req.quantity);
+
+          req.isAvailable = isAvailable.success;
+        } catch (err) {
+          req.isAvailable = false;
+        }
+
+        return req;
+      });
+      const newCart = await Promise.all(cartReq);
+
+      setCart(newCart);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }, [cart.length, userCart]);
 
   const handleAddProduct = async (
@@ -45,22 +54,18 @@ const useCart = () => {
     onDone?: () => void
   ) => {
     try {
-      const isExistInCart =
-        userCart.findIndex(
-          (item) =>
-            item.product_id === product.product_id &&
-            item.color === product.color
-        ) > -1;
-      if (isExistInCart) {
-        const newCart = await updateCartQuantity({
+      const productCart = userCart.find(
+        (item) =>
+          item.product_id === product.product_id && item.color === product.color
+      );
+      if (productCart) {
+        const data = await updateCartQuantity({
           product_id: product.product_id,
-          quantity: product.quantity,
+          quantity: product.quantity + productCart.quantity,
           color: product.color,
         });
-        dispatch(actions.user.setUserCart(newCart));
-        dispatch(
-          actions.user.setUserCartTotal(product.quantity * product.price)
-        );
+        dispatch(actions.user.setUserCart(data.cart));
+        dispatch(actions.user.setUserCartTotal(data.cart_total));
       } else {
         const newCart = await addProductCart({
           product_id: product.product_id,
@@ -69,7 +74,9 @@ const useCart = () => {
         });
         dispatch(actions.user.setUserCart(newCart));
         dispatch(
-          actions.user.setUserCartTotal(product.quantity * product.price)
+          actions.user.setUserCartTotal(
+            cartTotal + product.quantity * product.price
+          )
         );
       }
       onDone?.();

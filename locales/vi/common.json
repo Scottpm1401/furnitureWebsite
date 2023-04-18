@@ -42,6 +42,10 @@
     "purchase": {
       "not_found": "Không tìm thấy đơn hàng",
       "failed_to_update": "Cập nhật đơn hàng thất bại"
+    },
+    "subscription": {
+      "failed_to_subscribe": "Đăng ký thất bại",
+      "already_subscribe": "Người dùng đã đăng ký"
     }
   },
   "view_more": "Xem Thêm",

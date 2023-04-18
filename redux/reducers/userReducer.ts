@@ -36,7 +36,7 @@ export const { actions, reducer } = createSlice({
     },
 
     setUserCartTotal(state, action: PayloadAction<number>) {
-      state.cart_total += action.payload;
+      state.cart_total = action.payload;
     },
 
     reset: () => initialState,
