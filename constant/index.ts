@@ -40,9 +40,6 @@ export const CHART_COLORS = CHART_COLORS_HOVER.map((color) =>
     )}, ${parseInt(color.substring(4), 16)}, 0.5)`
 );
 
-export const DEFAULT_SEO_IMAGE =
-  'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft';
-
 export const MONTHS = [
   'Jan',
   'Feb',
