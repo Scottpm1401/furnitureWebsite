@@ -5,7 +5,6 @@ import { ChakraProvider, ColorModeScript, Flex } from '@chakra-ui/react';
 import moment from 'moment';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { ReactElement, ReactNode, useEffect, useMemo } from 'react';
@@ -45,10 +44,6 @@ const App = (props: MyAppProps) => {
 
   return (
     <Provider store={store}>
-      <Head>
-        <title>Comfysloth</title>
-        <link rel='icon' href='/favicon.svg' />
-      </Head>
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
           <TemplateProvider>

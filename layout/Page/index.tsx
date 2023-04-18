@@ -4,7 +4,7 @@ import { NextSeo } from 'next-seo';
 import { OpenGraphMedia } from 'next-seo/lib/types';
 import React, { useMemo } from 'react';
 
-import { APP_ROUTES } from '../../constant';
+import { APP_ROUTES, DEFAULT_SEO_IMAGE } from '../../constant';
 import { NAV_HEIGHT } from '../Nav';
 
 type Props = {
@@ -30,17 +30,18 @@ const Page = ({
   return (
     <>
       <NextSeo
-        title={title}
+        additionalLinkTags={[{ rel: 'icon', href: '/favicon.svg' }]}
+        title={title || 'Comfysloth'}
         description={description}
         canonical={canonical}
         openGraph={{
-          title,
+          title: title || 'Comfysloth',
           description,
           images: image
             ? [image]
             : [
                 {
-                  url: 'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft',
+                  url: DEFAULT_SEO_IMAGE,
                   alt: 'Comfysloth',
                   width: 800,
                   height: 600,
