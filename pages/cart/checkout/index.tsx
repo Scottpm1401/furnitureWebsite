@@ -18,6 +18,7 @@ import { usePayment } from '../../../hooks/payment';
 import Container from '../../../layout/Container';
 import Page from '../../../layout/Page';
 import AuthProvider from '../../../layout/Provider/AuthProvider';
+import CheckoutProvider from '../../../layout/Provider/CheckoutProvider';
 import { NextApplicationPage } from '../../_app';
 
 const stripePromise = loadStripe(
@@ -118,7 +119,11 @@ const Checkout: NextApplicationPage = () => {
 };
 
 Checkout.getLayout = (page: React.ReactElement) => {
-  return <AuthProvider>{page}</AuthProvider>;
+  return (
+    <AuthProvider>
+      <CheckoutProvider>{page}</CheckoutProvider>
+    </AuthProvider>
+  );
 };
 
 export default Checkout;
