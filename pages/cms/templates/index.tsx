@@ -1,8 +1,22 @@
-import { Button, Stack, Switch, Text, useToast } from '@chakra-ui/react';
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Skeleton,
+  Stack,
+  Switch,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
 import { isAxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { APP_ROUTES } from '../../../constant';
 import { useTemplates } from '../../../hooks/template';
@@ -17,12 +31,24 @@ import { actions } from '../../../redux/reducer';
 import { activeTemplate, deleteTemplate } from '../../../services/template';
 import { NextApplicationPage } from '../../_app';
 
+type Alert = {
+  isOpen: boolean;
+  content?: string;
+  onSuccess?: () => void;
+  onClose?: () => void;
+};
+
+const initialAlert: Alert = {
+  isOpen: false,
+};
+
 const CmsTemplates: NextApplicationPage = () => {
   const { t } = useTranslation();
-  const { templates, getTemplates } = useTemplates();
+  const { templates, getTemplates, isLoading } = useTemplates();
   const router = useRouter();
   const toast = useToast();
   const dispatch = useAppDispatch();
+  const [alert, setAlert] = useState(initialAlert);
 
   const handleActiveTemplate = async (template: TemplateType) => {
     if (template.active) return;
@@ -58,6 +84,16 @@ const CmsTemplates: NextApplicationPage = () => {
     }
   };
 
+  const handleCloseAlert = () => {
+    alert.onClose?.();
+    setAlert(initialAlert);
+  };
+
+  const handleSuccessAlert = () => {
+    alert.onSuccess?.();
+    setAlert(initialAlert);
+  };
+
   return (
     <Page direction='row' w='full' title='Template'>
       <CmsContainer
@@ -73,36 +109,35 @@ const CmsTemplates: NextApplicationPage = () => {
         }
       >
         <Stack spacing={4}>
-          {templates.map((template) => (
-            <Stack key={template._id}>
+          {!isLoading ? (
+            templates.map((template) => (
               <Stack
-                position='relative'
                 direction='row'
+                justifyContent='space-between'
                 alignItems='center'
-                spacing={4}
+                key={template._id}
               >
-                <Text
-                  fontSize='2xl'
-                  fontWeight='semibold'
-                  cursor='pointer'
-                  color={template.active ? 'orange.400' : 'initial'}
-                  _hover={{ color: 'orange.400' }}
-                  onClick={() =>
-                    router.push(APP_ROUTES.cms.templates.index(template._id))
-                  }
-                >
-                  {template.title}
-                </Text>
-                <Switch
-                  isChecked={template.active}
-                  colorScheme='orange'
-                  size='lg'
-                  onChange={() => handleActiveTemplate(template)}
-                />
+                <Stack direction='row' alignItems='center' spacing={4}>
+                  <Text
+                    fontSize='2xl'
+                    fontWeight='semibold'
+                    cursor='pointer'
+                    color={template.active ? 'orange.400' : 'initial'}
+                    _hover={{ color: 'orange.400' }}
+                    onClick={() =>
+                      router.push(APP_ROUTES.cms.templates.index(template._id))
+                    }
+                  >
+                    {template.title}
+                  </Text>
+                  <Switch
+                    isChecked={template.active}
+                    colorScheme='orange'
+                    size='lg'
+                    onChange={() => handleActiveTemplate(template)}
+                  />
+                </Stack>
                 <Stack
-                  position='absolute'
-                  top='0'
-                  right='0'
                   bg='orange.400'
                   p='4px'
                   cursor='pointer'
@@ -111,13 +146,67 @@ const CmsTemplates: NextApplicationPage = () => {
                   borderRadius='4px'
                   _hover={{ opacity: 0.8 }}
                   transition='all 300ms ease-in-out'
-                  onClick={() => handleDeleteTemplate(template)}
+                  onClick={() =>
+                    setAlert({
+                      isOpen: true,
+                      content: template.title,
+                      onSuccess: () => handleDeleteTemplate(template),
+                    })
+                  }
                 >
                   <TrashIcon style={{ stroke: 'white' }} />
                 </Stack>
               </Stack>
-            </Stack>
-          ))}
+            ))
+          ) : (
+            <>
+              {new Array(6).fill(0).map((item, index) => (
+                <Stack
+                  direction='row'
+                  justifyContent='space-between'
+                  alignItems='center'
+                  key={`${item}_${index}`}
+                >
+                  <Stack direction='row' alignItems='center' spacing={4}>
+                    <Skeleton h='36px' w='300px' />
+                    <Skeleton h='28px' w='50px' />
+                  </Stack>
+                  <Stack>
+                    <Skeleton w='24px' h='24px' />
+                  </Stack>
+                </Stack>
+              ))}
+            </>
+          )}
+
+          <Modal
+            onClose={handleCloseAlert}
+            size='xl'
+            isOpen={alert.isOpen}
+            isCentered
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>{t('delete_template')}</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody pb={6}>
+                {t('are_you_sure_to_delete', { title: alert.content })}
+              </ModalBody>
+              <ModalFooter justifyContent='center'>
+                <Button
+                  variant='ghost'
+                  colorScheme='orange'
+                  mr={3}
+                  onClick={handleCloseAlert}
+                >
+                  {t('cancel')}
+                </Button>
+                <Button colorScheme='orange' onClick={handleSuccessAlert}>
+                  {t('delete')}
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         </Stack>
       </CmsContainer>
     </Page>

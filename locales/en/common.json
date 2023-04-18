@@ -273,5 +273,8 @@
   "reset_password": "Reset password",
   "reset_password_title": "Create a new password You can create a new password for your account by entering it in the box below. ",
   "reset_password_success_title": "Congratulations, you have a new password",
-  "reset_password_success_description": "You have created a new password for your account. Please log back in with your new password to enjoy our features."
+  "reset_password_success_description": "You have created a new password for your account. Please log back in with your new password to enjoy our features.",
+  "delete": "Delete",
+  "are_you_sure_to_delete": "Are you sure to delete this template: {{title}}",
+  "delete_template": "Delete template"
 }
