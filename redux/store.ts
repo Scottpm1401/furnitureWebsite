@@ -2,12 +2,13 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import { persistStore } from 'redux-persist';
 
+import { isDevEnv } from '../utils/common';
 import { reducer } from './reducer';
 
 export const store = configureStore({
   reducer,
   middleware: [logger],
-  devTools: true,
+  devTools: isDevEnv(),
 });
 export const persistor = persistStore(store);
 

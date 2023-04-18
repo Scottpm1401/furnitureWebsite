@@ -87,3 +87,11 @@ export const handleDeleteImage = async (img: string) => {
 
   await destroyImage(formData);
 };
+
+export const isDevEnv = () => {
+  return process.env.NODE_ENV === 'development';
+};
+
+export const isProdEnv = () => {
+  return process.env.NODE_ENV === 'production';
+};
