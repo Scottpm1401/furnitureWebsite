@@ -117,7 +117,11 @@ const Products: NextApplicationPage = () => {
         current={t('products')}
       />
       <Container pt='5rem'>
-        <Grid w='full' templateColumns={isMobile ? '1fr' : '240px 1fr'}>
+        <Grid
+          w='full'
+          templateColumns={isMobile ? '1fr' : '240px 1fr'}
+          position='relative'
+        >
           <ProductSidebar
             filter={filter}
             handleUpdateFilter={handleUpdateFilter}
@@ -252,7 +256,7 @@ const Products: NextApplicationPage = () => {
                   ))
               ) : products.length === 0 ? (
                 <Text fontWeight='semibold' fontSize='xl'>
-                  Product not found
+                  {t('error.product.not_found')}
                 </Text>
               ) : (
                 products.map((item) => (

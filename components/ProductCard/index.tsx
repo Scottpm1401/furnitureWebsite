@@ -41,12 +41,12 @@ const ProductCard = ({
   const { isMobile } = useResponsive();
   const responsive = useBreakpointValue(
     {
-      sm: 360,
-      md: 200,
+      sm: 600,
+      md: 360,
       lg: 280,
       xl: 400,
       '2xl': 440,
-      base: 280,
+      base: 400,
     },
     {
       fallback: 'md',
@@ -60,7 +60,7 @@ const ProductCard = ({
       position='relative'
       w='full'
       h={isHorizontal && isMobile ? '460px' : responsive}
-      templateColumns={isHorizontal && !isMobile ? '360px 1fr' : 'auto'}
+      templateColumns={isHorizontal && !isMobile ? '400px 1fr' : 'auto'}
       templateRows={isHorizontal ? 'auto' : '1fr auto'}
       {...props}
     >
@@ -88,6 +88,7 @@ const ProductCard = ({
           }
         >
           <Image
+            style={{ objectFit: 'cover' }}
             src={`${process.env.NEXT_PUBLIC_CDN}${product.img}`}
             fill
             alt={product.title}

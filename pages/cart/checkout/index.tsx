@@ -15,6 +15,7 @@ import Breadcrumb from '../../../components/Breadcrumb';
 import CheckoutForm from '../../../components/Form/CheckoutForm';
 import { APP_ROUTES, FORM_BOX_SHADOW } from '../../../constant';
 import { usePayment } from '../../../hooks/payment';
+import { useResponsive } from '../../../hooks/responsive';
 import Container from '../../../layout/Container';
 import Page from '../../../layout/Page';
 import AuthProvider from '../../../layout/Provider/AuthProvider';
@@ -37,6 +38,7 @@ const Checkout: NextApplicationPage = () => {
   const { t } = useTranslation();
 
   const { clientSecret, isLoading } = usePayment();
+  const { isMobileOrTablet } = useResponsive();
 
   return (
     <Page direction='column' title={t('checkout')}>
@@ -83,7 +85,11 @@ const Checkout: NextApplicationPage = () => {
               justifyContent='center'
               boxShadow={FORM_BOX_SHADOW}
             >
-              <Stack direction='row' spacing={5} w='full'>
+              <Stack
+                direction={isMobileOrTablet ? 'column' : 'row'}
+                spacing={5}
+                w='full'
+              >
                 <Stack spacing='1.5rem' w='full'>
                   {new Array(8).fill(0).map((item, index) => (
                     <Flex direction='column' w='full' key={`${item}_${index}`}>

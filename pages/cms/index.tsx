@@ -63,7 +63,7 @@ const Cms: NextApplicationPage = () => {
 
           <Stack direction='row' justifyContent='space-between'>
             <Stack w={isBigScreen ? '40%' : '30%'} alignItems='center'>
-              <Stack alignItems='center' spacing={4}>
+              <Stack alignItems='center' spacing={4} textAlign='center'>
                 <Text fontWeight='semibold' fontSize='xl'>
                   {t('bought_products')}
                 </Text>
@@ -85,7 +85,7 @@ const Cms: NextApplicationPage = () => {
               <ProductsPieChart boughtProducts={boughtProducts} />
             </Stack>
             <Stack w={isBigScreen ? '40%' : '30%'} alignItems='center'>
-              <Stack alignItems='center' spacing={4}>
+              <Stack alignItems='center' spacing={4} textAlign='center'>
                 <Text fontWeight='semibold' fontSize='xl'>
                   {t('top_10_users')}
                 </Text>

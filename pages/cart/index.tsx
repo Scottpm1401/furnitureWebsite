@@ -169,13 +169,14 @@ const Cart: NextApplicationPage = () => {
                     <Flex>
                       <Flex
                         w='200px'
-                        h='160px'
+                        h='200px'
                         mr='0.5rem'
                         position='relative'
                         overflow='hidden'
                         borderRadius='1rem'
                       >
                         <Image
+                          style={{ objectFit: 'cover' }}
                           src={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
                           alt={item.title}
                           fill
@@ -273,6 +274,7 @@ const Cart: NextApplicationPage = () => {
                               borderRadius='1rem'
                             >
                               <Image
+                                style={{ objectFit: 'cover' }}
                                 src={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
                                 alt={item.title}
                                 fill

@@ -45,7 +45,13 @@ const ProductSidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
     1000
   );
   return (
-    <Box position='relative' h='full'>
+    <Box
+      position={isMobile ? 'sticky' : 'relative'}
+      zIndex={2}
+      top={NAV_HEIGHT}
+      h='full'
+      background='white'
+    >
       <Flex
         direction='column'
         position='sticky'
