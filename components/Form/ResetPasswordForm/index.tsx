@@ -13,6 +13,7 @@ import { useState } from 'react';
 import * as Yup from 'yup';
 
 import { FORM_BOX_SHADOW } from '../../../constant';
+import { FORM_VALIDATE } from '../../../constant/validate';
 import { ResetPasswordRequest } from '../../../models/api/auth';
 import Eye from '../../../public/svg/eye.svg';
 import EyeOff from '../../../public/svg/eye_off.svg';
@@ -29,7 +30,22 @@ const ResetPasswordForm = ({ handleSubmit, isLoading = false }: Props) => {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const resetPasswordSchema = Yup.object().shape({
-    password: Yup.string().required(t('form_required')),
+    password: Yup.string()
+      .min(
+        FORM_VALIDATE.password.min,
+        t('error.form.min', {
+          value: FORM_VALIDATE.password.min,
+          label: t('password'),
+        })
+      )
+      .max(
+        FORM_VALIDATE.password.max,
+        t('error.form.max', {
+          value: FORM_VALIDATE.password.max,
+          label: t('password'),
+        })
+      )
+      .required(t('error.form.required')),
   });
 
   return (

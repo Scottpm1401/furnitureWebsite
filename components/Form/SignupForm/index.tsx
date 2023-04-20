@@ -15,6 +15,7 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import { APP_ROUTES, FORM_BOX_SHADOW } from '../../../constant';
+import { FORM_VALIDATE } from '../../../constant/validate';
 import Eye from '../../../public/svg/eye.svg';
 import EyeOff from '../../../public/svg/eye_off.svg';
 import { useAppDispatch } from '../../../redux/hooks';
@@ -49,11 +50,26 @@ const SignupForm = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const SignupSchema = Yup.object().shape({
-    displayName: Yup.string().required(t('form_required')),
-    username: Yup.string().required(t('form_required')),
-    email: Yup.string().email().required(t('form_required')),
-    password: Yup.string().required(t('form_required')),
-    birthday: Yup.string().nullable().required(t('form_required')),
+    displayName: Yup.string().required(t('error.form.required')),
+    username: Yup.string().required(t('error.form.required')),
+    email: Yup.string().email().required(t('error.form.required')),
+    password: Yup.string()
+      .min(
+        FORM_VALIDATE.password.min,
+        t('error.form.min', {
+          value: FORM_VALIDATE.password.min,
+          label: t('password'),
+        })
+      )
+      .max(
+        FORM_VALIDATE.password.max,
+        t('error.form.max', {
+          value: FORM_VALIDATE.password.max,
+          label: t('password'),
+        })
+      )
+      .required(t('error.form.required')),
+    birthday: Yup.string().nullable().required(t('error.form.required')),
   });
 
   const handleSignup = async (values: SignupFormType) => {

@@ -39,14 +39,14 @@ const ProductForm = ({ product, onSubmit, create }: ProductFormProps) => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const productScheme = Yup.object().shape({
-    title: Yup.string().required(t('form_required')),
-    category: Yup.string().required(t('form_required')),
-    brand: Yup.string().required(t('form_required')),
-    price: Yup.number().required(t('form_required')),
-    img: Yup.string().required(t('form_required')),
-    storage_quantity: Yup.number().required(t('form_required')),
-    sku: Yup.string().required(t('form_required')),
-    colors: Yup.array().min(1, t('form_required')),
+    title: Yup.string().required(t('error.form.required')),
+    category: Yup.string().required(t('error.form.required')),
+    brand: Yup.string().required(t('error.form.required')),
+    price: Yup.number().required(t('error.form.required')),
+    img: Yup.string().required(t('error.form.required')),
+    storage_quantity: Yup.number().required(t('error.form.required')),
+    sku: Yup.string().required(t('error.form.required')),
+    colors: Yup.array().min(1, t('error.form.required')),
   });
 
   const handleSubmit = async (values: UpdateProductRequest) => {

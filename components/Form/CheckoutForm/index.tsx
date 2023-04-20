@@ -37,14 +37,14 @@ const CheckoutForm = () => {
   const toast = useToast();
 
   const checkoutSchema = Yup.object().shape({
-    name: Yup.string().required(t('form_required')),
-    email: Yup.string().email().required(t('form_required')),
-    phone: Yup.string().required(t('form_required')),
+    name: Yup.string().required(t('error.form.required')),
+    email: Yup.string().email().required(t('error.form.required')),
+    phone: Yup.string().required(t('error.form.required')),
     address: Yup.object().shape({
-      country: Yup.string().required(t('form_required')),
-      city: Yup.string().required(t('form_required')),
-      state: Yup.string().required(t('form_required')),
-      line1: Yup.string().required(t('form_required')),
+      country: Yup.string().required(t('error.form.required')),
+      city: Yup.string().required(t('error.form.required')),
+      state: Yup.string().required(t('error.form.required')),
+      line1: Yup.string().required(t('error.form.required')),
     }),
   });
 

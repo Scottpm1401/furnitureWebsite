@@ -23,13 +23,13 @@ const TemplateForm = ({ template, onSubmit, create }: TemplateFormProps) => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const templateScheme = Yup.object().shape({
-    title: Yup.string().required(t('form_required')),
-    banners: Yup.array().min(1, t('form_required')),
-    about: Yup.object().required(t('form_required')),
-    home_footer: Yup.array().min(1, t('form_required')),
-    contact: Yup.array().min(1, t('form_required')),
-    terms_and_conditions: Yup.array().min(1, t('form_required')),
-    privacy_policy: Yup.array().min(1, t('form_required')),
+    title: Yup.string().required(t('error.form.required')),
+    banners: Yup.array().min(1, t('error.form.required')),
+    about: Yup.object().required(t('error.form.required')),
+    home_footer: Yup.array().min(1, t('error.form.required')),
+    contact: Yup.array().min(1, t('error.form.required')),
+    terms_and_conditions: Yup.array().min(1, t('error.form.required')),
+    privacy_policy: Yup.array().min(1, t('error.form.required')),
   });
 
   const handleSubmit = async (values: UpdateTemplateRequest) => {

@@ -46,6 +46,11 @@
     "subscription": {
       "failed_to_subscribe": "Failed to subscribe",
       "already_subscribe": "User already subscribe"
+    },
+    "form": {
+      "required": "This field cannot be empty",
+      "min": "{{label}} length must be at least {{value}} characters long",
+      "max": "{{label}} length must be less than or equal to {{value}} characters long"
     }
   },
   "view_more": "View More",
@@ -160,7 +165,6 @@
   "OTHER": "Other",
   "update_profile_success": "Successfully update your profile",
   "update_password_success": "Successfully update your password",
-  "form_required": "This field cannot be empty",
   "our_story": "Our Story",
   "cart": "Cart",
   "quantity": "Quantity",

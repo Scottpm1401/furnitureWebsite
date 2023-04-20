@@ -46,6 +46,11 @@
     "subscription": {
       "failed_to_subscribe": "Đăng ký thất bại",
       "already_subscribe": "Người dùng đã đăng ký"
+    },
+    "form": {
+      "required": "Không thể bỏ trống ô này",
+      "min": "Độ dài {{label}} phải ít nhất {{value}} ký tự",
+      "max": "Độ dài {{label}} phải nhỏ hơn hoặc bằng {{value}} ký tự"
     }
   },
   "view_more": "Xem Thêm",
@@ -160,8 +165,6 @@
   "OTHER": "Khác",
   "update_profile_success": "Cập nhật thông tin thành công",
   "update_password_success": "Cập nhật mật khẩu thành công",
-  "form_required": "Không thể bỏ trống ô này",
-
   "our_story": "Câu chuyện của chúng tôi",
   "cart": "Giỏ hàng",
   "quantity": "Số lượng",

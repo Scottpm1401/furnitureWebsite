@@ -41,8 +41,8 @@ const LoginForm = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    userinput: Yup.string().required(t('form_required')),
-    password: Yup.string().required(t('form_required')),
+    userinput: Yup.string().required(t('error.form.required')),
+    password: Yup.string().required(t('error.form.required')),
   });
 
   const handleLogin = async (values: LoginFormType) => {

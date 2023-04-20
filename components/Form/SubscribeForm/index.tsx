@@ -16,7 +16,7 @@ const SubscribeForm = ({ handleSubmit }: Props) => {
   const { t } = useTranslation();
 
   const subscribeSchema = Yup.object().shape({
-    email: Yup.string().email().required(t('form_required')),
+    email: Yup.string().email().required(t('error.form.required')),
   });
 
   return (

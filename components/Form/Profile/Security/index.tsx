@@ -13,6 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import * as Yup from 'yup';
 
+import { FORM_VALIDATE } from '../../../../constant/validate';
 import { useResponsive } from '../../../../hooks/responsive';
 import Eye from '../../../../public/svg/eye.svg';
 import EyeOff from '../../../../public/svg/eye_off.svg';
@@ -35,8 +36,23 @@ const SecurityProfile = () => {
   const { isMobile } = useResponsive();
 
   const authenticationSchema = Yup.object().shape({
-    currentPassword: Yup.string().required(t('form_required')),
-    newPassword: Yup.string().required(t('form_required')),
+    currentPassword: Yup.string().required(t('error.form.required')),
+    newPassword: Yup.string()
+      .min(
+        FORM_VALIDATE.password.min,
+        t('error.form.min', {
+          value: FORM_VALIDATE.password.min,
+          label: t('password'),
+        })
+      )
+      .max(
+        FORM_VALIDATE.password.max,
+        t('error.form.max', {
+          value: FORM_VALIDATE.password.max,
+          label: t('password'),
+        })
+      )
+      .required(t('error.form.required')),
   });
 
   const handleUpdateProfile = async (values: SecurityType) => {

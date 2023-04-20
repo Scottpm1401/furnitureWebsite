@@ -23,9 +23,9 @@ const initialValues: BannerFormType = {
 const BannerForm = ({ banner, onSubmit }: BannerFormProps) => {
   const { t } = useTranslation();
   const bannerSchema = Yup.object().shape({
-    image: Yup.string().required(t('form_required')),
-    title: Yup.array().min(1, t('form_required')),
-    description: Yup.array().min(1, t('form_required')),
+    image: Yup.string().required(t('error.form.required')),
+    title: Yup.array().min(1, t('error.form.required')),
+    description: Yup.array().min(1, t('error.form.required')),
   });
 
   const handleSubmit = async (values: BannerFormType) => {
