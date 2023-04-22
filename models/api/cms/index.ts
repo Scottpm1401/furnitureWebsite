@@ -34,11 +34,19 @@ export type UpdateUserRequest = Partial<
 export type UpdateOrderedRequest = Partial<
   Omit<
     PurchaseType,
-    '_id' | 'user_id' | 'createdAt' | 'updatedAt' | 'payment_method'
+    | '_id'
+    | 'user_id'
+    | 'createdAt'
+    | 'updatedAt'
+    | 'payment_method'
+    | 'products'
   >
 >;
 
-export type UpdateProductRequest = Omit<ProductType, '_id'>;
+export type UpdateProductRequest = Omit<
+  ProductType,
+  '_id' | 'rating' | 'review'
+>;
 
 type TemplateRequest = {
   banners: BannerFormType[];

@@ -64,8 +64,16 @@ const ProductForm = ({ product, onSubmit, create }: ProductFormProps) => {
     <Formik
       initialValues={
         {
-          ...product,
-          _id: undefined,
+          img: product.img,
+          gallery: product.gallery,
+          title: product.title,
+          description: product.description,
+          category: product.category,
+          brand: product.brand,
+          price: product.price,
+          sku: product.sku,
+          storage_quantity: product.storage_quantity,
+          colors: product.colors,
         } as UpdateProductRequest
       }
       onSubmit={handleSubmit}

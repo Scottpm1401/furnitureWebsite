@@ -47,9 +47,13 @@ const TemplateForm = ({ template, onSubmit, create }: TemplateFormProps) => {
     <Formik
       initialValues={
         {
-          ...template,
-          _id: undefined,
-          about: { ...template.about, _id: undefined },
+          banners: template.banners,
+          about: template.about,
+          home_footer: template.home_footer,
+          contact: template.contact,
+          terms_and_conditions: template.terms_and_conditions,
+          privacy_policy: template.privacy_policy,
+          title: template.title,
         } as UpdateTemplateRequest
       }
       onSubmit={handleSubmit}
