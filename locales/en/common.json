@@ -23,6 +23,7 @@
     "user": {
       "not_found": "User not found",
       "failed_to_change_password": "Failed to change user password",
+      "failed_to_update_user": "Failed to update user",
       "cart": {
         "failed_to_add_product": "Failed to add product",
         "not_found": "Cart not found",

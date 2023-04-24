@@ -23,6 +23,7 @@
     "user": {
       "not_found": "Không tìm thấy người dùng",
       "failed_to_change_password": "Đổi mật khẩu thất bại",
+      "failed_to_update_user": "Cập nhật người dùng thất bại",
       "cart": {
         "failed_to_add_product": "Thêm sản phẩm thất bại",
         "not_found": "Không tìm thấy giỏ hàng",
