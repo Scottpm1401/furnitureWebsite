@@ -14,14 +14,14 @@ import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
 import { NextApplicationPage } from '../_app';
 
-const About: NextApplicationPage = () => {
+const title = 'About';
+const description = 'this is About page';
+const img = '/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg';
+
+const About = () => {
   const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
   const aboutContent = useAppSelector(selectors.global.selectAbout);
-
-  const title = 'About';
-  const description = 'this is About page';
-  const img = '/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg';
 
   return (
     <>
@@ -139,10 +139,6 @@ const About: NextApplicationPage = () => {
       </Flex>
     </>
   );
-};
-
-About.getLayout = (page: React.ReactElement) => {
-  return <NotAuthProvider>{page}</NotAuthProvider>;
 };
 
 export default About;

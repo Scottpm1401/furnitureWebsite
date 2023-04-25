@@ -25,6 +25,12 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1' />
         <title>{title || 'Comfysloth'}</title>
+        <meta property='og:type' content='object' />
+        <meta property='og:site_name' content='Comfysloth' />
+        <meta
+          property='og:url'
+          content={`${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`}
+        />
         <meta
           name='description'
           content={description || 'Bring the comfort to your home'}
