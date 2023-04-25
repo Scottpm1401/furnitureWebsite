@@ -11,7 +11,7 @@ import { NextApplicationPage } from './_app';
 const Home: NextApplicationPage = () => {
   const { t } = useTranslation();
   return (
-    <Page direction='column' title={t('home')}>
+    <Page direction='column'>
       <Section1 />
       <Section2 />
       <Section3 />

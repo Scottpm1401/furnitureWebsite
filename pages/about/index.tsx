@@ -28,19 +28,19 @@ const About = () => {
       <Head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1' />
-        <title>{title}</title>
+        <title>{'About'}</title>
         <meta property='og:type' content='object' />
         <meta property='og:site_name' content='Comfysloth' />
         <meta
           property='og:url'
-          content={`${process.env.NEXT_PUBLIC_FE_URL}${APP_ROUTES.about}`}
+          content='https://furniture-website-nu.vercel.app/about'
         />
-        <meta name='description' content={description} />
-        <meta property='og:title' content={title} />
-        <meta property='og:description' content={description} />
+        <meta name='description' content={'this is About page'} />
+        <meta property='og:title' content={'About'} />
+        <meta property='og:description' content={'this is About page'} />
         <meta
           property='og:image'
-          content={`${process.env.NEXT_PUBLIC_CDN}${img}`}
+          content={`${process.env.NEXT_PUBLIC_CDN}/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg`}
         />
         <meta property='og:image:width' content='800' />
         <meta property='og:image:height' content='600' />
