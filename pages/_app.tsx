@@ -45,40 +45,6 @@ const App = (props: MyAppProps) => {
 
   return (
     <Provider store={store}>
-      <Head>
-        <meta charSet='utf-8' />
-        <meta name='viewport' content='width=device-width,initial-scale=1' />
-        <title>Comfysloth</title>
-        <meta name='description' content='This is Comfysloth' />
-
-        <meta property='og:type' content='website' />
-        <meta property='og:site_name' content='Comfysloth' />
-        <meta
-          property='og:url'
-          content={`${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`}
-        />
-        <meta property='og:title' content='Comfysloth' />
-        <meta property='og:description' content='This is Comfysloth' />
-        <meta
-          property='og:image'
-          content={`${process.env.NEXT_PUBLIC_CDN}/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg`}
-        />
-        <meta property='og:image:width' content='800' />
-        <meta property='og:image:height' content='600' />
-        <meta
-          property='og:image:alt'
-          content={`${process.env.NEXT_PUBLIC_CDN}/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg`}
-        />
-
-        <meta itemProp='name' content='Comfysloth' />
-        <meta itemProp='description' content='This is Comfysloth' />
-        <meta
-          itemProp='image'
-          content={`${process.env.NEXT_PUBLIC_CDN}/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg`}
-        />
-
-        <link rel='icon' href='/favicon.svg' />
-      </Head>
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
           <TemplateProvider>

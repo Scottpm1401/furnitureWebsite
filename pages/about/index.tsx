@@ -1,6 +1,8 @@
 import { Flex, Text } from '@chakra-ui/react';
 import { css } from '@emotion/react';
+import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import Breadcrumb from '../../components/Breadcrumb';
@@ -17,14 +19,44 @@ const About: NextApplicationPage = () => {
   const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
   const aboutContent = useAppSelector(selectors.global.selectAbout);
+  const router = useRouter();
 
   return (
-    <Page
-      alignItems='center'
-      justifyContent='center'
-      direction='column'
-      title={t('about')}
-    >
+    <Page alignItems='center' justifyContent='center' direction='column'>
+      <Head>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
+        <title>About</title>
+        <meta name='description' content='About' />
+
+        <meta property='og:type' content='website' />
+        <meta property='og:site_name' content='Comfysloth' />
+        <meta
+          property='og:url'
+          content={`${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`}
+        />
+        <meta property='og:title' content='Comfysloth' />
+        <meta property='og:description' content='About' />
+        <meta
+          property='og:image'
+          content={`${process.env.NEXT_PUBLIC_CDN}/v1671091687/furniture/banners/slider_img_1_lt3wft.jpg`}
+        />
+        <meta property='og:image:width' content='800' />
+        <meta property='og:image:height' content='600' />
+        <meta
+          property='og:image:alt'
+          content={`${process.env.NEXT_PUBLIC_CDN}/v1671091687/furniture/banners/slider_img_1_lt3wft.jpg`}
+        />
+
+        <meta itemProp='name' content='Comfysloth' />
+        <meta itemProp='description' content='About' />
+        <meta
+          itemProp='image'
+          content={`${process.env.NEXT_PUBLIC_CDN}/v1671091687/furniture/banners/slider_img_1_lt3wft.jpg`}
+        />
+
+        <link rel='icon' href='/favicon.svg' />
+      </Head>
       <Breadcrumb
         links={[
           { title: t('home'), href: APP_ROUTES.home },
