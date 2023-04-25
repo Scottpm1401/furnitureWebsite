@@ -12,10 +12,10 @@ const Home: NextApplicationPage = () => {
   const { t } = useTranslation();
   return (
     <Page direction='column' title={t('home')}>
-      <Section1 />
+      {/* <Section1 />
       <Section2 />
       <Section3 />
-      <Newsletter />
+      <Newsletter /> */}
     </Page>
   );
 };
