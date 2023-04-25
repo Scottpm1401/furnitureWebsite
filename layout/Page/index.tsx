@@ -21,13 +21,7 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
   );
   return (
     <>
-      {/* {title && (
-        <Head>
-          <title>{title}</title>
-        </Head>
-      )} */}
-
-      <NextSeo
+      {/* <NextSeo
         title={title || 'Comfysloth'}
         description={description || 'Bring the comfort to your home'}
         openGraph={{
@@ -58,7 +52,7 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
             href: '/favicon.svg',
           },
         ]}
-      />
+      /> */}
 
       <Flex
         mt={router.pathname === APP_ROUTES.home || isInCms ? 0 : NAV_HEIGHT}
