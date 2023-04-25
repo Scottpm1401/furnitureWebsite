@@ -1,8 +1,7 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { NextSeo } from 'next-seo';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { APP_ROUTES } from '../../constant';
 import { NAV_HEIGHT } from '../Nav';
@@ -53,6 +52,38 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
           },
         ]}
       /> */}
+
+      <Head>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
+        <title>{title || 'Comfysloth'}</title>
+        <meta
+          name='description'
+          content={description || 'Bring the comfort to your home'}
+        />
+        <meta property='og:title' content={title || 'Comfysloth'} />
+        <meta
+          property='og:description'
+          content={description || 'Bring the comfort to your home'}
+        />
+        <meta
+          property='og:image'
+          content={
+            img ||
+            'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
+          }
+        />
+        <meta property='og:image:width' content='800' />
+        <meta property='og:image:height' content='600' />
+        <meta
+          property='og:image:alt'
+          content={
+            img ||
+            'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
+          }
+        />
+        <link rel='icon' href='/favicon.svg' />
+      </Head>
 
       <Flex
         mt={router.pathname === APP_ROUTES.home || isInCms ? 0 : NAV_HEIGHT}
