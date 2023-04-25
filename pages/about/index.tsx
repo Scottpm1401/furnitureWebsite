@@ -28,32 +28,26 @@ const About: NextApplicationPage = () => {
       <Head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1' />
-        <title>{title || 'Comfysloth'}</title>
+        <title>{title}</title>
+        <meta property='og:type' content='object' />
+        <meta property='og:site_name' content='Comfysloth' />
         <meta
-          name='description'
-          content={description || 'Bring the comfort to your home'}
+          property='og:url'
+          content={`${process.env.NEXT_PUBLIC_FE_URL}${APP_ROUTES.about}`}
         />
-        <meta property='og:title' content={title || 'Comfysloth'} />
-        <meta
-          property='og:description'
-          content={description || 'Bring the comfort to your home'}
-        />
+        <meta name='description' content={description} />
+        <meta property='og:title' content={title} />
+        <meta property='og:description' content={description} />
         <meta
           property='og:image'
-          content={
-            img
-              ? `${process.env.NEXT_PUBLIC_CDN}${img}`
-              : 'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
-          }
+          content={`${process.env.NEXT_PUBLIC_CDN}${img}`}
         />
         <meta property='og:image:width' content='800' />
         <meta property='og:image:height' content='600' />
         <meta
           property='og:image:alt'
           content={
-            img
-              ? `${process.env.NEXT_PUBLIC_CDN}${img}`
-              : 'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
+            'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
           }
         />
         <link rel='icon' href='/favicon.svg' />

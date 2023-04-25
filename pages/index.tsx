@@ -11,12 +11,7 @@ import { NextApplicationPage } from './_app';
 const Home: NextApplicationPage = () => {
   const { t } = useTranslation();
   return (
-    <Page
-      direction='column'
-      title={'About'}
-      description={'this is About page'}
-      img={'/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'}
-    >
+    <Page direction='column' title={t('home')}>
       <Section1 />
       <Section2 />
       <Section3 />
