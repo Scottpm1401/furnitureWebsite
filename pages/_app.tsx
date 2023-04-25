@@ -7,7 +7,6 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import { ReactElement, ReactNode, useEffect, useMemo } from 'react';
 import { Provider } from 'react-redux';
@@ -46,30 +45,10 @@ const App = (props: MyAppProps) => {
 
   return (
     <Provider store={store}>
-      <Head>
-        <title>Comfysloth</title>
-        <link rel='icon' href='/favicon.svg' />
-      </Head>
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
           <TemplateProvider>
             <>
-              <DefaultSeo
-                openGraph={{
-                  title: 'Comfysloth',
-                  description: 'Bring the comfort to your home',
-                  type: 'website',
-                  url: `${process.env.NEXT_PUBLIC_FE_URL}${APP_ROUTES.home}`,
-                  images: [
-                    {
-                      url: `https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft`,
-                      width: 800,
-                      height: 600,
-                      alt: 'Banner',
-                    },
-                  ],
-                }}
-              />
               <Flex direction={isInCms ? 'row' : 'column'}>
                 {!isInCms ? <Nav /> : <CmsSideBar />}
                 <ColorModeScript

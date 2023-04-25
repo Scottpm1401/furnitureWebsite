@@ -27,13 +27,13 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
         </Head>
       )} */}
 
-      {/* <NextSeo
-        title={title}
-        description={description}
+      <NextSeo
+        title={title || 'Comfysloth'}
+        description={description || 'Bring the comfort to your home'}
         openGraph={{
-          title: title,
+          title: title || 'Comfysloth',
           url: `${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`,
-          description: description,
+          description: description || 'Bring the comfort to your home',
           images: img
             ? [
                 {
@@ -43,9 +43,16 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
                   alt: 'Image',
                 },
               ]
-            : [],
+            : [
+                {
+                  url: `https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft`,
+                  width: 800,
+                  height: 600,
+                  alt: 'Banner',
+                },
+              ],
         }}
-      /> */}
+      />
 
       <Flex
         mt={router.pathname === APP_ROUTES.home || isInCms ? 0 : NAV_HEIGHT}
