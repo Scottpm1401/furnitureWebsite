@@ -53,7 +53,7 @@ const App = (props: MyAppProps) => {
               <ColorModeScript
                 initialColorMode={theme.config.initialColorMode}
               />
-              {getLayout(<Component {...pageProps} />)}
+              {<Component {...pageProps} />}
               {!isInCms && <Footer />}
             </Flex>
           </TemplateProvider>

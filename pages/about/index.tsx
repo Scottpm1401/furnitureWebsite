@@ -10,10 +10,8 @@ import { APP_ROUTES } from '../../constant';
 import { useResponsive } from '../../hooks/responsive';
 import Container from '../../layout/Container';
 import Page from '../../layout/Page';
-import NotAuthProvider from '../../layout/Provider/NotAuthProvider';
 import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
-import { NextApplicationPage } from '../_app';
 
 const About = () => {
   const { t, lang } = useTranslation();
