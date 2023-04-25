@@ -29,27 +29,38 @@ const About = () => {
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1' />
         <title>{'About'}</title>
-        <meta property='og:type' content='object' />
+        <meta name='description' content={'this is About page'} />
+
+        <meta property='og:type' content='website' />
         <meta property='og:site_name' content='Comfysloth' />
         <meta
           property='og:url'
           content='https://furniture-website-nu.vercel.app/about'
         />
-        <meta name='description' content={'this is About page'} />
         <meta property='og:title' content={'About'} />
         <meta property='og:description' content={'this is About page'} />
         <meta
           property='og:image'
-          content={`${process.env.NEXT_PUBLIC_CDN}/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg`}
+          content={
+            'https://res.cloudinary.com/scottcloud/image/upload/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'
+          }
         />
         <meta property='og:image:width' content='800' />
         <meta property='og:image:height' content='600' />
         <meta
           property='og:image:alt'
           content={
-            'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
+            'https://res.cloudinary.com/scottcloud/image/upload/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'
           }
         />
+
+        <meta itemProp='name' content='About' />
+        <meta itemProp='description' content='this is About page' />
+        <meta
+          itemProp='image'
+          content='https://res.cloudinary.com/scottcloud/image/upload/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'
+        />
+
         <link rel='icon' href='/favicon.svg' />
       </Head>
 
