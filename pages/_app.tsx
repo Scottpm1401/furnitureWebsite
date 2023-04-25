@@ -46,7 +46,7 @@ const App = (props: MyAppProps) => {
 
   return (
     <Provider store={store}>
-      <DefaultSeo
+      {/* <DefaultSeo
         title='Comfysloth'
         description='Bring the comfort to your home'
         openGraph={{
@@ -74,7 +74,29 @@ const App = (props: MyAppProps) => {
           site: '@Comfysloth',
           cardType: 'summary_large_image',
         }}
-      />
+      /> */}
+      <Head>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
+        <title>Comfysloth</title>
+        <meta name='description' content='Bring the comfort to your home' />
+        <meta property='og:title' content='Comfysloth' />
+        <meta
+          property='og:description'
+          content='Bring the comfort to your home'
+        />
+        <meta
+          property='og:image'
+          content='https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
+        />
+        <meta property='og:image:width' content='800' />
+        <meta property='og:image:height' content='600' />
+        <meta
+          property='og:image:alt'
+          content='https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
+        />
+        <link rel='icon' href='/favicon.svg' />
+      </Head>
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
           <TemplateProvider>
