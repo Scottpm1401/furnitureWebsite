@@ -52,6 +52,12 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
                 },
               ],
         }}
+        additionalLinkTags={[
+          {
+            rel: 'icon',
+            href: '/favicon.svg',
+          },
+        ]}
       />
 
       <Flex

@@ -68,7 +68,7 @@ type ProductPageProps = {
   product: ProductType;
 };
 
-const Product: NextApplicationPage<ProductPageProps> = (props) => {
+const Product = (props: ProductPageProps) => {
   const router = useRouter();
   const { t } = useTranslation();
   const { product } = useProduct();
