@@ -14,10 +14,6 @@ import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
 import { NextApplicationPage } from '../_app';
 
-const title = 'About';
-const description = 'this is About page';
-const img = '/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg';
-
 const About = () => {
   const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
