@@ -21,7 +21,7 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1' />
         <title>{title || 'Comfysloth'}</title>
@@ -59,7 +59,7 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
           }
         />
         <link rel='icon' href='/favicon.svg' />
-      </Head>
+      </Head> */}
 
       <Flex
         mt={router.pathname === APP_ROUTES.home || isInCms ? 0 : NAV_HEIGHT}

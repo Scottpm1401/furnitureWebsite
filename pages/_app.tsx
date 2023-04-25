@@ -45,6 +45,44 @@ const App = (props: MyAppProps) => {
 
   return (
     <Provider store={store}>
+      <Head>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
+        <title>Comfysloth</title>
+        <meta name='description' content='This is Comfysloth' />
+
+        <meta property='og:type' content='website' />
+        <meta property='og:site_name' content='Comfysloth' />
+        <meta
+          property='og:url'
+          content='https://furniture-website-nu.vercel.app/about'
+        />
+        <meta property='og:title' content={'About'} />
+        <meta property='og:description' content={'this is About page'} />
+        <meta
+          property='og:image'
+          content={
+            'https://res.cloudinary.com/scottcloud/image/upload/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'
+          }
+        />
+        <meta property='og:image:width' content='800' />
+        <meta property='og:image:height' content='600' />
+        <meta
+          property='og:image:alt'
+          content={
+            'https://res.cloudinary.com/scottcloud/image/upload/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'
+          }
+        />
+
+        <meta itemProp='name' content='About' />
+        <meta itemProp='description' content='this is About page' />
+        <meta
+          itemProp='image'
+          content='https://res.cloudinary.com/scottcloud/image/upload/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'
+        />
+
+        <link rel='icon' href='/favicon.svg' />
+      </Head>
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
           <TemplateProvider>
