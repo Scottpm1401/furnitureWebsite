@@ -55,30 +55,26 @@ const App = (props: MyAppProps) => {
         <meta property='og:site_name' content='Comfysloth' />
         <meta
           property='og:url'
-          content='https://furniture-website-nu.vercel.app/about'
+          content={`${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`}
         />
-        <meta property='og:title' content={'About'} />
-        <meta property='og:description' content={'this is About page'} />
+        <meta property='og:title' content='Comfysloth' />
+        <meta property='og:description' content='This is Comfysloth' />
         <meta
           property='og:image'
-          content={
-            'https://res.cloudinary.com/scottcloud/image/upload/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'
-          }
+          content={`${process.env.NEXT_PUBLIC_CDN}/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg`}
         />
         <meta property='og:image:width' content='800' />
         <meta property='og:image:height' content='600' />
         <meta
           property='og:image:alt'
-          content={
-            'https://res.cloudinary.com/scottcloud/image/upload/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'
-          }
+          content={`${process.env.NEXT_PUBLIC_CDN}/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg`}
         />
 
-        <meta itemProp='name' content='About' />
-        <meta itemProp='description' content='this is About page' />
+        <meta itemProp='name' content='Comfysloth' />
+        <meta itemProp='description' content='This is Comfysloth' />
         <meta
           itemProp='image'
-          content='https://res.cloudinary.com/scottcloud/image/upload/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'
+          content={`${process.env.NEXT_PUBLIC_CDN}/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg`}
         />
 
         <link rel='icon' href='/favicon.svg' />
@@ -86,16 +82,14 @@ const App = (props: MyAppProps) => {
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
           <TemplateProvider>
-            <>
-              <Flex direction={isInCms ? 'row' : 'column'}>
-                {!isInCms ? <Nav /> : <CmsSideBar />}
-                <ColorModeScript
-                  initialColorMode={theme.config.initialColorMode}
-                />
-                {getLayout(<Component {...pageProps} />)}
-                {!isInCms && <Footer />}
-              </Flex>
-            </>
+            <Flex direction={isInCms ? 'row' : 'column'}>
+              {!isInCms ? <Nav /> : <CmsSideBar />}
+              <ColorModeScript
+                initialColorMode={theme.config.initialColorMode}
+              />
+              {getLayout(<Component {...pageProps} />)}
+              {!isInCms && <Footer />}
+            </Flex>
           </TemplateProvider>
         </ChakraProvider>
       </PersistGate>

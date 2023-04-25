@@ -1,4 +1,4 @@
-import { Flex, FlexProps } from '@chakra-ui/react';
+import { Flex, FlexProps, Stack } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
@@ -20,7 +20,7 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
   );
 
   return (
-    <>
+    <Stack w='full' h='full'>
       {/* <Head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1' />
@@ -67,7 +67,7 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
       >
         {children}
       </Flex>
-    </>
+    </Stack>
   );
 };
 
