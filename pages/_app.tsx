@@ -47,6 +47,8 @@ const App = (props: MyAppProps) => {
   return (
     <Provider store={store}>
       <DefaultSeo
+        title='Comfysloth'
+        description='Bring the comfort to your home'
         openGraph={{
           title: 'Comfysloth',
           description: 'Bring the comfort to your home',
@@ -54,7 +56,7 @@ const App = (props: MyAppProps) => {
           url: `${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`,
           images: [
             {
-              url: `https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft`,
+              url: `/images/seo/banner.jpg`,
               width: 800,
               height: 600,
               alt: 'Banner',
