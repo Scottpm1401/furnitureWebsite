@@ -22,7 +22,6 @@ import { useResponsive } from '../../../hooks/responsive';
 import { useCart } from '../../../hooks/user';
 import Container from '../../../layout/Container';
 import Page from '../../../layout/Page';
-import NotAuthProvider from '../../../layout/Provider/NotAuthProvider';
 import { ProductCartType } from '../../../models/cart';
 import { ProductColor, ProductType } from '../../../models/product';
 import MinusIcon from '../../../public/svg/minus.svg';
@@ -31,7 +30,6 @@ import StarIcon from '../../../public/svg/star.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
 import { getProductById } from '../../../services/product';
-import { NextApplicationPage } from '../../_app';
 
 export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (
   context
@@ -68,7 +66,7 @@ type ProductPageProps = {
   product: ProductType;
 };
 
-const Product: NextApplicationPage<ProductPageProps> = (props) => {
+const Product = (props: ProductPageProps) => {
   const router = useRouter();
   const { t } = useTranslation();
   const { product } = useProduct();
@@ -114,8 +112,8 @@ const Product: NextApplicationPage<ProductPageProps> = (props) => {
       w='full'
       direction='column'
       title={props.product.title}
-      img={props.product.img}
       description={props.product.description}
+      img={props.product.img}
     >
       <Breadcrumb
         links={[
@@ -424,8 +422,8 @@ const Product: NextApplicationPage<ProductPageProps> = (props) => {
   );
 };
 
-Product.getLayout = (page: React.ReactElement) => {
-  return <NotAuthProvider>{page}</NotAuthProvider>;
-};
+// Product.getLayout = (page: React.ReactElement) => {
+//   return <NotAuthProvider>{page}</NotAuthProvider>;
+// };
 
 export default Product;

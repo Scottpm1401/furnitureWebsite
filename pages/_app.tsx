@@ -5,7 +5,6 @@ import { ChakraProvider, ColorModeScript, Flex } from '@chakra-ui/react';
 import moment from 'moment';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { ReactElement, ReactNode, useEffect, useMemo } from 'react';
@@ -53,7 +52,7 @@ const App = (props: MyAppProps) => {
               <ColorModeScript
                 initialColorMode={theme.config.initialColorMode}
               />
-              {<Component {...pageProps} />}
+              {getLayout(<Component {...pageProps} />)}
               {!isInCms && <Footer />}
             </Flex>
           </TemplateProvider>

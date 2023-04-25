@@ -1,6 +1,6 @@
-import { Flex, FlexProps, Stack } from '@chakra-ui/react';
-import Head from 'next/head';
+import { Flex, FlexProps } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 import { useMemo } from 'react';
 
 import { APP_ROUTES } from '../../constant';
@@ -20,46 +20,38 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
   );
 
   return (
-    <Stack w='full' h='full'>
-      {/* <Head>
-        <meta charSet='utf-8' />
-        <meta name='viewport' content='width=device-width,initial-scale=1' />
-        <title>{title || 'Comfysloth'}</title>
-        <meta property='og:type' content='object' />
-        <meta property='og:site_name' content='Comfysloth' />
-        <meta
-          property='og:url'
-          content={`${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`}
-        />
-        <meta
-          name='description'
-          content={description || 'Bring the comfort to your home'}
-        />
-        <meta property='og:title' content={title || 'Comfysloth'} />
-        <meta
-          property='og:description'
-          content={description || 'Bring the comfort to your home'}
-        />
-        <meta
-          property='og:image'
-          content={
-            img
-              ? `${process.env.NEXT_PUBLIC_CDN}${img}`
-              : 'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
-          }
-        />
-        <meta property='og:image:width' content='800' />
-        <meta property='og:image:height' content='600' />
-        <meta
-          property='og:image:alt'
-          content={
-            img
-              ? `${process.env.NEXT_PUBLIC_CDN}${img}`
-              : 'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
-          }
-        />
-        <link rel='icon' href='/favicon.svg' />
-      </Head> */}
+    <>
+      <NextSeo
+        title={title || 'Comfysloth'}
+        description={description || 'Bring comfort to your home'}
+        canonical={`${process.env.NEXT_PUBLIC_NEXT_PUBLIC_FE_URL}${router.pathname}`}
+        openGraph={{
+          title: title || 'Comfysloth',
+          description: description || 'Bring comfort to your home',
+          images: [
+            {
+              url: img
+                ? `${process.env.NEXT_PUBLIC_CDN}${img}`
+                : `${process.env.NEXT_PUBLIC_CDN}/v1671091687/furniture/banners/slider_img_1_lt3wft.jpg`,
+              width: 800,
+              height: 600,
+              alt: title,
+            },
+          ],
+          site_name: 'Comfysloth',
+        }}
+        twitter={{
+          handle: '@handle',
+          site: '@site',
+          cardType: 'summary_large_image',
+        }}
+        additionalLinkTags={[
+          {
+            rel: 'icon',
+            href: '/favicon.svg',
+          },
+        ]}
+      />
 
       <Flex
         mt={router.pathname === APP_ROUTES.home || isInCms ? 0 : NAV_HEIGHT}
@@ -67,7 +59,7 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
       >
         {children}
       </Flex>
-    </Stack>
+    </>
   );
 };
 
