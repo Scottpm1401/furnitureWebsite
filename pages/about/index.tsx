@@ -15,7 +15,7 @@ import { useAppSelector } from '../../redux/hooks';
 import { selectors } from '../../redux/reducer';
 import { NextApplicationPage } from '../_app';
 
-const About: NextApplicationPage = () => {
+const About = () => {
   const { t, lang } = useTranslation();
   const { isMobile } = useResponsive();
   const aboutContent = useAppSelector(selectors.global.selectAbout);
@@ -35,7 +35,7 @@ const About: NextApplicationPage = () => {
           property='og:url'
           content={`${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`}
         />
-        <meta property='og:title' content='Comfysloth' />
+        <meta property='og:title' content='About' />
         <meta property='og:description' content='About' />
         <meta
           property='og:image'
@@ -48,7 +48,7 @@ const About: NextApplicationPage = () => {
           content={`${process.env.NEXT_PUBLIC_CDN}/v1671091687/furniture/banners/slider_img_1_lt3wft.jpg`}
         />
 
-        <meta itemProp='name' content='Comfysloth' />
+        <meta itemProp='name' content='About' />
         <meta itemProp='description' content='About' />
         <meta
           itemProp='image'
@@ -138,10 +138,6 @@ const About: NextApplicationPage = () => {
       </Flex>
     </Page>
   );
-};
-
-About.getLayout = (page: React.ReactElement) => {
-  return <NotAuthProvider>{page}</NotAuthProvider>;
 };
 
 export default About;

@@ -10,7 +10,7 @@ import Page from '../layout/Page';
 import NotAuthProvider from '../layout/Provider/NotAuthProvider';
 import { NextApplicationPage } from './_app';
 
-const Home: NextApplicationPage = () => {
+const Home = () => {
   const { t } = useTranslation();
   const router = useRouter();
 
@@ -56,10 +56,6 @@ const Home: NextApplicationPage = () => {
       <Newsletter />
     </Page>
   );
-};
-
-Home.getLayout = (page: React.ReactElement) => {
-  return <NotAuthProvider>{page}</NotAuthProvider>;
 };
 
 export default Home;
