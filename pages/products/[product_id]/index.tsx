@@ -68,7 +68,7 @@ type ProductPageProps = {
   product: ProductType;
 };
 
-const Product = (props: ProductPageProps) => {
+const Product: NextApplicationPage<ProductPageProps> = (props) => {
   const router = useRouter();
   const { t } = useTranslation();
   const { product } = useProduct();
@@ -422,6 +422,10 @@ const Product = (props: ProductPageProps) => {
       </Container>
     </Page>
   );
+};
+
+Product.getLayout = (page: React.ReactElement) => {
+  return <NotAuthProvider>{page}</NotAuthProvider>;
 };
 
 export default Product;

@@ -20,39 +20,6 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
   );
   return (
     <>
-      {/* <NextSeo
-        title={title || 'Comfysloth'}
-        description={description || 'Bring the comfort to your home'}
-        openGraph={{
-          title: title || 'Comfysloth',
-          url: `${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`,
-          description: description || 'Bring the comfort to your home',
-          images: img
-            ? [
-                {
-                  url: img,
-                  width: 800,
-                  height: 600,
-                  alt: 'Image',
-                },
-              ]
-            : [
-                {
-                  url: `https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft`,
-                  width: 800,
-                  height: 600,
-                  alt: 'Banner',
-                },
-              ],
-        }}
-        additionalLinkTags={[
-          {
-            rel: 'icon',
-            href: '/favicon.svg',
-          },
-        ]}
-      /> */}
-
       <Head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1' />

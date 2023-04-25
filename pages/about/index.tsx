@@ -23,7 +23,9 @@ const About: NextApplicationPage = () => {
       alignItems='center'
       justifyContent='center'
       direction='column'
-      title={t('about')}
+      title={'About'}
+      description={'this is About page'}
+      img={'/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'}
     >
       <Breadcrumb
         links={[
