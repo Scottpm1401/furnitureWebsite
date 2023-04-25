@@ -27,12 +27,13 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
         </Head>
       )} */}
 
-      <NextSeo
-        title={title || 'Comfysloth 1'}
-        description={description || 'Testing 1'}
+      {/* <NextSeo
+        title={title}
+        description={description}
         openGraph={{
-          title: title || 'Comfysloth 2',
-          description: description || 'Testing 2',
+          title: title,
+          url: `${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`,
+          description: description,
           images: img
             ? [
                 {
@@ -44,7 +45,7 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
               ]
             : [],
         }}
-      />
+      /> */}
 
       <Flex
         mt={router.pathname === APP_ROUTES.home || isInCms ? 0 : NAV_HEIGHT}
