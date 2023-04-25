@@ -18,6 +18,7 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
     () => router.pathname.includes(APP_ROUTES.cms.dashboard),
     [router.pathname]
   );
+
   return (
     <>
       <Head>

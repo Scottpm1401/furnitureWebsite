@@ -14,9 +14,9 @@ import { selectors } from '../../redux/reducer';
 import { NextApplicationPage } from '../_app';
 
 const About: NextApplicationPage = () => {
-  const { t, lang } = useTranslation();
-  const { isMobile } = useResponsive();
-  const aboutContent = useAppSelector(selectors.global.selectAbout);
+  // const { t, lang } = useTranslation();
+  // const { isMobile } = useResponsive();
+  // const aboutContent = useAppSelector(selectors.global.selectAbout);
 
   return (
     <Page
@@ -27,7 +27,8 @@ const About: NextApplicationPage = () => {
       description={'this is About page'}
       img={'/v1681371531/furniture/banners/pbpjourmaairp0pasci4.jpg'}
     >
-      <Breadcrumb
+      <h1>test</h1>
+      {/* <Breadcrumb
         links={[
           { title: t('home'), href: APP_ROUTES.home },
           { title: t('about'), href: APP_ROUTES.about },
@@ -105,7 +106,7 @@ const About: NextApplicationPage = () => {
             </Text>
           </Flex>
         </Container>
-      </Flex>
+      </Flex> */}
     </Page>
   );
 };
