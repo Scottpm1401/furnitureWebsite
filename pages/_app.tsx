@@ -52,11 +52,12 @@ const App = (props: MyAppProps) => {
         openGraph={{
           title: 'Comfysloth',
           description: 'Bring the comfort to your home',
-          type: 'website',
+          type: 'object',
           url: `${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`,
+          siteName: 'Comfysloth',
           images: [
             {
-              url: `/images/seo/banner.jpg`,
+              url: `https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft`,
               width: 800,
               height: 600,
               alt: 'Banner',
@@ -69,6 +70,10 @@ const App = (props: MyAppProps) => {
             href: '/favicon.svg',
           },
         ]}
+        twitter={{
+          site: '@Comfysloth',
+          cardType: 'summary_large_image',
+        }}
       />
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
