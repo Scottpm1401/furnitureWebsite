@@ -6,6 +6,7 @@ import {
   SkeletonText,
   Text,
 } from '@chakra-ui/react';
+import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -23,13 +24,34 @@ import Container from '../../../layout/Container';
 import Page from '../../../layout/Page';
 import NotAuthProvider from '../../../layout/Provider/NotAuthProvider';
 import { ProductCartType } from '../../../models/cart';
-import { ProductColor } from '../../../models/product';
+import { ProductColor, ProductType } from '../../../models/product';
 import MinusIcon from '../../../public/svg/minus.svg';
 import PlusIcon from '../../../public/svg/plus.svg';
 import StarIcon from '../../../public/svg/star.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
+import { getProductById } from '../../../services/product';
 import { NextApplicationPage } from '../../_app';
+
+export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (
+  context
+) => {
+  const { product_id } = context.query;
+  if (!product_id) {
+    return {
+      redirect: {
+        destination: APP_ROUTES.not_found,
+        permanent: false,
+      },
+    };
+  }
+  const product = await getProductById(product_id.toString());
+  return {
+    props: {
+      product,
+    },
+  };
+};
 
 const initProductCart: ProductCartType = {
   product_id: '',
@@ -42,10 +64,14 @@ const initProductCart: ProductCartType = {
   category: '',
 };
 
-const Product: NextApplicationPage = () => {
+type ProductPageProps = {
+  product: ProductType;
+};
+
+const Product: NextApplicationPage<ProductPageProps> = (props) => {
   const router = useRouter();
-  const { product } = useProduct();
   const { t } = useTranslation();
+  const { product } = useProduct();
   const [addedProduct, setAddedProduct] =
     useState<ProductCartType>(initProductCart);
   const [currentSlide, setCurrentSlide] = useState<string>();
@@ -84,7 +110,13 @@ const Product: NextApplicationPage = () => {
   };
 
   return (
-    <Page w='full' direction='column' title={product?.title || 'Product'}>
+    <Page
+      w='full'
+      direction='column'
+      title={props.product.title}
+      img={props.product.img}
+      description={props.product.description}
+    >
       <Breadcrumb
         links={[
           { title: t('home'), href: APP_ROUTES.home },

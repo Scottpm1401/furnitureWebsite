@@ -73,6 +73,7 @@ export const APP_ROUTES = {
   termAndCondition: '/legal/terms_and_conditions',
   privacyPolicy: '/legal/privacy_policy',
   resetPassword: '/reset_password',
+  not_found: '/404',
   cms: {
     dashboard: '/cms',
     ordered: {

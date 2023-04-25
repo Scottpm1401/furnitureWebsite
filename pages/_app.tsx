@@ -20,7 +20,7 @@ import CmsSideBar from '../layout/SideBar/CmsSideBar';
 import { persistor, store } from '../redux/store';
 import theme from '../theme';
 
-export type NextApplicationPage = NextPage & {
+export type NextApplicationPage<P = {}> = NextPage<P> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
