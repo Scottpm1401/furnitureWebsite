@@ -424,8 +424,4 @@ const Product: NextApplicationPage<ProductPageProps> = (props) => {
   );
 };
 
-Product.getLayout = (page: React.ReactElement) => {
-  return <NotAuthProvider>{page}</NotAuthProvider>;
-};
-
 export default Product;
