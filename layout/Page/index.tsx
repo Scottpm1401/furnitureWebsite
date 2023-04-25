@@ -69,8 +69,9 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
         <meta
           property='og:image'
           content={
-            img ||
-            'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
+            img
+              ? `${process.env.NEXT_PUBLIC_CDN}${img}`
+              : 'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
           }
         />
         <meta property='og:image:width' content='800' />
@@ -78,8 +79,9 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
         <meta
           property='og:image:alt'
           content={
-            img ||
-            'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
+            img
+              ? `${process.env.NEXT_PUBLIC_CDN}${img}`
+              : 'https://res.cloudinary.com/scottcloud/image/upload/v1671091687/furniture/banners/slider_img_1_lt3wft'
           }
         />
         <link rel='icon' href='/favicon.svg' />
