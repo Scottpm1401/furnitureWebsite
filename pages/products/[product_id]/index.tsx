@@ -32,26 +32,6 @@ import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
 import { getProductById } from '../../../services/product';
 
-export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (
-  context
-) => {
-  const { product_id } = context.query;
-  if (!product_id) {
-    return {
-      redirect: {
-        destination: APP_ROUTES.not_found,
-        permanent: false,
-      },
-    };
-  }
-  const product = await getProductById(product_id.toString());
-  return {
-    props: {
-      product,
-    },
-  };
-};
-
 const initProductCart: ProductCartType = {
   product_id: '',
   img: '',
@@ -428,3 +408,23 @@ Product.getLayout = (page: React.ReactElement) => {
 };
 
 export default Product;
+
+export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (
+  context
+) => {
+  const { product_id } = context.query;
+  if (!product_id) {
+    return {
+      redirect: {
+        destination: APP_ROUTES.not_found,
+        permanent: false,
+      },
+    };
+  }
+  const product = await getProductById(product_id.toString());
+  return {
+    props: {
+      product,
+    },
+  };
+};
