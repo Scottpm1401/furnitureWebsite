@@ -31,6 +31,7 @@ import StarIcon from '../../../public/svg/star.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
 import { getProductById } from '../../../services/product';
+import { NextApplicationPage } from '../../_app';
 
 const initProductCart: ProductCartType = {
   product_id: '',
@@ -47,7 +48,7 @@ type ProductPageProps = {
   product: ProductType;
 };
 
-const Product = (props: ProductPageProps) => {
+const Product: NextApplicationPage<ProductPageProps> = (props) => {
   const router = useRouter();
   const { t } = useTranslation();
   const { product } = useProduct();
