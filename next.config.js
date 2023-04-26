@@ -3,7 +3,7 @@
 const nextTranslate = require('next-translate');
 
 const nextConfig = {
-  // ...nextTranslate(),
+  ...nextTranslate(),
   reactStrictMode: true,
   swcMinify: true,
   images: {
