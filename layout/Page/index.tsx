@@ -24,7 +24,7 @@ const Page = ({ children, title, description, img, ...props }: Props) => {
       <NextSeo
         title={title || 'Comfysloth'}
         description={description || 'Bring comfort to your home'}
-        canonical={`${process.env.NEXT_PUBLIC_NEXT_PUBLIC_FE_URL}${router.pathname}`}
+        canonical={`${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`}
         openGraph={{
           title: title || 'Comfysloth',
           description: description || 'Bring comfort to your home',
