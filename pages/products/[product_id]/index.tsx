@@ -22,6 +22,7 @@ import { useResponsive } from '../../../hooks/responsive';
 import { useCart } from '../../../hooks/user';
 import Container from '../../../layout/Container';
 import Page from '../../../layout/Page';
+import NotAuthProvider from '../../../layout/Provider/NotAuthProvider';
 import { ProductCartType } from '../../../models/cart';
 import { ProductColor, ProductType } from '../../../models/product';
 import MinusIcon from '../../../public/svg/minus.svg';
@@ -422,8 +423,8 @@ const Product = (props: ProductPageProps) => {
   );
 };
 
-// Product.getLayout = (page: React.ReactElement) => {
-//   return <NotAuthProvider>{page}</NotAuthProvider>;
-// };
+Product.getLayout = (page: React.ReactElement) => {
+  return <NotAuthProvider>{page}</NotAuthProvider>;
+};
 
 export default Product;
