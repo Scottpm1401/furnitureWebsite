@@ -2,6 +2,7 @@ import 'moment/locale/vi';
 import '../styles/globals.css';
 
 import { ChakraProvider, ColorModeScript, Flex } from '@chakra-ui/react';
+import { Analytics } from '@vercel/analytics/react';
 import moment from 'moment';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
@@ -85,6 +86,7 @@ const App = (props: MyAppProps) => {
               />
               {getLayout(<Component {...pageProps} />)}
               {!isInCms && <Footer />}
+              <Analytics />
             </Flex>
           </TemplateProvider>
         </ChakraProvider>
