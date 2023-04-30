@@ -126,6 +126,9 @@ const Product: NextApplicationPage<ProductPageProps> = (props) => {
                 <Image
                   src={`${process.env.NEXT_PUBLIC_CDN}${currentSlide}`}
                   fill
+                  sizes='(max-width: 768px) 100vw,
+              (max-width: 1280px) 50vw,
+              33vw'
                   alt={product._id}
                 />
               </Flex>
@@ -152,6 +155,9 @@ const Product: NextApplicationPage<ProductPageProps> = (props) => {
                     src={`${process.env.NEXT_PUBLIC_CDN}${product.img}`}
                     style={{ objectFit: 'cover' }}
                     fill
+                    sizes='(max-width: 768px) 100vw,
+              (max-width: 1280px) 50vw,
+              33vw'
                     alt={product.title}
                   />
                 </Flex>
@@ -172,6 +178,9 @@ const Product: NextApplicationPage<ProductPageProps> = (props) => {
                     <Image
                       src={`${process.env.NEXT_PUBLIC_CDN}${item}`}
                       fill
+                      sizes='(max-width: 768px) 100vw,
+              (max-width: 1280px) 50vw,
+              33vw'
                       alt={item}
                     />
                   </Flex>

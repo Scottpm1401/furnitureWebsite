@@ -91,6 +91,9 @@ const ProductCard = ({
             style={{ objectFit: 'cover' }}
             src={`${process.env.NEXT_PUBLIC_CDN}${product.img}`}
             fill
+            sizes='(max-width: 768px) 100vw,
+              (max-width: 1280px) 50vw,
+              33vw'
             alt={product.title}
           />
           <Flex
