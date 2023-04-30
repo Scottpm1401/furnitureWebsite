@@ -6,6 +6,7 @@ import moment from 'moment';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import { ReactElement, ReactNode, useEffect, useMemo } from 'react';
 import { Provider } from 'react-redux';
@@ -44,6 +45,36 @@ const App = (props: MyAppProps) => {
 
   return (
     <Provider store={store}>
+      <NextSeo
+        title={'Comfysloth'}
+        description={'Bring comfort to your home'}
+        canonical={`${process.env.NEXT_PUBLIC_FE_URL}${router.pathname}`}
+        openGraph={{
+          title: 'Comfysloth',
+          description: 'Bring comfort to your home',
+          images: [
+            {
+              url: `${process.env.NEXT_PUBLIC_CDN}/v1671091687/furniture/banners/slider_img_1_lt3wft.jpg`,
+              width: 800,
+              height: 600,
+              alt: 'banner',
+            },
+          ],
+          site_name: 'Comfysloth',
+        }}
+        twitter={{
+          handle: '@handle',
+          site: '@site',
+          cardType: 'summary_large_image',
+        }}
+        additionalLinkTags={[
+          {
+            rel: 'icon',
+            href: '/favicon.svg',
+          },
+        ]}
+      />
+
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
           <TemplateProvider>

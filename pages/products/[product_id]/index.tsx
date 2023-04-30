@@ -48,7 +48,7 @@ type ProductPageProps = {
   product: ProductType;
 };
 
-const Product: NextApplicationPage<ProductPageProps> = (props) => {
+const Product: NextApplicationPage<ProductPageProps> = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const { product } = useProduct();
@@ -90,13 +90,7 @@ const Product: NextApplicationPage<ProductPageProps> = (props) => {
   };
 
   return (
-    <Page
-      w='full'
-      direction='column'
-      title={props.product.title}
-      description={props.product.description}
-      img={props.product.img}
-    >
+    <Page w='full' direction='column' title={product?.title}>
       <Breadcrumb
         links={[
           { title: t('home'), href: APP_ROUTES.home },
@@ -418,23 +412,3 @@ Product.getLayout = (page: React.ReactElement) => {
 };
 
 export default Product;
-
-export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (
-  context
-) => {
-  const { product_id } = context.query;
-  if (!product_id) {
-    return {
-      redirect: {
-        destination: APP_ROUTES.not_found,
-        permanent: false,
-      },
-    };
-  }
-  const product = await getProductById(product_id.toString());
-  return {
-    props: {
-      product,
-    },
-  };
-};
