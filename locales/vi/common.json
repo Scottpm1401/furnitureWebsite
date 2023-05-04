@@ -46,7 +46,9 @@
     },
     "subscription": {
       "failed_to_subscribe": "Đăng ký thất bại",
-      "already_subscribe": "Người dùng đã đăng ký"
+      "already_subscribe": "Người dùng đã đăng ký",
+      "not_found": "Không tìm thấy người đăng ký",
+      "failed_to_update": "Cập nhật thông tin người đăng ký thất bại"
     },
     "form": {
       "required": "Không thể bỏ trống ô này",

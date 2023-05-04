@@ -46,7 +46,9 @@
     },
     "subscription": {
       "failed_to_subscribe": "Failed to subscribe",
-      "already_subscribe": "User already subscribe"
+      "already_subscribe": "User already subscribe",
+      "not_found": "Subscription not found",
+      "failed_to_update": "Failed to update subscription"
     },
     "form": {
       "required": "This field cannot be empty",
