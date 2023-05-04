@@ -12,7 +12,7 @@ const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BE_URL,
   timeout: 10000,
   headers: {
-    'Accept-Encoding': 'gzip,deflate,compress,',
+    // 'Accept-Encoding': 'gzip,deflate,compress,',
     'Content-Type': 'application/json',
   },
 });
