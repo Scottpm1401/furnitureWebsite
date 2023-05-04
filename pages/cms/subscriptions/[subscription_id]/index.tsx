@@ -1,33 +1,35 @@
-import { useToast } from '@chakra-ui/react';
+import { Stack, useToast } from '@chakra-ui/react';
 import { isAxiosError } from 'axios';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 
-import OrderedForm from '../../../../components/Form/OrderedForm';
+import SubscriptionForm from '../../../../components/Form/SubscriptionForm';
 import TableDetailSkeleton from '../../../../components/Table/TableDetailSkeleton';
 import { APP_ROUTES } from '../../../../constant';
-import { useOrdered } from '../../../../hooks/ordered';
+import { useSubscription } from '../../../../hooks/subscription';
 import CmsContainer from '../../../../layout/Container/CmsContainer';
 import Page from '../../../../layout/Page';
 import AdminAuthProvider from '../../../../layout/Provider/AdminAuthProvider';
-import { UpdateOrderedRequest } from '../../../../models/api/cms';
-import { updateOrderedById } from '../../../../services/cms';
+import { UpdateSubscriptionRequest } from '../../../../models/api/cms';
+import { updateSubscriptionById } from '../../../../services/cms';
 import { isReqError } from '../../../../utils/common';
 import { NextApplicationPage } from '../../../_app';
 
-const CmsOrdered: NextApplicationPage = () => {
-  const { ordered, isLoading } = useOrdered();
+const CmsSubscription: NextApplicationPage = () => {
+  const { subscription, isLoading } = useSubscription();
   const { t } = useTranslation();
   const toast = useToast();
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const handleUpdateOrdered = async (values: UpdateOrderedRequest) => {
-    if (!ordered) return;
+  const handleUpdateSubscription = async (
+    values: UpdateSubscriptionRequest
+  ) => {
+    if (!subscription) return;
     try {
       setIsUpdating(true);
-      await updateOrderedById(ordered._id, values);
+      await updateSubscriptionById(subscription._id, values);
       toast({
-        title: t('update_ordered_success'),
+        title: t('update_subscription_success'),
         status: 'success',
         duration: 5000,
         position: 'top-right',
@@ -51,18 +53,18 @@ const CmsOrdered: NextApplicationPage = () => {
 
   return (
     <AdminAuthProvider>
-      <Page direction='row' w='full' title={t('ordered_details')}>
+      <Page direction='row' w='full' title={t('subscription_details')}>
         <CmsContainer
-          title={t('ordered_details')}
-          href={APP_ROUTES.cms.ordered.list}
+          title={t('subscription_details')}
+          href={APP_ROUTES.cms.subscriptions.list}
         >
-          {!ordered || isLoading ? (
+          {!subscription || isLoading ? (
             <TableDetailSkeleton rows={7} />
           ) : (
-            <OrderedForm
+            <SubscriptionForm
               isUpdating={isUpdating}
-              ordered={ordered}
-              handleUpdate={handleUpdateOrdered}
+              subscription={subscription}
+              handleUpdate={handleUpdateSubscription}
             />
           )}
         </CmsContainer>
@@ -71,8 +73,8 @@ const CmsOrdered: NextApplicationPage = () => {
   );
 };
 
-CmsOrdered.getLayout = (page: React.ReactElement) => {
+CmsSubscription.getLayout = (page: React.ReactElement) => {
   return <AdminAuthProvider>{page}</AdminAuthProvider>;
 };
 
-export default CmsOrdered;
+export default CmsSubscription;

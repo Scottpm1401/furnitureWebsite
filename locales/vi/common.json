@@ -281,5 +281,10 @@
   "reset_password_success_description": "Bạn đã tạo một mật khẩu mới cho tài khoản của mình. Vui lòng đăng nhập lại bằng mật khẩu mới của bạn để tận hưởng các tính năng của chúng tôi.",
   "delete": "Xoá",
   "are_you_sure_to_delete": "Bạn có chắc chắn để xoá giao diện: {{title}}",
-  "delete_template": "Xoá giao diện"
+  "delete_template": "Xoá giao diện",
+  "subscribers": "Người đăng ký",
+  "subscription_list": "Danh sách đăng ký",
+  "subscription_details": "Chi tiết đăng ký",
+  "update_subscription": "Cập nhật thông tin đăng ký",
+  "update_subscription_success": "Cập nhật thông tin đăng ký thành công"
 }

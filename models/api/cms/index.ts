@@ -1,5 +1,6 @@
 import { ProductType } from '../../product';
 import { PurchaseType } from '../../purchase';
+import { SubscriptionType } from '../../subscription';
 import { ContentType } from '../../template';
 import { UserType } from '../../user';
 
@@ -61,3 +62,5 @@ type TemplateRequest = {
 export type CreateTemplateRequest = TemplateRequest;
 
 export type UpdateTemplateRequest = TemplateRequest;
+
+export type UpdateSubscriptionRequest = Omit<SubscriptionType, 'email' | '_id'>;

@@ -16,12 +16,13 @@ import { APP_ROUTES } from '../../../constant';
 import { useResponsive } from '../../../hooks/responsive';
 import HomeIcon from '../../../public/svg/home.svg';
 import LanguageIcon from '../../../public/svg/language.svg';
+import TemplateIcon from '../../../public/svg/layout.svg';
 import LogoutIcon from '../../../public/svg/log-out.svg';
 import MenuIcon from '../../../public/svg/menu.svg';
 import PackageIcon from '../../../public/svg/package.svg';
-import SettingsIcon from '../../../public/svg/settings.svg';
 import TaskIcon from '../../../public/svg/task.svg';
-import UserIcon from '../../../public/svg/user.svg';
+import UserCheckIcon from '../../../public/svg/user-check.svg';
+import UsersIcon from '../../../public/svg/users.svg';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { actions, selectors } from '../../../redux/reducer';
 import SideBarItem from './CmsSideBarItem';
@@ -72,9 +73,14 @@ const CmsSideBar = () => {
             href={APP_ROUTES.cms.dashboard}
           />
           <SideBarItem
-            icon={<UserIcon style={{ stroke: 'white' }} />}
+            icon={<UsersIcon style={{ stroke: 'white' }} />}
             title={t('users')}
             href={APP_ROUTES.cms.users.list}
+          />
+          <SideBarItem
+            icon={<UserCheckIcon style={{ stroke: 'white' }} />}
+            title={t('subscribers')}
+            href={APP_ROUTES.cms.subscriptions.list}
           />
           <SideBarItem
             icon={<TaskIcon style={{ fill: 'white' }} />}
@@ -87,7 +93,7 @@ const CmsSideBar = () => {
             href={APP_ROUTES.cms.products.list}
           />
           <SideBarItem
-            icon={<SettingsIcon style={{ stroke: 'white', fill: 'none' }} />}
+            icon={<TemplateIcon style={{ stroke: 'white', fill: 'none' }} />}
             title={t('template')}
             href={APP_ROUTES.cms.templates.list}
           />

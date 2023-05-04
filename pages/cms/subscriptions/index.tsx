@@ -6,57 +6,53 @@ import React from 'react';
 import Table from '../../../components/Table';
 import TableSkeleton from '../../../components/Table/TableSkeleton';
 import { APP_ROUTES } from '../../../constant';
-import { useOrderedList } from '../../../hooks/ordered';
+import { useSubscriptions } from '../../../hooks/subscription';
 import CmsContainer from '../../../layout/Container/CmsContainer';
 import Page from '../../../layout/Page';
 import AdminAuthProvider from '../../../layout/Provider/AdminAuthProvider';
 import EditIcon from '../../../public/svg/edit.svg';
 import { NextApplicationPage } from '../../_app';
 
-const CmsOrderedList: NextApplicationPage = () => {
+const CmsSubscriptions: NextApplicationPage = () => {
   const {
     total,
     isLoading,
-    orderedList,
+    subscriptions,
     offset,
     limit,
     search,
-    getOrderedList,
+    getSubscriptionsList,
     hasNext,
     hasPrevious,
-  } = useOrderedList();
+  } = useSubscriptions();
   const { t } = useTranslation();
   const router = useRouter();
 
   return (
     <AdminAuthProvider>
-      <Page direction='row' w='full' title='Ordered List'>
+      <Page direction='row' w='full' title='subscription List'>
         <CmsContainer
-          title={t('ordered_list')}
-          search={{ handleSearch: getOrderedList }}
+          title={t('subscription_list')}
+          search={{ handleSearch: getSubscriptionsList }}
         >
           <Table
             headers={
               <Tr>
                 <Th>ID</Th>
-                <Th>{t('name_of_user')}</Th>
                 <Th>{t('email')}</Th>
-                <Th>{t('status')}</Th>
-                <Th>{t('total')}</Th>
-                <Th>{t('payment_method')}</Th>
+                <Th>{t('name_of_user')}</Th>
+                <Th>{t('phone')}</Th>
                 <Th></Th>
               </Tr>
             }
             body={
               !isLoading ? (
-                orderedList.map((ordered) => (
-                  <Tr key={ordered._id}>
-                    <Td>{ordered._id.slice(0, 5)}</Td>
-                    <Td>{ordered.billingDetails.name}</Td>
-                    <Td>{ordered.billingDetails.email}</Td>
-                    <Td>{t(ordered.status)}</Td>
-                    <Td>${ordered.total_bill}</Td>
-                    <Td>{ordered.payment_method}</Td>
+                subscriptions.map((subscription) => (
+                  <Tr key={subscription._id}>
+                    <Td>{subscription._id.slice(0, 5)}</Td>
+                    <Td>{subscription.email}</Td>
+                    <Td>{subscription.name}</Td>
+                    <Td>{subscription.phone}</Td>
                     <Td>
                       <IconButton
                         minW='unset'
@@ -65,9 +61,11 @@ const CmsOrderedList: NextApplicationPage = () => {
                         h='32px'
                         colorScheme='orange'
                         icon={<EditIcon />}
-                        aria-label={`edit_icon_${ordered._id}`}
+                        aria-label={`edit_icon_${subscription._id}`}
                         onClick={() =>
-                          router.push(APP_ROUTES.cms.ordered.index(ordered._id))
+                          router.push(
+                            APP_ROUTES.cms.subscriptions.index(subscription._id)
+                          )
                         }
                       />
                     </Td>
@@ -80,22 +78,24 @@ const CmsOrderedList: NextApplicationPage = () => {
             tablePaginationProps={{
               labelDisplayedRows: {
                 from: offset,
-                to: orderedList.length,
+                to: subscriptions.length,
                 count: total,
               },
               prevButtonProps: {
                 disabled: !hasPrevious,
-                onClick: () => getOrderedList(offset - limit, limit, search),
+                onClick: () =>
+                  getSubscriptionsList(offset - limit, limit, search),
                 'aria-label': 'Prev navigation',
               },
               nextButtonProps: {
                 disabled: !hasNext,
-                onClick: () => getOrderedList(offset + limit, limit, search),
+                onClick: () =>
+                  getSubscriptionsList(offset + limit, limit, search),
                 'aria-label': 'Next navigation',
               },
               rowsPerPage: limit,
               onChangeRowsPerPage: (rowNumber) =>
-                getOrderedList(0, rowNumber, search),
+                getSubscriptionsList(0, rowNumber, search),
             }}
           />
         </CmsContainer>
@@ -104,8 +104,8 @@ const CmsOrderedList: NextApplicationPage = () => {
   );
 };
 
-CmsOrderedList.getLayout = (page: React.ReactElement) => {
+CmsSubscriptions.getLayout = (page: React.ReactElement) => {
   return <AdminAuthProvider>{page}</AdminAuthProvider>;
 };
 
-export default CmsOrderedList;
+export default CmsSubscriptions;

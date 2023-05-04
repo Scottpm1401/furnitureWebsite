@@ -61,5 +61,8 @@ export const API = {
   },
   SUBSCRIPTION: {
     SUBSCRIBE: '/subscription/subscribe',
+    GETALL: '/subscription/all',
+    GETSUBSCRIPTION: (id: string) => `/subscription/get/${id}`,
+    UPDATESUBSCRIPTION: (id: string) => `/subscription/update/${id}`,
   },
 };

@@ -96,6 +96,10 @@ export const APP_ROUTES = {
       create: '/cms/templates/create',
       index: (id: string) => `/cms/templates/${id}`,
     },
+    subscriptions: {
+      list: '/cms/subscriptions',
+      index: (id: string) => `/cms/subscriptions/${id}`,
+    },
   },
 };
 

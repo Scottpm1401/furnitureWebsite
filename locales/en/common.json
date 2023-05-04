@@ -281,5 +281,10 @@
   "reset_password_success_description": "You have created a new password for your account. Please log back in with your new password to enjoy our features.",
   "delete": "Delete",
   "are_you_sure_to_delete": "Are you sure to delete this template: {{title}}",
-  "delete_template": "Delete template"
+  "delete_template": "Delete template",
+  "subscribers": "Subscribers",
+  "subscription_list": "Subscriptions List",
+  "subscription_details": "Subscription Details",
+  "update_subscription": "Update subscription",
+  "update_subscription_success": "Update subscription success"
 }

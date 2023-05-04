@@ -37,7 +37,7 @@ const CmsUsers: NextApplicationPage = () => {
               <Th>ID</Th>
               <Th>{t('name_of_user')}</Th>
               <Th>{t('username')}</Th>
-              <Th>Email</Th>
+              <Th>{t('email')}</Th>
               <Th>{t('birthday')}</Th>
               <Th>{t('role')}</Th>
               <Th></Th>

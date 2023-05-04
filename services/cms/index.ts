@@ -1,20 +1,17 @@
 import { API } from '../../constant/api';
 import axiosClient from '../../interceptor';
-import {
-  BoughtProduct,
-  DataPoint,
-  Revenue,
-  TopUser,
-} from '../../models/analysis';
+import { BoughtProduct, Revenue, TopUser } from '../../models/analysis';
 import {
   CMSList,
   SearchPagination,
   UpdateOrderedRequest,
   UpdateProductRequest,
+  UpdateSubscriptionRequest,
   UpdateUserRequest,
 } from '../../models/api/cms';
 import { ProductType } from '../../models/product';
 import { PurchaseType } from '../../models/purchase';
+import { SubscriptionType } from '../../models/subscription';
 import { UserType } from '../../models/user';
 
 export const getAllUsers = async (params: SearchPagination) => {
@@ -81,4 +78,25 @@ export const getBoughtProductByMonth = async (month: number) => {
 export const getTop10UsersByMonth = async (month: number) => {
   const res = await axiosClient.get(API.ANALYSIS.GETTOP10USERS(month));
   return res.data as TopUser[];
+};
+
+export const getAllSubscriptions = async (params: SearchPagination) => {
+  const res = await axiosClient.get(API.SUBSCRIPTION.GETALL, { params });
+  return res.data as CMSList<SubscriptionType[]>;
+};
+
+export const getSubscriptionById = async (id: string) => {
+  const res = await axiosClient.get(API.SUBSCRIPTION.GETSUBSCRIPTION(id));
+  return res.data as SubscriptionType;
+};
+
+export const updateSubscriptionById = async (
+  id: string,
+  body: UpdateSubscriptionRequest
+) => {
+  const res = await axiosClient.post(
+    API.SUBSCRIPTION.UPDATESUBSCRIPTION(id),
+    body
+  );
+  return res.data as SubscriptionType;
 };
