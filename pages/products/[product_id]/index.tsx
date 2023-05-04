@@ -6,7 +6,6 @@ import {
   SkeletonText,
   Text,
 } from '@chakra-ui/react';
-import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -30,7 +29,6 @@ import PlusIcon from '../../../public/svg/plus.svg';
 import StarIcon from '../../../public/svg/star.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
-import { getProductById } from '../../../services/product';
 import { NextApplicationPage } from '../../_app';
 
 const initProductCart: ProductCartType = {
@@ -120,9 +118,7 @@ const Product: NextApplicationPage<ProductPageProps> = () => {
                 <Image
                   src={`${process.env.NEXT_PUBLIC_CDN}${currentSlide}`}
                   fill
-                  sizes='(max-width: 768px) 100vw,
-              (max-width: 1280px) 50vw,
-              33vw'
+                  sizes='100vw'
                   alt={product._id}
                 />
               </Flex>
@@ -149,9 +145,7 @@ const Product: NextApplicationPage<ProductPageProps> = () => {
                     src={`${process.env.NEXT_PUBLIC_CDN}${product.img}`}
                     style={{ objectFit: 'cover' }}
                     fill
-                    sizes='(max-width: 768px) 100vw,
-              (max-width: 1280px) 50vw,
-              33vw'
+                    sizes='100vw'
                     alt={product.title}
                   />
                 </Flex>
@@ -172,9 +166,7 @@ const Product: NextApplicationPage<ProductPageProps> = () => {
                     <Image
                       src={`${process.env.NEXT_PUBLIC_CDN}${item}`}
                       fill
-                      sizes='(max-width: 768px) 100vw,
-              (max-width: 1280px) 50vw,
-              33vw'
+                      sizes='100vw'
                       alt={item}
                     />
                   </Flex>
@@ -256,7 +248,6 @@ const Product: NextApplicationPage<ProductPageProps> = () => {
               </Grid>
               {isAvailable && (
                 <>
-                  {' '}
                   <Flex alignItems='center' mt='1.5rem'>
                     <Button
                       variant='unstyled'

@@ -66,9 +66,7 @@ const OrderedItem = ({ item, handleRating, orderId }: OrderedItemProps) => {
             src={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
             alt={item.title}
             fill
-            sizes='(max-width: 768px) 100vw,
-              (max-width: 1280px) 50vw,
-              33vw'
+            sizes='50vw'
           />
         </Flex>
         <Stack spacing='0.5rem' justifyContent='center'>
@@ -143,9 +141,7 @@ const OrderedItem = ({ item, handleRating, orderId }: OrderedItemProps) => {
               src={`${process.env.NEXT_PUBLIC_CDN}${item.img}`}
               alt={item.title}
               fill
-              sizes='(max-width: 768px) 100vw,
-              (max-width: 1280px) 50vw,
-              33vw'
+              sizes='50vw'
             />
           </Flex>
           <Flex direction='column' justifyContent='center'>

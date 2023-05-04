@@ -52,9 +52,7 @@ const About: NextApplicationPage = () => {
               style={{ objectFit: 'cover' }}
               src={`${process.env.NEXT_PUBLIC_CDN}${aboutContent.image}`}
               fill
-              sizes='(max-width: 768px) 100vw,
-              (max-width: 1280px) 50vw,
-              33vw'
+              sizes='100vw'
               alt={'about_banner'}
             />
           </Flex>
