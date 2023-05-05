@@ -1,4 +1,5 @@
 import {
+  Button,
   IconButton,
   IconButtonProps,
   Select,
@@ -11,11 +12,15 @@ import {
   Text,
   Thead,
 } from '@chakra-ui/react';
+import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
+import { CSVLink } from 'react-csv';
 
 import NavigateBeforeIcon from '../../public/svg/arrow_left.svg';
 import NavigateNextIcon from '../../public/svg/arrow_right.svg';
+import DownloadIcon from '../../public/svg/download.svg';
+import { formatShortDate } from '../../utils/common';
 
 type LabelDisplayedRowsProps = {
   from: number;
@@ -53,6 +58,11 @@ type Props = {
     rowsPerPageOptions?: number[];
     onChangeRowsPerPage(rowNumber: number): void;
   };
+  csv?: {
+    data: any;
+    headers: any;
+    filename: string;
+  };
 };
 
 const Table = ({
@@ -62,6 +72,7 @@ const Table = ({
   bodyProps,
   tableProps,
   tablePaginationProps,
+  csv,
 }: Props) => {
   const {
     labelDisplayedRows,
@@ -72,7 +83,7 @@ const Table = ({
     onChangeRowsPerPage,
   } = tablePaginationProps;
 
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   return (
     <Stack
@@ -86,39 +97,57 @@ const Table = ({
       </ChakraTable>
       <Stack
         direction='row'
-        alignItems='center'
-        justifyContent='flex-end'
+        justifyContent={csv ? 'space-between' : 'flex-end'}
         px={2}
         py={1}
-        spacing={3}
       >
-        <Stack direction='row' spacing={1} alignItems='center'>
-          <Text>{t('on_1_page')}</Text>
-          <Select
-            onChange={(e) => onChangeRowsPerPage(+e.target.value)}
-            value={rowsPerPage}
-            w='80px'
+        {csv && (
+          <CSVLink
+            data={csv.data}
+            filename={`${csv.filename}_${lang}_${formatShortDate(
+              moment().toDate()
+            )}.csv`}
+            headers={csv.headers}
           >
-            {rowsPerPageOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </Select>
-          <Text>{t('view_threads')}</Text>
-        </Stack>
-        {labelDisplayedRows && <LabelDisplayedRows {...labelDisplayedRows} />}
-        <Stack direction='row' spacing={2} alignItems='center'>
-          <IconButton
-            p='6px'
-            icon={<NavigateBeforeIcon style={{ stroke: 'black' }} />}
-            {...prevButtonProps}
-          />
-          <IconButton
-            p='6px'
-            icon={<NavigateNextIcon style={{ stroke: 'black' }} />}
-            {...nextButtonProps}
-          />
+            <Button
+              rightIcon={<DownloadIcon width='24px' height='24px' />}
+              colorScheme='green'
+            >
+              <Text fontWeight='bold' fontSize='md'>
+                CSV
+              </Text>
+            </Button>
+          </CSVLink>
+        )}
+        <Stack direction='row' alignItems='center' spacing={3}>
+          <Stack direction='row' spacing={1} alignItems='center'>
+            <Text>{t('on_1_page')}</Text>
+            <Select
+              onChange={(e) => onChangeRowsPerPage(+e.target.value)}
+              value={rowsPerPage}
+              w='80px'
+            >
+              {rowsPerPageOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </Select>
+            <Text>{t('view_threads')}</Text>
+          </Stack>
+          {labelDisplayedRows && <LabelDisplayedRows {...labelDisplayedRows} />}
+          <Stack direction='row' spacing={2} alignItems='center'>
+            <IconButton
+              p='6px'
+              icon={<NavigateBeforeIcon style={{ stroke: 'black' }} />}
+              {...prevButtonProps}
+            />
+            <IconButton
+              p='6px'
+              icon={<NavigateNextIcon style={{ stroke: 'black' }} />}
+              {...nextButtonProps}
+            />
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

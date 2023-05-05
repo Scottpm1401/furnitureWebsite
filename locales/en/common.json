@@ -288,5 +288,6 @@
   "subscription_list": "Subscriptions List",
   "subscription_details": "Subscription Details",
   "update_subscription": "Update subscription",
-  "update_subscription_success": "Update subscription success"
+  "update_subscription_success": "Update subscription success",
+  "num_of_rate": "Num of rate"
 }

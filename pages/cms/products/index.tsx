@@ -106,6 +106,68 @@ const CmsProducts: NextApplicationPage = () => {
             onChangeRowsPerPage: (rowNumber) =>
               getProductsList(0, rowNumber, search),
           }}
+          csv={{
+            data: products.map((product) => ({
+              id: product._id,
+              title: product.title,
+              description: product.description,
+              category: t(product.category),
+              brand: t(product.brand),
+              price: product.price,
+              sku: product.sku,
+              storage_quantity: product.storage_quantity,
+              colors: product.colors,
+              rating: product.rating?.rate,
+              num_of_rate: product.rating?.num_of_rate,
+            })),
+            headers: [
+              {
+                label: 'ID',
+                key: 'id',
+              },
+              {
+                label: t('title'),
+                key: 'title',
+              },
+              {
+                label: t('description'),
+                key: 'description',
+              },
+              {
+                label: t('categories'),
+                key: 'category',
+              },
+              {
+                label: t('brand'),
+                key: 'brand',
+              },
+              {
+                label: t('price'),
+                key: 'price',
+              },
+              {
+                label: t('sku'),
+                key: 'sku',
+              },
+              {
+                label: t('storage_quantity'),
+                key: 'storage_quantity',
+              },
+              {
+                label: t('colors'),
+                key: 'colors',
+              },
+              {
+                label: t('rating'),
+                key: 'rating',
+              },
+              {
+                label: t('num_of_rate'),
+                key: 'num_of_rate',
+              },
+            ],
+            filename: 'products',
+          }}
         />
       </CmsContainer>
     </Page>

@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Button,
   Flex,
   IconButton,
   Input,
@@ -10,14 +11,17 @@ import {
   TextProps,
 } from '@chakra-ui/react';
 import { debounce } from 'lodash';
+import moment from 'moment';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import { APP_ROUTES, CMS_BG_COLOR } from '../../../constant';
 import BackIcon from '../../../public/svg/back.svg';
+import DownloadIcon from '../../../public/svg/download.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
+import { formatDate } from '../../../utils/common';
 
 type Props = {
   title?: string;
@@ -38,6 +42,7 @@ const CmsContainer = ({
   containerProps,
   search,
   rightElement,
+
   ...props
 }: Props) => {
   const user = useAppSelector(selectors.user.selectUser);
@@ -85,9 +90,12 @@ const CmsContainer = ({
           justifyContent='space-between'
           w='full'
         >
-          <Text fontSize='4xl' mb='1rem' fontWeight='semibold' {...titleProps}>
-            {title}
-          </Text>
+          <Stack direction='row' alignItems='center' mb='1rem' spacing={4}>
+            <Text fontSize='4xl' fontWeight='semibold' {...titleProps}>
+              {title}
+            </Text>
+          </Stack>
+
           <Stack direction='row' alignItems='center' spacing={4}>
             {search && (
               <Input

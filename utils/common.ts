@@ -12,6 +12,10 @@ export const validateEmail = (email: string) => {
   );
 };
 
+export const formatShortDate = (date?: Date | string) => {
+  return moment(date).format('l');
+};
+
 export const formatDate = (date?: Date | string) => {
   return moment(date).format('ll');
 };

@@ -97,6 +97,34 @@ const CmsSubscriptions: NextApplicationPage = () => {
               onChangeRowsPerPage: (rowNumber) =>
                 getSubscriptionsList(0, rowNumber, search),
             }}
+            csv={{
+              data: subscriptions.map((subscription) => ({
+                id: subscription._id,
+                email: subscription.email,
+                name: subscription.name,
+                phone: subscription.phone,
+                address: subscription.address,
+              })),
+              headers: [
+                {
+                  label: 'ID',
+                  key: 'id',
+                },
+                {
+                  label: t('email'),
+                  key: 'email',
+                },
+                {
+                  label: t('name_of_user'),
+                  key: 'name',
+                },
+                {
+                  label: t('address'),
+                  key: 'address',
+                },
+              ],
+              filename: 'subscriptions',
+            }}
           />
         </CmsContainer>
       </Page>

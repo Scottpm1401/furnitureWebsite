@@ -10,7 +10,7 @@ import CmsContainer from '../../../layout/Container/CmsContainer';
 import Page from '../../../layout/Page';
 import AdminAuthProvider from '../../../layout/Provider/AdminAuthProvider';
 import EditIcon from '../../../public/svg/edit.svg';
-import { formatDateLong } from '../../../utils/common';
+import { formatDateLong, formatShortDate } from '../../../utils/common';
 import { NextApplicationPage } from '../../_app';
 
 const CmsUsers: NextApplicationPage = () => {
@@ -91,6 +91,88 @@ const CmsUsers: NextApplicationPage = () => {
             },
             rowsPerPage: limit,
             onChangeRowsPerPage: (rowNumber) => getUsers(0, rowNumber, search),
+          }}
+          csv={{
+            data: users.map((user) => ({
+              id: user._id,
+              email: user.email,
+              username: user.username,
+              displayName: user.displayName,
+              phone: user.info?.phone,
+              birthday: formatShortDate(user.birthday),
+              role: user.role,
+              first_name: user.info?.first_name,
+              last_name: user.info?.last_name,
+              gender: user.info?.sex ? t(user.info.sex) : undefined,
+              country: user.info?.address?.country,
+              city: user.info?.address?.city,
+              state: user.info?.address?.state,
+              line1: user.info?.address?.line1,
+              line2: user.info?.address?.line2,
+            })),
+            headers: [
+              {
+                label: 'ID',
+                key: 'id',
+              },
+              {
+                label: t('email'),
+                key: 'email',
+              },
+              {
+                label: t('username'),
+                key: 'username',
+              },
+              {
+                label: t('display_name'),
+                key: 'displayName',
+              },
+              {
+                label: t('phone'),
+                key: 'phone',
+              },
+              {
+                label: t('birthday'),
+                key: 'birthday',
+              },
+              {
+                label: t('role'),
+                key: 'role',
+              },
+              {
+                label: t('first_name'),
+                key: 'first_name',
+              },
+              {
+                label: t('last_name'),
+                key: 'last_name',
+              },
+              {
+                label: t('gender'),
+                key: 'gender',
+              },
+              {
+                label: t('country'),
+                key: 'country',
+              },
+              {
+                label: t('city'),
+                key: 'city',
+              },
+              {
+                label: t('state'),
+                key: 'state',
+              },
+              {
+                label: t('line1'),
+                key: 'line1',
+              },
+              {
+                label: t('line2'),
+                key: 'line2',
+              },
+            ],
+            filename: 'users',
           }}
         />
       </CmsContainer>

@@ -288,5 +288,6 @@
   "subscription_list": "Danh sách đăng ký",
   "subscription_details": "Chi tiết đăng ký",
   "update_subscription": "Cập nhật thông tin đăng ký",
-  "update_subscription_success": "Cập nhật thông tin đăng ký thành công"
+  "update_subscription_success": "Cập nhật thông tin đăng ký thành công",
+  "num_of_rate": "Số người đánh giá"
 }

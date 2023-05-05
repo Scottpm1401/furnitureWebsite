@@ -11,6 +11,7 @@ import CmsContainer from '../../../layout/Container/CmsContainer';
 import Page from '../../../layout/Page';
 import AdminAuthProvider from '../../../layout/Provider/AdminAuthProvider';
 import EditIcon from '../../../public/svg/edit.svg';
+import { formatDateTime } from '../../../utils/common';
 import { NextApplicationPage } from '../../_app';
 
 const CmsOrderedList: NextApplicationPage = () => {
@@ -96,6 +97,80 @@ const CmsOrderedList: NextApplicationPage = () => {
               rowsPerPage: limit,
               onChangeRowsPerPage: (rowNumber) =>
                 getOrderedList(0, rowNumber, search),
+            }}
+            csv={{
+              data: orderedList.map((ordered) => ({
+                id: ordered._id,
+                name: ordered.billingDetails.name,
+                email: ordered.billingDetails.email,
+                phone: ordered.billingDetails.phone,
+                payment_method: ordered.payment_method,
+                status: t(ordered.status),
+                package_date: formatDateTime(ordered.package_date),
+                arrive_date: ordered.arrive_date
+                  ? formatDateTime(ordered.arrive_date)
+                  : undefined,
+                total_bill: ordered.total_bill,
+                country: ordered.billingDetails.address.country,
+                state: ordered.billingDetails.address.state,
+                line1: ordered.billingDetails.address.line1,
+                line2: ordered.billingDetails.address.line2,
+              })),
+              headers: [
+                {
+                  label: 'ID',
+                  key: 'id',
+                },
+                {
+                  label: t('name_of_user'),
+                  key: 'name',
+                },
+                {
+                  label: t('email'),
+                  key: 'email',
+                },
+                {
+                  label: t('phone'),
+                  key: 'phone',
+                },
+                {
+                  label: t('payment_method'),
+                  key: 'payment_method',
+                },
+                {
+                  label: t('status'),
+                  key: 'status',
+                },
+                {
+                  label: t('package_date'),
+                  key: 'package_date',
+                },
+                {
+                  label: t('arrive_date'),
+                  key: 'arrive_date',
+                },
+                {
+                  label: t('total'),
+                  key: 'total_bill',
+                },
+                {
+                  label: t('country'),
+                  key: 'country',
+                },
+                {
+                  label: t('state'),
+                  key: 'state',
+                },
+                {
+                  label: t('line1'),
+                  key: 'line1',
+                },
+                {
+                  label: t('line2'),
+                  key: 'line2',
+                },
+              ],
+              filename: 'ordered',
             }}
           />
         </CmsContainer>
