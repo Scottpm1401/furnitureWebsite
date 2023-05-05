@@ -37,9 +37,12 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
         >
           {title}
         </Text>
-        <Text maxWidth={isMobile ? '80%' : '60%'} color='white' fontSize='md'>
-          {description}
-        </Text>
+        {!isMobile && (
+          <Text maxWidth='80%' color='white' fontSize='md'>
+            {description}
+          </Text>
+        )}
+
         <Flex mt='1.5rem'>
           <Button
             variant='unstyled'
