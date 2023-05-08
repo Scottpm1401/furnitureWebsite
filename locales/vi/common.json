@@ -54,6 +54,10 @@
       "required": "Không thể bỏ trống ô này",
       "min": "Độ dài {{label}} phải ít nhất {{value}} ký tự",
       "max": "Độ dài {{label}} phải nhỏ hơn hoặc bằng {{value}} ký tự"
+    },
+    "analysis": {
+      "failed_to_get_top_users": "Lấy thông tin top 10 người dùng thất bại",
+      "failed_to_get_bought_products": "Lấy thông tin những sản phẩm đã được mua thất bại"
     }
   },
   "view_more": "Xem Thêm",
@@ -289,5 +293,6 @@
   "subscription_details": "Chi tiết đăng ký",
   "update_subscription": "Cập nhật thông tin đăng ký",
   "update_subscription_success": "Cập nhật thông tin đăng ký thành công",
-  "num_of_rate": "Số người đánh giá"
+  "num_of_rate": "Số người đánh giá",
+  "num_of_purchase": "Số lượng đã mua"
 }

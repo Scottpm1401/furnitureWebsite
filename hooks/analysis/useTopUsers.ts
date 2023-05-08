@@ -4,8 +4,15 @@ import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
 import { useCallback, useEffect, useState } from 'react';
 
-import { TopUser } from '../../models/analysis';
+import { AnalysisDate, TopUser } from '../../models/analysis';
 import { getTop10UsersByMonth } from '../../services/cms';
+
+const currentMonth = Number(moment().format('M'));
+const currentYear = Number(moment().format('Y'));
+const initialDate: AnalysisDate = {
+  month: currentMonth,
+  year: currentYear,
+};
 
 const useTopUsers = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,10 +21,10 @@ const useTopUsers = () => {
   const toast = useToast();
 
   const getTopUsers = useCallback(
-    async (month: number) => {
+    async (date: AnalysisDate) => {
       try {
         setIsLoading(true);
-        const dataSet = await getTop10UsersByMonth(month);
+        const dataSet = await getTop10UsersByMonth(date);
         setTopUsers(dataSet);
       } catch (err) {
         if (isAxiosError(err))
@@ -35,7 +42,7 @@ const useTopUsers = () => {
   );
 
   useEffect(() => {
-    getTopUsers(Number(moment().format('M')));
+    getTopUsers(initialDate);
   }, [getTopUsers]);
 
   return {

@@ -46,9 +46,8 @@ export const API = {
   },
   ANALYSIS: {
     GETREVENUEPERMONTH: '/analysis/months_revenue',
-    GETBOUGHTPRODUCTS: (month: number) =>
-      `/analysis/products_purchase/${month}`,
-    GETTOP10USERS: (month: number) => `/analysis/top_10_users/${month}`,
+    GETBOUGHTPRODUCTS: '/analysis/products_purchase',
+    GETTOP10USERS: '/analysis/top_10_users',
   },
   TEMPLATE: {
     GETALL: '/template/all',

@@ -1,5 +1,4 @@
 import {
-  Button,
   IconButton,
   IconButtonProps,
   Select,
@@ -12,15 +11,12 @@ import {
   Text,
   Thead,
 } from '@chakra-ui/react';
-import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
-import { CSVLink } from 'react-csv';
 
 import NavigateBeforeIcon from '../../public/svg/arrow_left.svg';
 import NavigateNextIcon from '../../public/svg/arrow_right.svg';
-import DownloadIcon from '../../public/svg/download.svg';
-import { formatShortDate } from '../../utils/common';
+import CSVButton, { CSVProps } from '../CSVButton';
 
 type LabelDisplayedRowsProps = {
   from: number;
@@ -58,11 +54,7 @@ type Props = {
     rowsPerPageOptions?: number[];
     onChangeRowsPerPage(rowNumber: number): void;
   };
-  csv?: {
-    data: any;
-    headers: any;
-    filename: string;
-  };
+  csv?: CSVProps;
 };
 
 const Table = ({
@@ -102,22 +94,11 @@ const Table = ({
         py={1}
       >
         {csv && (
-          <CSVLink
+          <CSVButton
             data={csv.data}
-            filename={`${csv.filename}_${lang}_${formatShortDate(
-              moment().toDate()
-            )}.csv`}
             headers={csv.headers}
-          >
-            <Button
-              rightIcon={<DownloadIcon width='24px' height='24px' />}
-              colorScheme='green'
-            >
-              <Text fontWeight='bold' fontSize='md'>
-                CSV
-              </Text>
-            </Button>
-          </CSVLink>
+            filename={csv.filename}
+          />
         )}
         <Stack direction='row' alignItems='center' spacing={3}>
           <Stack direction='row' spacing={1} alignItems='center'>

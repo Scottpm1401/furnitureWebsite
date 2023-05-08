@@ -4,8 +4,15 @@ import moment from 'moment';
 import useTranslation from 'next-translate/useTranslation';
 import { useCallback, useEffect, useState } from 'react';
 
-import { BoughtProduct } from '../../models/analysis';
+import { AnalysisDate, BoughtProduct } from '../../models/analysis';
 import { getBoughtProductByMonth } from '../../services/cms';
+
+const currentMonth = Number(moment().format('M'));
+const currentYear = Number(moment().format('Y'));
+const initialDate: AnalysisDate = {
+  month: currentMonth,
+  year: currentYear,
+};
 
 const useBoughtProducts = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,10 +21,10 @@ const useBoughtProducts = () => {
   const toast = useToast();
 
   const getBoughtProduct = useCallback(
-    async (month: number) => {
+    async (date: AnalysisDate) => {
       try {
         setIsLoading(true);
-        const dataSet = await getBoughtProductByMonth(month);
+        const dataSet = await getBoughtProductByMonth(date);
 
         setBoughtProducts(dataSet);
       } catch (err) {
@@ -36,7 +43,7 @@ const useBoughtProducts = () => {
   );
 
   useEffect(() => {
-    getBoughtProduct(Number(moment().format('M')));
+    getBoughtProduct(initialDate);
   }, [getBoughtProduct]);
 
   return {

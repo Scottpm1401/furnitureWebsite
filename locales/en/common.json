@@ -54,6 +54,10 @@
       "required": "This field cannot be empty",
       "min": "{{label}} length must be at least {{value}} characters long",
       "max": "{{label}} length must be less than or equal to {{value}} characters long"
+    },
+    "analysis": {
+      "failed_to_get_top_users": "Failed to get top 10 users",
+      "failed_to_get_bought_products": "Failed to get bought products"
     }
   },
   "view_more": "View More",
@@ -289,5 +293,6 @@
   "subscription_details": "Subscription Details",
   "update_subscription": "Update subscription",
   "update_subscription_success": "Update subscription success",
-  "num_of_rate": "Num of rate"
+  "num_of_rate": "Num of rate",
+  "num_of_purchase": "Num of purchase"
 }

@@ -22,3 +22,8 @@ export type TopUser = {
   paid: number;
   bought_products_quantity: number;
 };
+
+export type AnalysisDate = {
+  month: number;
+  year: number;
+};
