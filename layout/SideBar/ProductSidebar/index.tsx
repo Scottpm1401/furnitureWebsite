@@ -48,7 +48,7 @@ const ProductSidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
     <Box
       position={isMobile ? 'sticky' : 'relative'}
       zIndex={2}
-      top={NAV_HEIGHT}
+      top={isMobile ? NAV_HEIGHT : 0}
       h='full'
       background='white'
     >
