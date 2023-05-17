@@ -7,8 +7,8 @@ on:
       - main
 
 jobs:
-  push:
-    name: Push code to EC2
+  pull_code:
+    name: Pull code from Git
     runs-on: ubuntu-latest
 
     steps:
@@ -24,9 +24,10 @@ jobs:
           script: |
             cd ~/app/furnitureWebsite
             git pull origin main
-  build:
-    name: Build code on EC2
+  deploy:
+    name: Build and deploy
     runs-on: ubuntu-latest
+    needs: pull_code
     steps:
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
