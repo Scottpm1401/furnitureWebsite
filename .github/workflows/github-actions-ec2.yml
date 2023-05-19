@@ -32,7 +32,6 @@ jobs:
       - name: Check for changes
         id: check_changes
         run: |
-          cd ~/app/furnitureWebsite
           if git diff --name-only origin/${{ github.ref }} ${{ github.sha }} | grep -qE '^(package\.json|\.env|next\.config\.js)$'; then
             echo "changed=true" >> $GITHUB_ENV
           else
@@ -41,7 +40,7 @@ jobs:
 
       - name: Restart code
         uses: appleboy/ssh-action@master
-        if: steps.check_changes.outputs.changed == 'false'
+        if: env.changed == 'false'
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
@@ -52,7 +51,7 @@ jobs:
 
       - name: Rebuild and deploy code
         uses: appleboy/ssh-action@master
-        if: steps.check_changes.outputs.changed == 'true'
+        if: env.changed == 'true'
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
