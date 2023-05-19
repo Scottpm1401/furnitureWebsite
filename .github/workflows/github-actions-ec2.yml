@@ -6,9 +6,6 @@ on:
     branches:
       - main
 
-env:
-  GITHUB_ENV: false
-
 jobs:
   pull_code:
     name: Pull code from Git
@@ -24,9 +21,9 @@ jobs:
         id: check_changes
         run: |
           if git diff --name-only HEAD~1 ${{ github.sha }} | grep -qE '^(package\.json|\.env|next\.config\.js)$'; then
-            $GITHUB_ENV = true
+            echo "changed=true" >> $GITHUB_ENV
           else
-            $GITHUB_ENV = false
+            echo "changed=false" >> $GITHUB_ENV
           fi
 
       - name: Pull code
@@ -38,14 +35,16 @@ jobs:
           script: |
             cd ~/app/furnitureWebsite
             git pull origin main
+
   deploy:
     name: Build and deploy
     runs-on: ubuntu-latest
     needs: pull_code
+
     steps:
       - name: Restart code
         uses: appleboy/ssh-action@master
-        if: $GITHUB_ENV == false
+        if: env.changed == 'false'
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
@@ -56,7 +55,7 @@ jobs:
 
       - name: Rebuild and deploy code
         uses: appleboy/ssh-action@master
-        if: $GITHUB_ENV == true
+        if: env.changed == 'true'
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
