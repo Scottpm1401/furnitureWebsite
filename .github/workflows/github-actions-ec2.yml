@@ -32,6 +32,7 @@ jobs:
       - name: Check for changes
         id: check_changes
         run: |
+          cd ~/app/furnitureWebsite
           if git diff --name-only origin/${{ github.ref }} ${{ github.sha }} | grep -qE '^(package\.json|\.env|next\.config\.js)$'; then
             echo "changed=true" >> $GITHUB_ENV
           else
