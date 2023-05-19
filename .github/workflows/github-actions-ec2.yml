@@ -18,7 +18,7 @@ jobs:
       - name: Check for changes
         id: check_changes
         run: |
-          if git diff --name-only HEAD@{1} ${{ github.sha }} | grep -qE '^(package\.json|\.env|next\.config\.js)$'; then
+          if git diff --name-only HEAD~1 ${{ github.sha }} | grep -qE '^(package\.json|\.env|next\.config\.js)$'; then
             echo "changed=true" >> $GITHUB_ENV
           else
             echo "changed=false" >> $GITHUB_ENV
