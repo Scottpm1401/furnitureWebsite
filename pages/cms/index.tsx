@@ -185,20 +185,20 @@ const Cms: NextApplicationPage = () => {
                         >{`${moment().year() - index}`}</option>
                       ))}
                   </Select>
-                  <Select
-                    value={userChartType}
-                    onChange={(e) => {
-                      setUserChartType(e.target.value as UserChartType);
-                    }}
-                  >
-                    <option value={UserChartType.paid}>
-                      {t(UserChartType.paid)}
-                    </option>
-                    <option value={UserChartType.num_of_bought}>
-                      {t(UserChartType.num_of_bought)}
-                    </option>
-                  </Select>
                 </Stack>
+                <Select
+                  value={userChartType}
+                  onChange={(e) => {
+                    setUserChartType(e.target.value as UserChartType);
+                  }}
+                >
+                  <option value={UserChartType.paid}>
+                    {t(UserChartType.paid)}
+                  </option>
+                  <option value={UserChartType.num_of_bought}>
+                    {t(UserChartType.num_of_bought)}
+                  </option>
+                </Select>
               </Stack>
 
               <TopUsersDoughnutChart

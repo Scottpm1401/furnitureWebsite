@@ -7,7 +7,7 @@ import { reducer } from './reducer';
 
 export const store = configureStore({
   reducer,
-  middleware: [logger],
+  middleware: isDevEnv() ? [logger] : [],
   devTools: isDevEnv(),
 });
 export const persistor = persistStore(store);
