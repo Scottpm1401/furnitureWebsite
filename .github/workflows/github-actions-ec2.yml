@@ -42,3 +42,20 @@ jobs:
             docker compose stop frontend
             docker compose up -d frontend --build
             docker image prune -f
+
+  notify_email:
+    name: Notify email
+    runs-on: ubuntu-latest
+    needs: deploy
+
+    steps:
+      - name: Notify email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          to: ${{github.event.pusher.email}}
+          from: github-actions
+          subject: Build Job result
+          body: Build job of ${{github.repository}} completed successfully!
