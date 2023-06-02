@@ -58,4 +58,4 @@ jobs:
           to: ${{secrets.MAIL_TO}}
           from: Comfysloth Deployment[bot]
           subject: 'Re:[${{github.repository}}] ${{ github.event.head_commit.message }}'
-          body: 'Successfully deployed to the followings URL: https://comfysloth.store'
+          body: 'Successfully deployed to the followings URL: ${{secrets.APP_DEPLOY_URL}}'
