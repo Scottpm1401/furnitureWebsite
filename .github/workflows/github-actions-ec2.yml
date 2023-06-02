@@ -56,6 +56,6 @@ jobs:
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           to: ${{secrets.MAIL_TO}}
-          from: github-actions
+          from: Comfysloth Deployment
           subject: Build Job result
           body: Build job of ${{github.repository}} completed successfully!
