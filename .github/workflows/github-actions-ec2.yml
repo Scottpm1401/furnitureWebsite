@@ -55,7 +55,7 @@ jobs:
           server_address: smtp.gmail.com
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          to: ${{github.event.pusher.email}}
+          to: ${{secrets.MAIL_TO}}
           from: github-actions
           subject: Build Job result
           body: Build job of ${{github.repository}} completed successfully!
