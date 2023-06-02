@@ -20,7 +20,7 @@ const NotFound = (props: Props) => {
         minH='60vh'
         title='Not Found'
       >
-        <Text fontWeight='bold' fontSize='4xl'>
+        <Text fontWeight='bold' fontSize='4xl' textAlign='center'>
           404 {t('page_not_found')}
         </Text>
         <Flex mt='1rem'>
