@@ -148,7 +148,7 @@ const AdditionalInfoProfile = () => {
                   >
                     {Object.values(Gender).map((gen) => (
                       <option value={gen} key={gen}>
-                        {gen}
+                        {t(gen)}
                       </option>
                     ))}
                   </Select>
