@@ -46,6 +46,7 @@ const NavLink = ({
       display='flex'
       justifyContent={direction === 'center' ? 'center' : 'flex-start'}
       variant='unstyled'
+      w='fit-content'
       {...props}
     >
       <Link
