@@ -6,7 +6,6 @@ import {
   useBreakpointValue,
   useToast,
 } from '@chakra-ui/react';
-import { css } from '@emotion/react';
 import { isAxiosError } from 'axios';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
@@ -101,17 +100,16 @@ const Section2 = () => {
           alignItems='center'
           justifyContent='center'
           wrap='wrap'
-          css={css`
-            svg {
-              width: 300px;
-              height: 150px;
-              transition: all 200ms ease-in-out;
-            }
-
-            svg:hover {
-              transform: scale(1.05);
-            }
-          `}
+          sx={{
+            svg: {
+              width: '300px',
+              height: '150px',
+              transition: 'all 200ms ease-in-out',
+              '&:hover': {
+                transform: 'scale(1.05)',
+              },
+            },
+          }}
         >
           <Link href='https://www.ashleyfurniture.com/' target='_blank'>
             <AshleyIcon />

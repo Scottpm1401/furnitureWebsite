@@ -59,6 +59,11 @@ const MobileNavSideBar = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t, lang } = useTranslation();
 
+  const handleUpdateLanguage = async (lang: string) => {
+    await handleChangeLanguage(lang);
+    setIsOpenLanguage(false);
+  };
+
   return (
     <Flex justifyContent='flex-start' alignItems='center'>
       <Button
@@ -283,13 +288,13 @@ const MobileNavSideBar = ({
                 <PopoverContent w='120px'>
                   <Button
                     variant='unstyled'
-                    onClick={() => handleChangeLanguage('en')}
+                    onClick={() => handleUpdateLanguage('en')}
                   >
                     <Text color='black'>English</Text>
                   </Button>
                   <Button
                     variant='unstyled'
-                    onClick={() => handleChangeLanguage('vi')}
+                    onClick={() => handleUpdateLanguage('vi')}
                   >
                     <Text color='black'>Tiếng Việt</Text>
                   </Button>

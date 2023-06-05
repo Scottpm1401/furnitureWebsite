@@ -1,5 +1,4 @@
 import { Flex, FlexProps } from '@chakra-ui/layout';
-import { css } from '@emotion/react';
 import React from 'react';
 import DatePicker from 'react-datepicker';
 
@@ -19,18 +18,18 @@ const CustomDatePicker = ({
 }: CustomDateProps) => {
   return (
     <Flex
-      css={css`
-        input {
-          background: transparent;
-          width: 100%;
-          border: 1px solid var(--chakra-colors-gray-200);
-          padding: 0 1rem;
-          height: var(--chakra-sizes-10);
-          border-radius: var(--chakra-radii-md);
-          transition: all 200ms ease-in-out;
-          outline: none;
-        }
-      `}
+      sx={{
+        input: {
+          background: 'transparent',
+          width: '100%',
+          border: '1px solid var(--chakra-colors-gray-200)',
+          padding: '0 1rem',
+          height: 'var(--chakra-sizes-10)',
+          borderRadius: 'var(--chakra-radii-md)',
+          transition: 'all 200ms ease-in-out',
+          outline: 'none',
+        },
+      }}
       {...props}
     >
       <DatePicker

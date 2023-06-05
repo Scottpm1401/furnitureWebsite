@@ -9,10 +9,9 @@ import {
   SliderTrack,
   Text,
 } from '@chakra-ui/react';
-import { css } from '@emotion/react';
 import { debounce } from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import ColorButton from '../../../components/ColorButton';
 import { useResponsive } from '../../../hooks/responsive';
@@ -111,11 +110,11 @@ const ProductSidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
                 key={value}
               >
                 <Flex
-                  css={css`
-                    &:hover .underline {
-                      width: 100%;
-                    }
-                  `}
+                  _hover={{
+                    '.underline': {
+                      width: '100%',
+                    },
+                  }}
                   cursor='pointer'
                   direction='column'
                   onClick={() =>
@@ -155,11 +154,11 @@ const ProductSidebar = ({ filter, handleUpdateFilter }: SidebarType) => {
                 key={value}
               >
                 <Flex
-                  css={css`
-                    &:hover .underline {
-                      width: 100%;
-                    }
-                  `}
+                  _hover={{
+                    '.underline': {
+                      width: '100%',
+                    },
+                  }}
                   cursor='pointer'
                   onClick={() =>
                     value === filter.brand

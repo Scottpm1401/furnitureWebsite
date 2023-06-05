@@ -6,7 +6,6 @@ import {
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
-import { css } from '@emotion/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -76,13 +75,13 @@ const ProductCard = ({
           w='full'
           h='full'
           position='relative'
-          css={css`
-            &:hover .popup {
-              visibility: visible;
-              opacity: 1;
-              z-index: 1;
-            }
-          `}
+          _hover={{
+            '.popup': {
+              visibility: 'visible',
+              opacity: 1,
+              zIndex: 1,
+            },
+          }}
           onClick={() =>
             isLoaded && router.push(APP_ROUTES.product(product._id))
           }
@@ -111,6 +110,7 @@ const ProductCard = ({
             justifyContent='center'
             alignItems='center'
             gap='1rem'
+            borderRadius='1rem'
           >
             {userId && isAvailable && (
               <PopupButton

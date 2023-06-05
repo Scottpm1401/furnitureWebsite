@@ -1,5 +1,4 @@
 import { Button, ButtonProps } from '@chakra-ui/react';
-import { css } from '@emotion/react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -19,15 +18,15 @@ const SocialIcon = ({
 }: SocialIconType) => {
   return (
     <Button
-      css={css`
-        svg {
-          transition: all 300ms ease-in-out;
-        }
-        &:hover svg {
-          stroke: ${strokeColor || 'transparent'};
-          fill: ${hoverColor};
-        }
-      `}
+      sx={{
+        svg: {
+          transition: 'all 300ms ease-in-out',
+          '&:hover': {
+            stroke: strokeColor || 'transparent',
+            fill: hoverColor,
+          },
+        },
+      }}
       variant='unstyled'
       w='28px'
       h='28px'

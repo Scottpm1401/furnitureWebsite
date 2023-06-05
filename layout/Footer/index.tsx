@@ -1,5 +1,4 @@
 import { Button, Flex, Stack, Text } from '@chakra-ui/react';
-import { css } from '@emotion/react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -174,17 +173,17 @@ const Footer = (props: Props) => {
           <Text mt='1rem'>{t('payment_method_des')}</Text>
           <Flex
             justifyContent={isMobile ? 'center' : 'flex-start'}
-            css={css`
-              a {
-                transition: all 200ms ease-in-out;
-              }
-              a:hover {
-                scale: 1.2;
-              }
-              svg {
-                width: 60px;
-              }
-            `}
+            sx={{
+              a: {
+                transition: 'all 200ms ease-in-out',
+                '&:hover': {
+                  scale: 1.2,
+                },
+              },
+              svg: {
+                width: '60px',
+              },
+            }}
           >
             <Link href='https://www.mastercard.com' target='_blank'>
               <MasterCard />

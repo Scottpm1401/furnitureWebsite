@@ -1,9 +1,7 @@
 import { Button, Flex, FlexProps, Text } from '@chakra-ui/react';
-import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
 
 import { APP_ROUTES } from '../../../../constant';
 import { useResponsive } from '../../../../hooks/responsive';
@@ -46,16 +44,18 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
         <Flex mt='1.5rem'>
           <Button
             variant='unstyled'
-            css={css`
-              &:hover circle {
-                stroke-dashoffset: 165;
-              }
-              circle {
-                transition: all 0.4s cubic-bezier(0.65, 0.05, 0.36, 1);
-                transform: rotate(90deg);
-                transform-origin: center;
-              }
-            `}
+            sx={{
+              circle: {
+                transition: 'all 0.4s cubic-bezier(0.65, 0.05, 0.36, 1)',
+                transform: 'rotate(90deg)',
+                transformOrigin: 'center',
+              },
+            }}
+            _hover={{
+              circle: {
+                strokeDashoffset: 165,
+              },
+            }}
           >
             <Link href={APP_ROUTES.products}>
               <Flex position='absolute' left='0' top='0' w='40px' h='40px'>

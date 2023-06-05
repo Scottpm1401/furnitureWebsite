@@ -1,8 +1,6 @@
 import { Button, Flex, Input, Stack, Text } from '@chakra-ui/react';
-import { css } from '@emotion/react';
 import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
 import * as Yup from 'yup';
 
 import { SubscribeRequest } from '../../../models/subscription';
@@ -39,14 +37,16 @@ const SubscribeForm = ({ handleSubmit }: Props) => {
                 onChange={handleChange('email')}
               />
               <Button
-                css={css`
-                  svg {
-                    transition: all 200ms ease-in-out;
-                  }
-                  &:hover svg {
-                    transform: translateX(10px);
-                  }
-                `}
+                sx={{
+                  svg: {
+                    transition: 'all 200ms ease-in-out',
+                  },
+                }}
+                _hover={{
+                  svg: {
+                    transform: 'translateX(10px)',
+                  },
+                }}
                 variant='unstyled'
                 w='24px'
                 h='24px'

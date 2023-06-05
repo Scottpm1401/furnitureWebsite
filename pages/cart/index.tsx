@@ -424,7 +424,7 @@ const Cart: NextApplicationPage = () => {
             justifyContent='center'
             alignItems='center'
           >
-            <Text fontSize='3xl' fontWeight='semibold'>
+            <Text fontSize='3xl' fontWeight='semibold' textAlign='center'>
               {t('empty_cart')}
             </Text>
             <Link href={APP_ROUTES.products}>

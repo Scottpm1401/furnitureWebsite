@@ -383,7 +383,7 @@ const Ordered: NextApplicationPage = () => {
               spacing={4}
               minH='50vh'
             >
-              <Text fontWeight='semibold' fontSize='2xl'>
+              <Text fontWeight='semibold' fontSize='2xl' textAlign='center'>
                 {t('empty_orders')}
               </Text>
               <Stack>

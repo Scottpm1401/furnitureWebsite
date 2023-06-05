@@ -1,7 +1,5 @@
 import { Flex, FlexProps, Text } from '@chakra-ui/react';
-import { css } from '@emotion/react';
 import Image from 'next/image';
-import React from 'react';
 
 import { useResponsive } from '../../hooks/responsive';
 
@@ -20,19 +18,19 @@ const TeamCard = ({ img, name, role, ...props }: TeamCardType) => {
       {...props}
     >
       <Flex
-        css={css`
-          overflow: hidden;
-          img:hover {
-            transform: scale(1.05) translateX(5px);
-          }
-          img {
-            transform: scale(1.05) translateX(0px);
-          }
-        `}
+        overflow='hidden'
         position='relative'
         w='full'
         h='auto'
         borderRadius='1rem'
+        sx={{
+          img: {
+            transform: 'scale(1.05) translateX(0px)',
+            '&:hover': {
+              transform: 'scale(1.05) translateX(5px)',
+            },
+          },
+        }}
       >
         <Image
           style={{

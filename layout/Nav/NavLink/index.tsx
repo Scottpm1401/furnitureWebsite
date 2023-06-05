@@ -6,7 +6,6 @@ import {
   Text,
   TextProps,
 } from '@chakra-ui/react';
-import { css } from '@emotion/react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -34,14 +33,16 @@ const NavLink = ({
 
   return (
     <Button
-      css={css`
-        &:not(last-child) {
-          margin-right: ${isSpacing ? '2rem' : '0'};
-        }
-        &:hover .underline {
-          width: 100%;
-        }
-      `}
+      sx={{
+        '&:not(last-child)': {
+          marginRight: isSpacing ? '2rem' : '0',
+        },
+      }}
+      _hover={{
+        '.underline': {
+          width: '100%',
+        },
+      }}
       display='flex'
       justifyContent={direction === 'center' ? 'center' : 'flex-start'}
       variant='unstyled'
