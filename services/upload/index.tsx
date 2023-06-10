@@ -10,8 +10,8 @@ export type GetSignatureType = {
 };
 
 export type UploadedImage = {
-  public_id: string;
-  version?: number;
+  image: string;
+  data: any;
 };
 
 export const getSignature = async ({ public_id, folder }: GetSignatureType) => {
@@ -23,17 +23,10 @@ export const getSignature = async ({ public_id, folder }: GetSignatureType) => {
 };
 
 export const uploadImage = async (body: FormData) => {
-  const res = await axios.post(
-    process.env.NEXT_PUBLIC_CLOUDINARY_URL || '',
-    body,
-    {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    }
-  );
-  return {
-    public_id: res.data.public_id,
-    version: res.data.version,
-  } as UploadedImage;
+  const res = await axiosClient.post(API.IMAGE.UPLOAD, body, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return res.data as UploadedImage;
 };
 
 export const destroyImage = async (body: FormData) => {

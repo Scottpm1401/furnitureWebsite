@@ -38,6 +38,9 @@ export const API = {
   UPLOAD: {
     SIGNATURE: '/upload/signature',
   },
+  IMAGE: {
+    UPLOAD: '/image/upload',
+  },
   ORDERED: {
     GETSELF: '/ordered/getself',
     GETALL: '/ordered/all',

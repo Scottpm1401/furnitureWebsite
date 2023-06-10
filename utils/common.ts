@@ -92,6 +92,10 @@ export const handleDeleteImage = async (img: string) => {
   await destroyImage(formData);
 };
 
+export const isFile = (value: any) => {
+  return value instanceof File;
+};
+
 export const isDevEnv = () => {
   return process.env.NODE_ENV === 'development';
 };
