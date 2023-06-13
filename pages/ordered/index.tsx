@@ -334,7 +334,7 @@ const Ordered: NextApplicationPage = () => {
                         {order.products.map((item) => (
                           <OrderedItem
                             handleRating={handleRating}
-                            key={item.product_id}
+                            key={`${item.product_id}_${item.color}`}
                             item={item}
                             orderId={order._id}
                           />
@@ -362,7 +362,7 @@ const Ordered: NextApplicationPage = () => {
                             {order.products.map((item) => (
                               <OrderedItem
                                 handleRating={handleRating}
-                                key={item.product_id}
+                                key={`${item.product_id}_${item.color}`}
                                 item={item}
                                 orderId={order._id}
                               />
