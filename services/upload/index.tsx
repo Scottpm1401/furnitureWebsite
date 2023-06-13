@@ -29,14 +29,8 @@ export const uploadImage = async (body: FormData) => {
   return res.data as UploadedImage;
 };
 
-export const destroyImage = async (body: FormData) => {
-  const res = await axios.post(
-    process.env.NEXT_PUBLIC_CLOUDINARY_DESTROY_URL || '',
-    body,
-    {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    }
-  );
+export const destroyImage = async (name: string) => {
+  const res = await axiosClient.post(API.IMAGE.DELETE, { name });
 
   return res.data;
 };

@@ -40,6 +40,7 @@ export const API = {
   },
   IMAGE: {
     UPLOAD: '/image/upload',
+    DELETE: '/image/delete',
   },
   ORDERED: {
     GETSELF: '/ordered/getself',

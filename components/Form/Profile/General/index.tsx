@@ -8,13 +8,9 @@ import { useResponsive } from '../../../../hooks/responsive';
 import Camera from '../../../../public/svg/camera.svg';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';
-import {
-  getSignature,
-  GetSignatureType,
-  uploadImage,
-} from '../../../../services/upload';
+import { uploadImage } from '../../../../services/upload';
 import { updateUser } from '../../../../services/user';
-import { convertToBase64, isFile } from '../../../../utils/common';
+import { convertToBase64 } from '../../../../utils/common';
 import CustomInput from '../../../CustomInput';
 
 type GeneralProfileType = {
