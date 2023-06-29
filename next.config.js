@@ -9,7 +9,7 @@ const securityHeaders = [
   },
   {
     key: 'Content-Security-Policy',
-    value: `default-src 'self' ${process.env.NEXT_PUBLIC_BE_URL}; img-src *; media-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; frame-src https://www.google.com https://js.stripe.com;`,
+    value: `default-src 'self' ${process.env.NEXT_PUBLIC_BE_URL}; img-src * 'data:'; media-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; frame-src https://www.google.com https://js.stripe.com;`,
   },
   {
     key: 'X-Frame-Options',
