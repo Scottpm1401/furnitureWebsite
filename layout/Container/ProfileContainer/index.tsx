@@ -10,6 +10,7 @@ import UserIcon from '../../../public/svg/user.svg';
 import UserAdvanceIcon from '../../../public/svg/user_advance.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
+import { isBase64Image } from '../../../utils/common';
 import CommonSideBar from '../../SideBar/CommonSideBar';
 import Container from '..';
 
@@ -45,7 +46,13 @@ const ProfileContainer = ({ children, ...props }: Props) => {
             <Avatar
               w='full'
               h='full'
-              src={`${process.env.NEXT_PUBLIC_CDN}${user.info?.avatar}`}
+              src={
+                user.info?.avatar
+                  ? isBase64Image(user.info?.avatar)
+                    ? user.info.avatar
+                    : `${process.env.NEXT_PUBLIC_CDN}${user.info?.avatar}`
+                  : ''
+              }
               name={user?.displayName}
             />
           </Flex>

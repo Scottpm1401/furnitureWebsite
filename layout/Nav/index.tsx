@@ -29,6 +29,7 @@ import ShoppingBagIcon from '../../public/svg/shopping_bag.svg';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { actions, selectors } from '../../redux/reducer';
 import { logout } from '../../services/auth';
+import { isBase64Image } from '../../utils/common';
 import Container from '../Container';
 import MobileNavSideBar from './MobileNavSideBar';
 import NavLink from './NavLink';
@@ -243,7 +244,13 @@ const Nav = (props: Props) => {
                           <Avatar
                             ml='1rem'
                             name={user?.displayName}
-                            src={`${process.env.NEXT_PUBLIC_CDN}${user?.info?.avatar}`}
+                            src={
+                              user.info?.avatar
+                                ? isBase64Image(user.info?.avatar)
+                                  ? user.info.avatar
+                                  : `${process.env.NEXT_PUBLIC_CDN}${user.info?.avatar}`
+                                : ''
+                            }
                             size='sm'
                           />
                         </Button>
@@ -343,7 +350,13 @@ const Nav = (props: Props) => {
                   <Avatar
                     w='full'
                     h='full'
-                    src={`${process.env.NEXT_PUBLIC_CDN}${user.info?.avatar}`}
+                    src={
+                      user.info?.avatar
+                        ? isBase64Image(user.info?.avatar)
+                          ? user.info.avatar
+                          : `${process.env.NEXT_PUBLIC_CDN}${user.info?.avatar}`
+                        : ''
+                    }
                     name={user?.displayName}
                   />
                 </Flex>

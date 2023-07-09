@@ -31,12 +31,13 @@ const GeneralProfile = () => {
   const handleUpdateProfile = async (values: GeneralProfileType) => {
     try {
       setIsLoading(true);
-      if (values.avatar) {
+      if (values.avatar && reviewImage) {
         const formData = new FormData();
 
         if (user.info?.avatar) formData.append('name', user.info.avatar);
 
         formData.append('image', values.avatar);
+        formData.append('isNoCache', 'true');
 
         const { image } = await uploadImage(formData);
         const updatedUser = await updateUser({
@@ -47,7 +48,12 @@ const GeneralProfile = () => {
             avatar: image,
           },
         });
-        dispatch(actions.user.setUser(updatedUser));
+        dispatch(
+          actions.user.setUser({
+            ...updatedUser,
+            info: { ...updatedUser.info, avatar: reviewImage },
+          })
+        );
       } else {
         const updatedUser = await updateUser({
           username: values.username,
