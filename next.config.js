@@ -7,10 +7,10 @@ const securityHeaders = [
     key: 'Strict-Transport-Security',
     value: 'max-age=63072000; includeSubDomains; preload',
   },
-  // {
-  //   key: 'Content-Security-Policy',
-  //   value: `default-src 'self' ${process.env.NEXT_PUBLIC_BE_URL}; img-src * 'data:'; media-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; frame-src https://www.google.com https://js.stripe.com;`,
-  // },
+  {
+    key: 'Content-Security-Policy',
+    value: `default-src 'self' ${process.env.NEXT_PUBLIC_BE_URL} ${process.env.NEXT_PUBLIC_CLOUDINARY_URL}; img-src * data:; media-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; frame-src https://www.google.com https://js.stripe.com;`,
+  },
   {
     key: 'X-Frame-Options',
     value: 'SAMEORIGIN',
