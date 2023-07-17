@@ -28,6 +28,9 @@ export type AddressType = {
 export enum Role {
   user = 'USER',
   admin = 'ADMIN',
+  super_admin = 'SUPER_ADMIN',
+  owner = 'OWNER',
+  shipper = 'SHIPPER',
 }
 
 export type UserType = {

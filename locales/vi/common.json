@@ -24,6 +24,7 @@
       "not_found": "Không tìm thấy người dùng",
       "failed_to_change_password": "Đổi mật khẩu thất bại",
       "failed_to_update_user": "Cập nhật người dùng thất bại",
+      "update_role_is_higher_than_your": "Quyền hạn cập nhật không được cao hơn quyền của bạn",
       "cart": {
         "failed_to_add_product": "Thêm sản phẩm thất bại",
         "not_found": "Không tìm thấy giỏ hàng",
@@ -294,5 +295,10 @@
   "update_subscription": "Cập nhật thông tin đăng ký",
   "update_subscription_success": "Cập nhật thông tin đăng ký thành công",
   "num_of_rate": "Số người đánh giá",
-  "num_of_purchase": "Số lượng đã mua"
+  "num_of_purchase": "Số lượng đã mua",
+  "ADMIN": "Quản trị viên",
+  "SUPER_ADMIN": "Quản trị viên cao cấp",
+  "USER": "Người dùng",
+  "OWNER": "Chủ sở hữu",
+  "SHIPPER": "Giao hàng"
 }

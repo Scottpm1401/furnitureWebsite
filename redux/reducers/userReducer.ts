@@ -51,12 +51,33 @@ const selectors = (<S extends { user: UserType }>() => {
   const selectUserId = createSelector(getState, (state) => state._id);
   const selectUserCart = createSelector(getState, (state) => state.cart);
   const selectCartTotal = createSelector(getState, (state) => state.cart_total);
-  const isAdmin = createSelector(getState, (state) => state.role === 'ADMIN');
+  const isAdmin = createSelector(
+    getState,
+    (state) =>
+      state.role === Role.admin ||
+      state.role === Role.super_admin ||
+      state.role === Role.owner
+  );
+
+  const isSuperAdmin = createSelector(
+    getState,
+    getState,
+    (state) => state.role === Role.super_admin || state.role === Role.owner
+  );
+
+  const isOwner = createSelector(
+    getState,
+
+    getState,
+    (state) => state.role === Role.owner
+  );
 
   return {
     selectUser,
     selectUserId,
     isAdmin,
+    isSuperAdmin,
+    isOwner,
     selectUserCart,
     selectCartTotal,
   };

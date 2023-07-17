@@ -24,6 +24,7 @@
       "not_found": "User not found",
       "failed_to_change_password": "Failed to change user password",
       "failed_to_update_user": "Failed to update user",
+      "update_role_is_higher_than_your": "Update role is higher than your role",
       "cart": {
         "failed_to_add_product": "Failed to add product",
         "not_found": "Cart not found",
@@ -294,5 +295,10 @@
   "update_subscription": "Update subscription",
   "update_subscription_success": "Update subscription success",
   "num_of_rate": "Num of rate",
-  "num_of_purchase": "Num of purchase"
+  "num_of_purchase": "Num of purchase",
+  "ADMIN": "Admin",
+  "SUPER_ADMIN": "Super Admin",
+  "USER": "User",
+  "OWNER": "Owner",
+  "SHIPPER": "Shipper"
 }

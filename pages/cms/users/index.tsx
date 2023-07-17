@@ -52,7 +52,7 @@ const CmsUsers: NextApplicationPage = () => {
                   <Td>{user.username}</Td>
                   <Td>{user.email}</Td>
                   <Td>{formatDateLong(user.birthday)}</Td>
-                  <Td>{user.role}</Td>
+                  <Td>{t(user.role)}</Td>
                   <Td>
                     <IconButton
                       minW='unset'
@@ -100,7 +100,7 @@ const CmsUsers: NextApplicationPage = () => {
               displayName: user.displayName,
               phone: user.info?.phone,
               birthday: formatShortDate(user.birthday),
-              role: user.role,
+              role: t(user.role),
               first_name: user.info?.first_name,
               last_name: user.info?.last_name,
               gender: user.info?.sex ? t(user.info.sex) : undefined,

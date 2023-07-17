@@ -87,7 +87,10 @@ axiosClient.interceptors.response.use(
 
       if (
         err.response.status === 401 ||
-        (err.response.status === 403 && role === Role.admin)
+        (err.response.status === 403 &&
+          (role === Role.admin ||
+            role === Role.super_admin ||
+            role === Role.owner))
       )
         return new Promise((resolve, reject) => {
           const f = async () => {

@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 import { countries } from '../../../constant/country';
 import { UpdateUserRequest } from '../../../models/api/cms';
 import { Gender, Role, UserType } from '../../../models/user';
+import { useAppSelector } from '../../../redux/hooks';
+import { selectors } from '../../../redux/reducer';
 import { formatDateLong, getCountryName } from '../../../utils/common';
 import CustomDatePicker from '../../CustomDatePicker';
 import TableDetail from '../../Table/TableDetail';
@@ -19,6 +21,7 @@ type UserFormProps = {
 const UserForm = ({ user, onSubmit }: UserFormProps) => {
   const { t } = useTranslation();
   const [isUpdating, setIsUpdating] = useState(false);
+  const isSuperAdmin = useAppSelector(selectors.user.isSuperAdmin);
 
   const handleSubmit = async (values: UpdateUserRequest) => {
     try {
@@ -124,12 +127,18 @@ const UserForm = ({ user, onSubmit }: UserFormProps) => {
               },
               {
                 title: t('role'),
-                content: values.role,
+                content: t(values.role || ''),
                 edit: {
                   customInput: (
                     <Select value={values.role} onChange={handleChange('role')}>
-                      <option value={Role.user}>{Role.user}</option>
-                      <option value={Role.admin}>{Role.admin}</option>
+                      <option value={Role.user}>{t(Role.user)}</option>
+                      <option value={Role.shipper}>{t(Role.shipper)}</option>
+                      <option value={Role.admin}>{t(Role.admin)}</option>
+                      {isSuperAdmin && (
+                        <option value={Role.super_admin}>
+                          {t(Role.super_admin)}
+                        </option>
+                      )}
                     </Select>
                   ),
                   isInit: initialValues.role === values.role,
