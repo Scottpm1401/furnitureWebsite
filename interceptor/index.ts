@@ -121,6 +121,14 @@ axiosClient.interceptors.response.use(
             } catch (err) {
               if (axios.isAxiosError(err) || err instanceof Error)
                 processQueue(err, null);
+              store.dispatch(
+                actions.auth.setAuth({
+                  accessToken: null,
+                  expiredDate: null,
+                  refreshToken: null,
+                })
+              );
+              if (window) window.location.href = APP_ROUTES.login;
               reject(err);
             } finally {
               isRefreshing = false;
