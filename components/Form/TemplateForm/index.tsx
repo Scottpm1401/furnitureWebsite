@@ -48,7 +48,7 @@ const TemplateForm = ({ template, onSubmit, create }: TemplateFormProps) => {
       initialValues={
         {
           banners: template.banners,
-          about: template.about,
+          about: { ...template.about, _id: undefined },
           home_footer: template.home_footer,
           contact: template.contact,
           terms_and_conditions: template.terms_and_conditions,
