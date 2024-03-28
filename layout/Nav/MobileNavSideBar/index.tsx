@@ -37,6 +37,7 @@ import Twitter from '../../../public/svg/twitter.svg';
 import SignupIcon from '../../../public/svg/user-plus.svg';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectors } from '../../../redux/reducer';
+import { isBase64Image } from '../../../utils/common';
 import NavLink from '../NavLink';
 
 type MobileNavSideBarType = {
@@ -102,7 +103,13 @@ const MobileNavSideBar = ({
                       <Avatar
                         w='full'
                         h='full'
-                        src={`${process.env.NEXT_PUBLIC_CDN}${user.info?.avatar}`}
+                        src={
+                          user.info?.avatar
+                            ? isBase64Image(user.info?.avatar)
+                              ? user.info.avatar
+                              : `${process.env.NEXT_PUBLIC_CDN}${user.info?.avatar}`
+                            : ''
+                        }
                         name={user?.displayName}
                       />
                     </Flex>

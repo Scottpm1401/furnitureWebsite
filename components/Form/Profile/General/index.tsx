@@ -8,11 +8,7 @@ import { useResponsive } from '../../../../hooks/responsive';
 import Camera from '../../../../public/svg/camera.svg';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { actions, selectors } from '../../../../redux/reducer';
-import {
-  getSignature,
-  GetSignatureType,
-  uploadImage,
-} from '../../../../services/upload';
+import { uploadImage } from '../../../../services/upload';
 import { updateUser } from '../../../../services/user';
 import { convertToBase64 } from '../../../../utils/common';
 import CustomInput from '../../../CustomInput';
@@ -30,42 +26,34 @@ const GeneralProfile = () => {
   const dispatch = useAppDispatch();
   const toast = useToast();
   const { isMobile } = useResponsive();
+  const [reviewImage, setReviewImage] = useState<string | undefined>(undefined);
 
   const handleUpdateProfile = async (values: GeneralProfileType) => {
     try {
       setIsLoading(true);
-      if (values.avatar) {
+      if (values.avatar && reviewImage) {
         const formData = new FormData();
-        let signatureParam: GetSignatureType = {};
-        if (user.info?.avatar) {
-          const publicId = user.info.avatar.slice(
-            user.info.avatar.indexOf('furniture')
-          );
-          signatureParam.public_id = publicId;
-          formData.append('public_id', publicId);
-        } else {
-          const folder = 'furniture/users';
-          signatureParam.folder = folder;
-          formData.append('folder', folder);
-        }
-        const { signature, timestamp } = await getSignature(signatureParam);
-        formData.append('file', values.avatar);
-        formData.append(
-          'api_key',
-          process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || ''
-        );
-        formData.append('timestamp', timestamp.toString());
-        formData.append('signature', signature);
-        const { public_id, version } = await uploadImage(formData);
+
+        if (user.info?.avatar) formData.append('name', user.info.avatar);
+
+        formData.append('image', values.avatar);
+        formData.append('isNoCache', 'true');
+
+        const { image } = await uploadImage(formData);
         const updatedUser = await updateUser({
           username: values.username,
           displayName: values.displayName,
           info: {
             ...user.info,
-            avatar: version ? `/v${version}/${public_id}` : public_id,
+            avatar: image,
           },
         });
-        dispatch(actions.user.setUser(updatedUser));
+        dispatch(
+          actions.user.setUser({
+            ...updatedUser,
+            info: { ...updatedUser.info, avatar: reviewImage },
+          })
+        );
       } else {
         const updatedUser = await updateUser({
           username: values.username,
@@ -203,7 +191,7 @@ const GeneralProfile = () => {
                     w='full'
                     h='full'
                     name={values?.displayName}
-                    src={values.avatar}
+                    src={reviewImage || values?.avatar}
                   />
                   <label htmlFor='avatar'>
                     <Flex
@@ -231,10 +219,11 @@ const GeneralProfile = () => {
                     type='file'
                     accept='image/png, image/gif, image/jpeg'
                     onChange={async (e) => {
-                      const { result } = await convertToBase64(
-                        e.target.files?.[0] as File
-                      );
-                      setFieldValue('avatar', result);
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      setFieldValue('avatar', file);
+                      const { result } = await convertToBase64(file);
+                      setReviewImage(result);
                     }}
                   />
                 </Flex>

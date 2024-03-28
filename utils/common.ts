@@ -79,17 +79,11 @@ export const isBase64Image = (str: string): boolean => {
 };
 
 export const handleDeleteImage = async (img: string) => {
-  const formData = new FormData();
-  const publicId = img.slice(img.indexOf('furniture'));
-  formData.append('public_id', publicId);
-  const { signature, timestamp } = await getSignature({
-    public_id: publicId,
-  });
-  formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || '');
-  formData.append('timestamp', timestamp.toString());
-  formData.append('signature', signature);
+  await destroyImage(img);
+};
 
-  await destroyImage(formData);
+export const isFile = (value: any) => {
+  return value instanceof File;
 };
 
 export const isDevEnv = () => {

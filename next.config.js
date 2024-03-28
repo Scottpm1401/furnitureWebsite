@@ -33,8 +33,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        pathname: `/${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}/image/upload/**`,
+        hostname: `${process.env.NEXT_PUBLIC_CDN_NAME}`,
+        pathname: `/**`,
       },
     ],
   },
